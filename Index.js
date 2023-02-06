@@ -1,9 +1,9 @@
-import express from 'express';
-import ServerApp from './Backend/App'
+const express = require('express');
+const ServerApp = require('./Backend/App')
+const {Port} = require('./Backend/Config')
 const App = express();
-const port = 4000;
 
 App.use(ServerApp)
-App.listen(port, () => {
-  console.log(`The Server is running on port: ${port}`)
+App.listen(Port, () => {
+  console.log(`The Server is running on port: ${Port}`)
 })
