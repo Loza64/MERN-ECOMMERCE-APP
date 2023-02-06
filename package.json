@@ -2,9 +2,10 @@
   "name": "mern-ecommerce-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "node Scripts/index.js",
   "scripts": {
-    "dev":"tsc-watch --onSucces \"node Scripts/Index.js",
+    "start": "node Scripts/index.js",
+    "tsc":"tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "UFOSTART-DEVELOPMENT",
