@@ -3,7 +3,7 @@ const { ConnectionCloud } = require('../Config')
 
 function GetConnection() {
   mongoose.set('strictQuery', true)
-  mongoose.connect(ConnectionCloud, { useNewUrlParser: true })
+  mongoose.connect(ConnectionCloud)
   mongoose.connection.on('open', () => {
     console.log("Connection to Database succes.")
   })
@@ -12,4 +12,4 @@ function GetConnection() {
   })
 }
 
-module.exports = GetConnection();
+module.exports = GetConnection;
