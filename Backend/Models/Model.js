@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const user = new Schema({
   key: { type: String, require: true, unique: true },
   username: { type: String, require: true, unique: true },
-  name: { type: String, require: true },
+  names: { type: String, require: true },
   surnames: { type: String, require: true },
   date: { type: String, require: true },
   email: { type: String, require: true, unique: true },
@@ -48,9 +48,9 @@ const detailsale = new Schema({
 })
 
 module.exports = {
-  users: mongoose.model("users", user),
-  products: mongoose.model("products", product),
-  categories: mongoose.model("categories", category),
-  sales: mongoose.model("sales", sale),
-  detailsales: mongoose.model("detailsales", detailsale)
+  Users: mongoose.model("users", user),
+  Products: mongoose.model("products", product),
+  Categories: mongoose.model("categories", category),
+  Sales: mongoose.model("sales", sale),
+  Detailsales: mongoose.model("detailsales", detailsale)
 }
