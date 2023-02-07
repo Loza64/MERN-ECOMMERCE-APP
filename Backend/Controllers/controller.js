@@ -4,11 +4,15 @@ const SendEmail = require('../Libraries/nodemailer')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
 const { ComparePass, EncryptPass } = require('../Libraries/bcrypt')
 const { Categories, Detailsales, Products, Sales, Users } = require('../Models/Model')
+const datakey = uniquid();
+
 
 const SignUp = async (req, res) => {
-  const { date, username, names, surnames, email, phone, password, type } = req
-  const pass = await EncryptPass(password)
-  new Users({ type, uniquid, username, names, surnames, date, email, phone, pass }).save((err) => {
+  const { usuario, nombres, apellidos, naciminento, correo, clave, pass, tipo } = req
+  const encryptpass = await EncryptPass(password)
+  new Users({
+    datakey, usuario, nombres, apellidos, naciminento, correo, telefono, encryptpass, tipo
+  }).save((err) => {
     if (err) {
       res.send('Lo sentimos ocurrio un erro inesperado')
     } else {
