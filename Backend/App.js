@@ -1,8 +1,8 @@
 const express = require('express');
+const bodyparser = require('body-parser')
 const ServerApp = express();
 const MongoConnect = require('./Connection/Database')
 
-MongoConnect();
-ServerApp.use(express.json());
-ServerApp.use(express.urlencoded({extended:true}))
+ServerApp.use(bodyparser.json());
+ServerApp.use(bodyparser.urlencoded({extended:true}))
 module.exports = ServerApp;
