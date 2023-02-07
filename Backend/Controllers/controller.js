@@ -1,4 +1,4 @@
-const unique = require('uniquid')
+const uniquid = require('uniquid')
 const jsontoken = require('jsonwebtoken')
 const SendEmail = require('../Libraries/nodemailer')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
@@ -8,7 +8,7 @@ const { Categories, Detailsales, Products, Sales, Users } = require('../Models/M
 const SignUp = async (req, res) => {
   const { date, username, names, surnames, email, phone, password } = req
   const pass = await EncryptPass(password)
-  new Users({ unique, username, names, surnames, date, email, phone, pass }).save((err) => {
+  new Users({ uniquid, username, names, surnames, date, email, phone, pass }).save((err) => {
     if (err) {
       res.send('Lo sentimos ocurrio un erro inesperado')
     } else {
