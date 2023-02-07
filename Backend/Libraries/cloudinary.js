@@ -11,3 +11,12 @@ cloudinary.config({
 const UploadImage = async (image) => {
   return await cloudinary.uploader.upload(image, { folder: 'ECOMMERCE' })
 }
+
+const DeleteImage = async (id) =>{
+  return await cloudinary.uploader.destroy(id)
+}
+
+module.exports = {
+  UploadImage,
+  DeleteImage
+}
