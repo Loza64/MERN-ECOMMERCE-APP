@@ -8,7 +8,7 @@ const datakey = uniquid();
 
 
 const SignUp = async (req, res) => {
-  const { usuario, nombres, apellidos, naciminento, correo, pass, tipo } = req
+  const { usuario, nombres, apellidos, naciminento, correo, telefono, pass, tipo } = req
   const encryptpass = await EncryptPass(pass)
   new Users({
     datakey, usuario, nombres, apellidos, naciminento, correo, telefono, encryptpass, tipo
