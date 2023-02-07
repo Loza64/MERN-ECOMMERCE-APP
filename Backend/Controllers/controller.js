@@ -6,9 +6,9 @@ const { ComparePass, EncryptPass } = require('../Libraries/bcrypt')
 const { Categories, Detailsales, Products, Sales, Users } = require('../Models/Model')
 
 const SignUp = async (req, res) => {
-  const { date, username, names, surnames, email, phone, password } = req
+  const { date, username, names, surnames, email, phone, password, type } = req
   const pass = await EncryptPass(password)
-  new Users({ uniquid, username, names, surnames, date, email, phone, pass }).save((err) => {
+  new Users({ type, uniquid, username, names, surnames, date, email, phone, pass }).save((err) => {
     if (err) {
       res.send('Lo sentimos ocurrio un erro inesperado')
     } else {
@@ -27,7 +27,7 @@ const Login = async (req, res) => {
     } else {
       res.send(null);
     }
-  }else{
+  } else {
     res.send(null);
   }
 }
