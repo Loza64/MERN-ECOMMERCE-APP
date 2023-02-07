@@ -1,0 +1,1 @@
+const { categories, detailsales, products, sales, users } = require('../Models/Model')
