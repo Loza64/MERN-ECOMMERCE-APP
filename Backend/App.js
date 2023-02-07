@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser')
-const { PORT } = require('./Backend/Config')
+const { PORT } = require('../Backend/Config')
 const fileupload = require('express-fileupload')
 const GetConnection = require('./Connection/Database')
 const ServerApp = express()
