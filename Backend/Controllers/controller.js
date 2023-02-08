@@ -8,17 +8,25 @@ const datakey = uniquid();
 
 
 const SignUp = async (req, res) => {
-  const { usuario, nombres, apellidos, naciminento, correo, telefono, pass, tipo } = req
-  const encryptpass = await EncryptPass(pass)
+  const { username, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body;
+  const encryptpass = await EncryptPass(clave);
   new Users({
-    datakey, usuario, nombres, apellidos, naciminento, correo, telefono, encryptpass, tipo
+    key:datakey,
+    username:username,
+    names:nombres,
+    surnames:apellidos,
+    date:naciminento,
+    email:correo,
+    phone:telefono,
+    password:encryptpass,
+    type:tipo
   }).save((err) => {
     if (err) {
-      res.send('Lo sentimos ocurrio un erro inesperado')
+      res.send('Lo sentimos ocurrio un error inesperado')
     } else {
       res.send('Registro realisado exitosamente')
     }
-  })
+  });
 }
 
 const Login = async (req, res) => {

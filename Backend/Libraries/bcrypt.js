@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 
-const EncryptPass = async (pass) => {
-  return await bcrypt.hash(pass, 30, (err, encript) => {
+const EncryptPass = async (password) => {
+  return await bcrypt.hash(password, 10, (err, encript) => {
     if (err) {
       console.log('Error de sifrado de contraseña: ' + err)
     } else {
