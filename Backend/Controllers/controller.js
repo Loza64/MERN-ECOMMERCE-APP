@@ -1,14 +1,14 @@
+const bcrypt = require('bcrypt')
 const uniquid = require('uniquid')
 const jsontoken = require('jsonwebtoken')
 const SendEmail = require('../Libraries/nodemailer')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
-const { ComparePass, EncryptPass } = require('../Libraries/bcrypt')
 const { Categories, Detailsales, Products, Sales, Users } = require('../Models/Model')
 const datakey = uniquid();
 
 const SignUp = async (req, res) => {
   const { usuario, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body;
-  const encryptpass = await EncryptPass(clave)
+  let encryptpass = await bcrypt.hash(clave, 10);
   new Users({
     key: datakey,
     username: usuario,
@@ -29,25 +29,21 @@ const SignUp = async (req, res) => {
 };
 
 const Login = async (req, res) => {
-  const { user, pass } = req
-  const users = await Users.findOne(user);
-  if (users.key != null) {
-    const checkpass = await ComparePass(pass, users.password);
-    if (checkpass) {
-      res.send(users)
-    } else {
-      res.send(null);
-    }
+  const { user, pass } = req.body;
+  const users = await Users.findOne({ username: user })
+  const checkpass = await bcrypt.compare(pass, users.password)
+  if (checkpass) {
+    res.send(users);
   } else {
-    res.send(null);
+    res.send(false);
   }
 }
 
-const GetProducts = (req, res) =>{
-  Products.find({},(err,docs)=>{
-    if(!err){
+const GetProducts = (req, res) => {
+  Products.find({}, (err, docs) => {
+    if (!err) {
       res.send(docs);
-    }else{
+    } else {
       console.error(error);
     }
   })
