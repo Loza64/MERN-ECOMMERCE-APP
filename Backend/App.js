@@ -8,12 +8,10 @@ const ServerApp = express()
 
 GetConnection()
 ServerApp.use(bodyparser.json())
-ServerApp.use('/ServerCommerce', routes)
 ServerApp.use(bodyparser.urlencoded({ extended: true }))
 ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Images' }))
 
-ServerApp.get('/', (req, res) => {
-  res.send(`The Server is running on port: ${PORT}`);
-})
+ServerApp.use('/ServerCommerce', routes)
+ServerApp.get('/', (req, res) => res.send(`The Server is running on port: ${PORT}`))
 
 module.exports = ServerApp;
