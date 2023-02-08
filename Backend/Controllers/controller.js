@@ -105,10 +105,12 @@ const GetCategories = async () => {
     }
   })
 }
-
-
+      
 module.exports = {
   SignUp,
   Login,
-  GetProducts
+  NewProduct,
+  GetProducts,
+  NewCategorie,
+  GetCategories
 }
