@@ -1,14 +1,14 @@
-const bcrypt = require('bcrypt')
 const uniquid = require('uniquid')
 const jsontoken = require('jsonwebtoken')
 const SendEmail = require('../Libraries/nodemailer')
+const { EncryptPass, ComparePass } = require('../Libraries/bcrypt')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
 const { Categories, Detailsales, Products, Sales, Users } = require('../Models/Model')
 const datakey = uniquid();
 
 const SignUp = async (req, res) => {
   const { usuario, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body;
-  let encryptpass = await bcrypt.hash(clave, 10);
+  let encryptpass = await EncryptPass(clave);
   new Users({
     key: datakey,
     username: usuario,
@@ -31,12 +31,16 @@ const SignUp = async (req, res) => {
 const Login = async (req, res) => {
   const { user, pass } = req.body;
   const users = await Users.findOne({ username: user })
-  const checkpass = await bcrypt.compare(pass, users.password)
+  const checkpass = await ComparePass(pass, users.password)
   if (checkpass) {
     res.send(users);
   } else {
     res.send(false);
   }
+}
+
+const NewProduct = async (req, res) => {
+
 }
 
 const GetProducts = (req, res) => {
@@ -48,6 +52,7 @@ const GetProducts = (req, res) => {
     }
   })
 }
+
 module.exports = {
   SignUp,
   Login,
