@@ -8,18 +8,18 @@ const datakey = uniquid();
 
 
 const SignUp = async (req, res) => {
-  const { username, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body;
-  const encryptpass = await EncryptPass(clave);
+  const { username, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body
+  const encryptpass = await EncryptPass(clave)
   new Users({
-    key:datakey,
-    username:username,
-    names:nombres,
-    surnames:apellidos,
-    date:naciminento,
-    email:correo,
-    phone:telefono,
-    password:encryptpass,
-    type:tipo
+    key: datakey,
+    username: username,
+    names: nombres,
+    surnames: apellidos,
+    date: naciminento,
+    email: correo,
+    phone: telefono,
+    password: encryptpass,
+    type: tipo
   }).save((err) => {
     if (err) {
       res.send('Lo sentimos ocurrio un error inesperado')
