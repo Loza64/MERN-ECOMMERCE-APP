@@ -42,22 +42,22 @@ const Login = async (req, res) => {
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
-  const { nameproduct, imageproduct, categoryproduct, stockproduct, companyproduct, detailsproduct, priceproduct } = req.body
-  const category = await Categories.findOne({ name: categoryproduct })
+  const { name, image, category, stock, company, detail, price } = req.body
+  const getcategory = await Categories.findOne({ name: category })
   let result;
-  if (imageproduct) {
-    result = await UploadImage(imageproduct.tempFilePath)
+  if (image) {
+    result = await UploadImage(image.tempFilePath)
   }
-  fs.remove(imageproduct.tempFilePath)
+  fs.remove(image.tempFilePath)
   new Products({
     key: datakey,
-    categorykey: category.key,
-    name: nameproduct,
+    categorykey: getcategory.key,
+    name: name,
     image: { public_id: result.public_id, url: result.url },
-    stock: stockproduct,
-    company: companyproduct,
-    details: detailsproduct,
-    price: priceproduct
+    stock: stock,
+    company: company,
+    details: detail,
+    price: price
   }).save((err) => {
     if (!err) {
       res.send('Producto guardado exitosamente')
@@ -78,16 +78,16 @@ const GetProducts = (req, res) => {
 
 //Funciones de las categorias
 const NewCategorie = async (req, res) => {
-  const { imagecategorie, namecategorie } = req.body
+  const {name } = req.body
   let result
-  if (imagecategorie) {
-    result = await UploadImage(imagecategorie.tempFilePath)
+  if (req.files.image) {
+    result = await UploadImage(req.files.image.tempFilePath)
   }
-  fs.remove(imagecategorie.tempFilePath)
+  fs.remove(req.files.image.tempFilePath)
   new Categories({
     key: datakey,
     image: { public_id: result.public_id, url: result.url },
-    name: namecategorie
+    name: name
   }).save((err) => {
     if (!err) {
       res.send('Categoria guardada exitosamente')
