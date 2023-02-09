@@ -16,11 +16,12 @@ const user = new Schema({
 const product = new Schema({
   key: { type: String, require: true, unique: true },
   image: { public_id: String, url: String },
-  name: { type: String, require: true, unique: true },
   categorykey: { type: String, require: true },
-  stock: { type: Number, require: true },
+  name: { type: String, require: true },
   company: { type: String, require: true },
+  color: { type: String, require: true },
   details: { type: String, require: true },
+  stock: { type: Number, require: true },
   price: { type: Number, require: true },
 })
 

@@ -5,14 +5,13 @@ const SendEmail = require('../Libraries/nodemailer')
 const { EncryptPass, ComparePass } = require('../Libraries/bcrypt')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
 const { Categories, Detailsales, Products, Sales, Users } = require('../Models/Model')
-const datakey = uniquid()
 
 //Funciones del usuario
 const SignUp = async (req, res) => {
   const { usuario, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body
   let encryptpass = await EncryptPass(clave)
   new Users({
-    key: datakey,
+    key: uniquid(),
     username: usuario,
     names: nombres,
     surnames: apellidos,
@@ -42,7 +41,7 @@ const Login = async (req, res) => {
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
-  const { name, image, category, stock, company, detail, price } = req.body
+  const { image, name, color, category, stock, company, detail, price } = req.body
   const getcategory = await Categories.findOne({ name: category })
   let result;
   if (image) {
@@ -50,13 +49,14 @@ const NewProduct = async (req, res) => {
   }
   fs.remove(image.tempFilePath)
   new Products({
-    key: datakey,
+    key: uniquid(),
+    image: { public_id: result.public_id, url: result.url },
     categorykey: getcategory.key,
     name: name,
-    image: { public_id: result.public_id, url: result.url },
-    stock: stock,
     company: company,
+    color:color,
     details: detail,
+    stock: stock,
     price: price
   }).save((err) => {
     if (!err) {
@@ -78,14 +78,14 @@ const GetProducts = (req, res) => {
 
 //Funciones de las categorias
 const NewCategorie = async (req, res) => {
-  const {name } = req.body
+  const { name } = req.body
   let result
   if (req.files.image) {
     result = await UploadImage(req.files.image.tempFilePath)
   }
   fs.remove(req.files.image.tempFilePath)
   new Categories({
-    key: datakey,
+    key: uniquid(),
     image: { public_id: result.public_id, url: result.url },
     name: name
   }).save((err) => {
@@ -96,7 +96,7 @@ const NewCategorie = async (req, res) => {
     }
   })
 }
-const GetCategories = async () => {
+const GetCategories = async (req, res) => {
   Categories.find({}, (err, docs) => {
     if (err) {
       res.send('Lo sentimos, ocurrio un error inesperado')
@@ -105,7 +105,7 @@ const GetCategories = async () => {
     }
   })
 }
-      
+
 module.exports = {
   SignUp,
   Login,
