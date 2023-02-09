@@ -41,7 +41,7 @@ const Login = async (req, res) => {
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
-  const {name, color, category, stock, company, details, price } = req.body
+  const {name, category, stock, company, details, price } = req.body
   const getcategory = await Categories.findOne({ name: category })
   let result;
   if (req.files.image) {
@@ -54,7 +54,6 @@ const NewProduct = async (req, res) => {
     categorykey: getcategory.key,
     name: name,
     company: company,
-    color:color,
     details: details,
     stock: Number(stock),
     price: Number(price)

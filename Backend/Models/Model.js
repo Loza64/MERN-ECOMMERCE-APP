@@ -19,7 +19,6 @@ const product = new Schema({
   categorykey: { type: String, require: true },
   name: { type: String, require: true },
   company: { type: String, require: true },
-  color: { type: String, require: true },
   details: { type: String, require: true },
   stock: { type: Number, require: true },
   price: { type: Number, require: true },
