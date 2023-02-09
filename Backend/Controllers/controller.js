@@ -41,13 +41,13 @@ const Login = async (req, res) => {
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
-  const { image, name, color, category, stock, company, detail, price } = req.body
+  const {name, color, category, stock, company, detail, price } = req.body
   const getcategory = await Categories.findOne({ name: category })
   let result;
-  if (image) {
-    result = await UploadImage(image.tempFilePath)
+  if (req.files.image) {
+    result = await UploadImage(req.files.image.tempFilePath)
   }
-  fs.remove(image.tempFilePath)
+  fs.remove(req.files.image.tempFilePath)
   new Products({
     key: uniquid(),
     image: { public_id: result.public_id, url: result.url },
