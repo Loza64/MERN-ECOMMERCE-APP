@@ -5,16 +5,16 @@ const context = createContext();
 
 export default function ContextConsumer({ Children }) {
 
-  const [product, setProduct] = useState([]);
-  const [categorie, setCategorie] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const getCategories = async () => {
     const result = await GetCategories();
-    setCategorie(result)
+    setCategories(result)
   }
   const getProducts = async () => {
     const result = await GetProducts();
-    setProduct(result)
+    setProducts(result)
   }
   const UserLogin = async (usuario) => {
     return await Login(usuario)
@@ -31,7 +31,7 @@ export default function ContextConsumer({ Children }) {
     getCategories()
   }, GetCategories());
 
-  <context.Provider value={{}}>
+  <context.Provider value={{ products, categories, UserLogin, UserSignUp }}>
     {Children}
   </context.Provider>
 }
