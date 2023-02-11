@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-
+import { ContextProvider } from './Context/Context';
+const {products} = ContextProvider()
+console.log(products)
 function App() {
   return (
     <div className="App">
