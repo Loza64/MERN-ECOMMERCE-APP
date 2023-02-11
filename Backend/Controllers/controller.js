@@ -34,7 +34,7 @@ const Login = async (req, res) => {
   if (user != null && (await ComparePass(password, user.password))) {
     res.send(user);
   } else {
-    res.send(false);
+    res.send(null);
   }
 }
 
