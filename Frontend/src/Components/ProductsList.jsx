@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 
 export default function ProductsList() {
   const { products } = ContextProvider();
+
   return (
     <div>
       {
