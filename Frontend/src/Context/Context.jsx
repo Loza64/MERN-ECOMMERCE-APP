@@ -1,12 +1,7 @@
-import { useContext, useState, createContext, useEffect } from 'react'
+import { React, useContext, useState, createContext, useEffect } from 'react'
 import { GetCategories, GetProducts, Login, SignUp } from '../Api/RestApi'
 
 const context = createContext()
-
-export const ContextProvider = () => {
-  const mycontext = useContext(context)
-  return mycontext
-}
 
 export default function ContextConsumer({ children }) {
 
@@ -41,4 +36,9 @@ export default function ContextConsumer({ children }) {
       {children}
     </context.Provider>
   )
+}
+
+export const ContextProvider = () => {
+  const mycontext = useContext(context)
+  return mycontext
 }
