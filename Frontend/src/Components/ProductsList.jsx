@@ -1,10 +1,9 @@
 import React from "react";
 import { ContextProvider } from '../Context/Context';
 import ProductItem from './ProductItem';
+const { products } = ContextProvider();
 
 export default function ProductsList() {
-  const { products } = ContextProvider();
-
   return (
     <div>
       {
