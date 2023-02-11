@@ -6,6 +6,14 @@ const { EncryptPass, ComparePass } = require('../Libraries/bcrypt')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
 const { Categories, Detailsales, Products, Sales, Users } = require('../Models/Model')
 
+//Body mailmessage
+let emailmessage = {
+  from: String,
+  to: String,
+  subject: String,
+  html: String
+}
+
 //Funciones del usuario
 const SignUp = async (req, res) => {
   const { usuario, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body
