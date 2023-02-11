@@ -10,11 +10,11 @@ export default function ContextConsumer({ children }) {
 
   const getCategories = async () => {
     const result = await GetCategories();
-    setCategories(result)
+    setCategories(result.data)
   }
   const getProducts = async () => {
     const result = await GetProducts();
-    setProducts(result)
+    setProducts(result.data)
   }
   const UserLogin = async (usuario) => {
     return await Login(usuario)
