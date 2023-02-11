@@ -30,11 +30,11 @@ export default function ContextConsumer({ children }) {
 
   useEffect(() => {
     getProducts()
-  }, []);
+  }, GetProducts());
 
   useEffect(() => {
     getCategories()
-  }, []);
+  }, GetCategories());
 
   return (
     <context.Provider value={{ products, categories, UserLogin, UserSignUp }}>
