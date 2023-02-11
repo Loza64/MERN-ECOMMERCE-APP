@@ -1,5 +1,5 @@
-import './App.css';
-import ProductsList from './Components/Products';
+import React from 'react';
+import ProductsList from './Components/ProductsList';
 
 export default function App() {
   return (
