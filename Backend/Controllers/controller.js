@@ -29,19 +29,18 @@ const SignUp = async (req, res) => {
   });
 }
 const Login = async (req, res) => {
-  const { user, pass } = req.body
-  const users = await Users.findOne({ username: user })
-  const checkpass = await ComparePass(pass, users.password)
-  if (checkpass) {
-    res.send(users);
+  const { username, password } = req.body
+  const user = await Users.findOne({ username: username })
+  if (user != null && (await ComparePass(password, user.password))) {
+    res.send(user);
   } else {
-    res.send(null);
+    res.send(false);
   }
 }
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
-  const {name, category, stock, company, details, price } = req.body
+  const { name, category, stock, company, details, price } = req.body
   const getcategory = await Categories.findOne({ name: category })
   let result;
   if (req.files.image) {
