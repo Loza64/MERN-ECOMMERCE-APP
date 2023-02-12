@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProductCategory({category}){
+export default function ProductsCategory({categorykey}){
   return(
     <div>
       

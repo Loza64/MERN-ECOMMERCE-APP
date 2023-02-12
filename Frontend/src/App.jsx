@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar'
 import { ContextProvider } from './Context/Context';
-import ProductCategory from './Components/ProductsSeccion/ProductCategory';
+import ProductsCategory from './Components/ProductsSeccion/ProductsCategory';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
 
@@ -17,7 +17,7 @@ export default function App() {
         {
           categories.map(
             category => (
-              <Route path={`${category.name}`} element={<ProductCategory category={`${category.name}`} />} />
+              <Route path={`${category.name}`} element={<ProductsCategory categorykey={`${category.key}`} />} />
             )
           )
         }
