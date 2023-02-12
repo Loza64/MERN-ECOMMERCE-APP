@@ -5,6 +5,7 @@ import { ContextProvider } from './Context/Context';
 import ProductsCategory from './Components/ProductsSeccion/ProductsCategory';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
+import CategorieList from './Components/Categories/CategorieList';
 
 export default function App() {
   const { categories } = ContextProvider();
@@ -14,6 +15,8 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Principal />} />
         <Route path='/Login' element={<Login />} />
+        <Route path='/Categories' element={<CategorieList />} />
+        
         {
           categories.map(
             category => (
