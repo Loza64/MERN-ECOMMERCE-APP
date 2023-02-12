@@ -22,6 +22,7 @@ const product = new Schema({
   details: { type: String, require: true },
   stock: { type: Number, require: true },
   price: { type: Number, require: true },
+  discount: { type: Number, require: true },
 })
 
 const category = new Schema({

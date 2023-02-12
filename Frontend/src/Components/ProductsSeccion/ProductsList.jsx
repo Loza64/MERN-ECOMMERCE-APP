@@ -1,5 +1,5 @@
 import React from "react";
-import { ContextProvider } from '../Context/Context';
+import { ContextProvider } from '../../Context/Context';
 import ProductItem from './ProductItem';
 
 export default function ProductsList() {
