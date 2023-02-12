@@ -48,7 +48,7 @@ const Login = async (req, res) => {
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
-  const { name, category, stock, company, details, price } = req.body
+  const { name, category, stock, company, details, price, discount } = req.body
   const getcategory = await Categories.findOne({ name: category })
   let result;
   if (req.files.image) {
@@ -63,7 +63,8 @@ const NewProduct = async (req, res) => {
     company: company,
     details: details,
     stock: Number(stock),
-    price: Number(price)
+    price: Number(price),
+    discount: Number(discount)
   }).save((err) => {
     if (!err) {
       res.send('Producto guardado exitosamente')
