@@ -1,8 +1,10 @@
 import React from 'react';
-import ProductsList from './Components/ProductsSeccion/ProductsList';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar'
 import { ContextProvider } from './Context/Context';
+import ProductCategory from './Components/ProductsSeccion/ProductCategory';
+import Principal from './Components/Principal';
+import Login from './Components/Login';
 
 export default function App() {
   const [categories] = ContextProvider();
@@ -10,10 +12,12 @@ export default function App() {
     <div>
       <Navbar />
       <Routes>
+        <Route path='/' element={<Principal />} />
+        <Route path='/Login' element={<Login />} />
         {
           categories.map(
             category => (
-              <Route path={`${category.name}`} />
+              <Route path={`${category.name}`} element={<ProductCategory category={`${category.name}`} />} />
             )
           )
         }
