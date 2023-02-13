@@ -4,8 +4,7 @@ import { GetCategories, GetProducts, Login, SignUp } from '../Api/RestApi';
 const context = createContext();
 
 export const ContextProvider = () => {
-  const mycontext = useContext(context)
-  return mycontext
+  return useContext(context);
 };
 
 export default function ContextConsumer({ children }) {
@@ -15,17 +14,17 @@ export default function ContextConsumer({ children }) {
 
   const getCategories = async () => {
     const result = await GetCategories();
-    setCategories(result.data)
+    setCategories(result.data);
   };
   const getProducts = async () => {
     const result = await GetProducts();
-    setProducts(result.data)
+    setProducts(result.data);
   };
   const UserLogin = async (usuario) => {
-    return await Login(usuario)
+    return await Login(usuario);
   };
   const UserSignUp = async (usuario) => {
-    return await SignUp(usuario)
+    return await SignUp(usuario);
   };
 
   useEffect(() => {
