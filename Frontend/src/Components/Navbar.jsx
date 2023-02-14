@@ -16,13 +16,15 @@ export default function Navbar() {
             <button><FaSearch /></button>
           </div>
           <nav>
+            <Link to="/Terms">Terms</Link>
             <Link to="/Products">Products</Link>
             <Link to="/Categories">Categories</Link>
+            <Link to="/Shoppings">My Shoppings</Link>
           </nav>
         </div>
         <div className="login-buttom">
           <FaUserAlt />
-          <label>Login</label>
+          <Link to="/Login">Login</Link>
         </div>
       </div>
     </NavBar>
