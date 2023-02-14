@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express')
 const bodyparser = require('body-parser')
 const routes = require('./Routes/api.routes')
 const fileupload = require('express-fileupload')

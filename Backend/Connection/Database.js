@@ -12,4 +12,4 @@ function GetConnection() {
   })
 }
 
-module.exports = GetConnection;
+module.exports = GetConnection

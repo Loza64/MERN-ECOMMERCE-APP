@@ -10,4 +10,4 @@ module.exports = {
   NODE_ENV: process.env.NODE_ENV,
   MAIL_BUSINESS: process.env.MAIL_BUSINESS,
   MAIL_PASS: process.env.MAIL_PASS
-};
+}
