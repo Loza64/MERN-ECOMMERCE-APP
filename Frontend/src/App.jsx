@@ -2,13 +2,14 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar'
 import { ContextProvider } from './Context/Context';
-import ProductsCategory from './Components/Products/ProductsCategory';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
 import CategorieList from './Components/Categories/CategorieList';
 import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
 import Default from './Components/Default';
+import Products from './Components/Products/Products'
+import ProductsCategory from './Components/Products/ProductsCategory'
 
 export default function App() {
   const { categories } = ContextProvider();
@@ -20,7 +21,7 @@ export default function App() {
         <Route path='/' element={<Principal />} />
         <Route path='/Terms' element={<Terms />} />
         <Route path='/Login' element={<Login />} />
-        <Route path='/Products' element={<}
+        <Route path='/Products' element={<Products />} />
         <Route path='/Shoppings' element={<MyShoppings />} />
         <Route path='/Categories' element={<CategorieList />} />
         {
