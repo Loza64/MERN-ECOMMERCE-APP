@@ -17,8 +17,8 @@ export default function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path='/*' element={<Default />} />
         <Route path='/' element={<Principal />} />
+        <Route path='/*' element={<Principal />} />
         <Route path='/Terms' element={<Terms />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/Products' element={<Products />} />
