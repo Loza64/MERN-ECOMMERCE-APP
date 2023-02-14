@@ -7,7 +7,6 @@ import Login from './Components/Login';
 import CategorieList from './Components/Categories/CategorieList';
 import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
-import Default from './Components/Default';
 import Products from './Components/Products/Products'
 import ProductsCategory from './Components/Products/ProductsCategory'
 
