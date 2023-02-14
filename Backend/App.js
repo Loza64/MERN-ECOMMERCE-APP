@@ -11,4 +11,4 @@ ServerApp.use(bodyparser.urlencoded({ extended: true }))
 ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Images' }))
 ServerApp.use('/ServerCommerce/Backend/Node/Route/Api/EcommerceApp', routes)
 
-module.exports = ServerApp;
+module.exports = ServerApp
