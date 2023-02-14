@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar'
 import { ContextProvider } from './Context/Context';
-import ProductsCategory from './Components/ProductsSeccion/ProductsCategory';
+import ProductsCategory from './Components/Products/ProductsCategory';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
 import CategorieList from './Components/Categories/CategorieList';
