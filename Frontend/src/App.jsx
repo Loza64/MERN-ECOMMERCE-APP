@@ -26,8 +26,7 @@ export default function App() {
         {
           categories.map(
             category => (
-              <Route path={`${category.name}`} 
-              element={<ProductsCategory key={category._id} categorykey={`${category.key}`} />} />
+              <Route path={`${category.name}`} element={<ProductsCategory key={category._id} categorykey={`${category.key}`} />} />
             )
           )
         }

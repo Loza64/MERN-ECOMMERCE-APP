@@ -1,30 +1,33 @@
 import React from "react";
-import { FaSearch, FaUserAlt } from 'react-icons/fa'
+import { FaSearch, FaUserAlt, FaBoxes,FaClipboardList } from 'react-icons/fa';
+import { VscThreeBars } from 'react-icons/vsc'
+import { BiPurchaseTag } from 'react-icons/bi'
+import { BsShop } from 'react-icons/bs'
+import { AiFillHome, AiFillSetting, AiFillShopping, AiOutlineShoppingCart } from 'react-icons/ai'
 import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <NavBar>
-      <div>
-        <div className="logo">
-          <label>E-COMMERCE</label>
+      <div className="title-business">
+        <label>ECOMMERCE</label>
+      </div>
+      <div className="sidebar">
+        <div>
+          <input type="search" placeholder="Search..." className="txt-search" />
+          <button className="btn-search"><FaSearch /></button>
         </div>
-        <div className="flex-nav">
-          <div className="search">
-            <input type="search" name="producto" id="producto" />
-            <button><FaSearch /></button>
-          </div>
-          <nav>
-            <Link to="/Terms">Terms</Link>
-            <Link to="/Products">Products</Link>
-            <Link to="/Categories">Categories</Link>
-            <Link to="/Shoppings">My Shoppings</Link>
-          </nav>
-        </div>
+        <nav>
+          <Link to="/"><AiFillHome className="react-icon" />Home</Link>
+          <Link to="/Terms"><AiFillSetting className="react-icon" />Terms</Link>
+          <Link to="/Products"><FaBoxes className="react-icon" />Products</Link>
+          <Link to="/Categories"><FaClipboardList className="react-icon" />Categories</Link>
+          <Link to="/Shoppings"><BiPurchaseTag className="react-icon" />Discounts</Link>
+          <Link to="/Shoppings"><AiOutlineShoppingCart className="react-icon" />Cart(0)</Link>
+        </nav>
         <div className="login-buttom">
-          <FaUserAlt />
-          <Link to="/Login">Login</Link>
+          <Link to="/Login"><FaUserAlt className="react-icon" />Login</Link>
         </div>
       </div>
     </NavBar>

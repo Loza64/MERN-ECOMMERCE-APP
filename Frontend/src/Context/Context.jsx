@@ -1,10 +1,10 @@
 import { React, useContext, useState, createContext, useEffect } from 'react';
 import { GetCategories, GetProducts, Login, SignUp } from '../Api/RestApi';
 
-const context = createContext();
+export const Context = createContext();
 
 export const ContextProvider = () => {
-  return useContext(context);
+  return useContext(Context);
 };
 
 export default function ContextConsumer({ children }) {
@@ -36,8 +36,8 @@ export default function ContextConsumer({ children }) {
   }, GetCategories());
 
   return (
-    <context.Provider value={{ products, categories, UserLogin, UserSignUp }}>
+    <Context.Provider value={{ products, categories, UserLogin, UserSignUp }}>
       {children}
-    </context.Provider>
+    </Context.Provider>
   )
 }
