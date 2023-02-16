@@ -79,4 +79,15 @@ color:white;
 .sidebar .login-buttom a:hover{
   color:#2AFF00
 }
+.btn-menu{
+  transition:all 0.2s ease-in-out;
+  background:#2AFF00;
+  font-size:35px;
+  padding:3px;
+  border-radius:5px;
+  display:none;
+}
+.btn-menu:active{
+  background: rgb(0, 194, 26);
+}
 `

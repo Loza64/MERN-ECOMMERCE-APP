@@ -1,9 +1,8 @@
 import React from "react";
-import { FaSearch, FaUserAlt, FaBoxes,FaClipboardList } from 'react-icons/fa';
+import { FaSearch, FaUserAlt, FaBoxes, FaClipboardList } from 'react-icons/fa';
 import { VscThreeBars } from 'react-icons/vsc'
 import { BiPurchaseTag } from 'react-icons/bi'
-import { BsShop } from 'react-icons/bs'
-import { AiFillHome, AiFillSetting, AiFillShopping, AiOutlineShoppingCart } from 'react-icons/ai'
+import { AiFillHome, AiFillSetting, AiOutlineShoppingCart } from 'react-icons/ai'
 import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
 
@@ -30,6 +29,7 @@ export default function Navbar() {
           <Link to="/Login"><FaUserAlt className="react-icon" />Login</Link>
         </div>
       </div>
+      <VscThreeBars className="btn-menu"/>
     </NavBar>
   );
 }
