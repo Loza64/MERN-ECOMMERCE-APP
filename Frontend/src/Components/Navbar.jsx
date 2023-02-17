@@ -13,9 +13,9 @@ export default function Navbar() {
         <label>ECOMMERCE</label>
       </div>
       <div className="sidebar">
-        <div>
-          <input type="search" placeholder="Search..." className="txt-search" />
+        <div className="content-search">
           <button className="btn-search"><FaSearch /></button>
+          <input type="search" placeholder="Search..." className="txt-search" />
         </div>
         <nav>
           <Link to="/"><AiFillHome className="react-icon" />Home</Link>
@@ -29,7 +29,7 @@ export default function Navbar() {
           <Link to="/Login"><FaUserAlt className="react-icon" />Login</Link>
         </div>
       </div>
-      <VscThreeBars className="btn-menu"/>
+      <VscThreeBars className="btn-menu" />
     </NavBar>
   );
 }

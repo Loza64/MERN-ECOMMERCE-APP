@@ -15,33 +15,45 @@ color:white;
   font-size:25px
 }
 .sidebar{
+  width:100%;
   display:flex;
   align-items:center;
 }
-.sidebar div {
+.sidebar .content-search{
   display:flex;
   margin:0 20px;
+  width:100%;
 }
-.sidebar div .txt-search{
+.sidebar .content-search .txt-search{
   font-weight:800;
   outline:none;
   border:0;
-  padding:5px 10px;
-  border-radius: 6px 0 0 6px;
-  transition:all 0.3s ease-in-out;
-}
-.sidebar div .btn-search{
-  background: #2AFF00;
-  outline:none;
-  border:0;
-  font-size:20px;
-  padding:5px 8px;
-  display:flex;
-  align-items:center;
+  padding:7px 13px;
   border-radius: 0 6px 6px 0;
   transition:all 0.3s ease-in-out;
+  background: rgba(49, 48, 48, 1);
+  width:100%;
+  color:white;
 }
-.sidebar div .btn-search:hover{
+.sidebar .content-search .txt-search::placeholder{
+  color:lightgray;
+}
+.sidebar .content-search .txt-search::-webkit-search-cancel-button {
+  color: green;
+}
+.sidebar .content-search .btn-search{
+  background: greenyellow;
+  color:black;
+  outline:none;
+  border:0;
+  padding:7px 10px;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  border-radius: 6px 0 0 6px;
+  transition:all 0.2s ease-in-out;
+}
+.sidebar .content-search .btn-search:active{
   background: rgb(0, 194, 26);
 }
 .sidebar nav{
@@ -52,7 +64,7 @@ color:white;
 }
 .sidebar nav a{
   color:white;
-  margin:0 10px;
+  padding:0 10px;
   text-decoration:none;
   display:flex;
   align-items:center;
