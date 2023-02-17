@@ -14,8 +14,8 @@ export default function Navbar() {
       </div>
       <div className="sidebar">
         <div className="content-search">
-          <button className="btn-search"><FaSearch /></button>
           <input type="search" placeholder="Search..." className="txt-search" />
+          <button className="btn-search"><FaSearch /></button>
         </div>
         <nav>
           <Link to="/"><AiFillHome className="react-icon" />Home</Link>

@@ -30,7 +30,7 @@ color:white;
   outline:none;
   border:0;
   padding:7px 13px;
-  border-radius: 0 6px 6px 0;
+  border-radius: 6px 0 0 6px;
   transition:all 0.3s ease-in-out;
   background: rgba(49, 48, 48, 1);
   width:100%;
@@ -51,7 +51,7 @@ color:white;
   font-size:20px;
   display:flex;
   align-items:center;
-  border-radius: 6px 0 0 6px;
+  border-radius: 0 6px 6px 0;
   transition:all 0.2s ease-in-out;
 }
 .sidebar .content-search .btn-search:active{
