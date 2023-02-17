@@ -9,12 +9,14 @@ import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
 import Products from './Components/Products/Products'
 import ProductsCategory from './Components/Products/ProductsCategory'
+import Top from './Components/Top';
 
 export default function App() {
   const { categories } = ContextProvider();
   return (
     <div>
       <Navbar />
+      <Top/>
       <Routes>
         <Route path='/' element={<Principal />} />
         <Route path='/*' element={<Principal />} />

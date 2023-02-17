@@ -1,6 +1,7 @@
 import styles from 'styled-components'
 
 export const NavBar = styles.div`
+position:absolute;
 width:100%;
 background:black;
 padding:15px 10px;
