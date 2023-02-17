@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import ContextConsumer from './Context/Context';
 import { BrowserRouter as Router } from 'react-router-dom'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('ECOMMERCEAPP'));
 root.render(
   <ContextConsumer>
     <Router>
