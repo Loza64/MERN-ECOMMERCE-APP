@@ -3,7 +3,7 @@ import styles from 'styled-components'
 export const NavBar = styles.div`
 position:fixed;
 width:100%;
-background:black;
+background:rgba(255, 0, 0, 1);
 padding:15px 10px;
 display:flex;
 align-items:center;
@@ -32,15 +32,12 @@ color:white;
   padding:7px 15px;
   border-radius: 6px 0 0 6px;
   transition:all 0.3s ease-in-out;
-  background: rgba(49, 48, 48, 1);
+  background: white;
   width:100%;
-  color:white;
+  color:black;
 }
 .sidebar .content-search .txt-search::placeholder{
-  color:lightgray;
-}
-.sidebar .content-search .txt-search::-webkit-search-cancel-button {
-  color: green;
+  color:gray;
 }
 .sidebar .content-search .btn-search{
   background: greenyellow;
@@ -116,6 +113,13 @@ color:white;
     height:100vh;
     transition: all 0.4s ease-in-out;
     overflow:scroll;
+  }
+  .sidebar .content-search .txt-search{
+    background:rgba(49, 48, 48, 1);
+    color:white;
+  }
+  .sidebar .content-search .txt-search::placeholder{
+    color:lightgray;
   }
   nav{
     flex-direction:column-reverse;
