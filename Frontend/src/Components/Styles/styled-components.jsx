@@ -1,7 +1,7 @@
 import styles from 'styled-components'
 
 export const NavBar = styles.div`
-position:absolute;
+position:fixed;
 width:100%;
 background:black;
 padding:15px 10px;
@@ -22,14 +22,14 @@ color:white;
 }
 .sidebar .content-search{
   display:flex;
-  margin:0 20px;
+  margin:0 10px;
   width:100%;
 }
 .sidebar .content-search .txt-search{
   font-weight:800;
   outline:none;
   border:0;
-  padding:7px 13px;
+  padding:7px 15px;
   border-radius: 6px 0 0 6px;
   transition:all 0.3s ease-in-out;
   background: rgba(49, 48, 48, 1);
@@ -60,12 +60,11 @@ color:white;
 .sidebar nav{
   display:flex;
   align-items:center;
-  justify-content:space-between;
   font-weight:800;
 }
 .sidebar nav a{
   color:white;
-  padding:0 10px;
+  padding:0 5px;
   text-decoration:none;
   display:flex;
   align-items:center;
@@ -79,7 +78,7 @@ color:white;
 }
 .sidebar .login-buttom a{
   color:white;
-  margin:0 10px;
+  margin:0 5px;
   text-decoration:none;
   display:flex;
   align-items:center;
@@ -93,7 +92,7 @@ color:white;
   color:#2AFF00
 }
 .btn-menu{
-  transition:all 0.2s ease-in-out;
+  transition:all 0.001s ease-in-out;
   background:#2AFF00;
   font-size:35px;
   padding:3px;
@@ -102,5 +101,42 @@ color:white;
 }
 .btn-menu:active{
   background: rgb(0, 194, 26);
+}
+
+
+@media only screen and (max-width:1130px){
+  .sidebar{
+    position:fixed;
+    top:4.45rem;
+    background:rgba(0, 0, 0, 0.69);
+    flex-direction:column;
+    width:20rem;
+    left:${({menu}) =>(menu ? "0px" : "-25rem")};
+    padding:20px;
+    height:100vh;
+    transition: all 0.4s ease-in-out;
+    overflow:scroll;
+  }
+  nav{
+    flex-direction:column-reverse;
+    width:100%;
+  }
+  nav a{
+    width:100%;
+    margin:15px 0;
+  }
+  .login-buttom{
+    width:100%;
+    margin-top:15px;
+    margin-bottom:3rem;
+  }
+  .btn-menu{
+    display:block;
+  }
+}
+@media only screen and (max-width:280px){
+  .sidebar{
+    width:100%
+  }
 }
 `

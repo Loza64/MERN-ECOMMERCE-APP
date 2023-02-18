@@ -1,4 +1,5 @@
-import React from "react";
+import { React, useState } from "react";
+import { RiCloseFill } from 'react-icons/ri';
 import { FaSearch, FaUserAlt, FaBoxes, FaClipboardList } from 'react-icons/fa';
 import { VscThreeBars } from 'react-icons/vsc'
 import { BiPurchaseTag } from 'react-icons/bi'
@@ -7,8 +8,11 @@ import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  //Hooks
+  const [state, setState] = useState(false);
+
   return (
-    <NavBar>
+    <NavBar menu={state}>
       <div className="title-business">
         <label>ECOMMERCE</label>
       </div>
@@ -18,18 +22,19 @@ export default function Navbar() {
           <button className="btn-search"><FaSearch /></button>
         </div>
         <nav>
-          <Link to="/"><AiFillHome className="react-icon" />Home</Link>
-          <Link to="/Terms"><AiFillSetting className="react-icon" />Terms</Link>
-          <Link to="/Products"><FaBoxes className="react-icon" />Products</Link>
-          <Link to="/Categories"><FaClipboardList className="react-icon" />Categories</Link>
-          <Link to="/Shoppings"><BiPurchaseTag className="react-icon" />Discounts</Link>
-          <Link to="/Shoppings"><AiOutlineShoppingCart className="react-icon" />Cart(0)</Link>
+          <Link to="/" onClick={() => { setState(false) }}><AiFillHome className="react-icon" />Home</Link>
+          <Link to="/Terms" onClick={() => { setState(false) }}><AiFillSetting className="react-icon" />Terms</Link>
+          <Link to="/Products" onClick={() => { setState(false) }}><FaBoxes className="react-icon" />Products</Link>
+          <Link to="/Categories" onClick={() => { setState(false) }}><FaClipboardList className="react-icon" />Categories</Link>
+          <Link to="/Shoppings" onClick={() => { setState(false) }}><BiPurchaseTag className="react-icon" />Discounts</Link>
+          <Link to="/Shoppings" onClick={() => { setState(false) }}><AiOutlineShoppingCart className="react-icon" />Cart(0)</Link>
         </nav>
         <div className="login-buttom">
           <Link to="/Login"><FaUserAlt className="react-icon" />Login</Link>
         </div>
       </div>
-      <VscThreeBars className="btn-menu" />
+      {!state ? (<VscThreeBars className="btn-menu" onClick={() => { setState(true) }} />) : (<RiCloseFill className="btn-menu" onClick={() => { setState(false) }} />)}
+
     </NavBar>
   );
 }
