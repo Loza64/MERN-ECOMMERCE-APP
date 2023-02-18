@@ -10,3 +10,18 @@
   background: greenyellow;
   border-radius: 10px;
 }
+
+.target {
+  width: auto;
+  height: auto;
+}
+
+.target .head-target img {
+  width: 100%;
+  height: 100%;
+}
+
+.target .body-target {
+  display: flex;
+  flex-direction: column;
+}

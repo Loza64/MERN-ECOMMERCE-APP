@@ -38,7 +38,7 @@ export default function Navbar() {
           <Link to="/Shoppings" onClick={() => { setState(false); scrollTop() }}><AiOutlineShoppingCart className="react-icon" />Cart(0)</Link>
         </nav>
         <div className="login-buttom">
-          <Link to="/Login"><FaUserAlt className="react-icon" />Login</Link>
+          <Link to="/Login" onClick={() => { setState(false); scrollTop() }}><FaUserAlt className="react-icon" />Login</Link>
         </div>
       </div>
       {!state ? (<VscThreeBars className="btn-menu" onClick={() => { setState(true) }} />) : (<RiCloseFill className="btn-menu" onClick={() => { setState(false) }} />)}
