@@ -11,6 +11,14 @@ export default function Navbar() {
   //Hooks
   const [state, setState] = useState(false);
 
+  //Functions
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <NavBar menu={state}>
       <div className="title-business">
@@ -22,12 +30,12 @@ export default function Navbar() {
           <button className="btn-search"><FaSearch /></button>
         </div>
         <nav>
-          <Link to="/" onClick={() => { setState(false) }}><AiFillHome className="react-icon" />Home</Link>
-          <Link to="/Terms" onClick={() => { setState(false) }}><AiFillSetting className="react-icon" />Terms</Link>
-          <Link to="/Products" onClick={() => { setState(false) }}><FaBoxes className="react-icon" />Products</Link>
-          <Link to="/Categories" onClick={() => { setState(false) }}><FaClipboardList className="react-icon" />Categories</Link>
-          <Link to="/Shoppings" onClick={() => { setState(false) }}><BiPurchaseTag className="react-icon" />Discounts</Link>
-          <Link to="/Shoppings" onClick={() => { setState(false) }}><AiOutlineShoppingCart className="react-icon" />Cart(0)</Link>
+          <Link to="/" onClick={() => { setState(false); scrollTop() }}><AiFillHome className="react-icon" />Home</Link>
+          <Link to="/Terms" onClick={() => { setState(false); scrollTop() }}><AiFillSetting className="react-icon" />Terms</Link>
+          <Link to="/Products" onClick={() => { setState(false); scrollTop() }}><FaBoxes className="react-icon" />Products</Link>
+          <Link to="/Categories" onClick={() => { setState(false); scrollTop() }}><FaClipboardList className="react-icon" />Categories</Link>
+          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop() }}><BiPurchaseTag className="react-icon" />Discounts</Link>
+          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop() }}><AiOutlineShoppingCart className="react-icon" />Cart(0)</Link>
         </nav>
         <div className="login-buttom">
           <Link to="/Login"><FaUserAlt className="react-icon" />Login</Link>
