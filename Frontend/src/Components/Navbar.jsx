@@ -42,7 +42,6 @@ export default function Navbar() {
         </div>
       </div>
       {!state ? (<VscThreeBars className="btn-menu" onClick={() => { setState(true) }} />) : (<RiCloseFill className="btn-menu" onClick={() => { setState(false) }} />)}
-
     </NavBar>
   );
 }
