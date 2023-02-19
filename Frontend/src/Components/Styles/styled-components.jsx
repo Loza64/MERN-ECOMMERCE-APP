@@ -2,6 +2,7 @@ import styles from 'styled-components'
 
 export const NavBar = styles.div`
 position:fixed;
+z-index: 100000;
 width:100%;
 background:rgba(2, 1, 71, 1);
 padding:15px 10px;
@@ -146,4 +147,18 @@ color:white;
     width:100%
   }
 }
-`
+`;
+export const BtnCart = styles.div`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width:100%;
+.react-icon{
+  color:greenyellow;
+  font-size:33px;
+  transition:all 0.05s ease-in-out;
+}
+.react-icon:active{
+  color:green;
+}
+`;
