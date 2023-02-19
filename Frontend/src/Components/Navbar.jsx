@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <NavBar menu={state}>
       <div className="title-business">
-        <label></label>
+        <label>ECOMMERCE</label>
       </div>
       <div className="sidebar">
         <div className="content-search">
