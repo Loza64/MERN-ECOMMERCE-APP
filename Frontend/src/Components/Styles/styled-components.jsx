@@ -3,7 +3,7 @@ import styles from 'styled-components'
 export const NavBar = styles.div`
 position:fixed;
 width:100%;
-background:rgba(255, 0, 0, 1);
+background:rgba(2, 1, 71, 1);
 padding:15px 10px;
 display:flex;
 align-items:center;
@@ -24,6 +24,8 @@ color:white;
   display:flex;
   margin:0 10px;
   width:100%;
+  text-align:center;
+  justify-content:center;
 }
 .sidebar .content-search .txt-search{
   font-weight:800;
@@ -34,6 +36,7 @@ color:white;
   transition:all 0.3s ease-in-out;
   background: white;
   width:100%;
+  max-width:465px;
   color:black;
 }
 .sidebar .content-search .txt-search::placeholder{
@@ -108,7 +111,7 @@ color:white;
     background:rgba(0, 0, 0, 0.69);
     flex-direction:column;
     width:20rem;
-    left:${({menu}) =>(menu ? "0px" : "-25rem")};
+    left:${({ menu }) => (menu ? "0px" : "-25rem")};
     padding:20px;
     height:100vh;
     transition: all 0.4s ease-in-out;
