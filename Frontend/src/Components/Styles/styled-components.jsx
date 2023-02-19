@@ -10,11 +10,24 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 border-bottom:4px solid #2AFF00;
+transition:all 2s ease-in-out;
+animation-name: load;
+animation-duration: 2s;
+animation-iteration-count: 1;
+@keyframes load {
+  0% {
+    opacity:0%;
+  }
+
+  100% {
+    opacity:110%;
+  }
+}
 
 color:white;
 .title-business{
   font-weight:900;
-  font-size:25px
+  font-size:25px;
 }
 .sidebar{
   width:100%;
@@ -113,11 +126,35 @@ color:white;
     background:rgba(0, 0, 0, 0.69);
     flex-direction:column;
     width:20rem;
-    left:${({ menu }) => (menu ? "0px" : "-25rem")};
+    transition: all 0.5s ease-in-out;
+    animation-name: ${({ menu }) => (menu ? "openmenu" : "closemenu")};
+    animation-duration:0.5s;
+    left: ${({ menu }) => (menu ? "0px" : "-21rem")};
     padding:20px;
     height:100vh;
-    transition: all 0.4s ease-in-out;
     overflow:scroll;
+  }
+  @keyframes openmenu {
+    0% {
+      left:-21rem;
+    }
+    50% {
+      left:70px;
+    }
+    100% {
+      left:0px;
+    }
+  }
+  @keyframes closemenu {
+    0% {
+      left:0px;
+    }
+    50% {
+      left:-140px;
+    }
+    100% {
+      left:-21rem;
+    }
   }
   .sidebar .content-search .txt-search{
     background:rgba(49, 48, 48, 1);
