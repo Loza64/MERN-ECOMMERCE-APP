@@ -16,9 +16,7 @@ export default function ProductItem({ product }) {
         <div className="content-product-price">
           <label className="product-price">US${product.price}</label>
           {
-            product.discount > 0 ?
-              (<label className="product-discount">-{Math.round(product.discount * 100)}%</label>)
-              : null
+            product.discount > 0 ? (<label className="product-discount">-{Math.round(product.discount * 100)}%</label>) : null
           }
         </div>
       </div>

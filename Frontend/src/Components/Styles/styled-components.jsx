@@ -99,6 +99,7 @@ color:white;
   padding:3px;
   border-radius:5px;
   display:none;
+  cursor: pointer;
 }
 .btn-menu:active{
   background: rgb(0, 194, 26);
@@ -157,6 +158,7 @@ export const BtnCart = styles.div`
   color:greenyellow;
   font-size:33px;
   transition:all 0.05s ease-in-out;
+  cursor: pointer;
 }
 .react-icon:active{
   color:green;

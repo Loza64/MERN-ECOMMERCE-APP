@@ -30,12 +30,26 @@
   background-color: rgb(246, 246, 246);
   padding: 10px;
   border-radius: 10px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.4s ease-in-out;
   z-index: 1;
+  animation-name: loadtarget;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
 }
 
 .target:hover {
-  transform: scale(110%);
+  transition: all 0.2s ease-in-out;
+  transform: scale(105%);
+}
+
+@keyframes loadtarget {
+  0% {
+    transform: scale(0%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
 }
 
 @media only screen and (max-width:600px) {
@@ -56,6 +70,21 @@
   width: 100%;
   height: 100%;
   padding: 12px;
+  transition: all 0.4s ease-in-out;
+  animation-name: loadimgproduct;
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
+  cursor: pointer;
+}
+
+@keyframes loadimgproduct {
+  0% {
+    transform: scale(0%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
 }
 
 .target .body-target {
