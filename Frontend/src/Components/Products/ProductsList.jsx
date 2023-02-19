@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 export default function ProductsList() {
   const { products } = ContextProvider();
   return (
-    <div>
+    <div className="grid">
       {
         products.map(
           product => (

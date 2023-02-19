@@ -4,7 +4,7 @@ import Products from "./Products/Products";
 export default function Principal() {
   return (
     <div>
-      <Products/>
+      <Products Topic={"Our Products"}/>
     </div>
   )
 }
