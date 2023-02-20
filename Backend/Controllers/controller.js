@@ -63,8 +63,8 @@ const NewProduct = async (req, res) => {
     company: company,
     details: details,
     stock: Number(stock),
-    price: parseFloat(price),
-    discount: parseFloat(discount)
+    price: Number(price),
+    discount: Number(discount)
   }).save((err) => {
     if (!err) {
       res.send('Producto guardado exitosamente')
