@@ -8,28 +8,27 @@ import Categories from './Components/Categories/Categories';
 import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
 import Products from './Components/Products/Products'
-import ProductsCategory from './Components/Products/ProductsCategory'
+import ProductsByCategory from './Components/Products/ProductsByCategory'
 import Top from './Components/Top';
-import CategorieItem from './Components/Categories/CategorieItem';
 
 export default function App() {
   const { categories } = ContextProvider();
   return (
     <div>
       <Navbar />
-      <Top/>
+      <Top />
       <Routes>
         <Route path='/' element={<Principal />} />
         <Route path='/*' element={<Principal />} />
         <Route path='/Terms' element={<Terms />} />
         <Route path='/Login' element={<Login />} />
-        <Route path='/Products' element={<Products />} />
+        <Route path='/Products' element={<Products SubTopic={"Our"} Topic={"Products"} />} />
         <Route path='/Shoppings' element={<MyShoppings />} />
-        <Route path='/Categories' element={<Categories SubTopic={"Look at our"} Topic={"Categories"}/>} />
+        <Route path='/Categories' element={<Categories SubTopic={"Look at our"} Topic={"Categories"} />} />
         {
           categories.map(
             category => (
-              <Route path={`${category.name}`} element={<ProductsCategory key={category._id} categorykey={`${category.key}`} />} />
+              <Route path={`${category.name}`} element={<ProductsByCategory key={category._id} clave={`${category.key}`} />} />
             )
           )
         }

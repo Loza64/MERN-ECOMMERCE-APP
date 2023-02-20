@@ -5,5 +5,6 @@ export const SignUp = async (usuario) => await axios.post('/ServerCommerce/Backe
 
 export const GetProducts = async () => await axios.get('/ServerCommerce/Backend/Node/Route/Api/EcommerceApp/GetProducts')
 export const GetCategories = async () => await axios.get('/ServerCommerce/Backend/Node/Route/Api/EcommerceApp/GetCategories')
+export const GetProductByCategorie = async (CategoryKey) => await axios.post('/ServerCommerce/Backend/Node/Route/Api/EcommerceApp/GetProductByCategorie', CategoryKey)
 
 

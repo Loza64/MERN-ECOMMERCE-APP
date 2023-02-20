@@ -82,6 +82,12 @@ const GetProducts = (req, res) => {
     }
   })
 }
+const GetProductByCategorie = (req, res) => {
+  const { CategoryKey } = req.body;
+  Products.find({ categorykey: CategoryKey }, (err, docs) => {
+    !err ? res.send(docs) : null;
+  })
+}
 
 //Funciones de las categorias
 const NewCategorie = async (req, res) => {
@@ -119,5 +125,6 @@ module.exports = {
   NewProduct,
   GetProducts,
   NewCategorie,
-  GetCategories
+  GetCategories,
+  GetProductByCategorie
 }
