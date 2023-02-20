@@ -7,7 +7,7 @@ export default function ProductsByCategory({ clave }) {
   const body = {
     CategoryKey: clave
   }
-  const { getProductByCategorie, productsByCategorie} = ContextProvider();
+  const { getProductByCategorie, productsByCategorie } = ContextProvider();
   useEffect(() => {
     getProductByCategorie(body);
   }, body)

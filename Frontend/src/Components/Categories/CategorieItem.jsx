@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { ContextProvider } from "../../Context/Context";
 
 export default function CategorieItem({ category }) {
+  const { setProductsByCategorie } = ContextProvider();
   return (
     <div className="targe-categorie">
       <div className="head">
@@ -11,7 +13,7 @@ export default function CategorieItem({ category }) {
         <label>{category.name}</label>
       </div>
       <div className="footer">
-        <Link to={`/${category.name}`}>View Products</Link>
+        <Link to={`/${category.name}`} onClick={() => { setProductsByCategorie([]) }}>View Products</Link>
       </div>
     </div>
   );

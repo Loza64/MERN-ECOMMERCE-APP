@@ -46,7 +46,7 @@ export default function ContextConsumer({ children }) {
   return (
     <Context.Provider value={{
       products, categories, UserLogin, UserSignUp,
-      getProductByCategorie, productsByCategorie
+      getProductByCategorie, productsByCategorie,setProductsByCategorie
     }}>
       {children}
     </Context.Provider>
