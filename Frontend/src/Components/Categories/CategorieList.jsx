@@ -5,7 +5,8 @@ import { ContextProvider } from '../../Context/Context'
 export default function CategorieList() {
   const { categories } = ContextProvider();
   return (
-    <div>
+    
+    <div className="grid">
       {
         categories.map(
           categorie => (

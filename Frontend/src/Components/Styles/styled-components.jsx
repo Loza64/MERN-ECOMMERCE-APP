@@ -128,7 +128,7 @@ color:white;
     width:20rem;
     transition: all 0.5s ease-in-out;
     animation-name: ${({ menu }) => (menu ? "openmenu" : "closemenu")};
-    animation-duration:0.5s;
+    animation-duration:0.6s;
     left: ${({ menu }) => (menu ? "0px" : "-21rem")};
     padding:20px;
     height:100vh;
@@ -150,7 +150,7 @@ color:white;
       left:0px;
     }
     50% {
-      left:-140px;
+      left:-200px;
     }
     100% {
       left:-21rem;
@@ -188,16 +188,18 @@ color:white;
 `;
 export const BtnCart = styles.div`
   display: flex;
-  flex-direction: column;
-  align-items: end;
+  flex-direction: crow;
+  align-items: center;
+  justify-content:space-between;
   width:100%;
 .react-icon{
-  color:greenyellow;
-  font-size:33px;
+  color:green;
+  font-size:27px;
   transition:all 0.05s ease-in-out;
   cursor: pointer;
+  text-align:end;
 }
 .react-icon:active{
-  color:green;
+  transform:scale(115%);
 }
 `;

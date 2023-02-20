@@ -4,12 +4,13 @@ import Navbar from './Components/Navbar'
 import { ContextProvider } from './Context/Context';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
-import CategorieList from './Components/Categories/CategorieList';
+import Categories from './Components/Categories/Categories';
 import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
 import Products from './Components/Products/Products'
 import ProductsCategory from './Components/Products/ProductsCategory'
 import Top from './Components/Top';
+import CategorieItem from './Components/Categories/CategorieItem';
 
 export default function App() {
   const { categories } = ContextProvider();
@@ -24,7 +25,7 @@ export default function App() {
         <Route path='/Login' element={<Login />} />
         <Route path='/Products' element={<Products />} />
         <Route path='/Shoppings' element={<MyShoppings />} />
-        <Route path='/Categories' element={<CategorieList />} />
+        <Route path='/Categories' element={<Categories SubTopic={"Look at our"} Topic={"Categories"}/>} />
         {
           categories.map(
             category => (
