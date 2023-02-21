@@ -6,7 +6,6 @@ import { FaSearch, FaUserAlt, FaBoxes, FaClipboardList } from 'react-icons/fa';
 import { AiFillHome, AiFillSetting, AiFillTags} from 'react-icons/ai'
 import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
-import {env} from 'process'
 
 export default function Navbar() {
   //Hooks
