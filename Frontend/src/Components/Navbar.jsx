@@ -20,7 +20,6 @@ export default function Navbar() {
     });
   }
 
-  console.log(`${process.env.REACT_APP_TITLEBUSINESS}`)
   return (
     <NavBar menu={state}>
       <div className="title-business">
