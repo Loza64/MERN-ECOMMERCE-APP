@@ -9,7 +9,7 @@ padding:15px 10px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-border-bottom:4px solid #2AFF00;
+border-bottom:5.5px solid #2AFF00;
 transition:all 2s ease-in-out;
 animation-name: load;
 animation-duration: 2s;
@@ -122,7 +122,7 @@ color:white;
 @media only screen and (max-width:1130px){
   .sidebar{
     position:fixed;
-    top:4.45rem;
+    top:4.59rem;
     background:rgba(0, 0, 0, 0.69);
     flex-direction:column;
     width:20rem;
