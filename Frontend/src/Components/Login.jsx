@@ -153,7 +153,7 @@ export default function Login() {
         onSubmit={() => {
           if (stateInputs.usuario || stateInputs.nombres || stateInputs.apellidos || stateInputs.nacimiento || stateInputs.correo || stateInputs.telefono || stateInputs.clave) {
             UserSignUp(body).then((result) => {
-              if (result) {
+              if (result.data) {
 
               } else {
 
