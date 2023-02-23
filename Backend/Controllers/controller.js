@@ -24,7 +24,7 @@ const SignUp = async (req, res) => {
       username: usuario,
       names: nombres,
       surnames: apellidos,
-      date: naciminento,
+      date: new Date(Date.parse(naciminento)),
       email: correo,
       phone: telefono,
       password: encryptpass,
