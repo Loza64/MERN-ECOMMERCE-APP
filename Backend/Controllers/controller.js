@@ -17,106 +17,124 @@ let emailmessage = {
 //Funciones del usuario
 const SignUp = async (req, res) => {
   const { usuario, nombres, apellidos, naciminento, correo, telefono, clave, tipo } = req.body
-  let encryptpass = await EncryptPass(clave)
-  new Users({
-    key: uniquid(),
-    username: usuario,
-    names: nombres,
-    surnames: apellidos,
-    date: naciminento,
-    email: correo,
-    phone: telefono,
-    password: encryptpass,
-    type: tipo
-  }).save((err) => {
-    if (err) {
-      res.send('Lo sentimos ocurrio un error inesperado')
-    } else {
-      res.send('Registro realisado exitosamente')
-    }
-  });
+  try {
+    let encryptpass = await EncryptPass(clave)
+    new Users({
+      key: uniquid(),
+      username: usuario,
+      names: nombres,
+      surnames: apellidos,
+      date: naciminento,
+      email: correo,
+      phone: telefono,
+      password: encryptpass,
+      type: tipo
+    }).save((err) => {
+      if (!err) {
+        res.send('Registro realisado exitosamente')
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 const Login = async (req, res) => {
-  const { username, password } = req.body
-  const user = await Users.findOne({ username: username })
-  if (user != null && (await ComparePass(password, user.password))) {
-    res.send(user);
-  } else {
-    res.send(null);
+  const { usuario, clave } = req.body
+  try {
+    const user = await Users.findOne({ username: usuario })
+    if (user != null && (await ComparePass(clave, user.password))) {
+      res.send(user);
+    } else {
+      res.send(null);
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
   }
 }
 
 //Funciones de los productos
 const NewProduct = async (req, res) => {
   const { name, category, stock, company, details, price, discount } = req.body
-  const getcategory = await Categories.findOne({ name: category })
-  let result;
-  if (req.files.image) {
-    result = await UploadImage(req.files.image.tempFilePath)
-  }
-  fs.remove(req.files.image.tempFilePath)
-  new Products({
-    key: uniquid(),
-    image: { public_id: result.public_id, url: result.url },
-    categorykey: getcategory.key,
-    name: name,
-    company: company,
-    details: details,
-    stock: Number(stock),
-    price: Number(price),
-    discount: Number(discount)
-  }).save((err) => {
-    if (!err) {
-      res.send('Producto guardado exitosamente')
-    } else {
-      res.send('Lo sentimos, ocurrio un error inesperado')
+  try {
+    const getcategory = await Categories.findOne({ name: category })
+    let result;
+    if (req.files.image) {
+      result = await UploadImage(req.files.image.tempFilePath)
     }
-  })
+    fs.remove(req.files.image.tempFilePath)
+    new Products({
+      key: uniquid(),
+      image: { public_id: result.public_id, url: result.url },
+      categorykey: getcategory.key,
+      name: name,
+      company: company,
+      details: details,
+      stock: Number(stock),
+      price: Number(price),
+      discount: Number(discount)
+    }).save((err) => {
+      if (!err) {
+        res.send('Producto guardado exitosamente')
+      }
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 const GetProducts = (req, res) => {
-  Products.find({}, (err, docs) => {
-    if (!err) {
-      res.send(docs);
-    } else {
-      console.error(error);
-    }
-  })
+  try {
+    Products.find({}, (err, docs) => {
+      if (!err) {
+        res.send(docs);
+      }
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 const GetProductByCategorie = (req, res) => {
-  const { CategoryKey } = req.body;
-  Products.find({ categorykey: CategoryKey }, (err, docs) => {
-    !err ? res.send(docs) : null;
-  })
+  try {
+    const { CategoryKey } = req.body;
+    Products.find({ categorykey: CategoryKey }, (err, docs) => {
+      !err ? res.send(docs) : null;
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 
 //Funciones de las categorias
 const NewCategorie = async (req, res) => {
   const { name } = req.body
-  let result
-  if (req.files.image) {
-    result = await UploadImage(req.files.image.tempFilePath)
-  }
-  fs.remove(req.files.image.tempFilePath)
-  new Categories({
-    key: uniquid(),
-    image: { public_id: result.public_id, url: result.url },
-    name: name
-  }).save((err) => {
-    if (!err) {
-      res.send('Categoria guardada exitosamente')
-    } else {
-      res.send('Lo sentimos, ocurrio un error inesperado')
+  try {
+    let result
+    if (req.files.image) {
+      result = await UploadImage(req.files.image.tempFilePath)
     }
-  })
+    fs.remove(req.files.image.tempFilePath)
+    new Categories({
+      key: uniquid(),
+      image: { public_id: result.public_id, url: result.url },
+      name: name
+    }).save((err) => {
+      if (!err) {
+        res.send('Categoria guardada exitosamente')
+      }
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 const GetCategories = async (req, res) => {
-  Categories.find({}, (err, docs) => {
-    if (err) {
-      res.send('Lo sentimos, ocurrio un error inesperado')
-    } else {
-      res.send(docs)
-    }
-  })
+  try {
+    Categories.find({}, (err, docs) => {
+      if (!err) {
+        res.send(docs)
+      }
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 
 module.exports = {

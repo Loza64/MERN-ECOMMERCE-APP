@@ -27,13 +27,13 @@
   flex-direction: column;
   align-items: center;
   margin: 15px 11px;
-  background-color: rgb(246, 246, 246);
+  background-color: white;
   padding: 10px;
   border-radius: 10px;
   transition: all 0.4s ease-in-out;
   z-index: 1;
   animation-name: loadtarget;
-  animation-duration: 1.5s;
+  animation-duration: 1.3s;
   animation-iteration-count: 1;
 }
 
@@ -127,7 +127,7 @@
   width: 100%;
   height: auto;
   max-width: 210px;
-  background: rgb(243, 243, 243);
+  background: white;
   margin: 10px 15px;
   display: flex;
   flex-direction: column;
@@ -137,18 +137,33 @@
   padding: 10px;
   transition: all 0.3s ease-in-out;
   animation-name: showcategorie;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   animation-iteration-count: 1;
+}
+.targe-categorie:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(105%);
 }
 @media  only screen and (max-width:600px) {
   .targe-categorie{
     max-width: 600px;
   }
 }
+@media only screen and (max-width:480px) {
+  .targe-categorie {
+    max-width: 800px;
+    margin: 5px 5px;
+  }
+
+  .targe-categorie:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(100%);
+  }
+}
 @keyframes showcategorie{
   0%{
     opacity: 0%;
-    transform: translateY(15%);
+    transform: translateY(10%);
   }
   100%{
     opacity: 100%;

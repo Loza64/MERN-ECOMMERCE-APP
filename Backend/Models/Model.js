@@ -6,7 +6,7 @@ const user = new Schema({
   username: { type: String, require: true, unique: true },
   names: { type: String, require: true },
   surnames: { type: String, require: true },
-  date: { type: String, require: true },
+  date: { type: Date, require: true },
   email: { type: String, require: true, unique: true },
   phone: { type: String, require: true, unique: true },
   password: { type: String, require: true },

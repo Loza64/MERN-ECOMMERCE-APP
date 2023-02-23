@@ -186,6 +186,7 @@ color:white;
   }
 }
 `;
+
 export const BtnCart = styles.div`
   display: flex;
   flex-direction: crow;
@@ -202,4 +203,8 @@ export const BtnCart = styles.div`
 .react-icon:active{
   transform:scale(115%);
 }
+`;
+
+export const FormContainer = styles.div`
+
 `;
