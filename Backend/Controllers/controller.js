@@ -31,7 +31,7 @@ const SignUp = async (req, res) => {
       type: tipo
     }).save((err) => {
       if (!err) {
-        res.send('Registro realisado exitosamente')
+        res.send(true)
       }
     });
   } catch (error) {
