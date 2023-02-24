@@ -47,7 +47,7 @@ const Login = async (req, res) => {
     if (user != null && (await ComparePass(password, user.password))) {
       res.send(user);
     } else {
-      res.send(null);
+      res.send(false);
     }
   } catch (error) {
     return res.status(500).json({ message: error.message })
