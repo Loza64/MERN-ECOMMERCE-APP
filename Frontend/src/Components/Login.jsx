@@ -42,14 +42,12 @@ export default function Login() {
                   'Inicio de sesión corrento.',
                   'success'
                 );
-                console.log(result.data)
               } else {
                 Swal.fire({
                   icon: 'error',
                   title: 'Error de registro!',
                   text: 'Usuario o correo no validos.'
                 });
-                console.log(result.data)
               }
             })
           }}
