@@ -21,6 +21,9 @@ export default function Login() {
   return (
     <LoginContainer>
       <div className="container-form-login">
+        <div className="content">
+
+        </div>
         <Formik
           initialValues={{
             usuario: String,
@@ -37,17 +40,9 @@ export default function Login() {
           onSubmit={() => {
             UserLogin(body).then((result) => {
               if (result.data) {
-                Swal.fire(
-                  'En horabuena!',
-                  'Inicio de sesión corrento.',
-                  'success'
-                );
+
               } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error de registro!',
-                  text: 'Usuario o correo no validos.'
-                });
+
               }
             })
           }}

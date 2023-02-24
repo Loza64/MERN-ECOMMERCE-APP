@@ -206,7 +206,69 @@ export const BtnCart = styles.div`
 `;
 
 export const LoginContainer = styles.div`
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
 
+.container-form-login{
+  width:100%;
+  display:flex;
+  margin: 0 270px;
+  margin-top:-80px;
+  height:440px;
+  box-shadow: 4px 4px 4px blue;
+  overflow:hidden;
+  border-radius:10px;
+}
+
+.container-form-login .content{
+  width:50%;
+  background:url(https://res.cloudinary.com/ufostart-development/image/upload/v1677258133/ECOMMERCE/pxoai4jkuieew8wartj2.jpg);
+  background-size:cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+.container-form-login form{
+  width:50%;
+  display:flex;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:0px 20px;
+}
+.container-form-login form input[type=text]{
+  width:100%;
+  margin:15px 0;
+  text-align:center;
+  border:none;
+  outline:none;
+  background:rgb(237, 237, 237);
+  padding:7px;
+  font-weight:bold;
+  border-radius:30px;
+}
+.container-form-login form input[type=password]{
+  width:100%;
+  margin:15px 0;
+  text-align:center;
+  border:none;
+  outline:none;
+  background:rgb(237, 237, 237);
+  padding:7px;
+  font-weight:bold;
+  border-radius:30px;
+}
+.container-form-login form input[type=submit]{
+  width:100%;
+  margin:15px 0;
+  text-align:center;
+}
 `;
 
 export const SignupContainer = styles.div`
