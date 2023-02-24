@@ -38,14 +38,14 @@ export default function Login() {
   }
 
   let body = {
-    username: user,
-    names: names,
-    surnames: surnames,
-    date: date,
-    email: email,
-    phone: phone,
+    usuario: user,
+    nombres: names,
+    apellidos: surnames,
+    nacimiento: date,
+    correo: email,
+    telefono: phone,
     pass: password,
-    type: "Cliente"
+    tipo: "Cliente"
   }
 
   return (
