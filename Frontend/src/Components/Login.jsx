@@ -73,8 +73,8 @@ export default function Login() {
             stateInputs.username = false;
             errores.usuario = 'Usuario no valido'
           } else {
-            stateInputs.username = true;
             setUser(values.usuario);
+            stateInputs.username = true;
           }
 
           //Validate names
@@ -85,8 +85,8 @@ export default function Login() {
             stateInputs.names = false;
             errores.nombres = 'Nombre no valido'
           } else {
-            stateInputs.names = true;
             setNames(values.nombres);
+            stateInputs.names = true;
           }
 
           //Validate surnames
@@ -97,8 +97,8 @@ export default function Login() {
             stateInputs.surnames = false;
             errores.apellidos = 'Apellidos no valido'
           } else {
-            stateInputs.surnames = true;
             setSurnames(values.apellidos);
+            stateInputs.surnames = true;
           }
 
           //Validate date
@@ -106,8 +106,8 @@ export default function Login() {
             stateInputs.date = false;
             errores.nacimiento = 'Campo obligatorio'
           } else {
-            stateInputs.date = true;
             setDate(values.nacimiento);
+            stateInputs.date = true;
           }
 
           //Validate email
@@ -118,8 +118,8 @@ export default function Login() {
             stateInputs.email = false;
             errores.correo = 'Correo no valido'
           } else {
-            stateInputs.email = true;
             setEmail(values.correo);
+            stateInputs.email = true;
           }
 
           //Validate phone
@@ -130,25 +130,30 @@ export default function Login() {
             stateInputs.phone = false;
             errores.telefono = 'Teléfono no valido'
           } else {
-            stateInputs.phone = true;
             setPhone(values.telefono);
+            stateInputs.phone = true;
           }
-
 
           //Validate pass
           if (!values.clave) {
             stateInputs.password = false;
             errores.clave = 'Campo obligatorio'
           } else {
-            stateInputs.password = true;
             setPass(values.clave);
+            stateInputs.password = true;
           }
           return errores;
         }}
 
         onSubmit={() => {
-          if (stateInputs.username && stateInputs.names && stateInputs.surnames
-            && stateInputs.date && stateInputs.email && stateInputs.phone && stateInputs.password) {
+          if (!stateInputs.username || !stateInputs.names || !stateInputs.surnames
+            || !stateInputs.date || !stateInputs.email || !stateInputs.phone || !stateInputs.password) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Datos erroneos!',
+              text: 'Registrese correctamente por favor.'
+            })
+          } else {
             UserSignUp(body).then((result) => {
               if (result.data) {
                 Swal.fire(
@@ -183,8 +188,8 @@ export default function Login() {
               <ErrorMessage name="usuario" component={() => (<label className="errormessage">{errors.usuario}</label>)} />
               <Field type="text" placeholder="Nombres" name="nombres" />
               <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
-              <Field type="text" placeholder="Apellidos" name="apellido" />
-              <ErrorMessage name="apellido" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
+              <Field type="text" placeholder="Apellidos" name="apellidos" />
+              <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
               <Field type="date" placeholder="Usuario" name="nacimiento" />
               <ErrorMessage name="nacimiento" component={() => (<label className="errormessage">{errors.nacimiento}</label>)} />
               <Field type="text" placeholder="Correo electronico" name="correo" />
