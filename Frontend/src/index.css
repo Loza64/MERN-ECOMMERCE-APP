@@ -187,14 +187,3 @@
   color: blue;
   text-decoration: none;
 }
-
-/* diseño del formulario */
-
-form{
-  display: flex;
-  flex-direction: column;
-}
-
-form input{
-  margin-top: 20px;
-}

@@ -6,6 +6,8 @@ import { FormContainer } from "./Styles/styled-components";
 import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+
+  const { UserSignUp } = ContextProvider();
   // hooks
   const [user, setUser] = useState("");
   const [names, setNames] = useState("");
@@ -16,36 +18,35 @@ export default function Login() {
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
 
+  //Objects
   let expresiones = {
-    username: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
+    username: /(^[A-Za-z]{1,10}([0-9]{3})){1}/,
     names: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
     surnames: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
     email: /^(([^<>()[\].,;:\s@”]+(\.[^<>()[\].,;:\s@”]+)*)|(”.+”))@(([^<>()[\].,;:\s@”]+\.)+[^<>()[\].,;:s@”]{2,})$/,
-    phone: /^09\d{8}$/
+    phone: /^[0-9]{8}$/
   }
 
   let stateInputs = {
-    usuario: true,
-    nombres: true,
-    apellidos: true,
-    nacimiento: true,
-    correo: true,
-    telefono: true,
-    clave: true
+    username: true,
+    names: true,
+    surnames: true,
+    date: true,
+    email: true,
+    phone: true,
+    password: true
   }
 
   let body = {
-    usuario: user,
-    nombres: names,
-    apellidos: surnames,
-    nacimiento: date,
-    correo: email,
-    telefono: phone,
-    clave: pass,
-    tipo: "Cliente"
+    username: user,
+    names: names,
+    surnames: surnames,
+    date: date,
+    email: email,
+    phone: phone,
+    password: pass,
+    type: "Cliente"
   }
-
-  const { UserSignUp } = ContextProvider();
 
   return (
     <FormContainer>
@@ -66,87 +67,88 @@ export default function Login() {
 
           //Validate username
           if (!values.usuario) {
-            stateInputs.usuario = false;
+            stateInputs.username = false;
             errores.usuario = 'Campo obligatorio'
           } else if (!expresiones.username.test(values.usuario)) {
-            stateInputs.usuario = false;
+            stateInputs.username = false;
             errores.usuario = 'Usuario no valido'
           } else {
-            stateInputs.usuario = true;
+            stateInputs.username = true;
             setUser(values.usuario);
           }
 
           //Validate names
           if (!values.nombres) {
-            stateInputs.nombres = false;
+            stateInputs.names = false;
             errores.nombres = 'Campo obligatorio'
           } else if (!expresiones.names.test(values.nombres)) {
-            stateInputs.nombres = false;
+            stateInputs.names = false;
             errores.nombres = 'Nombre no valido'
           } else {
-            stateInputs.nombres = true;
+            stateInputs.names = true;
             setNames(values.nombres);
           }
 
           //Validate surnames
           if (!values.apellidos) {
-            stateInputs.apellidos = false;
+            stateInputs.surnames = false;
             errores.apellidos = 'Campo obligatorio'
           } else if (!expresiones.surnames.test(values.apellidos)) {
-            stateInputs.apellidos = false;
+            stateInputs.surnames = false;
             errores.apellidos = 'Apellidos no valido'
           } else {
-            stateInputs.apellidos = true;
+            stateInputs.surnames = true;
             setSurnames(values.apellidos);
           }
 
           //Validate date
           if (!values.nacimiento) {
-            stateInputs.nacimiento = false;
+            stateInputs.date = false;
             errores.nacimiento = 'Campo obligatorio'
           } else {
-            stateInputs.nacimiento = true;
+            stateInputs.date = true;
             setDate(values.nacimiento);
           }
 
           //Validate email
           if (!values.correo) {
-            stateInputs.apellidos = false;
+            stateInputs.surnames = false;
             errores.apellidos = 'Campo obligatorio'
-          } else if (!expresiones.surnames.test(values.correo)) {
-            stateInputs.correo = false;
+          } else if (!expresiones.email.test(values.correo)) {
+            stateInputs.email = false;
             errores.correo = 'Correo no valido'
           } else {
-            stateInputs.correo = true;
+            stateInputs.email = true;
             setEmail(values.correo);
           }
 
           //Validate phone
           if (!values.telefono) {
-            stateInputs.apellidos = false;
+            stateInputs.surnames = false;
             errores.apellidos = 'Campo obligatorio'
-          } else if (!expresiones.surnames.test(values.telefono)) {
-            stateInputs.telefono = false;
+          } else if (!expresiones.phone.test(values.telefono)) {
+            stateInputs.phone = false;
             errores.telefono = 'Teléfono no valido'
           } else {
-            stateInputs.telefono = true;
+            stateInputs.phone = true;
             setPhone(values.telefono);
           }
 
 
           //Validate pass
           if (!values.clave) {
-            stateInputs.clave = false;
+            stateInputs.password = false;
             errores.clave = 'Campo obligatorio'
           } else {
-            stateInputs.clave = true;
+            stateInputs.password = true;
             setPass(values.clave);
           }
+          return errores;
         }}
 
         onSubmit={() => {
-          if (stateInputs.usuario && stateInputs.nombres && stateInputs.apellidos
-            && stateInputs.nacimiento && stateInputs.correo && stateInputs.telefono && stateInputs.clave) {
+          if (stateInputs.username && stateInputs.names && stateInputs.surnames
+            && stateInputs.date && stateInputs.email && stateInputs.phone && stateInputs.password) {
             UserSignUp(body).then((result) => {
               if (result.data) {
                 Swal.fire(
@@ -181,8 +183,8 @@ export default function Login() {
               <ErrorMessage name="usuario" component={() => (<label className="errormessage">{errors.usuario}</label>)} />
               <Field type="text" placeholder="Nombres" name="nombres" />
               <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
-              <Field type="text" placeholder="Apellidos" name="apellidos" />
-              <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
+              <Field type="text" placeholder="Apellidos" name="apellido" />
+              <ErrorMessage name="apellido" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
               <Field type="date" placeholder="Usuario" name="nacimiento" />
               <ErrorMessage name="nacimiento" component={() => (<label className="errormessage">{errors.nacimiento}</label>)} />
               <Field type="text" placeholder="Correo electronico" name="correo" />

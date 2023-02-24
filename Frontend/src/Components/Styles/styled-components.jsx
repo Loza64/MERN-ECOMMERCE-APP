@@ -206,5 +206,12 @@ export const BtnCart = styles.div`
 `;
 
 export const FormContainer = styles.div`
+form{
+  display: flex;
+  flex-direction: column;
+}
 
+form input{
+  margin-top: 20px;
+}
 `;
