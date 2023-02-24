@@ -20,7 +20,17 @@ const SignUp = async (req, res) => {
   try {
     let password = await EncryptPass(pass)
     let key = uniquid()
-    new Users({ key, username, names, surnames, date, email, phone, password, type }).save((err) => {
+    new Users({
+      key: key,
+      username: username,
+      names: names,
+      surnames: surnames,
+      date: date,
+      email: email,
+      phone: phone,
+      password: password,
+      type: type
+    }).save((err) => {
       if (!err) {
         res.send(true)
       } else {
