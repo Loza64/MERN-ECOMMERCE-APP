@@ -16,12 +16,11 @@ let emailmessage = {
 
 //Funciones del usuario
 const SignUp = async (req, res) => {
-  const { username, names, surnames, date, email, phone, password, type } = req.body
+  const { username, names, surnames, date, email, phone, pass, type } = req.body
   try {
-    let encryptpass = await EncryptPass(password)
-    let fecha = new Date(date);
+    let password = await EncryptPass(pass)
     let key = uniquid()
-    new Users({ key, username, names, surnames, fecha, email, phone, encryptpass, type }).save((err) => {
+    new Users({ key, username, names, surnames, date, email, phone, password, type }).save((err) => {
       if (!err) {
         res.send(true)
       } else {

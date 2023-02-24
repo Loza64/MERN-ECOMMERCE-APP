@@ -15,7 +15,7 @@ export default function Login() {
   const [date, setDate] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   //Objects
@@ -44,7 +44,7 @@ export default function Login() {
     date: date,
     email: email,
     phone: phone,
-    password: pass,
+    pass: password,
     type: "Cliente"
   }
 
@@ -83,7 +83,7 @@ export default function Login() {
             errores.nombres = 'Campo obligatorio'
           } else if (!expresiones.names.test(values.nombres)) {
             stateInputs.names = false;
-            errores.nombres = 'Nombre no valido'
+            errores.nombres = 'Nombres no validos'
           } else {
             setNames(values.nombres);
             stateInputs.names = true;
@@ -95,10 +95,10 @@ export default function Login() {
             errores.apellidos = 'Campo obligatorio'
           } else if (!expresiones.surnames.test(values.apellidos)) {
             stateInputs.surnames = false;
-            errores.apellidos = 'Apellidos no valido'
+            errores.apellidos = 'Apellidos no validos'
           } else {
-            setSurnames(values.apellidos);
             stateInputs.surnames = true;
+            setSurnames(values.apellidos);
           }
 
           //Validate date
@@ -106,32 +106,32 @@ export default function Login() {
             stateInputs.date = false;
             errores.nacimiento = 'Campo obligatorio'
           } else {
-            setDate(values.nacimiento);
             stateInputs.date = true;
+            setDate(values.nacimiento);
           }
 
           //Validate email
           if (!values.correo) {
             stateInputs.surnames = false;
-            errores.apellidos = 'Campo obligatorio'
+            errores.correo = 'Campo obligatorio'
           } else if (!expresiones.email.test(values.correo)) {
             stateInputs.email = false;
             errores.correo = 'Correo no valido'
           } else {
-            setEmail(values.correo);
             stateInputs.email = true;
+            setEmail(values.correo);
           }
 
           //Validate phone
           if (!values.telefono) {
             stateInputs.surnames = false;
-            errores.apellidos = 'Campo obligatorio'
+            errores.telefono = 'Campo obligatorio'
           } else if (!expresiones.phone.test(values.telefono)) {
             stateInputs.phone = false;
             errores.telefono = 'Teléfono no valido'
           } else {
-            setPhone(values.telefono);
             stateInputs.phone = true;
+            setPhone(values.telefono);
           }
 
           //Validate pass
@@ -139,8 +139,8 @@ export default function Login() {
             stateInputs.password = false;
             errores.clave = 'Campo obligatorio'
           } else {
-            setPass(values.clave);
             stateInputs.password = true;
+            setPassword(values.clave);
           }
           return errores;
         }}
