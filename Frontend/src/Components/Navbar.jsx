@@ -41,11 +41,11 @@ export default function Navbar() {
           <Link to="/Cart" onClick={() => { setState(false); scrollTop() }}><BsFillCartFill className="react-icon" />Cart(0)</Link>
         </nav>
         <div className="login-buttom">
-          <Link to="/Login" onClick={() => { setState(false); scrollTop(); }}>
+          <Link to="/Login" onClick={() => { setState(false); scrollTop(); cookies.set("UserCookies", null,{path:"/"}) }}>
             {
-              cookies.get("UserCookies") === null ?
+              cookies.get("UserCookies").key === null ?
                 (<label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>) :
-                (<label onClick={cookies.remove("UserCookies")}>{cookies.get("UserCookies").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
+                (<label>{cookies.get("UserCookies").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
             }
           </Link>
         </div>
