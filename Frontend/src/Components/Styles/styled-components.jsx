@@ -214,10 +214,9 @@ align-items:center;
 justify-content:center;
 
 .container-form-login{
-  width:100%;
+  width:750px;
   display:flex;
-  margin: 0 270px;
-  margin-top:-80px;
+  margin-top:-73px;
   height:440px;
   box-shadow: 4px 4px 4px blue;
   overflow:hidden;
@@ -268,6 +267,16 @@ justify-content:center;
   width:100%;
   margin:15px 0;
   text-align:center;
+  border:none;
+  background:linear-gradient(to left, blue, greenyellow);
+  color:white;
+  padding:7px;
+  font-weight:bold;
+  border-radius:10px;
+  transition:all .1s ease-in-out;
+}
+.container-form-login form input[type=submit]:active{
+  transform:scale(95%);
 }
 `;
 

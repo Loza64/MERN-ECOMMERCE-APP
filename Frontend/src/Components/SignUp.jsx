@@ -3,7 +3,6 @@ import { ContextProvider } from '../Context/Context';
 import { React, useState } from "react";
 import { Field, ErrorMessage, Formik, Form } from 'formik'
 import { SignupContainer } from "./Styles/styled-components";
-import { useNavigate } from 'react-router-dom'
 
 export default function SignUp({ open }) {
 
