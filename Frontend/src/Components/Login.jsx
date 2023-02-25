@@ -77,11 +77,7 @@ export default function Login() {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
                     navigate("/");
-                    cookies.set("UserCookies", UserResponce.data,{
-                      expires: 1,
-                      path: "/",
-                      secure: true,
-                    })
+                    cookies.set("UserCookies", UserResponce.data,{path:"/"})
                   }
                 })
               }
