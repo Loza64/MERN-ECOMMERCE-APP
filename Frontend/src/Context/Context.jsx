@@ -39,6 +39,28 @@ export default function ContextConsumer({ children }) {
     return await SignUp(usuario);
   };
 
+  //Cookies 
+  const CreateCookies = (CookieName, data) => {
+    cookies.set(CookieName, data, { path: "/" })
+  }
+
+  const RemoveCookies = (CookieName) => {
+    cookies.remove(CookieName);
+  }
+
+  const GetCookies = (CookieName) => {
+    const token = cookies.get(CookieName);
+    try {
+      if(!token){
+        return false;
+      }else{
+        return token;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
   useEffect(() => {
     getProducts()
   }, []);
@@ -50,7 +72,7 @@ export default function ContextConsumer({ children }) {
   return (
     <Context.Provider value={{
       products, categories, UserLogin, UserSignUp, getProductByCategorie, productsByCategorie,
-      setProductsByCategorie
+      setProductsByCategorie, CreateCookies, RemoveCookies, GetCookies
     }}>
       {children}
     </Context.Provider>

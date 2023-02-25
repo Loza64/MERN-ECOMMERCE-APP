@@ -1,17 +1,12 @@
 import Swal from 'sweetalert2';
 import { React, useState } from "react";
 import { Field, Formik, Form } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../Context/Context';
 import { LoginContainer } from "./Styles/styled-components";
-import Cookies from 'universal-cookie';
 
 export default function Login() {
-
-  const cookies = new Cookies();
-  const navigate = useNavigate();
   //Function context
-  const { UserLogin } = ContextProvider();
+  const { UserLogin, CreateCookies } = ContextProvider();
 
   //hooks
   const [user, setUser] = useState(String);
@@ -76,8 +71,8 @@ export default function Login() {
                 }).then((result) => {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
-                    navigate("/");
-                    cookies.set("UserCookies", UserResponce.data,{path:"/"})
+                    CreateCookies("USERCOOKIES", UserResponce.data);
+                    window.location.href ="/Principal";
                   }
                 })
               }
