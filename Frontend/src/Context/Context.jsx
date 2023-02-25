@@ -42,12 +42,10 @@ export default function ContextConsumer({ children }) {
   //Cookies 
   const CreateCookies = (CookieName, data) => {
     cookies.set(CookieName, data, { path: "/" })
-  }
-
+  };
   const RemoveCookies = (CookieName) => {
     cookies.remove(CookieName);
-  }
-
+  };
   const GetCookies = (CookieName) => {
     const token = cookies.get(CookieName);
     try {
