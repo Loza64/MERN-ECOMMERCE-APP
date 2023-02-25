@@ -9,9 +9,7 @@ import { Link } from "react-router-dom";
 import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
-
   //Functions Context
-
   const { GetCookies, RemoveCookies } = ContextProvider();
 
   //Hooks
@@ -46,7 +44,7 @@ export default function Navbar() {
         <div className="login-buttom">
           <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES") }}>
             {
-              GetCookies("USERCOOKIES") === false ? (<label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>) : (<label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
+              !GetCookies("USERCOOKIES") ? (<label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>) : (<label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
             }
           </a>
         </div>

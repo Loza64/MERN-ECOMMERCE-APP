@@ -168,7 +168,7 @@ color:white;
     color:lightgray;
   }
   nav{
-    flex-direction:column-reverse;
+    flex-direction:column;
     width:100%;
   }
   nav a{

@@ -51,9 +51,9 @@ export default function ContextConsumer({ children }) {
   const GetCookies = (CookieName) => {
     const token = cookies.get(CookieName);
     try {
-      if(!token){
+      if (!token) {
         return false;
-      }else{
+      } else {
         return token;
       }
     } catch (error) {
