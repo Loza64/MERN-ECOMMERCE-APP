@@ -1,13 +1,15 @@
 import Swal from 'sweetalert2';
 import { React, useState } from "react";
-import { Field, Formik, Form } from 'formik'
+import { Field, Formik, Form } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../Context/Context';
 import { LoginContainer } from "./Styles/styled-components";
-import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 export default function Login() {
-  const navigate = useNavigate();
 
+  const cookies = new Cookies();
+  const navigate = useNavigate();
   //Function context
   const { UserLogin } = ContextProvider();
 
@@ -49,11 +51,12 @@ export default function Login() {
             return errors;
           }}
           onSubmit={() => {
-            UserLogin(body).then((result) => {
-              if (!result.data) {
+            UserLogin(body).then((UserResponce) => {
+              if (!UserResponce.data) {
                 setState(false);
               } else {
                 setState(true);
+
                 let timerInterval
                 Swal.fire({
                   title: 'Cargando su información!',
@@ -74,6 +77,11 @@ export default function Login() {
                   /* Read more about handling dismissals below */
                   if (result.dismiss === Swal.DismissReason.timer) {
                     navigate("/");
+                    cookies.set("UserCookies", UserResponce.data,{
+                      expires: 1,
+                      path: "/",
+                      secure: true,
+                    })
                   }
                 })
               }
@@ -85,7 +93,7 @@ export default function Login() {
               <Form>
                 <Field type="text" name="usuario" placeholder="usuario" />
                 <Field type="password" name="password" placeholder="contraseña" />
-                {!state ? (<label htmlFor="">Usuario o contraseña incorrectos.</label>) : null}
+                {!state ? (<label className='errormessage'>Usuario o contraseña incorrectos.</label>) : null}
                 <input type="submit" value="Iniciar sesión" />
               </Form>
             )

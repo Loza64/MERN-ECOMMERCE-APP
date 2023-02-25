@@ -99,7 +99,11 @@ color:white;
   font-weight:800;
   transition:all 0.3s ease-in-out;
 }
-.sidebar .login-buttom a .react-icon{
+.sidebar .login-buttom a label{
+  display:flex;
+  align-items:center
+}
+.sidebar .login-buttom a label .react-icon{
   font-size:18px
 }
 .sidebar .login-buttom a:hover{
@@ -277,6 +281,10 @@ justify-content:center;
 }
 .container-form-login form input[type=submit]:active{
   transform:scale(95%);
+}
+.container-form-login form .errormessage{
+  color:red;
+  font-weight:bold;
 }
 `;
 

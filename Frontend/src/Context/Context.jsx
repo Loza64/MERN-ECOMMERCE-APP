@@ -1,11 +1,14 @@
+import Cookies from 'universal-cookie';
 import { React, useContext, useState, createContext, useEffect } from 'react';
 import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie } from '../Api/RestApi';
 
-export const Context = createContext();
+const cookies = new Cookies();
+const Context = createContext();
 
 export const ContextProvider = () => {
   return useContext(Context);
 };
+
 
 export default function ContextConsumer({ children }) {
 
@@ -18,6 +21,7 @@ export default function ContextConsumer({ children }) {
     const result = await GetCategories();
     setCategories(result.data);
   };
+
   const getProducts = async () => {
     const result = await GetProducts();
     setProducts(result.data);
@@ -45,8 +49,8 @@ export default function ContextConsumer({ children }) {
 
   return (
     <Context.Provider value={{
-      products, categories, UserLogin, UserSignUp,
-      getProductByCategorie, productsByCategorie, setProductsByCategorie
+      products, categories, UserLogin, UserSignUp, getProductByCategorie, productsByCategorie,
+      setProductsByCategorie
     }}>
       {children}
     </Context.Provider>
