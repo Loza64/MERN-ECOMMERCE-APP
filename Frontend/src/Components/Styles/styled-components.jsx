@@ -126,7 +126,7 @@ color:white;
 @media only screen and (max-width:1130px){
   .sidebar{
     position:fixed;
-    top:4.59rem;
+    top:4.57rem;
     background:rgba(0, 0, 0, 0.69);
     flex-direction:column;
     width:20rem;
