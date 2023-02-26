@@ -2,11 +2,11 @@ import Swal from 'sweetalert2';
 import { React, useState } from "react";
 import { Field, Formik, Form } from 'formik';
 import { ContextProvider } from '../Context/Context';
-import { LoginContainer } from "./Styles/styled-components";
+import { ButtomTransparent, LoginContainer } from "./Styles/styled-components";
 
 export default function Login() {
   //Function context
-  const { UserLogin, CreateCookies } = ContextProvider();
+  const { UserLogin, CreateCookies, RemoveCookies } = ContextProvider();
 
   //hooks
   const [user, setUser] = useState(String);
@@ -19,11 +19,16 @@ export default function Login() {
     password: pass
   }
 
+  window.addEventListener('load', () =>{
+    RemoveCookies("USERCOOKIES")
+  })
+
   return (
     <LoginContainer>
       <div className="container-form-login">
         <div className="content">
-
+         <label>Registrate ahora en ECOMMERCE y realiza tus compras de forma rapida y segura.</label>
+         <ButtomTransparent>Registrarme ahora!</ButtomTransparent>
         </div>
         <Formik
           initialValues={{
@@ -82,10 +87,12 @@ export default function Login() {
           {
             () => (
               <Form>
+                <label className="topic">Iniciar Sesión</label>
                 <Field type="text" name="usuario" placeholder="usuario" />
                 <Field type="password" name="password" placeholder="contraseña" />
                 {!state ? (<label className='errormessage'>Usuario o contraseña incorrectos.</label>) : null}
                 <input type="submit" value="Iniciar sesión" />
+                <a href='#'>¿Has olvidado tu contraseña?</a>
               </Form>
             )
           }

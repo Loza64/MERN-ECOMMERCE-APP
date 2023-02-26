@@ -218,7 +218,8 @@ align-items:center;
 justify-content:center;
 
 .container-form-login{
-  width:750px;
+  width:100%;
+  max-width:767px;
   display:flex;
   margin-top:-73px;
   height:440px;
@@ -234,7 +235,14 @@ justify-content:center;
   display:flex;
   align-items:center;
   justify-content:center;
+  text-align:center;
   flex-direction:column;
+  padding:10px;
+}
+.container-form-login .content label{
+  color:white;
+  font-weight:900;
+  font-size:30px
 }
 .container-form-login form{
   width:50%;
@@ -244,6 +252,10 @@ justify-content:center;
   justify-content:center;
   flex-direction:column;
   padding:0px 20px;
+}
+.container-form-login form .topic{
+  font-weight:900;
+  font-size:40px
 }
 .container-form-login form input[type=text]{
   width:100%;
@@ -275,7 +287,7 @@ justify-content:center;
   background:linear-gradient(to left, blue, greenyellow);
   color:white;
   padding:7px;
-  font-weight:bold;
+  font-weight:900;
   border-radius:10px;
   transition:all .1s ease-in-out;
 }
@@ -285,6 +297,76 @@ justify-content:center;
 .container-form-login form .errormessage{
   color:red;
   font-weight:bold;
+}
+@media only screen and (max-width: 834px){
+  .container-form-login{
+    margin: 0 25px;
+  }
+  .container-form-login .content label{
+    font-size:24px
+  }
+  .container-form-login form .topic{
+    font-size:30px
+  }
+}
+@media only screen and (max-width: 610px){
+  .container-form-login{
+    flex-direction:column;
+    height:auto;
+    margin-top:-100px;
+  }
+  .container-form-login .content{
+    width:100%
+  }
+  .container-form-login form{
+    width:100%;
+    padding: 20px 20px;
+  }
+}
+@media only screen and (max-width: 610px){
+  .container-form-login .content label{
+    font-size:20px
+  }
+}
+@media only screen and (max-width: 280px){
+  .container-form-login .content label{
+    font-size:15px
+  }
+  .container-form-login form .topic{
+    font-size:20px
+  }
+  .container-form-login form input{
+    font-size:15px;
+    font-weight:900;
+  }
+  .container-form-login form a{
+    font-size:13px;
+  }
+}
+`;
+
+export const ButtomTransparent = styles.button`
+background:transparent;
+color:white;
+width:100%;
+max-width:18rem;
+font-size:15px;
+font-weight:900;
+border:solid 3px white;
+margin:20px 10px;
+padding: 6px 30px;
+border-radius: 20px;
+transition:all .07s ease-in-out;
+outline:none;
+:hover{
+  color:greenyellow;
+  border-color:greenyellow;
+}
+:active{
+  transform:scale(98%);
+}
+@media only screen and (max-width: 280px){
+  font-size:13px;
 }
 `;
 

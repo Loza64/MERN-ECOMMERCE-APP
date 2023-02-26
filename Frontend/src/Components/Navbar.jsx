@@ -10,7 +10,7 @@ import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
   //Functions Context
-  const { GetCookies, RemoveCookies } = ContextProvider();
+  const { GetCookies } = ContextProvider();
 
   //Hooks
   const [state, setState] = useState(false);
@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link to="/Cart" onClick={() => { setState(false); scrollTop() }}><BsFillCartFill className="react-icon" />Cart(0)</Link>
         </nav>
         <div className="login-buttom">
-          <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES") }}>
+          <a href="/Login" onClick={() => { setState(false); scrollTop() }}>
             {
               !GetCookies("USERCOOKIES") ? (<label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>) : (<label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
             }
