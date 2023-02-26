@@ -325,10 +325,18 @@ justify-content:center;
 }
 @media only screen and (max-width: 610px){
   .container-form-login .content label{
-    font-size:20px
+    font-size:18px
+  }
+}
+@media only screen and (max-width: 430px){
+  .container-form-login{
+    margin-top:-150px
   }
 }
 @media only screen and (max-width: 280px){
+  .container-form-login{
+    margin-top:-130px
+  }
   .container-form-login .content label{
     font-size:15px
   }
@@ -365,8 +373,12 @@ outline:none;
 :active{
   transform:scale(98%);
 }
-@media only screen and (max-width: 280px){
+@media only screen and (max-width: 610px){
   font-size:13px;
+  padding: 6px 15px;
+}
+@media only screen and (max-width: 280px){
+  font-size:11px;
 }
 `;
 
