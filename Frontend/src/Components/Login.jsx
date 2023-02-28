@@ -13,7 +13,7 @@ export default function Login() {
   const [user, setUser] = useState(String);
   const [pass, setPass] = useState(String);
   const [state, setState] = useState(true);
-  const [open, setOpen] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
 
   //object
   let body = {
@@ -31,7 +31,7 @@ export default function Login() {
         <div className="container-form-login">
           <div className="content">
             <label>Registrate ahora en ECOMMERCE y realiza tus compras de forma rapida y segura.</label>
-            <ButtomTransparent>Registrarme ahora!</ButtomTransparent>
+            <ButtomTransparent onClick={() => { setOpenSignup(true) }}>Registrarme ahora!</ButtomTransparent>
           </div>
           <Formik
             initialValues={{
@@ -102,7 +102,7 @@ export default function Login() {
           </Formik>
         </div>
       </LoginContainer>
-      <SignUp />
+      <SignUp open={openSignup} setOpen={setOpenSignup} />
     </div>
   )
 }

@@ -253,6 +253,7 @@ z-index:20;
   justify-content:center;
   flex-direction:column;
   padding:0px 20px;
+  background:white;
 }
 .container-form-login form .topic{
   font-weight:900;
@@ -361,8 +362,11 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-z-index:30;
-background:rgba(0, 0, 0, 0.5);
+z-index:${({formopen}) => (formopen ? "20" : "19")};
+background:${({formopen}) => (formopen ? "rgba(0, 0, 0, 0.5)" : "transparent")};
+opacity:${({formopen}) => (formopen ? "1" : "0")};
+transition:all ${({formopen}) => (formopen ? "0s" : "0.8s")} ease-in-out;
+}
 
 .container-form-signup{
   width:100%;
@@ -370,6 +374,8 @@ background:rgba(0, 0, 0, 0.5);
   margin-top:-4.5rem;
   background:white;
   padding:10px 17px;
+  transition:all 0.8s ease-in-out;
+  transform:${({formopen}) => (formopen ? "scale(100%)" : "scale(0%)")};
 }
 .container-form-signup form .closebuttom{
   display:flex;

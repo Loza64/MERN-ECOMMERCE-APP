@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const uniquid = require('uniquid')
-const jsontoken = require('jsonwebtoken')
+const jsonwebtoken = require('jsonwebtoken')
 const SendEmail = require('../Libraries/nodemailer')
 const { EncryptPass, ComparePass } = require('../Libraries/bcrypt')
 const { UploadImage, DeleteImage } = require('../Libraries/cloudinary')
@@ -63,27 +63,32 @@ const Login = async (req, res) => {
 const NewProduct = async (req, res) => {
   const { name, category, stock, company, details, price, discount } = req.body
   try {
-    const getcategory = await Categories.findOne({ name: category })
-    let result;
-    if (req.files.image) {
-      result = await UploadImage(req.files.image.tempFilePath)
-    }
-    fs.remove(req.files.image.tempFilePath)
-    new Products({
-      key: uniquid(),
-      image: { public_id: result.public_id, url: result.url },
-      categorykey: getcategory.key,
-      name: name,
-      company: company,
-      details: details,
-      stock: Number(stock),
-      price: Number(price),
-      discount: Number(discount)
-    }).save((err) => {
-      if (!err) {
-        res.send('Producto guardado exitosamente')
+    const check = Products.findOne({ name: name })
+    if (check != null) {
+      res.send('El producto ya existe en la base de datos.')
+    } else {
+      const getcategory = await Categories.findOne({ name: category })
+      let result;
+      if (req.files.image) {
+        result = await UploadImage(req.files.image.tempFilePath)
       }
-    })
+      fs.remove(req.files.image.tempFilePath)
+      new Products({
+        key: uniquid(),
+        image: { public_id: result.public_id, url: result.url },
+        categorykey: getcategory.key,
+        name: name,
+        company: company,
+        details: details,
+        stock: Number(stock),
+        price: Number(price),
+        discount: Number(discount)
+      }).save((err) => {
+        if (!err) {
+          res.send('Producto guardado exitosamente.')
+        }
+      })
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -114,20 +119,25 @@ const GetProductByCategorie = (req, res) => {
 const NewCategorie = async (req, res) => {
   const { name } = req.body
   try {
-    let result
-    if (req.files.image) {
-      result = await UploadImage(req.files.image.tempFilePath)
-    }
-    fs.remove(req.files.image.tempFilePath)
-    new Categories({
-      key: uniquid(),
-      image: { public_id: result.public_id, url: result.url },
-      name: name
-    }).save((err) => {
-      if (!err) {
-        res.send('Categoria guardada exitosamente')
+    const check = Categories.findOne({ name: name })
+    if (check != null) {
+      res.send('La categoria ya existe en la bases de datos.')
+    } else {
+      let result
+      if (req.files.image) {
+        result = await UploadImage(req.files.image.tempFilePath)
       }
-    })
+      fs.remove(req.files.image.tempFilePath)
+      new Categories({
+        key: uniquid(),
+        image: { public_id: result.public_id, url: result.url },
+        name: name
+      }).save((err) => {
+        if (!err) {
+          res.send('Categoria guardada exitosamente.')
+        }
+      })
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }

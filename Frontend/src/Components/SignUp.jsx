@@ -1,11 +1,10 @@
 import Swal from 'sweetalert2';
-import { AiOutlineClose } from 'react-icons/ai'
 import { ContextProvider } from '../Context/Context';
 import { React, useState } from "react";
 import { Field, ErrorMessage, Formik, Form } from 'formik'
 import { SignupContainer } from "./Styles/styled-components";
 
-export default function SignUp({ open }) {
+export default function SignUp({ open, setOpen }) {
 
   const { UserSignUp } = ContextProvider();
   // hooks
@@ -48,7 +47,7 @@ export default function SignUp({ open }) {
   }
 
   return (
-    <SignupContainer>
+    <SignupContainer formopen={open}>
       <div className="container-form-signup">
         <Formik
           initialValues={{
@@ -173,8 +172,8 @@ export default function SignUp({ open }) {
             ({ errors }) => (
               <Form>
                 <div className='closebuttom'>
-                   <i className='buttom'>X</i>
-                </div>               
+                  <i className='buttom' onClick={() => { setOpen(false) }}>X</i>
+                </div>
                 <Field type="text" placeholder="Usuario" name="usuario" />
                 <ErrorMessage name="usuario" component={() => (<label className="errormessage">{errors.usuario}</label>)} />
                 <Field type="text" placeholder="Nombres" name="nombres" />
