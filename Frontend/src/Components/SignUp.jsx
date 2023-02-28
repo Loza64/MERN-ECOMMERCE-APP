@@ -144,28 +144,29 @@ export default function SignUp({ open, setOpen }) {
           }}
 
           onSubmit={() => {
-            UserSignUp(body).then((result) => {
-              if (result.data) {
-                Swal.fire(
-                  'En horabuena!',
-                  'Registro realizado exitosamente, bienvenido a ECOMMERCE.',
-                  'success'
-                )
-              } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error de registro!',
-                  text: 'Nombre de usuario, email o teléfono ya son utlizados por otro usuario.'
-                })
-              }
-            }).catch((err) => {
+            try {
+              UserSignUp(body).then((result) => {
+                if (result.data) {
+                  Swal.fire(
+                    'En horabuena!',
+                    'Registro realizado exitosamente, bienvenido a ECOMMERCE.',
+                    'success'
+                  )
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Ocurrio un error en el registro!',
+                    text: 'Nombre de usuario, email o teléfono ya son utlizados por otro usuario.'
+                  })
+                }
+              })
+            } catch (error) {
               Swal.fire({
                 icon: 'error',
-                title: 'Lo sentimos ocurrio un error en el servidor',
-                text: 'Información del error ' + err + ' Si el error persiste comunicate con nostros lo mas rapido posible.',
-                footer: '<a href="">¿Quieres enviar un email acerca del error?</a>'
+                title: 'Lo sentimos ocurrio un error en el servidor!',
+                text: 'Información del error: ' + error + ' si el error persiste comuniqueselo al desarrolador inmediatamente, lamentamos los inconvenientes'
               })
-            })
+            }
           }}
         >
           {

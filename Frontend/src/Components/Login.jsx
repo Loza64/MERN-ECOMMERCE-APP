@@ -54,37 +54,44 @@ export default function Login() {
               return errors;
             }}
             onSubmit={() => {
-              UserLogin(body).then((UserResponce) => {
-                if (!UserResponce.data) {
-                  setState(false);
-                } else {
-                  setState(true);
-
-                  let timerInterval
-                  Swal.fire({
-                    title: 'Cargando su información!',
-                    html: 'Por favor espere.',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                      Swal.showLoading()
-                      const b = Swal.getHtmlContainer().querySelector('b')
-                      timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                      }, 100)
-                    },
-                    willClose: () => {
-                      clearInterval(timerInterval)
-                    }
-                  }).then((result) => {
-                    /* Read more about handling dismissals below */
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                      CreateCookies("USERCOOKIES", UserResponce.data);
-                      window.location.href = "/Principal";
-                    }
-                  })
-                }
-              })
+              try {
+                UserLogin(body).then((UserResponce) => {
+                  if (!UserResponce.data) {
+                    setState(false);
+                  } else {
+                    setState(true);
+                    let timerInterval
+                    Swal.fire({
+                      title: 'Cargando su información!',
+                      html: 'Por favor espere.',
+                      timer: 2000,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                          b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval)
+                      }
+                    }).then((result) => {
+                      /* Read more about handling dismissals below */
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                        CreateCookies("USERCOOKIES", UserResponce.data);
+                        window.location.href = "/Principal";
+                      }
+                    })
+                  }
+                })
+              } catch (error) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Lo sentimos ocurrio un error en el servidor!',
+                  text: 'Información del error: ' + error + ' si el error persiste comuniqueselo al desarrolador inmediatamente, lamentamos los inconvenientes'
+                })
+              }
             }}
           >
             {
