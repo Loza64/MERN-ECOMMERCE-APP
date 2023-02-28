@@ -3,6 +3,7 @@ import { React, useState } from "react";
 import { Field, Formik, Form } from 'formik';
 import { ContextProvider } from '../Context/Context';
 import { ButtomTransparent, LoginContainer } from "./Styles/styled-components";
+import SignUp from './SignUp';
 
 export default function Login() {
   //Function context
@@ -12,6 +13,7 @@ export default function Login() {
   const [user, setUser] = useState(String);
   const [pass, setPass] = useState(String);
   const [state, setState] = useState(true);
+  const [open, setOpen] = useState(false);
 
   //object
   let body = {
@@ -19,85 +21,88 @@ export default function Login() {
     password: pass
   }
 
-  window.addEventListener('load', () =>{
+  window.addEventListener('load', () => {
     RemoveCookies("USERCOOKIES")
   })
 
   return (
-    <LoginContainer>
-      <div className="container-form-login">
-        <div className="content">
-         <label>Registrate ahora en ECOMMERCE y realiza tus compras de forma rapida y segura.</label>
-         <ButtomTransparent>Registrarme ahora!</ButtomTransparent>
-        </div>
-        <Formik
-          initialValues={{
-            usuario: String,
-            password: String
-          }}
-          validate={(values) => {
-            let errors = {};
-            if (!values.usuario) {
-              setUser(null)
-            } else {
-              setUser(values.usuario)
-            }
-
-            if (!values.password) {
-              setPass(null)
-            } else {
-              setPass(values.password)
-            }
-            return errors;
-          }}
-          onSubmit={() => {
-            UserLogin(body).then((UserResponce) => {
-              if (!UserResponce.data) {
-                setState(false);
+    <div>
+      <LoginContainer>
+        <div className="container-form-login">
+          <div className="content">
+            <label>Registrate ahora en ECOMMERCE y realiza tus compras de forma rapida y segura.</label>
+            <ButtomTransparent>Registrarme ahora!</ButtomTransparent>
+          </div>
+          <Formik
+            initialValues={{
+              usuario: String,
+              password: String
+            }}
+            validate={(values) => {
+              let errors = {};
+              if (!values.usuario) {
+                setUser(null)
               } else {
-                setState(true);
-
-                let timerInterval
-                Swal.fire({
-                  title: 'Cargando su información!',
-                  html: 'Por favor espere.',
-                  timer: 2000,
-                  timerProgressBar: true,
-                  didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                  },
-                  willClose: () => {
-                    clearInterval(timerInterval)
-                  }
-                }).then((result) => {
-                  /* Read more about handling dismissals below */
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    CreateCookies("USERCOOKIES", UserResponce.data);
-                    window.location.href ="/Principal";
-                  }
-                })
+                setUser(values.usuario)
               }
-            })
-          }}
-        >
-          {
-            () => (
-              <Form>
-                <label className="topic">Iniciar Sesión</label>
-                <Field type="text" name="usuario" placeholder="usuario" />
-                <Field type="password" name="password" placeholder="contraseña" />
-                {!state ? (<label className='errormessage'>Usuario o contraseña incorrectos.</label>) : null}
-                <input type="submit" value="Iniciar sesión" />
-                <a href='#'>¿Has olvidado tu contraseña?</a>
-              </Form>
-            )
-          }
-        </Formik>
-      </div>
-    </LoginContainer>
+
+              if (!values.password) {
+                setPass(null)
+              } else {
+                setPass(values.password)
+              }
+              return errors;
+            }}
+            onSubmit={() => {
+              UserLogin(body).then((UserResponce) => {
+                if (!UserResponce.data) {
+                  setState(false);
+                } else {
+                  setState(true);
+
+                  let timerInterval
+                  Swal.fire({
+                    title: 'Cargando su información!',
+                    html: 'Por favor espere.',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                      Swal.showLoading()
+                      const b = Swal.getHtmlContainer().querySelector('b')
+                      timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                      }, 100)
+                    },
+                    willClose: () => {
+                      clearInterval(timerInterval)
+                    }
+                  }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                      CreateCookies("USERCOOKIES", UserResponce.data);
+                      window.location.href = "/Principal";
+                    }
+                  })
+                }
+              })
+            }}
+          >
+            {
+              () => (
+                <Form>
+                  <label className="topic">Iniciar Sesión</label>
+                  <Field type="text" name="usuario" placeholder="usuario" />
+                  <Field type="password" name="password" placeholder="contraseña" />
+                  {!state ? (<label className='errormessage'>Usuario o contraseña incorrectos.</label>) : null}
+                  <input type="submit" value="Iniciar sesión" />
+                  <a href='#'>¿Has olvidado tu contraseña?</a>
+                </Form>
+              )
+            }
+          </Formik>
+        </div>
+      </LoginContainer>
+      <SignUp />
+    </div>
   )
 }

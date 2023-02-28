@@ -18,24 +18,29 @@ let emailmessage = {
 const SignUp = async (req, res) => {
   const { usuario, nombres, apellidos, nacimiento, correo, telefono, pass, tipo } = req.body
   try {
-    let encryptPass = await EncryptPass(pass)
-    new Users({
-      key: uniquid(),
-      username: usuario,
-      names: nombres,
-      surnames: apellidos,
-      date: nacimiento,
-      email: correo,
-      phone: telefono,
-      password: encryptPass,
-      type: tipo
-    }).save((err) => {
-      if (!err) {
-        res.send(true)
-      } else {
-        res.send(false)
-      }
-    });
+    const check = await Users.findOne({ username: usuario }, { email: correo }, { phone: telefono })
+    if (check != null) {
+      res.send(false)
+    } else {
+      let encryptPass = await EncryptPass(pass)
+      new Users({
+        key: uniquid(),
+        username: usuario,
+        names: nombres,
+        surnames: apellidos,
+        date: nacimiento,
+        email: correo,
+        phone: telefono,
+        password: encryptPass,
+        type: tipo
+      }).save((err) => {
+        if (!err) {
+          res.send(true)
+        } else {
+          res.send(false)
+        }
+      });
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }

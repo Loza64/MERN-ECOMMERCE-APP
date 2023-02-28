@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import { AiOutlineClose } from 'react-icons/ai'
 import { ContextProvider } from '../Context/Context';
 import { React, useState } from "react";
 import { Field, ErrorMessage, Formik, Form } from 'formik'
@@ -50,15 +51,14 @@ export default function SignUp({ open }) {
     <SignupContainer>
       <div className="container-form-signup">
         <Formik
-
           initialValues={{
-            usuario: String,
-            nombres: String,
-            apellidos: String,
-            nacimiento: String,
-            correo: String,
-            telefono: String,
-            clave: String,
+            usuario: '',
+            nombres: '',
+            apellidos: '',
+            nacimiento: '',
+            correo: '',
+            telefono: '',
+            clave: '',
           }}
 
           validate={(values) => {
@@ -172,6 +172,9 @@ export default function SignUp({ open }) {
           {
             ({ errors }) => (
               <Form>
+                <div className='closebuttom'>
+                   <i className='buttom'>X</i>
+                </div>               
                 <Field type="text" placeholder="Usuario" name="usuario" />
                 <ErrorMessage name="usuario" component={() => (<label className="errormessage">{errors.usuario}</label>)} />
                 <Field type="text" placeholder="Nombres" name="nombres" />

@@ -2,7 +2,7 @@ import styles from 'styled-components'
 
 export const NavBar = styles.div`
 position:fixed;
-z-index: 100000;
+z-index: 100;
 width:100%;
 background:rgba(2, 1, 71, 1);
 padding:15px 10px;
@@ -216,6 +216,7 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
+z-index:20;
 
 .container-form-login{
   width:100%;
@@ -353,6 +354,91 @@ justify-content:center;
 }
 `;
 
+export const SignupContainer = styles.div`
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:30;
+background:rgba(0, 0, 0, 0.5);
+
+.container-form-signup{
+  width:100%;
+  max-width:500px;
+  margin-top:-4.5rem;
+  background:white;
+  padding:10px 17px;
+}
+.container-form-signup form .closebuttom{
+  display:flex;
+  justify-content: end;
+  margin-top:-10px;
+  margin-bottom:-20px;
+  width:100%;
+  padding:0;
+}
+.container-form-signup form .closebuttom .buttom{
+  color:red;
+  font-weight:900;
+  cursor: pointer;
+  font-size:20px;
+}
+.container-form-signup form{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+.container-form-signup form input{
+  margin-top:23px;
+  border:none;
+  outline:none;
+  background:rgb(237, 237, 237);
+  padding:6px 12px;
+  font-weight:900;
+  border-radius:30px;
+}
+.container-form-signup form input[type=submit]{
+  width:100%;
+  margin-top:27px;
+  text-align:center;
+  border:none;
+  background:linear-gradient(to left, blue, greenyellow);
+  color:white;
+  padding:7px;
+  font-weight:900;
+  border-radius:10px;
+  transition:all .1s ease-in-out;
+}
+.container-form-signup form input[type=submit]:active{
+  transform:scale(95%);
+}
+.container-form-signup form .errormessage{
+  color:red;
+  margin: 0 12px;
+  font-weight:900;
+  font-size:12px;
+  margin-bottom:-16px;
+  margin-top:-2px;
+}
+@media only screen and (max-width: 460px){
+  .container-form-signup{
+    margin-right:10px;
+    margin-left:10px;
+  }
+}
+
+@media only screen and (max-width: 300px){
+  .container-form-signup form input{
+    font-size:12px;
+  }
+  .container-form-signup form .errormessage{
+    font-size:10px;
+  }
+}
+`;
+
 export const ButtomTransparent = styles.button`
 background:transparent;
 color:white;
@@ -382,12 +468,3 @@ outline:none;
 }
 `;
 
-export const SignupContainer = styles.div`
-form{
-  display:flex;
-  flex-direction:column;
-}
-form input{
-  margin-top:20px;
-}
-`;
