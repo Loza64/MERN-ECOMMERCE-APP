@@ -1,7 +1,7 @@
 import styles from 'styled-components'
 
 export const NavBar = styles.div`
-position:fixed;
+position: fixed;
 z-index: 100;
 width:100%;
 background:rgba(2, 1, 71, 1);
@@ -217,6 +217,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 z-index:20;
+top:5%;
 
 .container-form-login{
   width:100%;
@@ -329,14 +330,7 @@ z-index:20;
     font-size:18px
   }
 }
-@media only screen and (max-width: 480px){
-  margin-top:50px
-}
-@media only screen and (max-width: 430px){
-  .container-form-login{
-    margin-top:-150px
-  }
-}
+
 @media only screen and (max-width: 280px){
   margin-top:60px;
   .container-form-login{
@@ -369,6 +363,7 @@ z-index:${({ formopen }) => (formopen ? "20" : "19")};
 background:${({ formopen }) => (formopen ? "rgba(0, 0, 0, 0.5)" : "transparent")};
 opacity:${({ formopen }) => (formopen ? "1" : "0")};
 transition:all ${({ formopen }) => (formopen ? "0s" : "0.8s")} ease-in-out;
+top:3%;
 }
 
 .container-form-signup{
@@ -440,6 +435,7 @@ transition:all ${({ formopen }) => (formopen ? "0s" : "0.8s")} ease-in-out;
   margin-bottom:-16px;
   margin-top:-2px;
 }
+
 @media only screen and (max-width: 460px){
   .container-form-signup{
     margin-right:10px;

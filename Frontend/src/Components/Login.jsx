@@ -27,7 +27,6 @@ export default function Login() {
 
   return (
     <div>
-      <br />
       <LoginContainer>
         <div className="container-form-login">
           <div className="content">
