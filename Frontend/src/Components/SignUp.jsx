@@ -11,6 +11,7 @@ export default function SignUp({ open, setOpen }) {
   const [user, setUser] = useState(String);
   const [names, setNames] = useState(String);
   const [surnames, setSurnames] = useState(String);
+  const [address, setAddress] = useState(String);
   const [date, setDate] = useState(String);
   const [email, setEmail] = useState(String);
   const [phone, setPhone] = useState(String);
@@ -21,6 +22,7 @@ export default function SignUp({ open, setOpen }) {
     username: /(^[A-Za-z]{1,10}([0-9]{3})){1}/,
     names: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
     surnames: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
+    address: /^[a-zA-ZÁ-ÿ\s]{1,240}$/,
     email: /^(([^<>()[\].,;:\s@”]+(\.[^<>()[\].,;:\s@”]+)*)|(”.+”))@(([^<>()[\].,;:\s@”]+\.)+[^<>()[\].,;:s@”]{2,})$/,
     phone: /^[0-9]{8}$/
   }
@@ -29,6 +31,7 @@ export default function SignUp({ open, setOpen }) {
     username: true,
     names: true,
     surnames: true,
+    address: true,
     date: true,
     email: true,
     phone: true,
@@ -39,6 +42,7 @@ export default function SignUp({ open, setOpen }) {
     usuario: user,
     nombres: names,
     apellidos: surnames,
+    direccion: address,
     nacimiento: date,
     correo: email,
     telefono: phone,
@@ -54,6 +58,7 @@ export default function SignUp({ open, setOpen }) {
             usuario: '',
             nombres: '',
             apellidos: '',
+            direccion: '',
             nacimiento: '',
             correo: '',
             telefono: '',
@@ -66,10 +71,10 @@ export default function SignUp({ open, setOpen }) {
             //Validate username
             if (!values.usuario) {
               stateInputs.username = false;
-              errores.usuario = 'Campo obligatorio'
+              errores.usuario = 'Campo obligatorio.'
             } else if (!expresiones.username.test(values.usuario)) {
               stateInputs.username = false;
-              errores.usuario = 'Usuario no valido'
+              errores.usuario = 'Nombre de usuario no valido.'
             } else {
               setUser(values.usuario);
               stateInputs.username = true;
@@ -78,10 +83,10 @@ export default function SignUp({ open, setOpen }) {
             //Validate names
             if (!values.nombres) {
               stateInputs.names = false;
-              errores.nombres = 'Campo obligatorio'
+              errores.nombres = 'Campo nombres obligatorio.'
             } else if (!expresiones.names.test(values.nombres)) {
               stateInputs.names = false;
-              errores.nombres = 'Nombres no validos'
+              errores.nombres = 'Nombres no validos.'
             } else {
               setNames(values.nombres);
               stateInputs.names = true;
@@ -90,19 +95,30 @@ export default function SignUp({ open, setOpen }) {
             //Validate surnames
             if (!values.apellidos) {
               stateInputs.surnames = false;
-              errores.apellidos = 'Campo obligatorio'
+              errores.apellidos = 'Campo apellidos obligatorio.'
             } else if (!expresiones.surnames.test(values.apellidos)) {
               stateInputs.surnames = false;
-              errores.apellidos = 'Apellidos no validos'
+              errores.apellidos = 'Apellidos no validos.'
             } else {
               stateInputs.surnames = true;
               setSurnames(values.apellidos);
             }
 
+            if (!values.direccion) {
+              stateInputs.address = false;
+              errores.direccion = 'Campo obligatorio.';
+            } else if (!expresiones.address.test()) {
+              stateInputs.address = false;
+              errores.direccion = 'La direccion no debe incluir numero o caracteres especiales.';
+            } else {
+              stateInputs.address = true;
+              setAddress(values.direccion);
+            }
+
             //Validate date
             if (!values.nacimiento) {
               stateInputs.date = false;
-              errores.nacimiento = 'Campo obligatorio'
+              errores.nacimiento = 'Campo obligatorio.';
             } else {
               stateInputs.date = true;
               setDate(values.nacimiento);
@@ -111,10 +127,10 @@ export default function SignUp({ open, setOpen }) {
             //Validate email
             if (!values.correo) {
               stateInputs.surnames = false;
-              errores.correo = 'Campo obligatorio'
+              errores.correo = 'Campo obligatorio.'
             } else if (!expresiones.email.test(values.correo)) {
               stateInputs.email = false;
-              errores.correo = 'Correo no valido'
+              errores.correo = 'Correo no valido.'
             } else {
               stateInputs.email = true;
               setEmail(values.correo);
@@ -123,10 +139,10 @@ export default function SignUp({ open, setOpen }) {
             //Validate phone
             if (!values.telefono) {
               stateInputs.surnames = false;
-              errores.telefono = 'Campo obligatorio'
+              errores.telefono = 'Campo obligatorio.'
             } else if (!expresiones.phone.test(values.telefono)) {
               stateInputs.phone = false;
-              errores.telefono = 'Teléfono no valido'
+              errores.telefono = 'Teléfono no valido.'
             } else {
               stateInputs.phone = true;
               setPhone(values.telefono);
@@ -135,7 +151,7 @@ export default function SignUp({ open, setOpen }) {
             //Validate pass
             if (!values.clave) {
               stateInputs.password = false;
-              errores.clave = 'Campo obligatorio'
+              errores.clave = 'Campo obligatorio.'
             } else {
               stateInputs.password = true;
               setPassword(values.clave);
@@ -177,10 +193,24 @@ export default function SignUp({ open, setOpen }) {
                 </div>
                 <Field type="text" placeholder="Usuario" name="usuario" />
                 <ErrorMessage name="usuario" component={() => (<label className="errormessage">{errors.usuario}</label>)} />
-                <Field type="text" placeholder="Nombres" name="nombres" />
-                <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
-                <Field type="text" placeholder="Apellidos" name="apellidos" />
-                <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
+                <div className='flex'>
+                  <div style={{ with: "50%" }}>
+                    <Field type="text" placeholder="Nombres" name="nombres" />
+                  </div>
+                  <div style={{ with: "50%" }}>
+                    <Field type="text" placeholder="Apellidos" name="apellidos" />
+                  </div>
+                </div>
+                <div className="flex" style={{marginBottom:"-17px",marginTop:"-5px"}}>
+                  <div>
+                    <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} /> <br />
+                  </div>
+                  <div>
+                    <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
+                  </div>
+                </div>
+                <Field type="text" placeholder="Ingrese su dirección" name="direccion" />
+                <ErrorMessage name="direccion" component={() => (<label className="errormessage">{errors.direccion}</label>)} />
                 <Field type="date" placeholder="Usuario" name="nacimiento" />
                 <ErrorMessage name="nacimiento" component={() => (<label className="errormessage">{errors.nacimiento}</label>)} />
                 <Field type="text" placeholder="Correo electronico" name="correo" />

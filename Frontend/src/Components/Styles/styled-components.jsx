@@ -222,7 +222,6 @@ z-index:20;
   width:100%;
   max-width:767px;
   display:flex;
-  margin-top:-73px;
   height:440px;
   box-shadow: 4px 4px 4px blue;
   overflow:hidden;
@@ -330,12 +329,16 @@ z-index:20;
     font-size:18px
   }
 }
+@media only screen and (max-width: 480px){
+  margin-top:50px
+}
 @media only screen and (max-width: 430px){
   .container-form-login{
     margin-top:-150px
   }
 }
 @media only screen and (max-width: 280px){
+  margin-top:60px;
   .container-form-login{
     margin-top:-130px
   }
@@ -362,20 +365,19 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-z-index:${({formopen}) => (formopen ? "20" : "19")};
-background:${({formopen}) => (formopen ? "rgba(0, 0, 0, 0.5)" : "transparent")};
-opacity:${({formopen}) => (formopen ? "1" : "0")};
-transition:all ${({formopen}) => (formopen ? "0s" : "0.8s")} ease-in-out;
+z-index:${({ formopen }) => (formopen ? "20" : "19")};
+background:${({ formopen }) => (formopen ? "rgba(0, 0, 0, 0.5)" : "transparent")};
+opacity:${({ formopen }) => (formopen ? "1" : "0")};
+transition:all ${({ formopen }) => (formopen ? "0s" : "0.8s")} ease-in-out;
 }
 
 .container-form-signup{
   width:100%;
   max-width:500px;
-  margin-top:-4.5rem;
   background:white;
   padding:10px 17px;
   transition:all 0.8s ease-in-out;
-  transform:${({formopen}) => (formopen ? "scale(100%)" : "scale(0%)")};
+  transform:${({ formopen }) => (formopen ? "scale(100%)" : "scale(0%)")};
 }
 .container-form-signup form .closebuttom{
   display:flex;
@@ -404,6 +406,16 @@ transition:all ${({formopen}) => (formopen ? "0s" : "0.8s")} ease-in-out;
   padding:6px 12px;
   font-weight:900;
   border-radius:30px;
+}
+.container-form-signup form .flex{
+  width:100%;
+  display:flex;
+}
+.container-form-signup form .flex div{
+  width:100%;
+}
+.container-form-signup form .flex div input{
+ width:100%;
 }
 .container-form-signup form input[type=submit]{
   width:100%;

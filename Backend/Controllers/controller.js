@@ -16,7 +16,7 @@ let emailmessage = {
 
 //Funciones del usuario
 const SignUp = async (req, res) => {
-  const { usuario, nombres, apellidos, nacimiento, correo, telefono, pass, tipo } = req.body
+  const { usuario, nombres, apellidos, direccion, nacimiento, correo, telefono, pass, tipo } = req.body
   try {
     const check = await Users.findOne({ username: usuario }, { email: correo }, { phone: telefono })
     if (check != null) {
@@ -28,6 +28,7 @@ const SignUp = async (req, res) => {
         username: usuario,
         names: nombres,
         surnames: apellidos,
+        address: direccion,
         date: nacimiento,
         email: correo,
         phone: telefono,
