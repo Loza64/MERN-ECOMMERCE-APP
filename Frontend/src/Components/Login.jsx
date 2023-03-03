@@ -102,7 +102,7 @@ export default function Login() {
                   <Field type="password" name="password" placeholder="contraseña" />
                   {!state ? (<label className='errormessage'>Usuario o contraseña incorrectos.</label>) : null}
                   <input type="submit" value="Iniciar sesión" />
-                  <a href='#'>¿Has olvidado tu contraseña?</a>
+                  <a href='/#'>¿Olvidates tu contraseña</a>
                 </Form>
               )
             }
