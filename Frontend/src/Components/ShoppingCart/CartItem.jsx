@@ -8,9 +8,12 @@ export default function CartItem({ product }) {
         <img src="https://res.cloudinary.com/ufostart-development/image/upload/v1675916495/ECOMMERCE/hq1gxwh4l6mnjiv6i7ir.jpg" alt="" srcset="" />
       </div>
       <div className="detailproduct">
-        <label className="name">Monitor de 27 pulgadas</label>
+        <div className="flex-product">
+          <label className="name">Monitor de 27 pulgadas</label>
+          <label className="subtotal">SubTotal: $232.45</label>
+        </div>
         <label className="marca">Amazon Basic</label>
-        <label className="price">$95.00</label>
+        <label className="price">Price: $95.00</label>
         <div className="flex-buttoms">
           <div className="quantity-buttoms">
             <button><i class="fa fa-minus" /></button>

@@ -207,6 +207,13 @@ export const BtnCart = styles.div`
 .react-icon:active{
   transform:scale(115%);
 }
+.disable{
+  color:grey;
+}
+.no-product{
+  font-weight:900;
+  color:red;
+}
 `;
 
 export const LoginContainer = styles.div`
@@ -477,16 +484,36 @@ outline:none;
 `;
 
 export const ShoppingCartList = styles.div`
-margin:5px 10px;
+overflow:hidden;
+width:100%;
 .item{
   display:flex;
   align-items:center;
   padding: 10px;
+  background:rgba(247, 247, 247, 1);
+  border-radius:10px;
+  margin: 10px 15px;
+  transition: all .05s ease-in-out;
+  animation-name: showitemcart;
+  animation-iteration-count:1;
+  animation-duration: .8s;
+  z-index:2;
+}
+@keyframes showitemcart{
+  0%{
+    transform:translateX(-1000px)
+  }
+  50%{
+    transform:translateX(100px)
+  }
+  100%{
+    transform:translateX(0px)
+  }
 }
 .item .image{
   width:100%;
   height:100%;
-  max-width:7rem;
+  max-width:8rem;
   margin: 8px;
 }
 .item .image img {
@@ -497,6 +524,17 @@ margin:5px 10px;
   width:100%;
   display:flex;
   flex-direction:column;
+}
+.item .detailproduct .price{
+  color:green;
+}
+.item .detailproduct .flex-product{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.item .detailproduct .flex-product .subtotal{
+  color:green;
 }
 .item .detailproduct .flex-buttoms{
   display:flex;
@@ -519,6 +557,7 @@ margin:5px 10px;
   border:none;
   border-radius:100%;
   color:rgba(2, 1, 71, 1);
+  transition: all .05s ease-in-out;
 }
 .item .detailproduct .flex-buttoms .quantity-buttoms button:active{
   background:rgba(2, 1, 71, 1);
@@ -536,6 +575,16 @@ margin:5px 10px;
   background:red;
   padding:6px 18px;
   border-radius:10px;
+  transition: all .05s ease-in-out;
+}
+.item .detailproduct .flex-buttoms .remove-buttom:active{
+  transform:scale(95%);
+}
+.item .detailproduct .flex-buttoms .remove-buttom .react-icon{
+  margin: 0 3px;
+}
+.item .detailproduct .flex-buttoms .remove-buttom label{
+  margin: 0 3px;
 }
 `;
 

@@ -1,14 +1,18 @@
 import React from "react";
+import Pago from "../Pago";
 import CartList from './CartList'
 
-export default function Cart(){
-  return(
+export default function Cart() {
+  return (
     <div>
       <br />
       <br />
       <br />
       <h1>My Shopping Cart</h1>
-      <CartList/>
+      <div className="flex-cart">
+        <CartList />
+        <Pago />
+      </div>
     </div>
   );
 }
