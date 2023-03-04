@@ -3,7 +3,7 @@ import { BsFillCartPlusFill, BsFillCartXFill } from 'react-icons/bs'
 import { BtnCart } from "../Styles/styled-components";
 
 export default function ProductItem({ product }) {
-  const { key, image, name, company, details, price, stock, discount } = product;
+  const { key, image, name, company, price, stock, discount } = product;
   if (stock > 0) {
     return (
       <div className="target">

@@ -8,7 +8,7 @@ export default function Cart() {
       <br />
       <br />
       <br />
-      <h1>My Shopping Cart</h1>
+      <h1 className="text-center title-cart">My Shopping Cart</h1>
       <div className="flex-cart">
         <CartList />
         <Pago />

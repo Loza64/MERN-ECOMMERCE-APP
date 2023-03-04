@@ -11,8 +11,6 @@ export default function CategorieItem({ category }) {
       </div>
       <div className="body">
         <label>{category.name}</label>
-      </div>
-      <div className="footer">
         <Link to={`/${category.name}`} onClick={() => { setProductsByCategorie([]) }}>View Products</Link>
       </div>
     </div>

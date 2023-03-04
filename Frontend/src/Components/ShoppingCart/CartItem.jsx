@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTrashAlt } from 'react-icons/fa'
 
-export default function CartItem({ product }) {
+export default function CartItem({ item }) {
   return (
     <div className="item">
       <div className="image">
