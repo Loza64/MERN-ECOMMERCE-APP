@@ -92,8 +92,8 @@ export default function ContextConsumer({ children }) {
     productsByCategorie,
     setProductsByCategorie,
     CreateCookies, RemoveCookies,
-    GetCookies, getProduct,
-    AddToCart, RemoveFromCart, ClearCart
+    GetCookies, getProduct, AddToCart,
+    RemoveFromCart, ClearCart, product
   }
   return (
     <Context.Provider value={ContextValues}>
