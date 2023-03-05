@@ -1,5 +1,5 @@
 const express = require('express')
-const { SignUp, Login, NewProduct, GetProducts, NewCategorie, GetCategories, GetProductByCategorie } = require('../Controllers/controller')
+const { SignUp, Login, NewProduct, GetProducts, NewCategorie, GetCategories, GetProductByCategorie, GetProductByKey } = require('../Controllers/controller')
 const routes = express.Router()
 
 //User Routes
@@ -10,6 +10,7 @@ routes.post('/SignUp', SignUp)
 routes.post('/NewProduct', NewProduct)
 routes.get('/GetProducts', GetProducts)
 routes.post('/GetProductByCategorie', GetProductByCategorie)
+routes.post('/GetProductByKey', GetProductByKey)
 
 //Categorie Routes
 routes.post('/NewCategorie', NewCategorie)

@@ -1,9 +1,11 @@
 import React from "react";
 import { BsFillCartPlusFill, BsFillCartXFill } from 'react-icons/bs'
 import { BtnCart } from "../Styles/styled-components";
+import { ContextProvider } from '../../Context/Context'
 
 export default function ProductItem({ product }) {
   const { key, image, name, company, price, stock, discount } = product;
+  const { AddToCart } = ContextProvider();
   if (stock > 0) {
     return (
       <div className="target">

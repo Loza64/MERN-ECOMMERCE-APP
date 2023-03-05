@@ -1,6 +1,7 @@
 import { React, useEffect } from "react";
 import { ContextProvider } from "../../Context/Context";
 import ProductItem from "./ProductItem";
+import Top from '../Top'
 
 export default function ProductsByCategory({ clave }) {
 
@@ -13,14 +14,18 @@ export default function ProductsByCategory({ clave }) {
   }, body)
 
   return (
-    <div className="grid">
-      {
-        productsByCategorie.map(
-          product => (
-            <ProductItem key={product._id} product={product} />
+    <div>
+      <Top></Top>
+      <div className="grid">
+        {
+          productsByCategorie.map(
+            product => (
+              <ProductItem key={product._id} product={product} />
+            )
           )
-        )
-      }
+        }
+      </div>
     </div>
+
   )
 }

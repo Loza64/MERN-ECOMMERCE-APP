@@ -115,6 +115,16 @@ const GetProductByCategorie = (req, res) => {
     return res.status(500).json({ message: error.message })
   }
 }
+const GetProductByKey = (req, res) => {
+  try {
+    const { ProductKey } = req.body;
+    Products.findOne({ key: ProductKey }, (err, docs) => {
+      !err ? res.send(docs) : null;
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
 
 //Funciones de las categorias
 const NewCategorie = async (req, res) => {
@@ -162,5 +172,6 @@ module.exports = {
   GetProducts,
   NewCategorie,
   GetCategories,
-  GetProductByCategorie
+  GetProductByCategorie,
+  GetProductByKey
 }
