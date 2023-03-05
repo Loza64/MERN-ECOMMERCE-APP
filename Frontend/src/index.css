@@ -218,7 +218,7 @@
   max-width: 400px;
   padding: 18px;
   border-radius: 10px;
-  box-shadow: 3px 0px 8px 2px greenyellow;
+  box-shadow: 0.2rem 0.2rem blue, -0.2rem -0.2rem greenyellow;
   transition: all 0.3 ease-in-out;
   animation-name: showpayment;
   animation-iteration-count: 1;

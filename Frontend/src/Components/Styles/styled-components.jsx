@@ -2,7 +2,7 @@ import styles from 'styled-components'
 
 export const NavBar = styles.div`
 position: fixed;
-z-index: 100;
+z-index: 50;
 width:100%;
 background:rgba(2, 1, 71, 1);
 padding:15px 10px;
@@ -366,11 +366,10 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-z-index:${({ formopen }) => (formopen ? "20" : "19")};
+z-index:${({ formopen }) => (formopen ? "100" : "0")};
 background:${({ formopen }) => (formopen ? "rgba(0, 0, 0, 0.5)" : "transparent")};
 opacity:${({ formopen }) => (formopen ? "1" : "0")};
-transition:all ${({ formopen }) => (formopen ? "0s" : "0.8s")} ease-in-out;
-top:3%;
+transition:all 0.7s ease-in-out;
 }
 
 .container-form-signup{
@@ -379,7 +378,7 @@ top:3%;
   background:white;
   padding:10px 17px;
   margin:0 10px;
-  transition:all 0.8s ease-in-out;
+  transition:all 0.7s ease-in-out;
   transform:${({ formopen }) => (formopen ? "scale(100%)" : "scale(0%)")};
 }
 .container-form-signup form .closebuttom{
@@ -408,7 +407,8 @@ top:3%;
   background:rgb(237, 237, 237);
   padding:6px 12px;
   font-weight:900;
-  border-radius:30px;
+  border-radius:50px;
+  font-size:15px;
 }
 .container-form-signup form .flex{
   width:100%;
@@ -443,10 +443,34 @@ top:3%;
   margin-bottom:-16px;
   margin-top:-2px;
 }
-
-@media only screen and (max-width: 300px){
+@media only screen and (max-width: 450px){
+  .container-form-signup form .errormessage{
+    font-size:10px;
+  }
   .container-form-signup form input{
     font-size:12px;
+  }
+}
+
+@media only screen and (max-width: 388px){
+  .container-form-signup form .errormessage{
+    font-size:9px;
+  }
+  .container-form-signup form input{
+    font-size:11.5px;
+  }
+}
+@media only screen and (max-width: 320px){
+  .container-form-signup form .errormessage{
+    font-size:7.4px;
+  }
+  .container-form-signup form input{
+    font-size:10.5px;
+  }
+}
+@media only screen and (max-width: 300px){
+  .container-form-signup form input{
+    font-size:10px;
   }
   .container-form-signup form .errormessage{
     font-size:10px;

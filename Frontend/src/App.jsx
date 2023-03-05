@@ -9,7 +9,6 @@ import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
 import Products from './Components/Products/Products'
 import ProductsByCategory from './Components/Products/ProductsByCategory'
-import Top from './Components/Top';
 import Cart from './Components/ShoppingCart/Cart';
 import DetailProduct from './Components/Products/DetailProduct';
 
