@@ -513,10 +513,11 @@ width:100%;
 .item{
   display:flex;
   align-items:center;
-  padding: 6px;
-  background:rgba(247, 247, 247, 1);
+  padding: 9px;
+  background:white;
+  border:solid 3px rgba(247, 247, 247, 1);
   border-radius:10px;
-  margin: 0px 15px;
+  margin-right:16px;
   margin-bottom:10px;
   transition: all .05s ease-in-out;
   animation-name: showitemcart;
@@ -539,7 +540,7 @@ width:100%;
   width:100%;
   height:100%;
   max-width:8rem;
-  margin: 4.5px;
+  margin: 9px;
 }
 .item .image img {
   width:100%;

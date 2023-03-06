@@ -10,7 +10,7 @@ export default function ProductItem({ product }) {
     return (
       <div className="target">
         <BtnCart>
-          <BsFillCartPlusFill className="react-icon" />
+          <BsFillCartPlusFill className="react-icon" onClick={() =>{AddToCart(key)}}/>
           {discount > 0 ? (<label className="product-discount">{Math.round(discount * 100)}%</label>) : null}
         </BtnCart>
         <div className="head-target">
@@ -23,7 +23,7 @@ export default function ProductItem({ product }) {
               (
                 <div className="content-product-price">
                   <label className="product-price" style={{ textDecoration: "line-through", color: "grey" }}>${price}</label>
-                  <label className="price-discount">${Math.round(price - discount * price)}</label>
+                  <label className="price-discount">${(price - discount * price).toFixed(2)}</label>
                 </div>
               ) : (
                 <div className="content-product-price">
@@ -51,7 +51,7 @@ export default function ProductItem({ product }) {
               (
                 <div className="content-product-price">
                   <label className="product-price" style={{ textDecoration: "line-through", color: "grey" }}>${price}</label>
-                  <label className="price-discount">${Math.round(price - discount * price)}</label>
+                  <label className="price-discount">${(price - discount * price).toFixed(2)}</label>
                 </div>
               ) : (
                 <div className="content-product-price">

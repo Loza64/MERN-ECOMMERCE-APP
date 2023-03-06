@@ -75,8 +75,8 @@ export default function ContextConsumer({ children }) {
     const [state, dispatch] = useReducer(ContextReducer, InitialState);
     const { cart } = state;
   }
-  const AddToCart = () => {
-
+  const AddToCart = (key) => {
+    console.log('productkey: ' + key)
   }
   const RemoveFromCart = () => {
 
