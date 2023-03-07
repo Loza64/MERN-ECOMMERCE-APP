@@ -9,6 +9,7 @@ export default function Pago() {
       <label className='taskmoney'>$1223</label>
       <label className='pay'>Total</label>
       <label className='paymoney'>$1223</label>
+      <button className='buttom-clear'>Clear my cart</button>
       <button className='buttom-pay'>Proceed to payment</button>
     </div>
   );

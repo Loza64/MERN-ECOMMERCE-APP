@@ -6,11 +6,12 @@ import { ContextProvider } from '../../Context/Context'
 export default function ProductItem({ product }) {
   const { key, image, name, company, price, stock, discount } = product;
   const { AddToCart } = ContextProvider();
+
   if (stock > 0) {
     return (
       <div className="target">
         <BtnCart>
-          <BsFillCartPlusFill className="react-icon" onClick={() =>{AddToCart(key)}}/>
+          <BsFillCartPlusFill className="react-icon" onClick={() => { AddToCart(key) }} />
           {discount > 0 ? (<label className="product-discount">{Math.round(discount * 100)}%</label>) : null}
         </BtnCart>
         <div className="head-target">

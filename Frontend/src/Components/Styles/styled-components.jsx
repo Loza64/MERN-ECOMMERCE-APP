@@ -618,9 +618,12 @@ width:100%;
   align-items:center;
   color:white;
   background:red;
-  padding:6px 18px;
-  border-radius:10px;
+  padding:4px 15px;
+  border-radius:7px;
   transition: all .05s ease-in-out;
+  display:flex;
+  algin-items:center;
+  justify-content:center;
 }
 .item .detailproduct .flex-buttoms .remove-buttom:active{
   transform:scale(95%);
@@ -634,6 +637,10 @@ width:100%;
 @media only screen and (max-width:600px){
   .item{
     margin: 12px 0;
+  }
+  .item .detailproduct .flex-buttoms .remove-buttom{
+    width:100%;
+    padding:6px;
   }
 }
 `;

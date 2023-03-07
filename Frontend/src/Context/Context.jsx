@@ -2,6 +2,7 @@ import Cookies from 'universal-cookie';
 import { React, useContext, useState, createContext, useEffect, useReducer } from 'react';
 import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie, GetProductByKey } from '../Api/RestApi';
 import { ContextReducer, InitialState } from './ContextReducer';
+import { Actions } from './ContextActions';
 
 const cookies = new Cookies();
 const Context = createContext();
@@ -13,10 +14,10 @@ export const ContextProvider = () => {
 
 export default function ContextConsumer({ children }) {
 
+  //hooks
   const [productsByCategorie, setProductsByCategorie] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [product, setProduct] = useState([]);
 
   // Functions products
   const getCategories = async () => {
@@ -28,8 +29,7 @@ export default function ContextConsumer({ children }) {
     setProducts(result.data);
   };
   const getProduct = async (ProductKey) => {
-    const result = await GetProductByKey(ProductKey);
-    setProduct(result.data);
+    return await GetProductByKey(ProductKey);
   };
   const getProductByCategorie = async (CategoryKey) => {
     const result = await GetProductByCategorie(CategoryKey);
@@ -37,10 +37,10 @@ export default function ContextConsumer({ children }) {
   }
   useEffect(() => {
     getProducts()
-  }, GetProducts());
+  }, []);
   useEffect(() => {
     getCategories()
-  }, GetCategories());
+  }, []);
 
   // Functions user
   const UserLogin = async (usuario) => {
@@ -71,12 +71,12 @@ export default function ContextConsumer({ children }) {
   }
 
   //Functions Cart
-  const ShoppingCart = () => {
-    const [state, dispatch] = useReducer(ContextReducer, InitialState);
-    const { cart } = state;
-  }
-  const AddToCart = (key) => {
-    console.log('productkey: ' + key)
+  const [state, dispatch] = useReducer(ContextReducer, InitialState);
+  const { cart } = state;
+
+  const AddToCart = async (ProductKey) => {
+    const product = await getProduct({ ProductKey });
+    dispatch({ type: Actions.ADD_TO_CART, payload: product.data })
   }
   const RemoveFromCart = () => {
 
@@ -93,7 +93,7 @@ export default function ContextConsumer({ children }) {
     setProductsByCategorie,
     CreateCookies, RemoveCookies,
     GetCookies, getProduct, AddToCart,
-    RemoveFromCart, ClearCart, product
+    RemoveFromCart, ClearCart, cart
   }
   return (
     <Context.Provider value={ContextValues}>

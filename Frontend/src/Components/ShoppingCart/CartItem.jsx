@@ -2,6 +2,7 @@ import React from "react";
 import { FaTrashAlt } from 'react-icons/fa'
 
 export default function CartItem({ item }) {
+  const {key, name, company, price, cant, subtotal, discount} = item;
   return (
     <div className="item">
       <div className="image">
@@ -9,15 +10,15 @@ export default function CartItem({ item }) {
       </div>
       <div className="detailproduct">
         <div className="flex-product">
-          <label className="name">Monitor de 27 pulgadas</label>
-          <label className="subtotal">SubTotal: $232.45</label>
+          <label className="name">{name}</label>
+          <label className="subtotal">SubTotal: ${subtotal}</label>
         </div>
-        <label className="marca">Amazon Basic</label>
-        <label className="price">Price: $95.00</label>
+        <label className="marca">{company}</label>
+        <label className="price">Price: ${price}</label>
         <div className="flex-buttoms">
           <div className="quantity-buttoms">
             <button><i class="fa fa-minus" /></button>
-            <label>1</label>
+            <label>{cant}</label>
             <button><i class="fa fa-plus" /></button>
           </div>
           <div className="remove-buttom">
