@@ -13,7 +13,7 @@ function checkCartLocal(){
   }
 }
 export const InitialState = {
-  cart: !checkCartLocal() ? [] : JSON.stringify(localStorage.getItem('cart')),
+  cart: !checkCartLocal() ? [] : JSON.parse(localStorage.getItem('cart')),
 }
 
 export function ContextReducer(state, action) {
