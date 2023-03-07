@@ -2,11 +2,11 @@ import React from "react";
 import { FaTrashAlt } from 'react-icons/fa'
 
 export default function CartItem({ item }) {
-  const {key, name, company, price, cant, subtotal, discount} = item;
+  const { key, name, image, company, price, quantity, subtotal, discount } = item;
   return (
     <div className="item">
       <div className="image">
-        <img src="https://res.cloudinary.com/ufostart-development/image/upload/v1675916495/ECOMMERCE/hq1gxwh4l6mnjiv6i7ir.jpg" alt="" srcset="" />
+        <img src={image.url} alt="imgproduct" />
       </div>
       <div className="detailproduct">
         <div className="flex-product">
@@ -18,7 +18,7 @@ export default function CartItem({ item }) {
         <div className="flex-buttoms">
           <div className="quantity-buttoms">
             <button><i class="fa fa-minus" /></button>
-            <label>{cant}</label>
+            <label>{quantity}</label>
             <button><i class="fa fa-plus" /></button>
           </div>
           <div className="remove-buttom">

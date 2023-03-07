@@ -10,7 +10,7 @@ import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
   //Functions Context
-  const { GetCookies } = ContextProvider();
+  const { GetCookies, cart } = ContextProvider();
 
   //Hooks
   const [state, setState] = useState(false);
@@ -39,7 +39,7 @@ export default function Navbar() {
           <Link to="/Products" onClick={() => { setState(false); scrollTop() }}><FaBoxes className="react-icon" />Products</Link>
           <Link to="/Categories" onClick={() => { setState(false); scrollTop() }}><FaClipboardList className="react-icon" />Categories</Link>
           <Link to="/Shoppings" onClick={() => { setState(false); scrollTop() }}><AiFillTags className="react-icon" />Discounts</Link>
-          <Link to="/Cart" onClick={() => { setState(false); scrollTop() }}><BsFillCartFill className="react-icon" />Cart(0)</Link>
+          <Link to="/Cart" onClick={() => { setState(false); scrollTop() }}><BsFillCartFill className="react-icon" />Cart({cart.length})</Link>
         </nav>
         <div className="login-buttom">
           <a href="/Login" onClick={() => { setState(false); scrollTop() }}>
