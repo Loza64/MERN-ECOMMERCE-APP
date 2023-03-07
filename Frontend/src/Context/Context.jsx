@@ -11,7 +11,6 @@ export const ContextProvider = () => {
   return useContext(Context);
 };
 
-
 export default function ContextConsumer({ children }) {
 
   //hooks
@@ -76,7 +75,13 @@ export default function ContextConsumer({ children }) {
 
   const AddToCart = async (ProductKey) => {
     const product = await getProduct({ ProductKey });
-    dispatch({ type: Actions.ADD_TO_CART, payload: product.data })
+    const CartBody = {
+      key: product.data.key, name: product.data.name,
+      image: product.data.image, company: product.data.company,
+      price: product.data.price, quantity: 1,
+      subtotal: product.data.price, discount: product.data.discount
+    }
+    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody })
   }
   const RemoveFromCart = () => {
 
