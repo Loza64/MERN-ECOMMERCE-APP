@@ -76,10 +76,14 @@ export default function ContextConsumer({ children }) {
   const AddToCart = async (ProductKey) => {
     const product = await getProduct({ ProductKey });
     const CartBody = {
-      key: product.data.key, name: product.data.name,
-      image: product.data.image, company: product.data.company,
-      price: product.data.price, quantity: 1,
-      subtotal: product.data.price, discount: product.data.discount
+      quantity: 1,
+      key: product.data.key, 
+      name: product.data.name,
+      image: product.data.image, 
+      company: product.data.company,
+      price: product.data.price, 
+      subtotal: product.data.price, 
+      discount: product.data.discount
     }
     dispatch({ type: Actions.ADD_TO_CART, payload: CartBody })
   }

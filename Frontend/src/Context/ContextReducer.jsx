@@ -13,23 +13,23 @@ function checkCartLocal(){
   }
 }
 export const InitialState = {
-  cart: !checkCartLocal() ? [] : JSON.parse(localStorage.getItem('cart')),
+  cart: [],
 }
 
 export function ContextReducer(state, action) {
   switch (action.type) {
     case Actions.ADD_TO_CART: {
       let newItem = action.payload;
-      let MyCart = state.cart.find((itemproduct) => itemproduct.key === newItem.key) ?
+      let checkProduct = state.cart.find((itemproduct) => itemproduct.key === newItem.key);
+      let MyCart = checkProduct ?
         {
           ...state, cart: state.cart.map((item) => item.key === newItem.key ?
-            { ...item, quantity: item.quantity + 1 }
+            { ...item, quantity: item.quantity + 1, subtotal: (item.price * item.quantity).toFixed(2) }
             :
             { item })
         }
         :
         { ...state, cart: [...state.cart, newItem]};
-        localStorage.setItem('cart', JSON.stringify(MyCart));
       return MyCart;
     }
     case Actions.REMOVE_ALL_FROM_CART: {
