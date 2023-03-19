@@ -24,7 +24,7 @@ export function ContextReducer(state, action) {
       let MyCart = checkProduct ?
         {
           ...state, cart: state.cart.map((item) => item.key === newItem.key ?
-            { ...item, quantity: item.quantity + 1, subtotal: (item.price * item.quantity).toFixed(2) }
+            { ...item, quantity: item.quantity + 1 }
             :
             { item })
         }
