@@ -1,8 +1,10 @@
 import React from "react";
 import { FaTrashAlt } from 'react-icons/fa'
+import { ContextProvider } from "../../Context/Context";
 
 export default function CartItem({ item }) {
-  const { key, name, image, company, price, quantity, subtotal, discount } = item;
+  const { key, name, image, company, price, quantity, discount } = item;
+  const {RemoveFromCart} = ContextProvider();
   return (
     <div className="item">
       <div className="image">
@@ -11,7 +13,7 @@ export default function CartItem({ item }) {
       <div className="detailproduct">
         <div className="flex-product">
           <label className="name">{name}</label>
-          <label className="subtotal">SubTotal: ${subtotal}</label>
+          <label className="subtotal">SubTotal: ${(price * quantity).toFixed(2)}</label>
         </div>
         <label className="marca">{company}</label>
         <label className="price">Price: ${price}</label>

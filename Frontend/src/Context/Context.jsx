@@ -76,18 +76,20 @@ export default function ContextConsumer({ children }) {
   const AddToCart = async (ProductKey) => {
     const product = await getProduct({ ProductKey });
     const CartBody = {
-      quantity: 1,
       key: product.data.key, 
-      name: product.data.name,
       image: product.data.image, 
+      name: product.data.name,
       company: product.data.company,
       price: product.data.price, 
-      subtotal: product.data.price, 
+      quantity: 1,
       discount: product.data.discount
     }
     dispatch({ type: Actions.ADD_TO_CART, payload: CartBody })
   }
   const RemoveFromCart = () => {
+
+  }
+  const Quantity = () => {
 
   }
   const ClearCart = () => {
@@ -102,7 +104,7 @@ export default function ContextConsumer({ children }) {
     setProductsByCategorie,
     CreateCookies, RemoveCookies,
     GetCookies, getProduct, AddToCart,
-    RemoveFromCart, ClearCart, cart
+    RemoveFromCart, ClearCart, cart, Quantity
   }
   return (
     <Context.Provider value={ContextValues}>
