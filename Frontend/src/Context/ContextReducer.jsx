@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 import { Actions } from "./ContextActions";
 
 export const InitialState = {
@@ -21,15 +22,30 @@ export function ContextReducer(state, action) {
               : item
           )
         : [...state.cart, newItem];
-        
+
       localStorage.setItem("cart", JSON.stringify(MyCart));
       return { ...state, cart: MyCart };
     }
-    case Actions.REMOVE_ALL_FROM_CART: {
+
+    case Actions.QUANTITY_PRODUCT: {
+      let { cant, productkey } = action.payload;
+      let Cart = state.cart.map((item) =>
+        item.key === productkey ? { ...item, quantity: cant } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(Cart))
+      return{...state, cart:Cart}
     }
-    case Actions.REMOVE_ONE_FROM_CART: {
+
+    case Actions.REMOVE_PRODUCT_FROM_CART: {
+      let productkey = action.payload;
+      let Cart = state.cart.filter((item) => item.key !== productkey);
+      localStorage.setItem("cart", JSON.stringify(Cart));
+      return { ...state, cart: Cart };
     }
+
     case Actions.CLEAR_CART: {
+      localStorage.setItem("cart", JSON.stringify([]));
+      return { ...state, cart: action.payload };
     }
     default:
       return state;

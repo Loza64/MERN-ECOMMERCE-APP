@@ -1,8 +1,22 @@
-import Cookies from 'universal-cookie';
-import { React, useContext, useState, createContext, useEffect, useReducer } from 'react';
-import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie, GetProductByKey } from '../Api/RestApi';
-import { ContextReducer, InitialState } from './ContextReducer';
-import { Actions } from './ContextActions';
+import Cookies from "universal-cookie";
+import {
+  React,
+  useContext,
+  useState,
+  createContext,
+  useEffect,
+  useReducer,
+} from "react";
+import {
+  GetCategories,
+  GetProducts,
+  Login,
+  SignUp,
+  GetProductByCategorie,
+  GetProductByKey,
+} from "../Api/RestApi";
+import { ContextReducer, InitialState } from "./ContextReducer";
+import { Actions } from "./ContextActions";
 
 const cookies = new Cookies();
 const Context = createContext();
@@ -12,7 +26,6 @@ export const ContextProvider = () => {
 };
 
 export default function ContextConsumer({ children }) {
-
   //hooks
   const [productsByCategorie, setProductsByCategorie] = useState([]);
   const [products, setProducts] = useState([]);
@@ -33,12 +46,12 @@ export default function ContextConsumer({ children }) {
   const getProductByCategorie = async (CategoryKey) => {
     const result = await GetProductByCategorie(CategoryKey);
     setProductsByCategorie(result.data);
-  }
+  };
   useEffect(() => {
-    getProducts()
+    getProducts();
   }, []);
   useEffect(() => {
-    getCategories()
+    getCategories();
   }, []);
 
   // Functions user
@@ -49,9 +62,9 @@ export default function ContextConsumer({ children }) {
     return await SignUp(usuario);
   };
 
-  //Cookies 
+  //Cookies
   const CreateCookies = (CookieName, data) => {
-    cookies.set(CookieName, data, { path: "/" })
+    cookies.set(CookieName, data, { path: "/" });
   };
   const RemoveCookies = (CookieName) => {
     cookies.remove(CookieName);
@@ -67,48 +80,63 @@ export default function ContextConsumer({ children }) {
     } catch (error) {
       return false;
     }
-  }
+  };
 
   //Functions Cart
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
+  const SubTotal = cart.reduce((Total, NextItem) => Total + (NextItem.quantity * NextItem.price), 0,0).toFixed(2);
+  const Task = cart.reduce((Total, NextItem) => Total + ((NextItem.quantity * NextItem.price) * 0.13), 0).toFixed(2);
+  const Total = (parseFloat(cart.reduce((Total, NextItem) => Total + (NextItem.quantity * NextItem.price), 0,0)) + parseFloat(cart.reduce((Total, NextItem) => Total + ((NextItem.quantity * NextItem.price) * 0.13), 0))).toFixed(2);
+
   const AddToCart = async (ProductKey) => {
     const product = await getProduct({ ProductKey });
     const CartBody = {
-      key: product.data.key, 
-      image: product.data.image, 
+      key: product.data.key,
+      image: product.data.image,
       name: product.data.name,
       company: product.data.company,
-      price: product.data.price, 
+      price: product.data.price,
       quantity: 1,
-      discount: product.data.discount
+      discount: product.data.discount,
+    };
+    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody });
+  };
+  const RemoveProductFromCart = (productkey) => {
+    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
+  };
+  const Quantity = (cant,productkey) => {
+    if(cant <= 1){
+      dispatch({type: Actions.QUANTITY_PRODUCT, payload:{cant:1,productkey}})
+    }else{
+      dispatch({type: Actions.QUANTITY_PRODUCT, payload:{cant,productkey}})
     }
-    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody })
-  }
-  const RemoveFromCart = () => {
-
-  }
-  const Quantity = () => {
-
-  }
+  };
   const ClearCart = () => {
-
-  }
+    dispatch({ type: Actions.CLEAR_CART, payload: [] });
+  };
 
   const ContextValues = {
-    products, categories,
-    UserLogin, UserSignUp,
+    products,
+    categories,
+    UserLogin,
+    UserSignUp,
     getProductByCategorie,
     productsByCategorie,
     setProductsByCategorie,
-    CreateCookies, RemoveCookies,
-    GetCookies, getProduct, AddToCart,
-    RemoveFromCart, ClearCart, cart, Quantity
-  }
-  return (
-    <Context.Provider value={ContextValues}>
-      {children}
-    </Context.Provider>
-  )
+    CreateCookies,
+    RemoveCookies,
+    GetCookies,
+    getProduct,
+    AddToCart,
+    RemoveProductFromCart,
+    ClearCart,
+    cart,
+    Quantity,
+    SubTotal,
+    Task,
+    Total
+  };
+  return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
 }
