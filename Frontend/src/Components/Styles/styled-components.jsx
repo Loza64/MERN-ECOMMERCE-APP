@@ -554,6 +554,10 @@ width:100%;
 .item .detailproduct .price{
   color:green;
 }
+.item .detailproduct .subtotal{
+  color:grey;
+  text-decoration:line-through
+}
 .item .detailproduct .flex-product{
   display:flex;
   align-items:center;
@@ -561,6 +565,7 @@ width:100%;
 }
 .item .detailproduct .flex-product .subtotal{
   color:green;
+  text-decoration:none
 }
 @media only screen and (max-width: 960px){
   .item{
