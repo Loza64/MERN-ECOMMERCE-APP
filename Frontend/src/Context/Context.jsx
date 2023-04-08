@@ -1,20 +1,6 @@
 import Cookies from "universal-cookie";
-import {
-  React,
-  useContext,
-  useState,
-  createContext,
-  useEffect,
-  useReducer,
-} from "react";
-import {
-  GetCategories,
-  GetProducts,
-  Login,
-  SignUp,
-  GetProductByCategorie,
-  GetProductByKey,
-} from "../Api/RestApi";
+import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
+import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie, GetProductByKey } from "../Api/RestApi";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { Actions } from "./ContextActions";
 
