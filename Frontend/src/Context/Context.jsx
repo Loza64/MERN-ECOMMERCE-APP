@@ -87,42 +87,42 @@ export default function ContextConsumer({ children }) {
   const { cart } = state;
 
   const SubTotal = cart.reduce(
-      (Total, NextItem) =>
-        NextItem.discount > 0
-          ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
-          : Total + NextItem.quantity * NextItem.price,
-      0
-    )
+    (Total, NextItem) =>
+      NextItem.discount > 0
+        ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
+        : Total + NextItem.quantity * NextItem.price,
+    0
+  )
     .toFixed(2);
 
   const Task = cart.reduce(
-      (Total, NextItem) =>
-        NextItem.discount > 0
-          ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
-          : Total + NextItem.quantity * NextItem.price * 0.13,
-      0
-    )
+    (Total, NextItem) =>
+      NextItem.discount > 0
+        ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
+        : Total + NextItem.quantity * NextItem.price * 0.13,
+    0
+  )
     .toFixed(2);
 
   const Total = (
     parseFloat(
       cart.reduce(
-          (Total, NextItem) =>
-            NextItem.discount > 0
-              ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
-              : Total + NextItem.quantity * NextItem.price,
-          0
-        )
+        (Total, NextItem) =>
+          NextItem.discount > 0
+            ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
+            : Total + NextItem.quantity * NextItem.price,
+        0
+      )
         .toFixed(2)
     ) +
     parseFloat(
       cart.reduce(
-          (Total, NextItem) =>
-            NextItem.discount > 0
-              ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
-              : Total + NextItem.quantity * NextItem.price * 0.13,
-          0
-        )
+        (Total, NextItem) =>
+          NextItem.discount > 0
+            ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
+            : Total + NextItem.quantity * NextItem.price * 0.13,
+        0
+      )
         .toFixed(2)
     )
   ).toFixed(2);
@@ -161,25 +161,13 @@ export default function ContextConsumer({ children }) {
   };
 
   const ContextValues = {
-    products,
-    categories,
-    UserLogin,
-    UserSignUp,
-    getProductByCategorie,
-    productsByCategorie,
-    setProductsByCategorie,
-    CreateCookies,
-    RemoveCookies,
-    GetCookies,
-    getProduct,
-    AddToCart,
-    RemoveProductFromCart,
-    ClearCart,
-    cart,
-    Quantity,
-    SubTotal,
-    Task,
-    Total,
+    products, categories,
+    UserLogin, UserSignUp,
+    getProductByCategorie, productsByCategorie,
+    setProductsByCategorie, CreateCookies,
+    RemoveCookies, GetCookies, getProduct,
+    AddToCart, RemoveProductFromCart, ClearCart,
+    cart, Quantity, SubTotal, Task, Total,
   };
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
 }

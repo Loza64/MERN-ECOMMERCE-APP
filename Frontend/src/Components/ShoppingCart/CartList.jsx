@@ -7,7 +7,7 @@ export default function CartList() {
   const { cart } = ContextProvider();
   return (
     <ShoppingCartList>
-      {cart.map(items => (<CartItem key={items._id} item={items}/>))}
+      {cart.map(items => (<CartItem key={items._id} item={items} />))}
     </ShoppingCartList>
   );
 }

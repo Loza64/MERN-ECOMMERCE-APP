@@ -201,7 +201,7 @@ export default function SignUp({ open, setOpen }) {
                     <Field type="text" placeholder="Apellidos" name="apellidos" />
                   </div>
                 </div>
-                <div className="flex" style={{marginBottom:"-17px",marginTop:"-5px"}}>
+                <div className="flex" style={{ marginBottom: "-17px", marginTop: "-5px" }}>
                   <div>
                     <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} /> <br />
                   </div>

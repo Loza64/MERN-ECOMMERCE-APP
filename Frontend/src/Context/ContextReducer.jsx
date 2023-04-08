@@ -2,9 +2,7 @@
 import { Actions } from "./ContextActions";
 
 export const InitialState = {
-  cart: JSON.parse(localStorage.getItem("cart"))
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [],
+  cart: JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [],
 };
 
 export function ContextReducer(state, action) {
@@ -17,11 +15,7 @@ export function ContextReducer(state, action) {
 
       let MyCart = checkProduct
         ? state.cart.map((item) =>
-            item.key === newItem.key
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
-        : [...state.cart, newItem];
+          item.key === newItem.key ? { ...item, quantity: item.quantity + 1 } : item) : [...state.cart, newItem];
 
       localStorage.setItem("cart", JSON.stringify(MyCart));
       return { ...state, cart: MyCart };
@@ -29,11 +23,9 @@ export function ContextReducer(state, action) {
 
     case Actions.QUANTITY_PRODUCT: {
       let { cant, productkey } = action.payload;
-      let Cart = state.cart.map((item) =>
-        item.key === productkey ? { ...item, quantity: cant } : item
-      );
+      let Cart = state.cart.map((item) => item.key === productkey ? { ...item, quantity: cant } : item);
       localStorage.setItem("cart", JSON.stringify(Cart))
-      return{...state, cart:Cart}
+      return { ...state, cart: Cart }
     }
 
     case Actions.REMOVE_PRODUCT_FROM_CART: {
