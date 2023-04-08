@@ -575,6 +575,9 @@ width:100%;
     flex-direction:column;
     text-align:center;
   }
+  .item .detailproduct .subtotal{
+    display: none;
+  }
   .item .detailproduct .flex-product .subtotal{
     display:none;
   }
