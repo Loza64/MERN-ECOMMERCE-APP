@@ -86,20 +86,16 @@ export default function ContextConsumer({ children }) {
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
-  const SubTotal = cart
-    .reduce(
+  const SubTotal = cart.reduce(
       (Total, NextItem) =>
         NextItem.discount > 0
-          ? Total +
-            (NextItem.quantity * NextItem.price -
-              NextItem.quantity * NextItem.price * NextItem.discount)
+          ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
           : Total + NextItem.quantity * NextItem.price,
       0
     )
     .toFixed(2);
 
-  const Task = cart
-    .reduce(
+  const Task = cart.reduce(
       (Total, NextItem) =>
         NextItem.discount > 0
           ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
@@ -110,8 +106,7 @@ export default function ContextConsumer({ children }) {
 
   const Total = (
     parseFloat(
-      cart
-        .reduce(
+      cart.reduce(
           (Total, NextItem) =>
             NextItem.discount > 0
               ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
@@ -121,8 +116,7 @@ export default function ContextConsumer({ children }) {
         .toFixed(2)
     ) +
     parseFloat(
-      cart
-        .reduce(
+      cart.reduce(
           (Total, NextItem) =>
             NextItem.discount > 0
               ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
