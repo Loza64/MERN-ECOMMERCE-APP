@@ -92,8 +92,7 @@ export default function ContextConsumer({ children }) {
         ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
         : Total + NextItem.quantity * NextItem.price,
     0
-  )
-    .toFixed(2);
+  ).toFixed(2);
 
   const Task = cart.reduce(
     (Total, NextItem) =>
@@ -101,31 +100,23 @@ export default function ContextConsumer({ children }) {
         ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
         : Total + NextItem.quantity * NextItem.price * 0.13,
     0
-  )
-    .toFixed(2);
-
-  const Total = (
-    parseFloat(
-      cart.reduce(
-        (Total, NextItem) =>
-          NextItem.discount > 0
-            ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
-            : Total + NextItem.quantity * NextItem.price,
-        0
-      )
-        .toFixed(2)
-    ) +
-    parseFloat(
-      cart.reduce(
-        (Total, NextItem) =>
-          NextItem.discount > 0
-            ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
-            : Total + NextItem.quantity * NextItem.price * 0.13,
-        0
-      )
-        .toFixed(2)
-    )
   ).toFixed(2);
+
+  const Total = parseFloat(cart.reduce(
+    (Total, NextItem) =>
+      NextItem.discount > 0
+        ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount)
+        : Total + NextItem.quantity * NextItem.price,
+    0
+  ).toFixed(2))
+    +
+    parseFloat(cart.reduce(
+      (Total, NextItem) =>
+        NextItem.discount > 0
+          ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
+          : Total + NextItem.quantity * NextItem.price * 0.13,
+      0
+    ).toFixed(2))
 
   const AddToCart = async (ProductKey) => {
     const product = await getProduct({ ProductKey });
@@ -145,15 +136,9 @@ export default function ContextConsumer({ children }) {
   };
   const Quantity = (cant, productkey) => {
     if (cant <= 1) {
-      dispatch({
-        type: Actions.QUANTITY_PRODUCT,
-        payload: { cant: 1, productkey },
-      });
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
     } else {
-      dispatch({
-        type: Actions.QUANTITY_PRODUCT,
-        payload: { cant, productkey },
-      });
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
     }
   };
   const ClearCart = () => {
