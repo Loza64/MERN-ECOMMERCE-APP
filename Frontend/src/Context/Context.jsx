@@ -110,7 +110,7 @@ export default function ContextConsumer({ children }) {
     const product = await getProduct({ ProductKey });
     const CartBody = {
       key: product.data.key,
-      image: product.data.image,
+      image: product.data.image.url,
       name: product.data.name,
       company: product.data.company,
       price: product.data.price,

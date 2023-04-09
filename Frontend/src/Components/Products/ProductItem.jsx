@@ -15,7 +15,7 @@ export default function ProductItem({ product }) {
           {discount > 0 ? (<label className="product-discount">{Math.round(discount * 100)}%</label>) : null}
         </BtnCart>
         <div className="head-target">
-          <img src={image.url} alt="imgproduct" />
+          <img src={image.url} alt={name} />
         </div>
         <div className="body-target">
           <label className="product-name">{company} - {name}</label>

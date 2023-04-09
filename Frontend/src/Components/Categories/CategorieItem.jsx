@@ -7,7 +7,7 @@ export default function CategorieItem({ category }) {
   return (
     <div className="targe-categorie">
       <div className="head">
-        <img src={category.image.url} alt="imgcategorie" />
+        <img src={category.image.url} alt={category.name} />
       </div>
       <div className="body">
         <label>{category.name}</label>

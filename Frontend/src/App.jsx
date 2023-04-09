@@ -9,7 +9,7 @@ import Terms from './Components/Terms';
 import MyShoppings from './Components/MyShoppings';
 import Products from './Components/Products/Products'
 import ProductsByCategory from './Components/Products/ProductsByCategory'
-import Cart from './Components/ShoppingCart/Cart';
+import Cart from './Components/Cart/Cart';
 import DetailProduct from './Components/Products/DetailProduct';
 
 export default function App() {
