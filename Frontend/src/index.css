@@ -208,12 +208,39 @@
   font-weight: 700;
   margin: 10px 0;
 }
+
+.cart-empty{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cart-empty .message{
+  color: rgba(2, 1, 71, 1);
+  font-size:40px;
+  font-weight: 900;
+  transition: all 1.2s ease-in-out;
+  animation-name: showmessage;
+  animation-iteration-count: 1;
+  animation-duration: 1.2s;
+}
+
+@keyframes showmessage{
+  0%{
+    transform: translateX(-90rem)
+  }
+  100%{
+    transform: translateX(0rem);
+  }
+}
 .pay-container{
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  
   text-align: center;
   max-width: 400px;
   padding: 5px 14px;
@@ -287,6 +314,9 @@
   margin: 20px 20px;
 }
 @media only screen and (max-width:600px){
+  .cart-empty .message{
+    font-size: 25px;
+  }
   .flex-cart{
     flex-direction: column-reverse;
   }
@@ -301,5 +331,8 @@
 @media only screen and (max-width:400px){
   .pay-container label{
     font-size:14px;
+  }
+  .cart-empty .message{
+    font-size: 15px;
   }
 }
