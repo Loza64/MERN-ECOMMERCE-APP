@@ -31,7 +31,6 @@ export default function CartItem({ item }) {
             </div>
             <div className="remove-buttom" onClick={() => {RemoveProductFromCart(key)}}>
               <FaTrashAlt className="react-icon" />
-              <label>Remove</label>
             </div>
           </div>
         </div>
@@ -64,7 +63,6 @@ export default function CartItem({ item }) {
             </div>
             <div className="remove-buttom" onClick={() => {RemoveProductFromCart(key)}}>
               <FaTrashAlt className="react-icon" />
-              <label>Remove</label>
             </div>
           </div>
         </div>

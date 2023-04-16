@@ -245,27 +245,41 @@
 .pay-container .buttom-pay{
   border: none;
   outline: none;
-  background:linear-gradient(to left, greenyellow,blue);
+  background:greenyellow;
   color: white;
   font-weight: 900;
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 30px;
   transition: all 0.1s ease-in-out;
   margin-bottom: 4px;
 }
 .pay-container .buttom-clear{
   border: none;
   outline: none;
-  background:linear-gradient(to left, red,blue);
+  background:red;
   color: white;
   font-weight: 900;
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 30px;
   transition: all 0.1s ease-in-out;
   margin-bottom: 9px;
   
 }
-.pay-container .buttom-pay:active, .buttom-clear:active{
+.pay-container .buttom-clear:hover{
+  background:rgba(225, 225, 225, 1);
+  color: red;
+}
+.pay-container .buttom-pay:hover{
+  background:blue;
+  color: greenyellow;
+}
+
+.pay-container .buttom-pay:active{
+  transform: scale(96%);
+  background:blue;
+  color: greenyellow;
+}
+.pay-container .buttom-clear:active{
   transform: scale(96%);
 }
 .flex-cart{
