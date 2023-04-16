@@ -26,8 +26,8 @@ export default function App() {
         <Route path='/Shoppings' element={<MyShoppings />} />
         <Route path='/Products' element={<Products SubTopic={"Our"} Topic={"Products"} />} />
         <Route path='/Categories' element={<Categories SubTopic={"Look at our"} Topic={"Categories"} />} />
-        {categories.map(category => (<Route path={`${category.name}`} element={<ProductsByCategory key={category._id} clave={`${category.key}`} />} />))}
-        {products.map(product => (<Route path={`${product.name}`} element={<DetailProduct key={product._id} productkey={`${product.key}`} />} />))}
+        {categories.map(category => (<Route path={`/${category.name}`} element={<ProductsByCategory key={category._id} clave={`${category.key}`} />} />))}
+        {products.map(product => (<Route path={`/${product.name}`} element={<DetailProduct key={product._id} productkey={`${product.key}`} />} />))}
       </Routes>
     </div>
   );
