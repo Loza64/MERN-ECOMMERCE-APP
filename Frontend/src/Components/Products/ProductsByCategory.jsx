@@ -11,21 +11,31 @@ export default function ProductsByCategory({ clave }) {
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
   useEffect(() => {
     getProductByCategorie(body);
-  }, body)
+  })
 
-  return (
-    <div>
-      <Top></Top>
-      <div className="grid">
-        {
-          productsByCategorie.map(
-            product => (
-              <ProductItem key={product._id} product={product} />
-            )
-          )
-        }
+  if(productsByCategorie.length === 0){
+    return (
+      <div className="list-empty">
+        <br />
+        <br />
+        <br />
+        <label className="message">products not available for this category.</label>
       </div>
-    </div>
-
-  )
+    )
+  }else{
+    return (
+      <div>
+        <Top></Top>
+        <div className="grid">
+          {
+            productsByCategorie.map(
+              product => (
+                <ProductItem key={product._id} product={product} />
+              )
+            )
+          }
+        </div>
+      </div>
+    )
+  }
 }

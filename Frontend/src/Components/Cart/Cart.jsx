@@ -7,7 +7,7 @@ export default function Cart() {
   const { cart } = ContextProvider();
   if (cart.length === 0) {
     return (
-      <div className="cart-empty">
+      <div className="list-empty">
         <br />
         <br />
         <br />

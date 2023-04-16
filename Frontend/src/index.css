@@ -209,7 +209,7 @@
   margin: 10px 0;
 }
 
-.cart-empty{
+.list-empty{
   position: fixed;
   width: 100%;
   height: 100%;
@@ -218,11 +218,11 @@
   align-items: center;
   text-align: center;
 }
-.cart-empty .message{
+.list-empty .message{
   color: rgba(2, 1, 71, 1);
   font-size:40px;
   font-weight: 900;
-  transition: all 1.2s ease-in-out;
+  transition: all 1.7s ease-in-out;
   animation-name: showmessage;
   animation-iteration-count: 1;
   animation-duration: 1.2s;
