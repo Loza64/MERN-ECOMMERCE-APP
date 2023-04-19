@@ -1,37 +1,18 @@
 /* eslint-disable no-fallthrough */
 import { Actions } from "./ContextActions";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [],
-  UserSession: localStorage.getItem("UserSession") ? JSON.parse(cookies.get("User")) : false
 };
 
 export function ContextReducer(state, action) {
   switch (action.type) {
-    //User Acctions
-    case Actions.USER_LOGIN: {
-      if (!state.userCookies) {
-        let userinfo = action.payload;
-        localStorage.getItem("UserSession", JSON.stringify(userinfo))
-        return { ...state, userCookies: userinfo }
-      }
-    }
-    case Actions.USER_SIGN_OUT: {
-      let sessionState = action.payload;
-      cookies.remove("UserCookies");
-      return { ...state, userCookies: sessionState }
-    }
-
-    //Acctions Cart
     case Actions.ADD_TO_CART: {
       let newItem = action.payload;
       let checkProduct = state.cart.find((itemproduct) => itemproduct.key === newItem.key);
 
       let MyCart = checkProduct ? state.cart.map((item) =>
-        (item.key === newItem.key ? { ...item, quantity: item.quantity + 1 } : item)) :
+        (item.key === newItem.key ? { ...item, quantity: item.quantity + 1 } : item)) : 
         [...state.cart, newItem];
 
       localStorage.setItem("cart", JSON.stringify(MyCart));

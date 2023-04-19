@@ -1,8 +1,10 @@
+import Cookies from "universal-cookie";
 import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
 import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie, GetProductByKey } from "../Api/RestApi";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { Actions } from "./ContextActions";
 
+const cookies = new Cookies();
 const Context = createContext();
 
 export const ContextProvider = () => {
@@ -38,44 +40,38 @@ export default function ContextConsumer({ children }) {
     getCategories();
   }, []);
 
-  const [state, dispatch] = useReducer(ContextReducer, InitialState);
-  const { cart, UserSession } = state;
-
   // Functions user
   const UserLogin = async (usuario) => {
-    dispatch({ type: Actions.USER_LOGIN, payload: await Login(usuario) })
+    return await Login(usuario);
   };
   const UserSignUp = async (usuario) => {
     return await SignUp(usuario);
   };
 
-  //Functions Cart
-  const AddToCart = async (ProductKey) => {
-    const product = await getProduct({ ProductKey });
-    const CartBody = {
-      key: product.data.key,
-      image: product.data.image.url,
-      name: product.data.name,
-      company: product.data.company,
-      price: product.data.price,
-      quantity: 1,
-      discount: product.data.discount,
-    };
-    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody });
+  //Cookies
+  const CreateCookies = (CookieName, data) => {
+    cookies.set(CookieName, data, { path: "/" });
   };
-  const RemoveProductFromCart = (productkey) => {
-    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
+  const RemoveCookies = (CookieName) => {
+    cookies.remove(CookieName);
   };
-  const Quantity = (cant, productkey) => {
-    if (cant <= 1) {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
-    } else {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
+  const GetCookies = (CookieName) => {
+    const token = cookies.get(CookieName);
+    try {
+      if (!token) {
+        return false;
+      } else {
+        return token;
+      }
+    } catch (error) {
+      return false;
     }
   };
-  const ClearCart = () => {
-    dispatch({ type: Actions.CLEAR_CART, payload: [] });
-  };
+
+  //Functions Cart
+  const [state, dispatch] = useReducer(ContextReducer, InitialState);
+  const { cart } = state;
+
   const SubTotal = cart.reduce(
     (Total, NextItem) =>
       NextItem.discount > 0
@@ -108,15 +104,41 @@ export default function ContextConsumer({ children }) {
           : Total + NextItem.quantity * NextItem.price * 0.13,
       0
     ))
-  ).toFixed(2);
+  ).toFixed(2)
 
-  //Context values
+  const AddToCart = async (ProductKey) => {
+    const product = await getProduct({ ProductKey });
+    const CartBody = {
+      key: product.data.key,
+      image: product.data.image.url,
+      name: product.data.name,
+      company: product.data.company,
+      price: product.data.price,
+      quantity: 1,
+      discount: product.data.discount,
+    };
+    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody });
+  };
+  const RemoveProductFromCart = (productkey) => {
+    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
+  };
+  const Quantity = (cant, productkey) => {
+    if (cant <= 1) {
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
+    } else {
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
+    }
+  };
+  const ClearCart = () => {
+    dispatch({ type: Actions.CLEAR_CART, payload: [] });
+  };
 
   const ContextValues = {
     products, categories,
     UserLogin, UserSignUp,
     getProductByCategorie, productsByCategorie,
-    setProductsByCategorie, UserSession, getProduct,
+    setProductsByCategorie, CreateCookies,
+    RemoveCookies, GetCookies, getProduct,
     AddToCart, RemoveProductFromCart, ClearCart,
     cart, Quantity, SubTotal, Task, Total,
   };

@@ -10,7 +10,7 @@ import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
   //Functions Context
-  const { userCookies, cart } = ContextProvider();
+  const { GetCookies, cart } = ContextProvider();
 
   //Hooks
   const [state, setState] = useState(false);
@@ -42,11 +42,11 @@ export default function Navbar() {
           <Link to="/Cart" onClick={() => { setState(false); scrollTop() }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
         </nav>
         <div className="login-buttom">
-          <Link to="/Login" onClick={() => { setState(false); scrollTop() }}>
+          <a href="/Login" onClick={() => { setState(false); scrollTop() }}>
             {
-              !userCookies ? (<label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>) : (<label>{userCookies.username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
+              !GetCookies("USERCOOKIES") ? (<label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>) : (<label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>)
             }
-          </Link>
+          </a>
         </div>
       </div>
       {!state ? (<VscThreeBars className="btn-menu" onClick={() => { setState(true) }} />) : (<RiCloseFill className="btn-menu" onClick={() => { setState(false) }} />)}
