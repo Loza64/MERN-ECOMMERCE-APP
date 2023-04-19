@@ -72,6 +72,33 @@ export default function ContextConsumer({ children }) {
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
+  const AddToCart = async (ProductKey) => {
+    const product = await getProduct({ ProductKey });
+    const CartBody = {
+      key: product.data.key,
+      image: product.data.image.url,
+      name: product.data.name,
+      company: product.data.company,
+      price: product.data.price,
+      quantity: 1,
+      discount: product.data.discount,
+    };
+    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody });
+  };
+  const RemoveProductFromCart = (productkey) => {
+    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
+  };
+  const Quantity = (cant, productkey) => {
+    if (cant <= 1) {
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
+    } else {
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
+    }
+  };
+  const ClearCart = () => {
+    dispatch({ type: Actions.CLEAR_CART, payload: [] });
+  };
+
   const SubTotal = cart.reduce(
     (Total, NextItem) =>
       NextItem.discount > 0
@@ -104,34 +131,7 @@ export default function ContextConsumer({ children }) {
           : Total + NextItem.quantity * NextItem.price * 0.13,
       0
     ))
-  ).toFixed(2)
-
-  const AddToCart = async (ProductKey) => {
-    const product = await getProduct({ ProductKey });
-    const CartBody = {
-      key: product.data.key,
-      image: product.data.image.url,
-      name: product.data.name,
-      company: product.data.company,
-      price: product.data.price,
-      quantity: 1,
-      discount: product.data.discount,
-    };
-    dispatch({ type: Actions.ADD_TO_CART, payload: CartBody });
-  };
-  const RemoveProductFromCart = (productkey) => {
-    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
-  };
-  const Quantity = (cant, productkey) => {
-    if (cant <= 1) {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
-    } else {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
-    }
-  };
-  const ClearCart = () => {
-    dispatch({ type: Actions.CLEAR_CART, payload: [] });
-  };
+  ).toFixed(2);
 
   const ContextValues = {
     products, categories,
