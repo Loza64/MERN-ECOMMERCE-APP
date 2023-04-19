@@ -6,7 +6,7 @@ const cookies = new Cookies();
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [],
-  userCookies: cookies.get("UserCookies") ? JSON.parse(cookies.get("User")) : false
+  UserSession: localStorage.getItem("UserSession") ? JSON.parse(cookies.get("User")) : false
 };
 
 export function ContextReducer(state, action) {
@@ -15,7 +15,7 @@ export function ContextReducer(state, action) {
     case Actions.USER_LOGIN: {
       if (!state.userCookies) {
         let userinfo = action.payload;
-        cookies.set("UserCookies", JSON.stringify(userinfo), { path: "/" })
+        localStorage.getItem("UserSession", JSON.stringify(userinfo))
         return { ...state, userCookies: userinfo }
       }
     }

@@ -39,7 +39,7 @@ export default function ContextConsumer({ children }) {
   }, []);
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
-  const { cart, userCookies } = state;
+  const { cart, UserSession } = state;
 
   // Functions user
   const UserLogin = async (usuario) => {
@@ -116,7 +116,7 @@ export default function ContextConsumer({ children }) {
     products, categories,
     UserLogin, UserSignUp,
     getProductByCategorie, productsByCategorie,
-    setProductsByCategorie, userCookies, getProduct,
+    setProductsByCategorie, UserSession, getProduct,
     AddToCart, RemoveProductFromCart, ClearCart,
     cart, Quantity, SubTotal, Task, Total,
   };
