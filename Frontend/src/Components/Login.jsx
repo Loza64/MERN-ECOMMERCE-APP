@@ -7,7 +7,7 @@ import SignUp from './SignUp';
 
 export default function Login() {
   //Function context
-  const { UserLogin, CreateCookies, RemoveCookies } = ContextProvider();
+  const { UserLogin, CreateCookies} = ContextProvider();
 
   //hooks
   const [user, setUser] = useState(String);
@@ -20,10 +20,6 @@ export default function Login() {
     username: user,
     password: pass
   }
-
-  window.addEventListener('load', () => {
-    RemoveCookies("USERCOOKIES")
-  })
 
   return (
     <div>
