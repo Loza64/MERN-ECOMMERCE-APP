@@ -12,7 +12,7 @@ export default function Pago() {
       <label className='pay'>Total</label>
       <label className='paymoney'>${Total}</label>
       <button className='buttom-clear' onClick={() => { ClearCart() }}>Clear my cart</button>
-      <button className='buttom-pay'>Proceed to payment</button>
+      <button className='buttom-pay'>Proceed to Checkout</button>
     </div>
   );
 }
