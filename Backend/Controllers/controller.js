@@ -51,7 +51,16 @@ const Login = async (req, res) => {
   try {
     const user = await Users.findOne({ username: username })
     if (user != null && (await ComparePass(password, user.password))) {
-      res.send(user);
+      res.send({
+        address:user.address,
+        key:user.key,
+        date:user.date,
+        username:user.username,
+        names:user.names,
+        surnames:user.surnames,
+        email:user.names,
+        phone:user.phone
+      });
     } else {
       res.send(false);
     }
