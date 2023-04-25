@@ -92,7 +92,7 @@ export default function ContextConsumer({ children }) {
     if (cant <= 1) {
       dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
     } else {
-      const { data } = await GetProductByKey(productkey);
+      const { data } = await getProduct(productkey);
       if (cant <= data.stock) {
         dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
       } else {
@@ -140,7 +140,7 @@ export default function ContextConsumer({ children }) {
 
   const ContextValues = {
     products, categories,
-    UserLogin, UserSignUp,
+    UserLogin, UserSignUp, getProduct,
     getProductByCategorie, productsByCategorie,
     setProductsByCategorie, CreateCookies,
     RemoveCookies, GetCookies, AddToCart, 
