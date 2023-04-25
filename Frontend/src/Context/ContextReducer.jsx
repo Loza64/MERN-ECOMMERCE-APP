@@ -11,8 +11,7 @@ export function ContextReducer(state, action) {
       let { newItem, stock } = action.payload;
       let checkProduct = state.cart.find((itemproduct) => itemproduct.key === newItem.key);
 
-      let MyCart = checkProduct ? state.cart.map((item) =>
-      (item.key === newItem.key ?
+      let MyCart = checkProduct ? state.cart.map((item) => (item.key === newItem.key ?
         { ...item, quantity: item.quantity <= stock ? item.quantity + 1 : stock } : item)
       ) : [...state.cart, newItem];
 
