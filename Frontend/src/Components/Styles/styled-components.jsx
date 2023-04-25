@@ -377,6 +377,7 @@ transition:all 0.7s ease-in-out;
   max-width:500px;
   background:white;
   padding:10px 17px;
+  border-radius:10px;
   margin:0 10px;
   transition:all 0.7s ease-in-out;
   transform:${({ formopen }) => (formopen ? "scale(100%)" : "scale(0%)")};

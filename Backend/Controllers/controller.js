@@ -52,14 +52,14 @@ const Login = async (req, res) => {
     const user = await Users.findOne({ username: username })
     if (user != null && (await ComparePass(password, user.password))) {
       res.send({
-        address:user.address,
-        key:user.key,
-        date:user.date,
-        username:user.username,
-        names:user.names,
-        surnames:user.surnames,
-        email:user.names,
-        phone:user.phone
+        address: user.address,
+        key: user.key,
+        date: user.date,
+        username: user.username,
+        names: user.names,
+        surnames: user.surnames,
+        email: user.names,
+        phone: user.phone
       });
     } else {
       res.send(false);
@@ -103,33 +103,37 @@ const NewProduct = async (req, res) => {
     return res.status(500).json({ message: error.message })
   }
 }
-const GetProducts = (req, res) => {
+const GetProducts = async (req, res) => {
   try {
-    Products.find({}, (err, docs) => {
-      if (!err) {
-        res.send(docs);
-      }
-    })
+    let products = await Products.find({})
+    res.send(products)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
 }
-const GetProductByCategorie = (req, res) => {
+const GetStockProduct = async (req, res) => {
+  let { ProductKey } = req.body;
+  try {
+    const product = await Products.findOne({ key: ProductKey })
+    res.send(product)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+const GetProductByCategorie = async (req, res) => {
   try {
     const { CategoryKey } = req.body;
-    Products.find({ categorykey: CategoryKey }, (err, docs) => {
-      !err ? res.send(docs) : null;
-    })
+    let products = await Products.find({ categorykey: CategoryKey })
+    res.send(products)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
 }
-const GetProductByKey = (req, res) => {
+const GetProductByKey = async (req, res) => {
   try {
     const { ProductKey } = req.body;
-    Products.findOne({ key: ProductKey }, (err, docs) => {
-      !err ? res.send(docs) : null;
-    })
+    let product = await Products.findOne({ key: ProductKey })
+    res.send(product)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -139,7 +143,7 @@ const GetProductByKey = (req, res) => {
 const NewCategorie = async (req, res) => {
   const { name } = req.body
   try {
-    const check = Categories.findOne({ name: name })
+    const check = await Categories.findOne({ name: name })
     if (check != null) {
       res.send('La categoria ya existe en la bases de datos.')
     } else {
@@ -164,11 +168,8 @@ const NewCategorie = async (req, res) => {
 }
 const GetCategories = async (req, res) => {
   try {
-    Categories.find({}, (err, docs) => {
-      if (!err) {
-        res.send(docs)
-      }
-    })
+    let categories = await Categories.find({})
+    res.send(categories)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -182,5 +183,6 @@ module.exports = {
   NewCategorie,
   GetCategories,
   GetProductByCategorie,
-  GetProductByKey
+  GetProductByKey,
+  GetStockProduct
 }
