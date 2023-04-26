@@ -80,7 +80,7 @@ export default function Login() {
                       /* Read more about handling dismissals below */
                       if (result.dismiss === Swal.DismissReason.timer) {
                         CreateCookies("USERCOOKIES", UserResponce.data);
-                        window.location.href = "/Principal";
+                        window.location.href = "/";
                       }
                     })
                   }
