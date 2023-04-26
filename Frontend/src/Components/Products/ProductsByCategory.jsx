@@ -3,14 +3,11 @@ import { ContextProvider } from "../../Context/Context";
 import ProductItem from "./ProductItem";
 import Top from '../Top'
 
-export default function ProductsByCategory({ clave }) {
+export default function ProductsByCategory({ CategoryKey }) {
 
-  const body = {
-    CategoryKey: clave
-  }
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
   useEffect(() => {
-    getProductByCategorie(body);
+    getProductByCategorie({ CategoryKey });
   })
 
   if(productsByCategorie.length === 0){
@@ -25,7 +22,7 @@ export default function ProductsByCategory({ clave }) {
   }else{
     return (
       <div>
-        <Top></Top>
+        <Top state={true} />
         <div className="grid">
           {
             productsByCategorie.map(

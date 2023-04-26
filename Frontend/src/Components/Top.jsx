@@ -1,11 +1,15 @@
 import React from "react";
 
-export default function Top(){
-  return (
-    <div>
-      <br />
-      <br />
-      <br />
-    </div>
-  )
+export default function Top({ state }) {
+  if (!state) {
+    return <div></div>
+  } else {
+    return (
+      <div>
+        <br />
+        <br />
+        <br />
+      </div>
+    )
+  }
 }

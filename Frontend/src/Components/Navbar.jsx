@@ -34,34 +34,30 @@ export default function Navbar() {
           <button className="btn-search"><FaSearch /></button>
         </div>
         <nav>
-          <Link to="/" onClick={() => { setState(false); scrollTop() }}><AiFillHome className="react-icon" />Home</Link>
-          <Link to="/Terms" onClick={() => { setState(false); scrollTop() }}><AiFillSetting className="react-icon" />Terms</Link>
-          <Link to="/Products" onClick={() => { setState(false); scrollTop() }}><FaBoxes className="react-icon" />Products</Link>
-          <Link to="/Categories" onClick={() => { setState(false); scrollTop() }}><FaClipboardList className="react-icon" />Categories</Link>
-          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop() }}><AiFillTags className="react-icon" />Discounts</Link>
-          <Link to="/Cart" onClick={() => { setState(false); scrollTop() }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
+          <Link to="/" onClick={() => { setState(false); scrollTop(); }}><AiFillHome className="react-icon" />Home</Link>
+          <Link to="/Terms" onClick={() => { setState(false); scrollTop(); }}><AiFillSetting className="react-icon" />Terms</Link>
+          <Link to="/Products" onClick={() => { setState(false); scrollTop(); }}><FaBoxes className="react-icon" />Products</Link>
+          <Link to="/Categories" onClick={() => { setState(false); scrollTop(); }}><FaClipboardList className="react-icon" />Categories</Link>
+          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop(); }}><AiFillTags className="react-icon" />Discounts</Link>
+          <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
         </nav>
         <div className="login-buttom">
-          {
-            GetCookies("USERCOOKIES") ?
-              (
-                <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES") }}>
-                  <label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
-                </a>
-              ) :
-              (
-                <Link to="/Login" onClick={() => { setState(false); scrollTop() }}>
-                  <label><FaUserAlt className="react-icon" ></FaUserAlt>Login</label>
-                </Link>
-              )
-          }
+          {GetCookies("USERCOOKIES") ?
+            (
+              <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
+                <label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
+              </a>
+            ) :
+            (
+              <Link to="/Login" onClick={() => { setState(false); scrollTop(); }}>
+                <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
+              </Link>
+            )}
         </div>
       </div>
-      {
-        !state ?
-          (<VscThreeBars className="btn-menu" onClick={() => { setState(true) }} />) :
-          (<RiCloseFill className="btn-menu" onClick={() => { setState(false) }} />)
-      }
+      {!state ?
+        (<VscThreeBars className="btn-menu" onClick={() => { setState(true); }} />) :
+        (<RiCloseFill className="btn-menu" onClick={() => { setState(false); }} />)}
     </NavBar>
   );
 }
