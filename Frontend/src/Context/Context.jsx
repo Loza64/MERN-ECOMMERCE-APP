@@ -35,10 +35,10 @@ export default function ContextConsumer({ children }) {
   };
   useEffect(() => {
     getProducts();
-  }, []);
+  }, GetProducts());
   useEffect(() => {
     getCategories();
-  }, []);
+  }, GetCategories());
 
   // Functions user
   const UserLogin = async (usuario) => {
