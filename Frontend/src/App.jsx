@@ -6,7 +6,7 @@ import Principal from './Components/Principal';
 import Login from './Components/Login';
 import Categories from './Components/Categories/Categories';
 import Terms from './Components/Terms';
-import MyShoppings from './Components/MyShoppings';
+import Discounts from './Components/Discounts';
 import Products from './Components/Products/Products'
 import ProductsByCategorie from './Components/Categories/ProductsByCategorie'
 import Cart from './Components/Cart/Cart';
@@ -23,7 +23,7 @@ export default function App() {
         <Route path='/*' element={<Principal />} />
         <Route path='/Terms' element={<Terms />} />
         <Route path='/Login' element={<Login />} />
-        <Route path='/Shoppings' element={<MyShoppings />} />
+        <Route path='/Discounts' element={<Discounts />} />
         <Route path='/Categories' element={<Categories SubTopic={"Look at our"} Topic={"Categories"} />} />
         <Route path='/Products' element={<Products SubTopic={"Our"} Topic={"Products"} Top={'40px'} TopState={true} />} />
         {products.map(product => (<Route path={`/${product.name}`} element={<DetailProduct key={product._id} productkey={`${product.key}`} />} />))}
