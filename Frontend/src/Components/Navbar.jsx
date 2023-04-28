@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { RiCloseFill } from 'react-icons/ri';
-import { BsFillCartFill } from 'react-icons/bs';
+import { BsFillCartFill, BsFillBasketFill } from 'react-icons/bs';
 import { VscThreeBars } from 'react-icons/vsc';
 import { FaSearch, FaUserAlt, FaBoxes, FaClipboardList, FaSignOutAlt } from 'react-icons/fa';
 import { AiFillHome, AiFillSetting, AiFillTags } from 'react-icons/ai'
@@ -38,7 +38,7 @@ export default function Navbar() {
           <Link to="/Terms" onClick={() => { setState(false); scrollTop(); }}><AiFillSetting className="react-icon" />Terms</Link>
           <Link to="/Products" onClick={() => { setState(false); scrollTop(); }}><FaBoxes className="react-icon" />Products</Link>
           <Link to="/Categories" onClick={() => { setState(false); scrollTop(); }}><FaClipboardList className="react-icon" />Categories</Link>
-          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop(); }}><AiFillTags className="react-icon" />Discounts</Link>
+          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop(); }}><BsFillBasketFill className="react-icon" />Shoppings</Link>
           <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
         </nav>
         <div className="login-buttom">
