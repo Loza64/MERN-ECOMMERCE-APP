@@ -1,8 +1,8 @@
 import Cookies from "universal-cookie";
+import { Actions } from "./ContextActions";
+import { ContextReducer, InitialState } from "./ContextReducer";
 import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
 import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie, GetProductByKey } from "../Api/RestApi";
-import { ContextReducer, InitialState } from "./ContextReducer";
-import { Actions } from "./ContextActions";
 
 const cookies = new Cookies();
 const Context = createContext();
@@ -35,10 +35,10 @@ export default function ContextConsumer({ children }) {
   };
   useEffect(() => {
     getProducts();
-  }, GetProducts());
+  });
   useEffect(() => {
     getCategories();
-  }, GetCategories());
+  });
 
   // Functions user
   const UserLogin = async (usuario) => {

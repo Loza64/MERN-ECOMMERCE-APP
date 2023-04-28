@@ -1,9 +1,9 @@
 import { React, useEffect } from "react";
 import { ContextProvider } from "../../Context/Context";
-import ProductItem from "./ProductItem";
+import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
 
-export default function ProductsByCategory({ CategoryKey }) {
+export default function ProductsByCategorie({ CategoryKey }) {
 
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
   useEffect(() => {
