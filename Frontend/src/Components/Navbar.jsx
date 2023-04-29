@@ -11,7 +11,7 @@ import { ContextProvider } from '../Context/Context';
 export default function Navbar() {
   //Functions Context
   const { GetCookies, RemoveCookies, cart } = ContextProvider();
-
+  const { username } = GetCookies("USERCOOKIES");
   //Hooks
   const [state, setState] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Navbar() {
             {
               GetCookies("USERCOOKIES") ?
                 (
-                  <label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
+                  <label>{username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
                 ) :
                 (
                   <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
