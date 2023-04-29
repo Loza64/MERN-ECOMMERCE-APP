@@ -43,13 +43,14 @@ export default function Navbar() {
         </nav>
         <div className="login-buttom">
           <Link to="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
-            {GetCookies("USERCOOKIES") ?
-              (
-                <label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
-              ) :
-              (
-                <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
-              )
+            {
+              GetCookies("USERCOOKIES") ?
+                (
+                  <label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
+                ) :
+                (
+                  <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
+                )
             }
           </Link>
         </div >
