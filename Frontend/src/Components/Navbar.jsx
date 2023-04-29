@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { RiCloseFill } from 'react-icons/ri';
 import { BsFillCartFill } from 'react-icons/bs';
 import { VscThreeBars } from 'react-icons/vsc';
@@ -12,6 +12,9 @@ export default function Navbar() {
   //Functions Context
   const { GetCookies, RemoveCookies, cart } = ContextProvider();
   const { username } = GetCookies("USERCOOKIES");
+  useEffect(() => {
+    GetCookies("USERCOOKIES");
+  })
   //Hooks
   const [state, setState] = useState(false);
 
@@ -42,22 +45,26 @@ export default function Navbar() {
           <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
         </nav>
         <div className="login-buttom">
-          <Link to="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
-            {
-              GetCookies("USERCOOKIES") ?
-                (
+          {
+            GetCookies("USERCOOKIES") ?
+              (
+                <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
                   <label>{username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
-                ) :
-                (
+                </a>
+              ) :
+              (
+                <Link to="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
                   <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
-                )
-            }
-          </Link>
+                </Link>
+              )
+          }
         </div >
       </div >
-      {!state ?
-        (<VscThreeBars className="btn-menu" onClick={() => { setState(true); }} />) :
-        (<RiCloseFill className="btn-menu" onClick={() => { setState(false); }} />)}
+      {
+        !state ?
+          (<VscThreeBars className="btn-menu" onClick={() => { setState(true); }} />) :
+          (<RiCloseFill className="btn-menu" onClick={() => { setState(false); }} />)
+      }
     </NavBar >
   );
 }
