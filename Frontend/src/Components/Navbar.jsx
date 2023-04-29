@@ -42,22 +42,21 @@ export default function Navbar() {
           <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
         </nav>
         <div className="login-buttom">
-          {GetCookies("USERCOOKIES") ?
-            (
-              <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
+          <Link to="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
+            {GetCookies("USERCOOKIES") ?
+              (
                 <label>{GetCookies("USERCOOKIES").username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
-              </a>
-            ) :
-            (
-              <Link to="/Login" onClick={() => { setState(false); scrollTop(); }}>
+              ) :
+              (
                 <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
-              </Link>
-            )}
-        </div>
-      </div>
+              )
+            }
+          </Link>
+        </div >
+      </div >
       {!state ?
         (<VscThreeBars className="btn-menu" onClick={() => { setState(true); }} />) :
         (<RiCloseFill className="btn-menu" onClick={() => { setState(false); }} />)}
-    </NavBar>
+    </NavBar >
   );
 }

@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import { React, useState } from "react";
 import { Field, Formik, Form } from 'formik';
 import { ContextProvider } from '../Context/Context';
+import { useNavigate } from 'react-router-dom';
 import { ButtomTransparent, LoginContainer } from "./Styles/styled-components";
 import SignUp from './SignUp';
 
@@ -14,6 +15,8 @@ export default function Login() {
   const [pass, setPass] = useState(String);
   const [state, setState] = useState(true);
   const [openSignup, setOpenSignup] = useState(false);
+
+  let navigate = useNavigate();
 
   //object
   let body = {
@@ -80,7 +83,7 @@ export default function Login() {
                       /* Read more about handling dismissals below */
                       if (result.dismiss === Swal.DismissReason.timer) {
                         CreateCookies("USERCOOKIES", UserResponce.data);
-                        window.location.href = "/";
+                        navigate("/");
                       }
                     })
                   }
