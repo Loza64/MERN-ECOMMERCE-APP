@@ -68,10 +68,11 @@ export default function ContextConsumer({ children }) {
     }
   };
 
-  //Functions Cart
+  //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
+  //Functions Cart
   const AddToCart = async (ProductKey) => {
     const { key, image, name, company, stock, price, discount } = await getProduct(ProductKey);
     const CartBody = {
@@ -85,9 +86,6 @@ export default function ContextConsumer({ children }) {
     };
     dispatch({ type: Actions.ADD_TO_CART, payload: { newItem: CartBody, stock: stock } });
   };
-  const RemoveProductFromCart = (productkey) => {
-    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
-  };
   const Quantity = async (cant, productkey) => {
     if (cant <= 1) {
       dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
@@ -100,10 +98,14 @@ export default function ContextConsumer({ children }) {
       }
     }
   };
+  const RemoveProductFromCart = (productkey) => {
+    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
+  };
   const ClearCart = () => {
     dispatch({ type: Actions.CLEAR_CART, payload: [] });
   };
 
+  //Totals Cart
   const SubTotal = cart.reduce(
     (Total, NextItem) =>
       NextItem.discount > 0
