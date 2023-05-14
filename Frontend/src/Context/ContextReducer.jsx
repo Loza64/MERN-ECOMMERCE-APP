@@ -9,11 +9,11 @@ export function ContextReducer(state, action) {
   switch (action.type) {
     case Actions.ADD_TO_CART: {
       let { newItem, stock } = action.payload;
-      let checkProduct = state.cart.find((itemproduct) => itemproduct.key === newItem.key);
 
-      let Cart = checkProduct ? state.cart.map((item) => (item.key === newItem.key ?
-        { ...item, quantity: item.quantity < stock ? item.quantity + 1 : stock } : item)
-      ) : [...state.cart, newItem];
+      let checkProduct = state.cart.find((itemproduct) => itemproduct.key === newItem.key);
+      let modifyItem = state.cart.map((item) => (item.key === newItem.key ? { ...item, quantity: item.quantity < stock ? item.quantity + 1 : stock } : item));
+
+      let Cart = checkProduct ? modifyItem : [...state.cart, newItem];
 
       localStorage.setItem("cart", JSON.stringify(Cart));
       return { ...state, cart: Cart };
