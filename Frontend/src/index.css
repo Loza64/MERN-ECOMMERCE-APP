@@ -105,6 +105,15 @@
   color: green;
   margin: 0 6px;
 }
+.target .body-target .content-product-price .product-price-none {
+  font-size: 12.5px;
+  font-weight: 900;
+  color: gray;
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2.35px;
+  margin: 0 6px;
+}
 
 .target .body-target .content-product-price .price-discount {
   font-size: 12.5px;

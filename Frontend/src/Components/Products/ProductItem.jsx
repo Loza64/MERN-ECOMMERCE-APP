@@ -23,7 +23,7 @@ export default function ProductItem({ product }) {
             discount > 0 ?
               (
                 <div className="content-product-price">
-                  <label className="product-price" style={{ textDecoration: "line-through", color: "grey" }}>${price}</label>
+                  <label className="product-price-none">${price}</label>
                   <label className="price-discount">${(price - discount * price).toFixed(2)}</label>
                 </div>
               ) : (
@@ -51,7 +51,7 @@ export default function ProductItem({ product }) {
             discount > 0 ?
               (
                 <div className="content-product-price">
-                  <label className="product-price" style={{ textDecoration: "line-through", color: "grey" }}>${price}</label>
+                  <label className="product-price-none">${price}</label>
                   <label className="price-discount">${(price - discount * price).toFixed(2)}</label>
                 </div>
               ) : (

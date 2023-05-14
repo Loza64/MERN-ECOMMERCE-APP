@@ -18,7 +18,7 @@ export default function CartItem({ item }) {
           </div>
           <label className="marca">{company}</label>
           <label className="price">Price: ${(price - price * discount).toFixed(2)}</label>
-          <label className="subtotal">SubTotal: ${(price * quantity).toFixed(2)}</label>
+          <label className="subtotal-none">SubTotal: ${(price * quantity).toFixed(2)}</label>
           <div className="flex-buttoms">
             <div className="quantity-buttoms">
               <button onClick={() => {Quantity(quantity - 1, key)}}>

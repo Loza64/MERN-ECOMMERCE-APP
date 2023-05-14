@@ -555,9 +555,11 @@ width:100%;
 .item .detailproduct .price{
   color:green;
 }
-.item .detailproduct .subtotal{
+.item .detailproduct .subtotal-none{
   color:grey;
-  text-decoration:line-through
+  text-decoration:line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2.47px;
 }
 .item .detailproduct .flex-product{
   display:flex;
