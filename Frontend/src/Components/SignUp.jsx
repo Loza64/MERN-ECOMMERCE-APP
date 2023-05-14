@@ -170,7 +170,7 @@ export default function SignUp({ open, setOpen }) {
                 </div>
                 <div className="flex" style={{ marginBottom: "-17px", marginTop: "-5px" }}>
                   <div>
-                    <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} /> <br />
+                    <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
                   </div>
                   <div>
                     <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
