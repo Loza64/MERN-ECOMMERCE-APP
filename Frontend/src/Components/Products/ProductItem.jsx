@@ -47,19 +47,9 @@ export default function ProductItem({ product }) {
         </div>
         <div className="body-target">
           <label className="product-name">{company} - {name}</label>
-          {
-            discount > 0 ?
-              (
-                <div className="content-product-price">
-                  <label className="product-price-none">${price}</label>
-                  <label className="price-discount">${(price - discount * price).toFixed(2)}</label>
-                </div>
-              ) : (
-                <div className="content-product-price">
-                  <label className="product-price">${price}</label>
-                </div>
-              )
-          }
+          <div className="content-product-price">
+            <label className="product-price">${price}</label>
+          </div>
         </div>
       </div>
     );
