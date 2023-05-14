@@ -11,18 +11,26 @@ export function ContextReducer(state, action) {
       let { newItem, stock } = action.payload;
       let checkProduct = state.cart.find((itemproduct) => itemproduct.key === newItem.key);
 
-      let MyCart = checkProduct ? state.cart.map((item) => (item.key === newItem.key ?
+      let Cart = checkProduct ? state.cart.map((item) => (item.key === newItem.key ?
         { ...item, quantity: item.quantity < stock ? item.quantity + 1 : stock } : item)
       ) : [...state.cart, newItem];
 
-      localStorage.setItem("cart", JSON.stringify(MyCart));
-      return { ...state, cart: MyCart };
+      localStorage.setItem("cart", JSON.stringify(Cart));
+      return { ...state, cart: Cart };
     }
 
     case Actions.QUANTITY_PRODUCT: {
-      let { cant, productkey } = action.payload;
-      let Cart = state.cart.map((item) => item.key === productkey ? { ...item, quantity: cant } : item);
-      localStorage.setItem("cart", JSON.stringify(Cart))
+      let Cart;
+      let { cant, productkey, stock } = action.payload;
+      if (stock <= 0) {
+        Cart = state.cart.filter((item) => item.key !== productkey);
+      } else {
+        Cart = state.cart.map(
+          (item) => item.key === productkey ?
+            { ...item, quantity: cant < stock ? cant : stock } : item
+        );
+        localStorage.setItem("cart", JSON.stringify(Cart))
+      }
       return { ...state, cart: Cart }
     }
 

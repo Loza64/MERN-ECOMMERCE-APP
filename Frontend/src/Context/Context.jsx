@@ -87,15 +87,11 @@ export default function ContextConsumer({ children }) {
     dispatch({ type: Actions.ADD_TO_CART, payload: { newItem: CartBody, stock: stock } });
   };
   const Quantity = async (cant, productkey) => {
+    const { stock } = await getProduct(productkey);
     if (cant <= 1) {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey, stock } });
     } else {
-      const { stock } = await getProduct(productkey);
-      if (cant <= stock) {
-        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
-      } else {
-        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: stock, productkey } });
-      }
+      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey, stock } });
     }
   };
   const RemoveProductFromCart = (productkey) => {
