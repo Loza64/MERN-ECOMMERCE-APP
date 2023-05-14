@@ -27,7 +27,7 @@ export default function ContextConsumer({ children }) {
     setProducts(result.data);
   };
   const getProduct = async (ProductKey) => {
-    return await GetProductByKey(ProductKey);
+    return await GetProductByKey(ProductKey).data;
   };
   const getProductByCategorie = async (CategoryKey) => {
     const result = await GetProductByCategorie(CategoryKey);
@@ -73,17 +73,17 @@ export default function ContextConsumer({ children }) {
   const { cart } = state;
 
   const AddToCart = async (ProductKey) => {
-    const { data } = await getProduct(ProductKey);
+    const { key, image, name, company, stock, price, discount } = await getProduct(ProductKey);
     const CartBody = {
-      key: data.key,
-      image: data.image.url,
-      name: data.name,
-      company: data.company,
-      price: data.price,
+      key: key,
+      image: image.url,
+      name: name,
+      company: company,
+      price: price,
       quantity: 1,
-      discount: data.discount,
+      discount: discount
     };
-    dispatch({ type: Actions.ADD_TO_CART, payload: { newItem: CartBody, stock: data.stock } });
+    dispatch({ type: Actions.ADD_TO_CART, payload: { newItem: CartBody, stock: stock } });
   };
   const RemoveProductFromCart = (productkey) => {
     dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
@@ -92,11 +92,11 @@ export default function ContextConsumer({ children }) {
     if (cant <= 1) {
       dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey } });
     } else {
-      const { data } = await getProduct(productkey);
-      if (cant <= data.stock) {
+      const { stock } = await getProduct(productkey);
+      if (cant <= stock) {
         dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey } });
       } else {
-        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: data.stock, productkey } });
+        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: stock, productkey } });
       }
     }
   };
