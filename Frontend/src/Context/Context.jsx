@@ -27,7 +27,7 @@ export default function ContextConsumer({ children }) {
     setProducts(result.data);
   };
   const getProduct = async (ProductKey) => {
-    return await GetProductByKey(ProductKey).data;
+    return (await GetProductByKey(ProductKey)).data;
   };
   const getProductByCategorie = async (CategoryKey) => {
     const result = await GetProductByCategorie(CategoryKey);
