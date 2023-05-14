@@ -27,17 +27,6 @@ export default function SignUp({ open, setOpen }) {
     phone: /^[0-9]{8}$/
   }
 
-  let stateInputs = {
-    username: true,
-    names: true,
-    surnames: true,
-    address: true,
-    date: true,
-    email: true,
-    phone: true,
-    password: true
-  }
-
   let body = {
     usuario: user,
     nombres: names,
@@ -70,90 +59,68 @@ export default function SignUp({ open, setOpen }) {
 
             //Validate username
             if (!values.usuario) {
-              stateInputs.username = false;
               errores.usuario = 'Campo obligatorio.'
             } else if (!expresiones.username.test(values.usuario)) {
-              stateInputs.username = false;
               errores.usuario = 'Nombre de usuario no valido.'
             } else {
               setUser(values.usuario);
-              stateInputs.username = true;
             }
 
             //Validate names
             if (!values.nombres) {
-              stateInputs.names = false;
               errores.nombres = 'Campo nombres obligatorio.'
             } else if (!expresiones.names.test(values.nombres)) {
-              stateInputs.names = false;
               errores.nombres = 'Nombres no validos.'
             } else {
               setNames(values.nombres);
-              stateInputs.names = true;
             }
 
             //Validate surnames
             if (!values.apellidos) {
-              stateInputs.surnames = false;
               errores.apellidos = 'Campo apellidos obligatorio.'
             } else if (!expresiones.surnames.test(values.apellidos)) {
-              stateInputs.surnames = false;
               errores.apellidos = 'Apellidos no validos.'
             } else {
-              stateInputs.surnames = true;
               setSurnames(values.apellidos);
             }
 
             if (!values.direccion) {
-              stateInputs.address = false;
               errores.direccion = 'Campo obligatorio.';
             } else if (!expresiones.address.test()) {
-              stateInputs.address = false;
               errores.direccion = 'La direccion no debe incluir numero o caracteres especiales.';
             } else {
-              stateInputs.address = true;
               setAddress(values.direccion);
             }
 
             //Validate date
             if (!values.nacimiento) {
-              stateInputs.date = false;
               errores.nacimiento = 'Campo obligatorio.';
             } else {
-              stateInputs.date = true;
               setDate(values.nacimiento);
             }
 
             //Validate email
             if (!values.correo) {
-              stateInputs.surnames = false;
               errores.correo = 'Campo obligatorio.'
             } else if (!expresiones.email.test(values.correo)) {
-              stateInputs.email = false;
               errores.correo = 'Correo no valido.'
             } else {
-              stateInputs.email = true;
               setEmail(values.correo);
             }
 
             //Validate phone
             if (!values.telefono) {
-              stateInputs.surnames = false;
               errores.telefono = 'Campo obligatorio.'
             } else if (!expresiones.phone.test(values.telefono)) {
-              stateInputs.phone = false;
               errores.telefono = 'Teléfono no valido.'
             } else {
-              stateInputs.phone = true;
               setPhone(values.telefono);
             }
 
             //Validate pass
             if (!values.clave) {
-              stateInputs.password = false;
               errores.clave = 'Campo obligatorio.'
             } else {
-              stateInputs.password = true;
               setPassword(values.clave);
             }
             return errores;
