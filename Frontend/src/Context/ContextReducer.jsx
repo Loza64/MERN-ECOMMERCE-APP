@@ -1,4 +1,3 @@
-/* eslint-disable no-fallthrough */
 import { Actions } from "./ContextActions";
 
 export const InitialState = {
