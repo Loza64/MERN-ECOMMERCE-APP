@@ -160,20 +160,22 @@ export default function SignUp({ open, setOpen }) {
                 </div>
                 <Field type="text" placeholder="Usuario" name="usuario" />
                 <ErrorMessage name="usuario" component={() => (<label className="errormessage">{errors.usuario}</label>)} />
-                <div className='flex'>
-                  <div style={{ with: "50%" }}>
-                    <Field type="text" placeholder="Nombres" name="nombres" />
+                <div style={{ marginBottom: "8px" }}>
+                  <div className='flex' >
+                    <div style={{ with: "50%" }}>
+                      <Field type="text" placeholder="Nombres" name="nombres" />
+                    </div>
+                    <div style={{ with: "50%" }}>
+                      <Field type="text" placeholder="Apellidos" name="apellidos" />
+                    </div>
                   </div>
-                  <div style={{ with: "50%" }}>
-                    <Field type="text" placeholder="Apellidos" name="apellidos" />
-                  </div>
-                </div>
-                <div className="flex" style={{ marginBottom: "-17px", marginTop: "-5px" }}>
-                  <div>
-                    <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
-                  </div>
-                  <div>
-                    <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
+                  <div className="flex" style={{ marginTop: "-5px" }}>
+                    <div style={{marginBottom: "-40px"}}>
+                      <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
+                    </div>
+                    <div style={{marginBottom: "-40px"}}>
+                      <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
+                    </div>
                   </div>
                 </div>
                 <Field type="text" placeholder="Ingrese su dirección" name="direccion" />
