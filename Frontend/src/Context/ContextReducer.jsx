@@ -50,7 +50,7 @@ export function ContextReducer(state, action) {
       localStorage.removeItem(CartLocal);
       return { ...state, cart: [] };
     }
-    default:
-      return state;
+    
+    default: return state;
   }
 }
