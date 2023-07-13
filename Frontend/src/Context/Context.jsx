@@ -74,17 +74,8 @@ export default function ContextConsumer({ children }) {
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {
-    const { key, image, name, company, stock, price, discount } = await getProduct(ProductKey);
-    const CartBody = {
-      key: key,
-      image: image.url,
-      name: name,
-      company: company,
-      price: price,
-      quantity: 1,
-      discount: discount
-    };
-    dispatch({ type: Actions.ADD_TO_CART, payload: { newItem: CartBody, stock: stock } });
+    const product = await getProduct(ProductKey);
+    dispatch({ type: Actions.ADD_TO_CART, payload: { product } });
   };
   const Quantity = async (cant, productkey) => {
     const { stock } = await getProduct(productkey);
@@ -98,7 +89,7 @@ export default function ContextConsumer({ children }) {
     dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
   };
   const ClearCart = () => {
-    dispatch({ type: Actions.CLEAR_CART, payload: [] });
+    dispatch({ type: Actions.CLEAR_CART });
   };
 
   //Totals Cart

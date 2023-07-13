@@ -9,7 +9,7 @@ export default function CartItem({ item }) {
     return (
       <div className="item">
         <div className="image">
-          <img src={image} alt={name} />
+          <img src={image.url} alt={name} />
         </div>
         <div className="detailproduct">
           <div className="flex-product">
@@ -40,7 +40,7 @@ export default function CartItem({ item }) {
     return (
       <div className="item">
         <div className="image">
-          <img src={image} alt={name}/>
+          <img src={image.url} alt={name}/>
         </div>
         <div className="detailproduct">
           <div className="flex-product">
