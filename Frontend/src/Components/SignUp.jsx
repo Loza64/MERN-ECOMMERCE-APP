@@ -60,7 +60,7 @@ export default function SignUp({ open, setOpen }) {
             //Validate username
             if (!values.usuario) {
               errores.usuario = 'Campo obligatorio.'
-            } else if (!expresiones.username.test(values.usuario)) {
+            } else if (!expresiones.username.test(values.usuario) || values.usuario.length > 12) {
               errores.usuario = 'Nombre de usuario no valido.'
             } else {
               setUser(values.usuario);
