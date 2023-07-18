@@ -8,9 +8,9 @@ export default function ProductsByCategorie({ CategoryKey }) {
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
   useEffect(() => {
     getProductByCategorie({ CategoryKey });
-  })
+  }, [])
 
-  if(productsByCategorie.length === 0){
+  if (productsByCategorie.length === 0) {
     return (
       <div className="list-empty">
         <br />
@@ -19,7 +19,7 @@ export default function ProductsByCategorie({ CategoryKey }) {
         <label className="message">products not available for this category.</label>
       </div>
     )
-  }else{
+  } else {
     return (
       <div>
         <Top state={true} />

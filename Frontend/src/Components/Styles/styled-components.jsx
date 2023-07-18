@@ -380,7 +380,7 @@ transition:all 0.7s ease-in-out;
   border-radius:10px;
   margin:0 10px;
   transition:all 0.7s ease-in-out;
-  transform:${({ formopen }) => (formopen ? "scale(100%)" : "scale(0%)")};
+  transform: ${({ formopen }) => (formopen ? "scale(100%)" : "scale(0%)")};
 }
 .container-form-signup form .closebuttom{
   display:flex;
@@ -511,6 +511,7 @@ outline:none;
 export const ShoppingCartList = styles.div`
 overflow:hidden;
 width:100%;
+
 .item{
   display:flex;
   align-items:center;
@@ -542,6 +543,7 @@ width:100%;
   height:100%;
   max-width:8rem;
   margin: 9px;
+  cursor: pointer;
 }
 .item .image img {
   width:100%;
@@ -569,6 +571,9 @@ width:100%;
 .item .detailproduct .flex-product .subtotal{
   color:green;
   text-decoration:none
+}
+.item .detailproduct .flex-product .name{
+  cursor:pointer;
 }
 @media only screen and (max-width: 960px){
   .item{
@@ -635,6 +640,7 @@ width:100%;
   algin-items:center;
   justify-content:center;
   font-size:19px;
+  cursor:pointer;
 }
 .item .detailproduct .flex-buttoms .remove-buttom:active{
   transform:scale(112%);

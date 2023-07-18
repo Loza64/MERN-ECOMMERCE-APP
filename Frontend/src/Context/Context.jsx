@@ -2,7 +2,7 @@ import Cookies from "universal-cookie";
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
-import { GetCategories, GetProducts, Login, SignUp, GetProductByCategorie, GetProductByKey } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByCategorie, GetProductByKey } from "../Api/RestApi";
 
 const cookies = new Cookies();
 const Context = createContext();
@@ -40,14 +40,6 @@ export default function ContextConsumer({ children }) {
     getCategories();
   }, []);
 
-  // Functions user
-  const UserLogin = async (usuario) => {
-    return await Login(usuario);
-  };
-  const UserSignUp = async (usuario) => {
-    return await SignUp(usuario);
-  };
-
   //Cookies
   const CreateCookies = (CookieName, data) => {
     cookies.set(CookieName, data, { path: "/" });
@@ -70,7 +62,15 @@ export default function ContextConsumer({ children }) {
 
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
-  const { cart } = state;
+  const { cart, userSession } = state;
+
+  // Functions user
+  const UserLogin = (login) => {
+    dispatch({ type: Actions.USER_LOGIN, payload: { login } })
+  };
+  const UserSignUp = (signup) => {
+    dispatch({ type: Actions.USER_SIGN_UP, payload: { signup } })
+  };
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {
@@ -129,7 +129,7 @@ export default function ContextConsumer({ children }) {
 
   const ContextValues = {
     products, categories,
-    UserLogin, UserSignUp, getProduct,
+    UserLogin, UserSignUp, userSession ,getProduct,
     getProductByCategorie, productsByCategorie,
     setProductsByCategorie, CreateCookies,
     RemoveCookies, GetCookies, AddToCart,

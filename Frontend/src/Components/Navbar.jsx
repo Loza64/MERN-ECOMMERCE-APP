@@ -10,11 +10,8 @@ import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
   //Functions Context
-  const { GetCookies, RemoveCookies, cart } = ContextProvider();
-  const { username } = GetCookies("USERCOOKIES");
-  useEffect(() => {
-    GetCookies("USERCOOKIES");
-  })
+  const { userSession, cart } = ContextProvider();
+
   //Hooks
   const [state, setState] = useState(false);
 
@@ -46,14 +43,14 @@ export default function Navbar() {
         </nav>
         <div className="login-buttom">
           {
-            GetCookies("USERCOOKIES") ?
+            userSession ?
               (
-                <a href="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
-                  <label>{username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
+                <a href="/Login" onClick={() => { setState(false); scrollTop(); }}>
+                  <label>{userSession.username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
                 </a>
               ) :
               (
-                <Link to="/Login" onClick={() => { setState(false); scrollTop(); RemoveCookies("USERCOOKIES"); }}>
+                <Link to="/Login" onClick={() => { setState(false); scrollTop(); }}>
                   <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
                 </Link>
               )

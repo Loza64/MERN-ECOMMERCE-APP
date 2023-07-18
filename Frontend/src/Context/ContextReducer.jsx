@@ -1,13 +1,32 @@
 import { Actions } from "./ContextActions";
+import { Login, SignUp } from "../Api/RestApi";
+
 const CartLocal = "Cart";
+const UserLocal = "UserSession";
 
 export const InitialState = {
-  cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : []
+  cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
+  userSession: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage(UserLocal)) : null
 };
 
-export function ContextReducer(state, action) {
+export async function ContextReducer(state, action) {
   switch (action.type) {
 
+    //Actions user
+    case Actions.USER_LOGIN: {
+      const { login } = action.payload;
+      const userlogin = (await Login(login)).data
+
+      if (!userlogin) {
+        localStorage.setItem(UserLocal, null)
+        return { ...state, userSession: null}
+      } else {
+        localStorage.setItem(UserLocal, JSON.stringify(userlogin))
+        return { ...state, userSession: userlogin }
+      }
+    }
+
+    //Actions Cart
     case Actions.ADD_TO_CART: {
       let { product } = action.payload;
       let checkProduct = state.cart.find((productItem) => productItem.key === product.key);
@@ -50,7 +69,7 @@ export function ContextReducer(state, action) {
       localStorage.removeItem(CartLocal);
       return { ...state, cart: [] };
     }
-    
+
     default: return state;
   }
 }
