@@ -3,7 +3,7 @@ import { Actions } from "./ContextActions";
 
 const cookies = new Cookies();
 const CartLocal = "Cart";
-const UserSession = "UserSession";
+const UserLocal = "User";
 
 //Cookies
 const CreateCookies = (CookieName, data) => {
@@ -27,7 +27,7 @@ const GetCookies = (CookieName) => {
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
-  user: localStorage.getItem(UserSession) ? JSON.parse(localStorage.getItem(UserSession)) : false
+  user: localStorage.getItem(UserLocal) ? JSON.parse(localStorage.getItem(UserLocal)) : false
 };
 
 export function ContextReducer(state, action) {
@@ -36,12 +36,12 @@ export function ContextReducer(state, action) {
     //Actions user
     case Actions.USER_LOGIN: {
       const { data } = action.payload;
-      localStorage.setItem(UserSession, JSON.stringify(data))
+      localStorage.setItem(UserLocal, JSON.stringify(data))
       return { ...state, user: JSON.stringify(data) }
     }
 
     case Actions.USER_SIGN_OUT:{
-      localStorage.removeItem(UserSession);
+      localStorage.removeItem(UserLocal);
       return { ...state, user: false }
     }
 
