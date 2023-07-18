@@ -1,6 +1,5 @@
 import Cookies from "universal-cookie";
 import { Actions } from "./ContextActions";
-import { Login, SignUp } from "../Api/RestApi";
 
 const cookies = new Cookies();
 const CartLocal = "Cart";
