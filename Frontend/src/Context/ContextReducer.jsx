@@ -27,7 +27,7 @@ const GetCookies = (CookieName) => {
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
-  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : {}
+  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : false
 };
 
 export function ContextReducer(state, action) {
