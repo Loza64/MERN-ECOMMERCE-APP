@@ -1,11 +1,14 @@
 import Swal from 'sweetalert2';
 import { React, useState } from "react";
 import { Field, Formik, Form } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../Context/Context';
 import { ButtomTransparent, LoginContainer } from "./Styles/styled-components";
 import SignUp from './SignUp';
 
 export default function Login() {
+  const navigator = useNavigate();
+
   //Function context
   const { UserLogin, UserSignOut } = ContextProvider();
 
@@ -60,28 +63,7 @@ export default function Login() {
                     setState(false);
                   } else {
                     setState(true);
-                    let timerInterval
-                    Swal.fire({
-                      title: 'Cargando su información!',
-                      html: 'Por favor espere.',
-                      timer: 2000,
-                      timerProgressBar: true,
-                      didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                          b.textContent = Swal.getTimerLeft()
-                        }, 100)
-                      },
-                      willClose: () => {
-                        clearInterval(timerInterval)
-                      }
-                    }).then((result) => {
-                      /* Read more about handling dismissals below */
-                      if (result.dismiss === Swal.DismissReason.timer) {
-                        window.location.href = "/";
-                      }
-                    })
+                    navigator("/");
                   }
                 })
               } catch (error) {

@@ -27,7 +27,7 @@ const GetCookies = (CookieName) => {
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
-  user: localStorage.getItem(UserLocal) ? JSON.parse(localStorage.getItem(UserLocal)) : false
+  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : {}
 };
 
 export function ContextReducer(state, action) {
@@ -37,10 +37,10 @@ export function ContextReducer(state, action) {
     case Actions.USER_LOGIN: {
       const { data } = action.payload;
       localStorage.setItem(UserLocal, JSON.stringify(data))
-      return { ...state, user: JSON.stringify(data) }
+      return { ...state, user: data }
     }
 
-    case Actions.USER_SIGN_OUT:{
+    case Actions.USER_SIGN_OUT: {
       localStorage.removeItem(UserLocal);
       return { ...state, user: false }
     }

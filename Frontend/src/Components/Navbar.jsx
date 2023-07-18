@@ -10,7 +10,7 @@ import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
   //Functions Context
-  const { user, cart } = ContextProvider();
+  const { user, cart, UserSignOut } = ContextProvider();
   let { username } = user;
 
   //Hooks
@@ -44,16 +44,16 @@ export default function Navbar() {
         </nav>
         <div className="login-buttom">
           {
-            user ?
-              (
-                <a href="/Login" onClick={() => { setState(false); scrollTop(); }}>
-                  <label>{username} <FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
-                </a>
-              )
-              :
+            !user ?
               (
                 <Link to="/Login" onClick={() => { setState(false); scrollTop(); }}>
                   <label><FaUserAlt className="react-icon"></FaUserAlt>Login</label>
+                </Link>
+              )
+              :
+              (
+                <Link to="/Login" onClick={() => { setState(false); scrollTop(); UserSignOut() }}>
+                  <label>{username}<FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
                 </Link>
               )
           }
