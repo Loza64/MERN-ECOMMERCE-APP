@@ -1,29 +1,49 @@
+import Cookies from "universal-cookie";
 import { Actions } from "./ContextActions";
 import { Login, SignUp } from "../Api/RestApi";
 
+const cookies = new Cookies();
 const CartLocal = "Cart";
-const UserLocal = "UserSession";
+const UserSession = "UserSession";
+
+//Cookies
+const CreateCookies = (CookieName, data) => {
+  cookies.set(CookieName, data, { path: "/" });
+};
+const RemoveCookies = (CookieName) => {
+  cookies.remove(CookieName);
+};
+const GetCookies = (CookieName) => {
+  const token = cookies.get(CookieName);
+  try {
+    if (!token) {
+      return false;
+    } else {
+      return token;
+    }
+  } catch (error) {
+    return false;
+  }
+};
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
-  userSession: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage(UserLocal)) : null
+  user: localStorage.getItem(UserSession) ? JSON.parse(localStorage.getItem(UserSession)) : false
 };
 
-export async function ContextReducer(state, action) {
+export function ContextReducer(state, action) {
   switch (action.type) {
 
     //Actions user
     case Actions.USER_LOGIN: {
-      const { login } = action.payload;
-      const userlogin = (await Login(login)).data
+      const { data } = action.payload;
+      localStorage.setItem(UserSession, JSON.stringify(data))
+      return { ...state, user: JSON.stringify(data) }
+    }
 
-      if (!userlogin) {
-        localStorage.setItem(UserLocal, null)
-        return { ...state, userSession: null}
-      } else {
-        localStorage.setItem(UserLocal, JSON.stringify(userlogin))
-        return { ...state, userSession: userlogin }
-      }
+    case Actions.USER_SIGN_OUT:{
+      localStorage.removeItem(UserSession);
+      return { ...state, user: false }
     }
 
     //Actions Cart

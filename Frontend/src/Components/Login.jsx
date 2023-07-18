@@ -7,7 +7,7 @@ import SignUp from './SignUp';
 
 export default function Login() {
   //Function context
-  const { UserLogin, CreateCookies, RemoveCookies } = ContextProvider();
+  const { UserLogin, UserSignOut } = ContextProvider();
 
   //hooks
   const [user, setUser] = useState(String);
@@ -22,7 +22,7 @@ export default function Login() {
   }
 
   window.addEventListener('load', () => {
-    RemoveCookies("USERCOOKIES")
+    UserSignOut();
   })
 
   return (
@@ -55,8 +55,8 @@ export default function Login() {
             }}
             onSubmit={() => {
               try {
-                UserLogin(body).then((UserResponce) => {
-                  if (!UserResponce.data) {
+                UserLogin(body).then((responce) => {
+                  if (!responce) {
                     setState(false);
                   } else {
                     setState(true);
@@ -79,7 +79,6 @@ export default function Login() {
                     }).then((result) => {
                       /* Read more about handling dismissals below */
                       if (result.dismiss === Swal.DismissReason.timer) {
-                        CreateCookies("USERCOOKIES", UserResponce.data);
                         window.location.href = "/";
                       }
                     })

@@ -129,12 +129,14 @@ export default function SignUp({ open, setOpen }) {
           onSubmit={() => {
             try {
               UserSignUp(body).then((result) => {
-                if (result.data) {
+                if (result) {
                   Swal.fire(
                     'En horabuena!',
                     'Registro realizado exitosamente, bienvenido a ECOMMERCE.',
                     'success'
-                  )
+                  ).then(() => {
+                    setOpen(false)
+                  })
                 } else {
                   Swal.fire({
                     icon: 'error',
@@ -170,10 +172,10 @@ export default function SignUp({ open, setOpen }) {
                     </div>
                   </div>
                   <div className="flex" style={{ marginTop: "-5px" }}>
-                    <div style={{marginBottom: "-40px"}}>
+                    <div style={{ marginBottom: "-40px" }}>
                       <ErrorMessage name="nombres" component={() => (<label className="errormessage">{errors.nombres}</label>)} />
                     </div>
-                    <div style={{marginBottom: "-40px"}}>
+                    <div style={{ marginBottom: "-40px" }}>
                       <ErrorMessage name="apellidos" component={() => (<label className="errormessage">{errors.apellidos}</label>)} />
                     </div>
                   </div>

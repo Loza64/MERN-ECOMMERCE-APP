@@ -1,10 +1,7 @@
-import Cookies from "universal-cookie";
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
-import { GetCategories, GetProducts, GetProductByCategorie, GetProductByKey } from "../Api/RestApi";
-
-const cookies = new Cookies();
+import { GetCategories, GetProducts, GetProductByCategorie, GetProductByKey, Login, SignUp } from "../Api/RestApi";
 const Context = createContext();
 
 export const ContextProvider = () => {
@@ -40,36 +37,23 @@ export default function ContextConsumer({ children }) {
     getCategories();
   }, []);
 
-  //Cookies
-  const CreateCookies = (CookieName, data) => {
-    cookies.set(CookieName, data, { path: "/" });
-  };
-  const RemoveCookies = (CookieName) => {
-    cookies.remove(CookieName);
-  };
-  const GetCookies = (CookieName) => {
-    const token = cookies.get(CookieName);
-    try {
-      if (!token) {
-        return false;
-      } else {
-        return token;
-      }
-    } catch (error) {
-      return false;
-    }
-  };
 
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
-  const { cart, userSession } = state;
+  const { cart, user } = state;
 
   // Functions user
-  const UserLogin = (login) => {
-    dispatch({ type: Actions.USER_LOGIN, payload: { login } })
+  const UserLogin = async (login) => {
+    const { data } = await Login(login);
+    dispatch({ type: Actions.USER_LOGIN, payload: { data } })
+    return await data ? true : false;
   };
-  const UserSignUp = (signup) => {
-    dispatch({ type: Actions.USER_SIGN_UP, payload: { signup } })
+  const UserSignOut = () => {
+    dispatch({ type: Actions.USER_SIGN_OUT })
+  }
+  const UserSignUp = async (signup) => {
+    const { data } = await SignUp(signup);
+    return data;
   };
 
   //Functions Cart
@@ -128,11 +112,10 @@ export default function ContextConsumer({ children }) {
   ).toFixed(2);
 
   const ContextValues = {
-    products, categories,
-    UserLogin, UserSignUp, userSession ,getProduct,
+    products, categories, UserSignOut,
+    UserLogin, UserSignUp, user, getProduct,
     getProductByCategorie, productsByCategorie,
-    setProductsByCategorie, CreateCookies,
-    RemoveCookies, GetCookies, AddToCart,
+    setProductsByCategorie, AddToCart,
     RemoveProductFromCart, ClearCart,
     cart, Quantity, SubTotal, Task, Total,
   };
