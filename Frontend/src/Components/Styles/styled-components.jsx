@@ -579,19 +579,28 @@ width:100%;
   .item{
     flex-direction:column;
     text-align:center;
-  }.item .detailproduct .flex-product{
+  }
+  
+  .item .detailproduct .flex-product{
     flex-direction:column;
     text-align:center;
+  }
+  .item .detailproduct .subtotal-none{
+    display:none;
   }
   .item .detailproduct .subtotal{
     display: none;
   }
-  .item .detailproduct .flex-product .subtotal{
-    display:none;
-  }
+
   .item .detailproduct .flex-buttoms{
     flex-direction:column;
   }
+  
+  .item .detailproduct .flex-product .subtotal{
+    display:none;
+  }
+
+  
   .item .detailproduct .flex-buttoms .quantity-buttoms{
     margin-bottom:5px;
   }
