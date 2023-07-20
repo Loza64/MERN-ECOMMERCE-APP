@@ -105,25 +105,40 @@ const NewProduct = async (req, res) => {
 }
 const GetProducts = async (req, res) => {
   try {
-    let products = await Products.find({})
-    res.send(products)
+    let result = await Products.find({})
+    res.send(result)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
 }
-const GetProductByCategorie = async (req, res) => {
+const GetProductsByCategorie = async (req, res) => {
   try {
-    const { CategoryKey } = req.body;
-    let products = await Products.find({ categorykey: CategoryKey })
-    res.send(products)
+    const { CategoryKey } = req.params;
+    let result = await Products.find({ categorykey: CategoryKey })
+    res.send(result)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
 }
 const GetProductByKey = async (req, res) => {
   try {
-    let product = await Products.findOne({ key: req.params.key })
-    res.send(product)
+    let result = await Products.findOne({ key: req.params.key })
+    res.send(result)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+const SearchProducts = async (req, res) => {
+  try {
+    const { product } = req.params;
+    const result = await Products.find({
+      name: {
+        $regex: product,
+        $options: 'i',
+      }
+    })
+    res.send(result)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -172,6 +187,7 @@ module.exports = {
   GetProducts,
   NewCategorie,
   GetCategories,
-  GetProductByCategorie,
-  GetProductByKey
+  GetProductsByCategorie,
+  GetProductByKey,
+  SearchProducts
 }

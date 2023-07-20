@@ -1,7 +1,7 @@
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
-import { GetCategories, GetProducts, GetProductByCategorie, GetProductByKey, Login, SignUp } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, Login, SignUp } from "../Api/RestApi";
 const Context = createContext();
 
 export const ContextProvider = () => {
@@ -16,19 +16,20 @@ export default function ContextConsumer({ children }) {
 
   // Functions products
   const getCategories = async () => {
-    const result = await GetCategories();
-    setCategories(result.data);
+    const { data } = await GetCategories();
+    setCategories(data);
   };
   const getProducts = async () => {
-    const result = await GetProducts();
-    setProducts(result.data);
+    const { data } = await GetProducts();
+    setProducts(data);
   };
   const getProduct = async (ProductKey) => {
-    return (await GetProductByKey(ProductKey)).data;
+    const { data } = await GetProductByKey(ProductKey)
+    return data;
   };
   const getProductByCategorie = async (CategoryKey) => {
-    const result = await GetProductByCategorie(CategoryKey);
-    setProductsByCategorie(result.data);
+    const { data } = await GetProductsByCategorie(CategoryKey);
+    setProductsByCategorie(data);
   };
   useEffect(() => {
     getProducts();

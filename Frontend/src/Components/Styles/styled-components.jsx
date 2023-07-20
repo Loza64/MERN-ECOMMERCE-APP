@@ -515,12 +515,12 @@ width:100%;
 .item{
   display:flex;
   align-items:center;
-  padding: 9px;
+  padding: 2px 10px;
   background:white;
-  border:solid 3px rgba(247, 247, 247, 1);
+  border:solid 3px rgb(220, 220, 220);
   border-radius:10px;
   margin-right:16px;
-  margin-bottom:10px;
+  margin-bottom:6px;
   transition: all .05s ease-in-out;
   animation-name: showitemcart;
   animation-iteration-count:1;

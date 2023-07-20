@@ -7,7 +7,7 @@ export default function ProductsByCategorie({ CategoryKey }) {
 
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
   useEffect(() => {
-    getProductByCategorie({ CategoryKey });
+    getProductByCategorie(CategoryKey);
   }, [])
 
   if (productsByCategorie.length === 0) {
