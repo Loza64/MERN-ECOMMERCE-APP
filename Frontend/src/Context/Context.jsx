@@ -1,7 +1,7 @@
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
-import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, Login, SignUp } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, SearchProducts, Login, SignUp } from "../Api/RestApi";
 const Context = createContext();
 
 export const ContextProvider = () => {
