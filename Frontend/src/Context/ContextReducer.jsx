@@ -5,9 +5,8 @@ const UserLocal = "User";
 
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
-  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : false,
-  search: JSON.parse(localStorage.getItem("search")) ? JSON.parse(localStorage.getItem("search")) : false,
-};
+  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : false
+}
 
 export function ContextReducer(state, action) {
   switch (action.type) {
@@ -22,13 +21,6 @@ export function ContextReducer(state, action) {
     case Actions.USER_SIGN_OUT: {
       localStorage.removeItem(UserLocal);
       return { ...state, user: false }
-    }
-
-    //Search
-    case Actions.SEARCH_PRODUCT: {
-      const { product } = action.payload;
-      localStorage.setItem("search", JSON.stringify(product))
-      return { ...state, search: product }
     }
 
     //Actions Cart
