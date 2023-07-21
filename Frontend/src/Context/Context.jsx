@@ -13,6 +13,7 @@ export default function ContextConsumer({ children }) {
   const [productsByCategorie, setProductsByCategorie] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [resultSearch, setResultSearch] = useState([]);
 
   // Functions products
   const getCategories = async () => {
@@ -24,13 +25,22 @@ export default function ContextConsumer({ children }) {
     setProducts(data);
   };
   const getProduct = async (ProductKey) => {
-    const { data } = await GetProductByKey(ProductKey)
+    const { data } = await GetProductByKey(ProductKey);
     return data;
   };
   const getProductByCategorie = async (CategoryKey) => {
     const { data } = await GetProductsByCategorie(CategoryKey);
     setProductsByCategorie(data);
   };
+  const searchProduct = async (product) => {
+    if (product === "all") {
+      setResultSearch((await GetProducts()).data)
+    } else {
+      const { data } = await SearchProducts(product);
+      setResultSearch(data);
+    }
+  }
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -42,6 +52,9 @@ export default function ContextConsumer({ children }) {
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart, user } = state;
+
+  //Product
+
 
   // Functions user
   const UserLogin = async (login) => {
@@ -56,6 +69,7 @@ export default function ContextConsumer({ children }) {
     const { data } = await SignUp(signup);
     return data;
   };
+
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {
@@ -116,9 +130,9 @@ export default function ContextConsumer({ children }) {
     products, categories, UserSignOut,
     UserLogin, UserSignUp, user, getProduct,
     getProductByCategorie, productsByCategorie,
-    setProductsByCategorie, AddToCart,
-    RemoveProductFromCart, ClearCart,
-    cart, Quantity, SubTotal, Task, Total,
+    resultSearch, ClearCart, cart, Quantity, searchProduct,
+    SubTotal, Task, Total, setProductsByCategorie,
+    AddToCart, RemoveProductFromCart
   };
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
 }

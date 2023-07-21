@@ -1,33 +1,12 @@
-import Cookies from "universal-cookie";
 import { Actions } from "./ContextActions";
 
-const cookies = new Cookies();
 const CartLocal = "Cart";
 const UserLocal = "User";
 
-//Cookies
-const CreateCookies = (CookieName, data) => {
-  cookies.set(CookieName, data, { path: "/" });
-};
-const RemoveCookies = (CookieName) => {
-  cookies.remove(CookieName);
-};
-const GetCookies = (CookieName) => {
-  const token = cookies.get(CookieName);
-  try {
-    if (!token) {
-      return false;
-    } else {
-      return token;
-    }
-  } catch (error) {
-    return false;
-  }
-};
-
 export const InitialState = {
   cart: JSON.parse(localStorage.getItem(CartLocal)) ? JSON.parse(localStorage.getItem(CartLocal)) : [],
-  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : false
+  user: JSON.parse(localStorage.getItem(UserLocal)) ? JSON.parse(localStorage.getItem(UserLocal)) : false,
+  search: JSON.parse(localStorage.getItem("search")) ? JSON.parse(localStorage.getItem("search")) : false,
 };
 
 export function ContextReducer(state, action) {
@@ -43,6 +22,13 @@ export function ContextReducer(state, action) {
     case Actions.USER_SIGN_OUT: {
       localStorage.removeItem(UserLocal);
       return { ...state, user: false }
+    }
+
+    //Search
+    case Actions.SEARCH_PRODUCT: {
+      const { product } = action.payload;
+      localStorage.setItem("search", JSON.stringify(product))
+      return { ...state, search: product }
     }
 
     //Actions Cart

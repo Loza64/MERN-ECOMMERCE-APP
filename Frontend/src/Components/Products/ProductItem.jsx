@@ -4,14 +4,14 @@ import { BtnCart } from "../Styles/styled-components";
 import { ContextProvider } from '../../Context/Context'
 import { useNavigate } from "react-router-dom";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, animationState }) {
   const { key, image, name, company, price, stock, discount } = product;
   const { AddToCart } = ContextProvider();
   const navigator = useNavigate();
 
   if (stock > 0) {
     return (
-      <div className="target">
+      <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
           <BsFillCartPlusFill className="react-icon" onClick={() => { AddToCart(key) }} />
           {discount > 0 ? (<label className="product-discount">{Math.round(discount * 100)}%</label>) : null}
@@ -39,7 +39,7 @@ export default function ProductItem({ product }) {
     );
   } else {
     return (
-      <div className="target">
+      <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
           <BsFillCartXFill className="react-icon disable" />
           <label className="no-product">Not available</label>

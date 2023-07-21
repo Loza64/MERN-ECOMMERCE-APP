@@ -32,7 +32,6 @@
   border-radius: 10px;
   transition: all 0.4s ease-in-out;
   z-index: 1;
-  animation-name: loadtarget;
   animation-duration: 1.3s;
   animation-iteration-count: 1;
 }
@@ -56,6 +55,9 @@
   .target {
     max-width: 800px;
     margin: 5px 77px;
+  }
+  .result-search{
+    text-align: center;
   }
 }
 
@@ -131,6 +133,19 @@
   margin: 0 6px;
   border-radius: 5px;
 }
+/*Result search*/
+.result-search{
+  font-weight: 900;
+  font-size: 20px;
+  margin: 10px 35px;
+}
+.result-search .query{
+  margin-right: 6px;
+}
+.result-search .result{
+  color: blue
+}
+
 
 .targe-categorie {
   width: 100%;
@@ -161,6 +176,7 @@
   }
 }
 @media only screen and (max-width:480px) {
+
   .targe-categorie {
     max-width: 300px;
     margin: 5px 5px;

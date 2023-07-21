@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import { ContextProvider } from "../../Context/Context";
 import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
@@ -6,9 +6,7 @@ import Top from '../Top'
 export default function ProductsByCategorie({ CategoryKey }) {
 
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
-  useEffect(() => {
-    getProductByCategorie(CategoryKey);
-  }, [])
+  getProductByCategorie(CategoryKey);
 
   if (productsByCategorie.length === 0) {
     return (
@@ -27,7 +25,7 @@ export default function ProductsByCategorie({ CategoryKey }) {
           {
             productsByCategorie.map(
               product => (
-                <ProductItem key={product._id} product={product} />
+                <ProductItem key={product._id} product={product} animationState={true} />
               )
             )
           }

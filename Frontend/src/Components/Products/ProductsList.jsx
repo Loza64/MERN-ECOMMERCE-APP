@@ -9,7 +9,7 @@ export default function ProductsList() {
       {
         products.map(
           product => (
-            <ProductItem key={product._id} product={product} />
+            <ProductItem key={product._id} product={product} animationState={true}/>
           )
         )
       }

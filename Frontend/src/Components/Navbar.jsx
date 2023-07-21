@@ -1,4 +1,5 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { RiCloseFill } from 'react-icons/ri';
 import { BsFillCartFill } from 'react-icons/bs';
 import { VscThreeBars } from 'react-icons/vsc';
@@ -9,12 +10,16 @@ import { Link } from "react-router-dom";
 import { ContextProvider } from '../Context/Context';
 
 export default function Navbar() {
+
+  const navigator = useNavigate();
+
   //Functions Context
-  const { user, cart, UserSignOut } = ContextProvider();
+  const { user, cart, UserSignOut, searchProduct, } = ContextProvider();
   let { username } = user;
 
   //Hooks
   const [state, setState] = useState(false);
+  const [search, setSearch] = useState(String);
 
   //Functions
   const scrollTop = () => {
@@ -24,6 +29,7 @@ export default function Navbar() {
     });
   }
 
+
   return (
     <NavBar menu={state}>
       <div className="title-business">
@@ -31,8 +37,8 @@ export default function Navbar() {
       </div>
       <div className="sidebar">
         <div className="content-search">
-          <input type="search" placeholder="Search..." className="txt-search" />
-          <button className="btn-search"><FaSearch /></button>
+          <input name="query" id="query" type="search" placeholder="Search..." className="txt-search" onChange={(e) => { setSearch(e.target.value) }} />
+          <button className="btn-search" onClick={() => { localStorage.setItem("search", JSON.stringify(search ? search : "all")); searchProduct(search ? search : "all"); navigator(search ? `/SearchProduct/?product=${search}` : '/SearchProduct/?product=all'); setState(false) }}><FaSearch /></button>
         </div>
         <nav>
           <Link to="/" onClick={() => { setState(false); scrollTop(); }}><AiFillHome className="react-icon" />Home</Link>
