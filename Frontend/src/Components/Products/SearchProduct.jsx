@@ -18,7 +18,7 @@ export default function SearchProduct({ TopState }) {
                 </div>
                 <div className="grid">
                     {
-                        resultSearch.map(item => (<ProductItem key={item._id} product={item} />))
+                        resultSearch.map(item => (<ProductItem key={item._id} product={item} animationState={true} />))
                     }
                 </div>
             </div>
