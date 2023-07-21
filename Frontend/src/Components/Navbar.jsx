@@ -43,7 +43,7 @@ export default function Navbar() {
           setState(false);
           e.preventDefault();
         }}>
-          <input name="query" id="query" type="search" placeholder="Search..." className="txt-search" onChange={(e) => { setSearch(e.target.value) }} />
+          <input name="query" id="query" type="search" placeholder="Search products..." className="txt-search" onChange={(e) => { setSearch(e.target.value) }} />
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>
