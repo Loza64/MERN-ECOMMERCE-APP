@@ -36,10 +36,16 @@ export default function Navbar() {
         <label>ECOMMERCE</label>
       </div>
       <div className="sidebar">
-        <div className="content-search">
+        <form className="content-search" onSubmit={(e) => {
+          localStorage.setItem("search", JSON.stringify(search ? search : "all"));
+          searchProduct(search ? search : "all");
+          navigator(search ? `/SearchProduct/?product=${search}` : '/SearchProduct/?product=all');
+          setState(false);
+          e.preventDefault();
+        }}>
           <input name="query" id="query" type="search" placeholder="Search..." className="txt-search" onChange={(e) => { setSearch(e.target.value) }} />
-          <button className="btn-search" onClick={() => { localStorage.setItem("search", JSON.stringify(search ? search : "all")); searchProduct(search ? search : "all"); navigator(search ? `/SearchProduct/?product=${search}` : '/SearchProduct/?product=all'); setState(false) }}><FaSearch /></button>
-        </div>
+          <button type="submit" className="btn-search"><FaSearch /></button>
+        </form>
         <nav>
           <Link to="/" onClick={() => { setState(false); scrollTop(); }}><AiFillHome className="react-icon" />Home</Link>
           <Link to="/Terms" onClick={() => { setState(false); scrollTop(); }}><AiFillSetting className="react-icon" />Terms</Link>
