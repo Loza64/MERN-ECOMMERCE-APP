@@ -39,7 +39,7 @@ export default function Navbar() {
         <form className="content-search" onSubmit={(e) => {
           localStorage.setItem("search", JSON.stringify(search ? search : "all"));
           searchProduct(search ? search : "all");
-          navigator(search ? `/SearchProduct/?product=${search}` : '/SearchProduct/?product=all');
+          navigator(search ? `/SearchProduct?product=${search}` : '/SearchProduct?product=all');
           setState(false);
           e.preventDefault();
         }}>
