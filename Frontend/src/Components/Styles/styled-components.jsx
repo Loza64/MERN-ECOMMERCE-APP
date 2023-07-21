@@ -579,6 +579,7 @@ width:100%;
   .item{
     flex-direction:column;
     text-align:center;
+    padding: 10px 0;
   }
   
   .item .detailproduct .flex-product{
