@@ -127,12 +127,12 @@ export default function ContextConsumer({ children }) {
   ).toFixed(2);
 
   const ContextValues = {
+    AddToCart, RemoveProductFromCart,
     products, categories, UserSignOut,
     UserLogin, UserSignUp, user, getProduct,
     getProductByCategorie, productsByCategorie,
-    resultSearch, ClearCart, cart, Quantity, searchProduct,
     SubTotal, Task, Total, setProductsByCategorie,
-    AddToCart, RemoveProductFromCart
+    resultSearch, ClearCart, cart, Quantity, searchProduct
   };
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
 }

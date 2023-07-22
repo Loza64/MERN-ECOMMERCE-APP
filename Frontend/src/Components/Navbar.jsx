@@ -14,7 +14,7 @@ export default function Navbar() {
   const navigator = useNavigate();
 
   //Functions Context
-  const { user, cart, UserSignOut, searchProduct, } = ContextProvider();
+  const { user, cart, UserSignOut, searchProduct } = ContextProvider();
   let { username } = user;
 
   //Hooks
@@ -28,7 +28,6 @@ export default function Navbar() {
       behavior: "smooth",
     });
   }
-
 
   return (
     <NavBar menu={state}>
