@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <NavBar menu={state}>
       <div className="title-business">
-        <label>ECOMMERCE</label>
+        <label>COMMERCE</label>
       </div>
       <div className="sidebar">
         <form className="content-search" onSubmit={(e) => {

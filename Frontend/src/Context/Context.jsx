@@ -100,7 +100,7 @@ export default function ContextConsumer({ children }) {
     0
   ).toFixed(2);
 
-  const Task = cart.reduce(
+  const Tax = cart.reduce(
     (Total, NextItem) =>
       NextItem.discount > 0
         ? Total + (NextItem.quantity * NextItem.price - NextItem.quantity * NextItem.price * NextItem.discount) * 0.13
@@ -131,7 +131,7 @@ export default function ContextConsumer({ children }) {
     products, categories, UserSignOut,
     UserLogin, UserSignUp, user, getProduct,
     getProductByCategorie, productsByCategorie,
-    SubTotal, Task, Total, setProductsByCategorie,
+    SubTotal, Tax, Total, setProductsByCategorie,
     resultSearch, ClearCart, cart, Quantity, searchProduct
   };
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
