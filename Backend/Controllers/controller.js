@@ -121,8 +121,9 @@ const GetProductsByCategorie = async (req, res) => {
   }
 }
 const GetProductByKey = async (req, res) => {
+  const { key } = req.params;
   try {
-    let result = await Products.findOne({ key: req.params.key })
+    let result = await Products.findOne({ key })
     res.send(result)
   } catch (error) {
     return res.status(500).json({ message: error.message })

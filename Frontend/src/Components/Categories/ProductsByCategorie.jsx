@@ -4,7 +4,7 @@ import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
 import Loading from "../Loading";
 
-export default function ProductsByCategorie({ CategoryKey }) {
+export default function ProductsByCategorie({ CategoryKey,top }) {
 
   const { getProductByCategorie, productsByCategorie } = ContextProvider();
   getProductByCategorie(CategoryKey);
@@ -25,7 +25,7 @@ export default function ProductsByCategorie({ CategoryKey }) {
     } else {
       return (
         <div>
-          <Top state={true} />
+          <Top state={top} />
           <div className="grid">
             {
               productsByCategorie.map(

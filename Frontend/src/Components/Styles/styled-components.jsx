@@ -668,3 +668,114 @@ width:100%;
 }
 `;
 
+export const DetailProducts = styles.div`
+.content-detail-product {
+  width: 100%;
+  padding: 0.5rem 5rem;
+}
+
+.content-detail-product h2 {
+  text-align: center;
+  margin: 10px 0;
+  color: blue;
+  font-weight: 700;
+  font-size: 35px;
+}
+
+.content-detail-product .flex-detail-product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.content-detail-product .flex-detail-product .image {
+  width: 100%;
+}
+
+.content-detail-product .flex-detail-product .info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding :30px
+}
+
+.content-detail-product .flex-detail-product .image img {
+  width: 90%;
+  padding :30px
+}
+
+
+.content-detail-product .flex-detail-product .info .company,
+.price,
+.status,
+.discount {
+  font-weight: 900;
+  font-size: 18px;
+  margin: 3px 0;
+}
+
+.content-detail-product .flex-detail-product .info .company .detail {
+  color: blue;
+}
+
+.content-detail-product .flex-detail-product .info .price .detail {
+  color: green;
+}
+
+.content-detail-product .flex-detail-product .info .status .detail {
+  background-color: ${({ status }) => (status ? "blue" : "grey")};
+  color: ${({ status }) => (status ? "white" : "red")};
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.content-detail-product .flex-detail-product .info .discount .detail {
+  background-color: red;
+  color: white;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+.content-detail-product .flex-detail-product .info p{
+  color:grey;
+  font-weight: 700;
+  font-size:13px;
+}
+.content-detail-product .flex-detail-product .buttoms{
+  display:flex;
+  justify-content: space-between;
+}
+.content-detail-product .flex-detail-product .buttoms .buttom{
+  border:none;
+  background:transparent;
+  width:100%;
+  margin: 0 5px;
+  border-radius:5px;
+  padding:5px 15px;
+  transition: all 0.3s ease-in-out;
+}
+.content-detail-product .flex-detail-product .buttoms  .cart{
+  background :green;
+  color:white;
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content: center
+}
+.content-detail-product .flex-detail-product .buttoms  .cart .react-icon{
+  font-size:25px;
+  margin: 0 10px
+}
+.content-detail-product .flex-detail-product .buttoms  .cart:active{
+  transform:scale(110%);
+}
+.content-detail-product .flex-detail-product .buttoms  .buy:active{
+  transform:scale(110%);
+}
+.content-detail-product .flex-detail-product .buttoms  .buy{
+  background :blue;
+  color:white;
+  font-size:18px;
+  font-weight:700
+}
+`
