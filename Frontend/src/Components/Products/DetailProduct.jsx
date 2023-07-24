@@ -31,11 +31,11 @@ export default function DetailProduct({ product }) {
               {
                 details.length >= 980 ?
                   (
-                    <div className="description">
+                    <div className="description less">
                       <p>{details}</p>
                       <label className="view-more" onClick={() => { setView(view ? false : true) }}>
                         {
-                          !view ? ("View more") : ("View less")
+                          view ? ("View less") : ("View more")
                         }
                       </label>
                     </div>

@@ -753,9 +753,11 @@ export const DetailProducts = styles.div`
   font-size:13px;
   width : 100%;
   overflow: hidden;
-  height: ${({data}) => (!data ? "100px" : "auto")};
   margin-bottom: 0px
 }
+.content-detail-product .flex-detail-product .info  .less p{
+  ${({ data }) => (data ? null : "height:100px;")}
+} 
 .content-detail-product .flex-detail-product .info .description .view-more{
   color:blue;
   font-weight: 700;
