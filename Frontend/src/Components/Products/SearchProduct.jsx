@@ -3,14 +3,25 @@ import ProductItem from "./ProductItem";
 import Top from "../Top";
 import Loading from "../Loading";
 import { useState } from "react";
+import Message from "../Message";
+import Swal from "sweetalert2";
 
 export default function SearchProduct({ TopState }) {
     const [loadingTime, setLoadingTime] = useState(0);
     const timeoutId = setTimeout(() => (setLoadingTime(loadingTime + 1)), 1000);
     const { resultSearch, searchProduct } = ContextProvider();
 
+    console.log(loadingTime)
     window.addEventListener('load', () => {
-        searchProduct(JSON.parse(localStorage.getItem("search")))
+        searchProduct(JSON.parse(localStorage.getItem("search"))).catch((err) => {
+            Swal.fire({
+                title: 'Connection server error',
+                text: 'Bug name: ' + err + ', we will solve this problem as soon as possible.',
+                icon: 'error',
+                button: "Aceptar",
+                footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
+            })
+        });
     })
 
     if (loadingTime >= 1) {
@@ -31,19 +42,14 @@ export default function SearchProduct({ TopState }) {
                 </div>
             )
         } else {
-            clearTimeout(timeoutId)
-            return (
-                <div>
-                    <div className="list-empty" >
-                        <br />
-                        <br />
-                        <br />
-                        <label className="message" style={{ animationName: "none" }}>products not found.</label>
-                    </div>
-                </div>
-            )
+            if (loadingTime <= 50) {
+                return <Loading title={"loading results..."} />
+            } else {
+                clearTimeout(timeoutId)
+                return <Message title={"Products not found, reload this page!"} />
+            }
         }
     } else {
-        return <Loading title={"loading results..."}/>
+        return <Loading title={"loading results..."} />
     }
 }

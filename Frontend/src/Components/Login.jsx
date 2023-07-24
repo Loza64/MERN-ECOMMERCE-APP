@@ -57,22 +57,22 @@ export default function Login() {
               return errors;
             }}
             onSubmit={() => {
-              try {
-                UserLogin(body).then((responce) => {
-                  if (!responce) {
-                    setState(false);
-                  } else {
-                    setState(true);
-                    navigator("/");
-                  }
-                })
-              } catch (error) {
+              UserLogin(body).then((responce) => {
+                if (!responce) {
+                  setState(false);
+                } else {
+                  setState(true);
+                  navigator("/");
+                }
+              }).catch((err) => {
                 Swal.fire({
+                  title: 'Connection server error',
+                  text: 'Bug name: ' + err + ', we will solve this problem as soon as possible.',
                   icon: 'error',
-                  title: 'Lo sentimos ocurrio un error en el servidor!',
-                  text: 'Información del error: ' + error + ' si el error persiste comuniqueselo al desarrolador inmediatamente, lamentamos los inconvenientes'
+                  button: "Aceptar",
+                  footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
                 })
-              }
+              });
             }}
           >
             {

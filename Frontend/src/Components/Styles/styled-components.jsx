@@ -703,6 +703,11 @@ export const DetailProducts = styles.div`
   width: 50%;
   text-align:center;
 }
+@media only screen and (max-width: 600px){
+  .content-detail-product .flex-detail-product .image {
+    width: 100%;
+  }
+}
 
 .content-detail-product .flex-detail-product .info {
   width: 100%;
@@ -714,6 +719,11 @@ export const DetailProducts = styles.div`
 .content-detail-product .flex-detail-product .image img {
   width: 100%;
   padding: 4px;
+}
+@media only screen and (max-width: 600px){
+  .content-detail-product .flex-detail-product .image img {
+    padding: 0px;
+  }
 }
 
 

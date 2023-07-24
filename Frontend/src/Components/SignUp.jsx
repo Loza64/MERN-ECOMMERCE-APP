@@ -127,31 +127,31 @@ export default function SignUp({ open, setOpen }) {
           }}
 
           onSubmit={() => {
-            try {
-              UserSignUp(body).then((result) => {
-                if (result) {
-                  Swal.fire(
-                    'En horabuena!',
-                    'Registro realizado exitosamente, bienvenido a ECOMMERCE.',
-                    'success'
-                  ).then(() => {
-                    setOpen(false)
-                  })
-                } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Ocurrio un error en el registro!',
-                    text: 'Nombre de usuario, email o teléfono ya son utlizados por otro usuario.'
-                  })
-                }
-              })
-            } catch (error) {
+            UserSignUp(body).then((result) => {
+              if (result) {
+                Swal.fire(
+                  'En horabuena!',
+                  'Registro realizado exitosamente, bienvenido a ECOMMERCE.',
+                  'success'
+                ).then(() => {
+                  setOpen(false)
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Ocurrio un error en el registro!',
+                  text: 'Nombre de usuario, email o teléfono ya son utlizados por otro usuario.'
+                })
+              }
+            }).catch((err) => {
               Swal.fire({
+                title: 'Connection server error',
+                text: 'Bug name: ' + err + ', we will solve this problem as soon as possible.',
                 icon: 'error',
-                title: 'Lo sentimos ocurrio un error en el servidor!',
-                text: 'Información del error: ' + error + ' si el error persiste comuniqueselo al desarrolador inmediatamente, lamentamos los inconvenientes'
+                button: "Aceptar",
+                footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
               })
-            }
+            });
           }}
         >
           {

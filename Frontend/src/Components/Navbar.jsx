@@ -8,6 +8,7 @@ import { AiFillHome, AiFillSetting, AiFillTags } from 'react-icons/ai'
 import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
 import { ContextProvider } from '../Context/Context';
+import Swal from "sweetalert2";
 
 export default function Navbar() {
 
@@ -37,7 +38,15 @@ export default function Navbar() {
       <div className="sidebar">
         <form className="content-search" onSubmit={(e) => {
           localStorage.setItem("search", JSON.stringify(search ? search : "all"));
-          searchProduct(search ? search : "all");
+          searchProduct(search ? search : "all").catch((err) => {
+            Swal.fire({
+              title: 'Connection server error',
+              text: 'Bug name: ' + err + ', we will solve this problem as soon as possible.',
+              icon: 'error',
+              button: "Aceptar",
+              footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
+            })
+          });;
           navigator(search ? `/SearchProduct?product=${search}` : '/SearchProduct?product=all');
           setState(false);
           e.preventDefault();

@@ -4,6 +4,7 @@ import { ContextProvider } from '../../Context/Context'
 
 export default function CategorieList() {
   const { categories } = ContextProvider();
+
   return (
     <div className="grid">
       {

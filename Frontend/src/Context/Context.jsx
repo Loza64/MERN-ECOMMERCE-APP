@@ -1,6 +1,6 @@
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
-import { React, useContext, useState, createContext, useEffect, useReducer } from "react";
+import { React, useContext, useState, createContext, useReducer } from "react";
 import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, SearchProducts, Login, SignUp } from "../Api/RestApi";
 const Context = createContext();
 
@@ -41,19 +41,9 @@ export default function ContextConsumer({ children }) {
     }
   }
 
-  useEffect(() => {
-    getProducts();
-  }, []);
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart, user } = state;
-
-  //Product
 
 
   // Functions user
@@ -130,9 +120,9 @@ export default function ContextConsumer({ children }) {
     AddToCart, RemoveProductFromCart,
     products, categories, UserSignOut,
     UserLogin, UserSignUp, user, getProduct,
-    getProductByCategorie, productsByCategorie,
-    SubTotal, Tax, Total, setProductsByCategorie,
-    resultSearch, ClearCart, cart, Quantity, searchProduct
+    getProducts, getCategories, getProductByCategorie,
+    resultSearch, ClearCart, cart, Quantity, searchProduct,
+    productsByCategorie, SubTotal, Tax, Total, setProductsByCategorie
   };
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
 }
