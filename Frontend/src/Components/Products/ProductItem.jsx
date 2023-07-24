@@ -48,7 +48,7 @@ export default function ProductItem({ product, animationState }) {
       <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
           <BsFillCartXFill className="react-icon disable" />
-          <label className="no-product">Not available</label>
+          <label className="no-product">Unavailable</label>
         </BtnCart>
         <div className="head-target">
           <img src={image.url} alt="imgproduct" onClick={() => { navigator(`/Product/${name}`); TopWindow() }} />

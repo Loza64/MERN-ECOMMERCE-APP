@@ -685,23 +685,24 @@ export const DetailProducts = styles.div`
 .content-detail-product .flex-detail-product {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
 }
 
 .content-detail-product .flex-detail-product .image {
-  width: 100%;
+  width: 50%;
+  text-align:center;
 }
 
 .content-detail-product .flex-detail-product .info {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding :30px
+  padding :10px;
 }
 
 .content-detail-product .flex-detail-product .image img {
-  width: 90%;
-  padding :30px
+  width: 100%;
+  padding: 4px;
 }
 
 
@@ -710,7 +711,7 @@ export const DetailProducts = styles.div`
 .status,
 .discount {
   font-weight: 900;
-  font-size: 18px;
+  font-size: 15px;
   margin: 3px 0;
 }
 
@@ -723,26 +724,37 @@ export const DetailProducts = styles.div`
 }
 
 .content-detail-product .flex-detail-product .info .status .detail {
-  background-color: ${({ status }) => (status ? "blue" : "grey")};
-  color: ${({ status }) => (status ? "white" : "red")};
+  background-color: ${({ status }) => (status ? "blue" : "red")};
+  color: white;
   padding: 0 10px;
   border-radius: 10px;
 }
 
 .content-detail-product .flex-detail-product .info .discount .detail {
-  background-color: red;
-  color: white;
+  background-color: blue;
+  color: greenyellow;
   padding: 0 10px;
   border-radius: 10px;
 }
-.content-detail-product .flex-detail-product .info p{
+.content-detail-product .flex-detail-product .info .description p{
   color:grey;
   font-weight: 700;
   font-size:13px;
+  width : 100%;
+  overflow: hidden;
+  height: ${({data}) => (!data ? "100px" : "auto")};
+  margin-bottom: 0px
+}
+.content-detail-product .flex-detail-product .info .description .view-more{
+  color:blue;
+  font-weight: 700;
+  font-size:13px;
+  margin-bottom: 10px; 
 }
 .content-detail-product .flex-detail-product .buttoms{
   display:flex;
   justify-content: space-between;
+  margin: 10px 0;
 }
 .content-detail-product .flex-detail-product .buttoms .buttom{
   border:none;
@@ -751,10 +763,10 @@ export const DetailProducts = styles.div`
   margin: 0 5px;
   border-radius:5px;
   padding:5px 15px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .content-detail-product .flex-detail-product .buttoms  .cart{
-  background :green;
+  background : linear-gradient(to right, blue, greenyellow);
   color:white;
   font-size:18px;
   font-weight:700;
@@ -767,15 +779,22 @@ export const DetailProducts = styles.div`
   margin: 0 10px
 }
 .content-detail-product .flex-detail-product .buttoms  .cart:active{
-  transform:scale(110%);
+  transform:scale(105%);
 }
 .content-detail-product .flex-detail-product .buttoms  .buy:active{
-  transform:scale(110%);
+  transform:scale(105%);
 }
 .content-detail-product .flex-detail-product .buttoms  .buy{
   background :blue;
   color:white;
   font-size:18px;
-  font-weight:700
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content: center
+}
+.content-detail-product .flex-detail-product .buttoms  .buy .react-icon{
+  font-size:25px;
+  margin: 0 10px
 }
 `
