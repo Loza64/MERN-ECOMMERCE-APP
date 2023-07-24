@@ -300,8 +300,18 @@
   animation-name: showmessage;
   animation-iteration-count: 1;
   animation-duration: 1.2s;
+  margin:30px;
 }
-
+@media screen and (max-width:450px) {
+  .list-empty .message{
+    font-size: 30px;
+  }
+}
+@media screen and (max-width:400px) {
+  .list-empty .message{
+    font-size: 20px;
+  }
+}
 @keyframes showmessage {
   0% {
     transform: translateX(-90rem)

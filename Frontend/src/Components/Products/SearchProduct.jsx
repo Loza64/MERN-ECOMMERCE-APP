@@ -42,12 +42,8 @@ export default function SearchProduct({ TopState }) {
                 </div>
             )
         } else {
-            if (loadingTime <= 50) {
-                return <Loading title={"loading results..."} />
-            } else {
-                clearTimeout(timeoutId)
-                return <Message title={"Products not found, reload this page!"} />
-            }
+            clearTimeout(timeoutId)
+            return <Message title={"Products not found"} />
         }
     } else {
         return <Loading title={"loading results..."} />
