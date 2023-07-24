@@ -729,6 +729,7 @@ export const DetailProducts = styles.div`
 
 .content-detail-product .flex-detail-product .info .company,
 .price,
+.price-none,
 .status,
 .discount {
   font-weight: 900;
@@ -742,6 +743,13 @@ export const DetailProducts = styles.div`
 
 .content-detail-product .flex-detail-product .info .price .detail {
   color: green;
+}
+
+.content-detail-product .flex-detail-product .info .price-none .detail {
+  color: grey;
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2.35px;
 }
 
 .content-detail-product .flex-detail-product .info .status .detail {

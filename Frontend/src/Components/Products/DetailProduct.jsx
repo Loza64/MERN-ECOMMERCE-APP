@@ -48,7 +48,8 @@ export default function DetailProduct({ product }) {
                 </div>
                 <div className="info">
                   <label className="company">Made by: <label className="detail">{company}</label></label>
-                  <label className="price">Price: <label className="detail">${price}</label></label>
+                  <label className="price">Price: <label className="detail">${discount > 0 ? ((price - discount * price).toFixed(2)) : (price)}</label></label>
+                  {discount > 0 ? (<label className="price-none">Original price: <label className="detail">${price}</label></label>) : null}
                   {discount > 0 ? (<label className="discount">Discount: <label className="detail">{Math.round(discount * 100)}%</label></label>) : null}
                   <label className="status">Status: <label className="detail">{stock > 0 ? "In Stock" : "Unavailable"}</label></label>
                   {
