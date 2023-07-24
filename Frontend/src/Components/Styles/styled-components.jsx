@@ -691,11 +691,11 @@ export const DetailProducts = styles.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items:center;
 }
 @media only screen and (max-width: 980px){
   .content-detail-product .flex-detail-product{
     flex-direction: column;
+    align-items:center;
   }
 }
 
