@@ -49,7 +49,7 @@ export default function Login() {
   return (
     <div>
       <LoginContainer>
-        <div className="container-form-login">ñ
+        <div className="container-form-login">
           <div className="content">
             <label>Registrate ahora en ECOMMERCE y realiza tus compras de forma rapida y segura.</label>
             <ButtomTransparent onClick={() => { setOpenSignup(true) }}>Registrarme ahora!</ButtomTransparent>
