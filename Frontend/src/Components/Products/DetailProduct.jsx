@@ -9,16 +9,18 @@ import Loading from "../Loading";
 import ProductItem from "./ProductItem";
 
 export default function DetailProduct({ product }) {
-  const { key, image, name, company, price, stock, discount, details } = product;
-  const { AddToCart, productsByCategorie, system } = ContextProvider();
+  const { key, image, name, company, price, categorykey, stock, discount, details } = product;
+  const { AddToCart, productsByCategorie, getProductsByCategorie, system } = ContextProvider();
   const navigator = useNavigate();
+
+  getProductsByCategorie(categorykey);
 
   const [view, setView] = useState(false);
   const [loading, setLoading] = useState(0);
 
 
 
-  const releatedProducts = system ? productsByCategorie.filter(item => item.key !== key) : [];
+  const releatedProducts = productsByCategorie.filter(item => item.key !== key)
 
   if (system) {
     const timeId = setTimeout(() => { setLoading(loading + 1) }, 1000);
