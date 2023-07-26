@@ -18,8 +18,6 @@ export default function DetailProduct({ product }) {
   const [view, setView] = useState(false);
   const [loading, setLoading] = useState(0);
 
-
-
   const releatedProducts = productsByCategorie.filter(item => item.key !== key)
 
   if (system) {
