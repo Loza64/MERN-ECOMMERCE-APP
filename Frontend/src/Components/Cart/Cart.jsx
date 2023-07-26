@@ -6,24 +6,20 @@ import Products from "../Products/Products";
 import Top from "../Top";
 
 export default function Cart() {
-  const { cart } = ContextProvider();
-  if (cart.length === 0) {
-    return (
-      <div className="list-empty">
-        <label className="message">Your cart is currently empty.</label>
+  const { cart, system } = ContextProvider();
+  return !system ? null : cart.length > 0 ? (
+    <div>
+      <Top state={true} />
+      <h1 className="text-center title-cart py-2">Shopping Cart</h1>
+      <div className="flex-cart">
+        <CartList />
+        <Pago />
       </div>
-    )
-  } else {
-    return (
-      <div>
-        <Top state={true} />
-        <h1 className="text-center title-cart py-2">Shopping Cart</h1>
-        <div className="flex-cart">
-          <CartList />
-          <Pago />
-        </div>
-        <Products SubTopic={"See more"} Topic={"Products"} TopState={false}/>
-      </div>
-    )
-  }
+      <Products SubTopic={"See more"} Topic={"Products"} TopState={false} />
+    </div>
+  ) : (
+    <div className="list-empty">
+      <label className="message">Your cart is currently empty.</label>
+    </div>
+  )
 }

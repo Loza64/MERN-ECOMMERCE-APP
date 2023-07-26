@@ -8,6 +8,7 @@ export default function ProductItem({ product, animationState }) {
   const { key, image, name, company, price, stock, discount } = product;
   const { AddToCart } = ContextProvider();
   const navigator = useNavigate();
+
   function TopWindow() {
     window.scrollTo({
       top: 0,
@@ -15,8 +16,8 @@ export default function ProductItem({ product, animationState }) {
     })
   }
 
-  if (stock > 0) {
-    return (
+  return stock > 0 ?
+    (
       <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
           <BsFillCartPlusFill className="react-icon" onClick={() => { AddToCart(key) }} />
@@ -42,9 +43,7 @@ export default function ProductItem({ product, animationState }) {
           }
         </div>
       </div>
-    );
-  } else {
-    return (
+    ) : (
       <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
           <BsFillCartXFill className="react-icon disable" />
@@ -60,6 +59,5 @@ export default function ProductItem({ product, animationState }) {
           </div>
         </div>
       </div>
-    );
-  }
+    )
 }

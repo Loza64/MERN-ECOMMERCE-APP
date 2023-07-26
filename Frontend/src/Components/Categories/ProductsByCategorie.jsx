@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { ContextProvider } from "../../Context/Context";
 import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
@@ -7,37 +7,34 @@ import Message from "../Message";
 
 export default function ProductsByCategorie({ CategoryKey, top }) {
 
-  const { getProductByCategorie, productsByCategorie } = ContextProvider();
+  const { getProductsByCategorie, productsByCategorie, system } = ContextProvider();
   const [time, setTime] = useState(0);
   const timeId = setTimeout(() => { setTime(time + 1) }, 1000);
-  getProductByCategorie(CategoryKey);
 
-  if (time >= 1) {
-    clearTimeout(timeId);
-    if (productsByCategorie.length > 0) {
-      return (
-        <div>
-          <Top state={top} />
-          <div className="grid">
-            {
-              productsByCategorie.map(
-                product => (
-                  <ProductItem key={product._id} product={product} animationState={true} />
+  getProductsByCategorie(CategoryKey);
+
+  if (system) {
+    if (time >= 1) {
+      clearTimeout(timeId);
+      return productsByCategorie.length > 0 ?
+        (
+          <div>
+            <Top state={top} />
+            <div className="grid">
+              {
+                productsByCategorie.map(
+                  product => (
+                    <ProductItem key={product._id} product={product} animationState={true} />
+                  )
                 )
-              )
-            }
+              }
+            </div>
           </div>
-        </div>
-      )
+        ) : <Message title={"Products not found"} />
     } else {
-      if (time <= 50) {
-        return <Loading title={"Loading..."} />
-      } else {
-        clearTimeout(timeId)
-        return <Message title={"Products not found, reload this page!"} />
-      }
+      return <Loading title={"Loading products..."} />
     }
   } else {
-    return <Loading title={"Loading..."} />
+    return null;
   }
-}
+} 

@@ -7,34 +7,22 @@ import { ContextProvider } from "../../Context/Context";
 import { DetailProducts } from "../Styles/styled-components";
 import Loading from "../Loading";
 import ProductItem from "./ProductItem";
-import Swal from "sweetalert2";
 
 export default function DetailProduct({ product }) {
-  const { key, image, name, company, categorykey, price, stock, discount, details } = product;
-  const { AddToCart, getProductByCategorie, productsByCategorie } = ContextProvider();
+  const { key, image, name, company, price, stock, discount, details } = product;
+  const { AddToCart, productsByCategorie, system } = ContextProvider();
   const navigator = useNavigate();
+
   const [view, setView] = useState(false);
-  const [time, setTime] = useState(0);
-  const [state, setState] = useState(true);
-  const timeId = setTimeout(() => { setTime(time + 1) }, 1000);
+  const [loading, setLoading] = useState(0);
 
-  getProductByCategorie(categorykey).catch((err) => {
-    Swal.fire({
-      title: 'Connection server error',
-      text: 'Bug name: ' + err + ', we will solve this problem as soon as possible.',
-      icon: 'error',
-      button: "Aceptar",
-      footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
-    }).then(() => {
-      setState(false);
-    })
-  });
 
-  if (!state) {
-    clearImmediate(timeId);
-    return null
-  } else {
-    if (time >= 1) {
+
+  const releatedProducts = system ? productsByCategorie.filter(item => item.key !== key) : [];
+
+  if (system) {
+    const timeId = setTimeout(() => { setLoading(loading + 1) }, 1000);
+    if (loading >= 1) {
       clearTimeout(timeId);
       return (
         <div>
@@ -55,7 +43,7 @@ export default function DetailProduct({ product }) {
                   {
                     details.length >= 980 ?
                       (
-                        <div className="description less">
+                        <div className="description view-less">
                           <p>{details}</p>
                           <label className="view-more" onClick={() => { setView(view ? false : true) }}>
                             {
@@ -83,13 +71,13 @@ export default function DetailProduct({ product }) {
             </div>
           </DetailProducts>
           {
-            productsByCategorie.length > 0 ?
+            releatedProducts.length > 0 ?
               (
                 <div>
                   <h1 className="text-center" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Releated</label> Products</h1>
                   <div className="grid">
                     {
-                      productsByCategorie.map(item => (<ProductItem product={item} animationState={true} />))
+                      releatedProducts.map(item => (<ProductItem key={product._id} product={item} animationState={true} />))
                     }
                   </div>
                 </div>
@@ -98,7 +86,9 @@ export default function DetailProduct({ product }) {
         </div>
       )
     } else {
-      return <Loading title={"Loading..."} />
+      return <Loading title={"Loading...."} />
     }
+  } else {
+    return null
   }
 }

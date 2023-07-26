@@ -773,9 +773,14 @@ export const DetailProducts = styles.div`
   overflow: hidden;
   margin-bottom: 0px
 }
-.content-detail-product .flex-detail-product .info  .less p{
+.content-detail-product .flex-detail-product .info  .view-less p{
   ${({ data }) => (data ? null : "height:100px;")}
 } 
+@media only screen and (max-width: 980px){
+  .content-detail-product .flex-detail-product .info  .view-less p{
+    ${({ data }) => (data ? null : "height:160px;")}
+  }
+}
 .content-detail-product .flex-detail-product .info .description .view-more{
   color:blue;
   font-weight: 700;

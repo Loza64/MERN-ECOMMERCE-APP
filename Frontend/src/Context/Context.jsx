@@ -1,7 +1,8 @@
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
-import { React, useContext, useState, createContext, useReducer } from "react";
+import { React, useContext, useState, createContext, useReducer, useEffect } from "react";
 import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, SearchProducts, Login, SignUp } from "../Api/RestApi";
+import Swal from "sweetalert2";
 const Context = createContext();
 
 export const ContextProvider = () => {
@@ -10,36 +11,76 @@ export const ContextProvider = () => {
 
 export default function ContextConsumer({ children }) {
   //hooks
-  const [productsByCategorie, setProductsByCategorie] = useState([]);
+  const [system, setSystem] = useState(true);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [resultSearch, setResultSearch] = useState([]);
+  const [productsByCategorie, setProductsByCategorie] = useState([]);
+
+  function SystemError(err) {
+    Swal.fire({
+      title: 'Connection server error',
+      text: err + ', we will solve this problem as soon as possible.',
+      icon: 'error',
+      button: "Aceptar",
+      footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
+    }).then(() => {
+      setSystem(false);
+    })
+  }
 
   // Functions products
   const getCategories = async () => {
-    const { data } = await GetCategories();
-    setCategories(data);
+    GetCategories().then(product => {
+      setCategories(product.data);
+    }).catch((err) => {
+      SystemError(err)
+    });
+
   };
   const getProducts = async () => {
-    const { data } = await GetProducts();
-    setProducts(data);
+    GetProducts().then(product => {
+      setProducts(product.data);
+    }).catch((err) => {
+      SystemError(err)
+    });
+
   };
   const getProduct = async (ProductKey) => {
     const { data } = await GetProductByKey(ProductKey);
     return data;
   };
-  const getProductByCategorie = async (CategoryKey) => {
-    const { data } = await GetProductsByCategorie(CategoryKey);
-    setProductsByCategorie(data);
+  const getProductsByCategorie = async (CategoryKey) => {
+    GetProductsByCategorie(CategoryKey).then(products => {
+      setProductsByCategorie(products.data);
+    }).catch((err) => {
+      SystemError(err)
+    });
+
   };
   const searchProduct = async (product) => {
     if (product === "all") {
-      setResultSearch((await GetProducts()).data)
+      GetProducts().then(product => {
+        setResultSearch(product.data)
+      }).catch((err) => {
+        SystemError(err)
+      })
     } else {
-      const { data } = await SearchProducts(product);
-      setResultSearch(data);
+      await SearchProducts(product).then(product => {
+        setResultSearch(product.data)
+      }).catch((err) => {
+        SystemError(err)
+      })
     }
   }
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
@@ -56,23 +97,30 @@ export default function ContextConsumer({ children }) {
     dispatch({ type: Actions.USER_SIGN_OUT })
   }
   const UserSignUp = async (signup) => {
-    const { data } = await SignUp(signup);
-    return data;
+    return (await SignUp(signup)).data;
   };
 
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {
-    const product = await getProduct(ProductKey);
-    dispatch({ type: Actions.ADD_TO_CART, payload: { product } });
+    await getProduct(ProductKey).then(product => {
+      dispatch({ type: Actions.ADD_TO_CART, payload: { product } });
+    }).catch((err) => {
+      SystemError(err)
+    })
   };
   const Quantity = async (cant, productkey) => {
-    const { stock } = await getProduct(productkey);
-    if (cant <= 1) {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey, stock } });
-    } else {
-      dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey, stock } });
-    }
+    await getProduct(productkey).then(product => {
+      const { stock } = product
+      if (cant <= 1) {
+        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey, stock } });
+      } else {
+        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey, stock } });
+      }
+    }).catch((err) => {
+      SystemError(err)
+    });
+
   };
   const RemoveProductFromCart = (productkey) => {
     dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
@@ -119,8 +167,8 @@ export default function ContextConsumer({ children }) {
   const ContextValues = {
     AddToCart, RemoveProductFromCart,
     products, categories, UserSignOut,
-    UserLogin, UserSignUp, user, getProduct,
-    getProducts, getCategories, getProductByCategorie,
+    UserLogin, UserSignUp, user, getProduct, system,
+    getProducts, getCategories, getProductsByCategorie,
     resultSearch, ClearCart, cart, Quantity, searchProduct,
     productsByCategorie, SubTotal, Tax, Total, setProductsByCategorie
   };
