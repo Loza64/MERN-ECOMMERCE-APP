@@ -9,6 +9,6 @@ GetConnection()
 ServerApp.use(bodyparser.json())
 ServerApp.use(bodyparser.urlencoded({ extended: true }))
 ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Images' }))
-ServerApp.use('/EcommerceApp', routes)
+ServerApp.use('/ECOMMERCE/SERVER/NODE/ROUTE/API/ECOMMERCESERVER/APP', routes)
 
 module.exports = ServerApp

@@ -15,6 +15,7 @@ import DetailProduct from './Components/Products/DetailProduct';
 
 export default function App() {
   const { categories, products } = ContextProvider();
+
   return (
     <div>
       <Navbar />

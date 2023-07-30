@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { ContextProvider } from "../../Context/Context";
 import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
