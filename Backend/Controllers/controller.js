@@ -73,8 +73,8 @@ const Login = async (req, res) => {
 const NewProduct = async (req, res) => {
   const { name, category, stock, company, details, price, discount } = req.body
   try {
-    const check = Products.findOne({ name: name })
-    if (check != null) {
+    const check = await Products.find({ name: name })
+    if (check.length > 0) {
       res.send('El producto ya existe en la base de datos.')
     } else {
       const getcategory = await Categories.findOne({ name: category })
