@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "npm install --prefix Frontend && npm run build --prefix Frontend"
+    "build": "npm install --prefix Frontend && npm run build --prefix Frontend",
+    "appinstall": "npm install && npm instal --prefix Frontend",
+    "appupdate": "npm update && npm update --prefix Frontend",
+    "webinstall": "npm install && npm run build"
   },
   "repository": {
     "type": "git",
