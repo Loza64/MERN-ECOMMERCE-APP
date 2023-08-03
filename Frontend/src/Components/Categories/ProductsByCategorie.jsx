@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { ContextProvider } from "../../Context/Context";
+import { ContextProvider } from "../../Context/ContextConsumer";
 import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
 import Loading from "../Loading";

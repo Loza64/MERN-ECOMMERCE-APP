@@ -1,7 +1,7 @@
 import React from "react";
 import Pago from "../Pago";
 import CartList from './CartList'
-import { ContextProvider } from "../../Context/Context";
+import { ContextProvider } from "../../Context/ContextConsumer";
 import Products from "../Products/Products";
 import Top from "../Top";
 

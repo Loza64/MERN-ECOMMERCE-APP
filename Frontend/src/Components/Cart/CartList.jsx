@@ -1,7 +1,7 @@
 import React from "react";
 import { ShoppingCartList } from "../Styles/styled-components";
 import CartItem from "./CartItem";
-import { ContextProvider } from '../../Context/Context'
+import { ContextProvider } from '../../Context/ContextConsumer'
 
 export default function CartList() {
   const { cart } = ContextProvider();

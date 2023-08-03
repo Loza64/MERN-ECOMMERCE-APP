@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar'
-import { ContextProvider } from './Context/Context';
+import { ContextProvider } from './Context/ContextConsumer';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
 import Categories from './Components/Categories/Categories';

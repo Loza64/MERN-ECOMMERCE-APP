@@ -5,7 +5,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import ContextConsumer from './Context/Context';
+import ContextConsumer from './Context/ContextConsumer';
 import { BrowserRouter as Router } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('ECOMMERCEAPP'));

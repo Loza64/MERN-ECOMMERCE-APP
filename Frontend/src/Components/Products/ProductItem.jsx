@@ -1,7 +1,7 @@
 import React from "react";
 import { BsFillCartPlusFill, BsFillCartXFill } from 'react-icons/bs'
 import { BtnCart } from "../Styles/styled-components";
-import { ContextProvider } from '../../Context/Context'
+import { ContextProvider } from '../../Context/ContextConsumer'
 import { useNavigate } from "react-router-dom";
 
 export default function ProductItem({ product, animationState }) {

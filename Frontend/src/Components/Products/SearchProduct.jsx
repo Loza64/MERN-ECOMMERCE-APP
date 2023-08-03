@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ContextProvider } from "../../Context/Context";
+import { ContextProvider } from "../../Context/ContextConsumer";
 import ProductItem from "./ProductItem";
 import Top from "../Top";
 import Loading from "../Loading";

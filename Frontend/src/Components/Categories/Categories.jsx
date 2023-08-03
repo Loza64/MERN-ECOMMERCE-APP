@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import Top from '../Top'
 import CategorieList from './CategorieList'
 import Loading from '../Loading';
-import { ContextProvider } from '../../Context/Context';
+import { ContextProvider } from '../../Context/ContextConsumer';
 import Message from '../Message';
 
 export default function Categories({ SubTopic, Topic }) {

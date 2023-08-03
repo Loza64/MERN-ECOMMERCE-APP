@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillCartPlusFill } from 'react-icons/bs'
 import { FaShoppingBag } from 'react-icons/fa'
-import { ContextProvider } from "../../Context/Context";
+import { ContextProvider } from "../../Context/ContextConsumer";
 import { DetailProducts } from "../Styles/styled-components";
 import Loading from "../Loading";
 import ProductItem from "./ProductItem";

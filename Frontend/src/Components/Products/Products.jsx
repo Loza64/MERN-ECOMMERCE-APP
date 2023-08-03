@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductsList from "./ProductsList";
 import Top from "../Top";
 import Loading from "../Loading";
-import { ContextProvider } from "../../Context/Context";
+import { ContextProvider } from "../../Context/ContextConsumer";
 import Message from "../Message";
 
 export default function Products({ SubTopic, Topic, TopState }) {

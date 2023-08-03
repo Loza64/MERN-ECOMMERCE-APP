@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { ContextProvider } from '../Context/Context';
+import { ContextProvider } from '../Context/ContextConsumer';
 import { React, useState } from "react";
 import { Field, ErrorMessage, Formik, Form } from 'formik'
 import { SignupContainer } from "./Styles/styled-components";

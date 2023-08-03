@@ -1,6 +1,6 @@
 import React from "react";
 import CategorieItem from "./CategorieItem";
-import { ContextProvider } from '../../Context/Context'
+import { ContextProvider } from '../../Context/ContextConsumer';
 
 export default function CategorieList() {
   const { categories } = ContextProvider();

@@ -7,7 +7,7 @@ import { FaSearch, FaUserAlt, FaBoxes, FaClipboardList, FaSignOutAlt } from 'rea
 import { AiFillHome, AiFillSetting, AiFillTags } from 'react-icons/ai'
 import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
-import { ContextProvider } from '../Context/Context';
+import { ContextProvider } from '../Context/ContextConsumer';
 import Swal from "sweetalert2";
 
 export default function Navbar() {

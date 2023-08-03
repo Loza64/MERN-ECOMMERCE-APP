@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { ContextProvider } from "../../Context/Context";
+import { ContextProvider } from "../../Context/ContextConsumer";
 
 export default function CategorieItem({ category }) {
   const { setProductsByCategorie } = ContextProvider();

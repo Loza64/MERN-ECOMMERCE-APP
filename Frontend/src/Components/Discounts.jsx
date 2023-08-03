@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Top from "./Top";
-import { ContextProvider } from '../Context/Context';
+import { ContextProvider } from '../Context/ContextConsumer';
 import ProductItem from './Products/ProductItem'
 import Loading from "./Loading";
 import Message from "./Message";

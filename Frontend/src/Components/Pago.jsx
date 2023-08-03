@@ -1,5 +1,5 @@
 import { React } from 'react';
-import { ContextProvider } from '../Context/Context';
+import { ContextProvider } from '../Context/ContextConsumer';
 export default function Pago() {
 
   const { ClearCart, SubTotal, Tax, Total } = ContextProvider();
