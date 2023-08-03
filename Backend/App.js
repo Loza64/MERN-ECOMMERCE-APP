@@ -14,7 +14,7 @@ ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Images' }))
 ServerApp.use('/ECOMMERCE/SERVER/NODE/ROUTE/API/ECOMMERCESERVER/APP', routes)
 
 if (NODE_ENV === "productions") {
-    ServerApp.use(express.static(path.join(__dirname, '../Frontend/build')));
+    ServerApp.use(express.static(path.join(__dirname, '../Frontend/build')))
     ServerApp.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, '../Frontend', 'build', 'index.html'))
     })
