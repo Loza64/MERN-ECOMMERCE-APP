@@ -517,7 +517,7 @@ width:100%;
   align-items:center;
   padding: 2px 10px;
   background:white;
-  border:solid 3px rgb(220, 220, 220);
+  border:solid 3px rgb(231,231,231);
   border-radius:10px;
   margin-right:16px;
   margin-bottom:6px;
@@ -541,8 +541,8 @@ width:100%;
 .item .image{
   width:100%;
   height:100%;
-  max-width:8rem;
-  margin: 9px;
+  max-width:5rem;
+  margin: 4px 10px;
   cursor: pointer;
 }
 .item .image img {
@@ -613,6 +613,7 @@ width:100%;
 }
 .item .detailproduct{
   font-weight:900;
+  font-size:14px;
 }
 .item .detailproduct .flex-buttoms .quantity-buttoms{
   display:flex;
@@ -635,7 +636,7 @@ width:100%;
   color:white;
 }
 .item .detailproduct .flex-buttoms .quantity-buttoms label{
-  font-size:17px;
+  font-size:15px;
   margin:0 10px;
   font-weight:900;
 }
