@@ -4,6 +4,7 @@ import CategorieList from './CategorieList'
 import Loading from '../Loading';
 import { ContextProvider } from '../../Context/ContextConsumer';
 import Message from '../Message';
+import Title from '../Title';
 
 export default function Categories({ SubTopic, Topic }) {
   const [loading, setLoading] = useState(0);
@@ -16,7 +17,7 @@ export default function Categories({ SubTopic, Topic }) {
       return categories.length > 0 ? (
         <div>
           <Top state={true} />
-          <h1 className="text-center py-2" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>{SubTopic}</label> {Topic}</h1>
+          <Title Title={"Look at out"} SubTitle={"Categories"} />
           <CategorieList />
         </div>
       ) : <Message title={"Categories not found"} />

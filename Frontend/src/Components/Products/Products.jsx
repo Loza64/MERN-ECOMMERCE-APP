@@ -4,8 +4,9 @@ import Top from "../Top";
 import Loading from "../Loading";
 import { ContextProvider } from "../../Context/ContextConsumer";
 import Message from "../Message";
+import Title from "../Title";
 
-export default function Products({ SubTopic, Topic, TopState }) {
+export default function Products({ TopState }) {
   const { products, system } = ContextProvider();
   const [loading, setLoading] = useState(0);
 
@@ -17,7 +18,7 @@ export default function Products({ SubTopic, Topic, TopState }) {
         (
           <div>
             <Top state={TopState} />
-            <h1 className="text-center py-2" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>{SubTopic}</label> {Topic}</h1>
+            <Title Title={"Our"} SubTitle={"Products"} />
             <ProductsList />
           </div>
         ) : <Message title={"Products not found"} />

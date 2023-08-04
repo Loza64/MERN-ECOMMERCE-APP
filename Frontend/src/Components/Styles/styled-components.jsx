@@ -680,7 +680,7 @@ export const DetailProducts = styles.div`
   margin: 10px 0;
   color: blue;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 28px;
 }
 @media only screen and (max-width: 780px){
   .content-detail-product h2{font-size: 25px;}

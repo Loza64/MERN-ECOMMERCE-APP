@@ -4,6 +4,7 @@ import { ContextProvider } from '../Context/ContextConsumer';
 import ProductItem from './Products/ProductItem'
 import Loading from "./Loading";
 import Message from "./Message";
+import Title from "./Title";
 
 export default function Discounts() {
   const { products, system } = ContextProvider();
@@ -19,7 +20,7 @@ export default function Discounts() {
         (
           <div>
             <Top state={true} />
-            <h1 className="text-center py-2" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Check our</label> Discounts</h1>
+            <Title Title={"Check our"} SubTitle={"discounts"}/>
             <div className="grid">
               {
                 discounts.map(

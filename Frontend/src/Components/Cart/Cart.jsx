@@ -4,13 +4,14 @@ import CartList from './CartList'
 import { ContextProvider } from "../../Context/ContextConsumer";
 import Products from "../Products/Products";
 import Top from "../Top";
+import Title from "../Title";
 
 export default function Cart() {
   const { cart, system } = ContextProvider();
   return !system ? null : cart.length > 0 ? (
     <div>
       <Top state={true} />
-      <h1 className="text-center title-cart py-2">Shopping Cart</h1>
+      <Title Title={"Shopping"} SubTitle={"Cart"} />
       <div className="flex-cart">
         <CartList />
         <Pago />
