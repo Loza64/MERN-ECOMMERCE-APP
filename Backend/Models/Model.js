@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
 const user = new Schema({
   key: { type: String, require: true, unique: true },
@@ -49,10 +49,8 @@ const detailsale = new Schema({
   total: { type: Number, require: true },
 })
 
-module.exports = {
-  Users: mongoose.model("users", user),
-  Products: mongoose.model("products", product),
-  Categories: mongoose.model("categories", category),
-  Sales: mongoose.model("sales", sale),
-  Detailsales: mongoose.model("detailsales", detailsale)
-}
+export const Users = mongoose.model("users", user)
+export const Products = mongoose.model("products", product)
+export const Categories = mongoose.model("categories", category)
+export const Sales = mongoose.model("sales", sale)
+export const Detailsales = mongoose.model("detailsales", detailsale)

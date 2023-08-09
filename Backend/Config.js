@@ -1,13 +1,11 @@
-const dotenv = require('dotenv');
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
 
-module.exports = {
-  ConnectionCloud: process.env.MONGODB_URI_CLOUD,
-  PORT: process.env.PORT,
-  ApiKey: process.env.API_KEY,
-  CloudName: process.env.CLOUD_NAME,
-  ApiSecret: process.env.API_SECRET,
-  NODE_ENV: process.env.NODE_ENV,
-  MAIL_BUSINESS: process.env.MAIL_BUSINESS,
-  MAIL_PASS: process.env.MAIL_PASS
-}
+export const ConnectionCloud = process.env.MONGODB_URI_CLOUD
+export const PORT = process.env.PORT
+export const ApiKey = process.env.API_KEY
+export const CloudName = process.env.CLOUD_NAME
+export const ApiSecret = process.env.API_SECRET
+export const NODE_ENV = process.env.NODE_ENV
+export const MAIL_BUSINESS = process.env.MAIL_BUSINESS
+export const MAIL_PASS = process.env.MAIL_PASS

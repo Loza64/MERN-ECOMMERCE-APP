@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer')
-const { MAIL_BUSINESS, MAIL_PASS } = require('../Config')
+import nodemailer from 'nodemailer'
+import { MAIL_BUSINESS, MAIL_PASS } from '../Config.js'
 
 const transport = nodemailer.createTransport({
   service: 'gmail',
@@ -9,12 +9,12 @@ const transport = nodemailer.createTransport({
   }
 })
 
-const SendEmail = (mailmessage) => transport.sendMail(mailmessage, (error, info) => {
-  if (error) {
-    console.error(error)
-  } else{
-    console.log('Email enviado con exito')
-  }
-})
-
-module.exports = SendEmail
+export default function SendEmail(mailmessage) {
+  transport.sendMail(mailmessage, (error, info) => {
+    if (error) {
+      console.error(error)
+    } else {
+      console.log('Email enviado con exito')
+    }
+  })
+}

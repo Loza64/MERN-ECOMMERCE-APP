@@ -1,5 +1,6 @@
-const express = require('express')
-const { SignUp, Login, NewProduct, GetProducts, NewCategorie, GetCategories, GetProductsByCategorie, GetProductByKey, SearchProducts } = require('../Controllers/controller')
+import express from 'express'
+import { SignUp, Login, NewProduct, GetProducts, NewCategorie, GetCategories, GetProductsByCategorie, GetProductByKey, SearchProducts } from '../Controllers/controller.js'
+
 const routes = express.Router()
 
 //User Routes
@@ -17,4 +18,4 @@ routes.get('/SearchProducts/:product', SearchProducts)
 routes.post('/NewCategorie', NewCategorie)
 routes.get('/GetCategories', GetCategories)
 
-module.exports = routes
+export default routes

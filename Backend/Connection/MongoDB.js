@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const { ConnectionCloud } = require('../Config')
+import mongoose from 'mongoose'
+import { ConnectionCloud } from '../Config.js'
 
-function GetConnection() {
+export default function GetMongoConnection() {
   mongoose.set('strictQuery', true)
   mongoose.connect(ConnectionCloud)
   mongoose.connection.on('open', () => {
@@ -11,5 +11,3 @@ function GetConnection() {
     console.error(err)
   })
 }
-
-module.exports = GetConnection

@@ -1,6 +1,6 @@
-const express = require('express');
-const ServerApp = require('./Backend/App')
-const { PORT } = require('./Backend/Config')
+import express from 'express';
+import ServerApp from'./Backend/App.js'
+import { PORT } from './Backend/Config.js'
 const App = express();
 
 App.use(ServerApp)

@@ -1,22 +1,17 @@
-const cloudinary = require('cloudinary').v2
-const { ApiKey, ApiSecret, CloudName } = require('../Config')
+import cloudinary from 'cloudinary'
+import { ApiKey, ApiSecret, CloudName } from '../Config.js'
 
-cloudinary.config({
+cloudinary.v2.config({
   api_key: ApiKey,
   api_secret: ApiSecret,
   cloud_name: CloudName,
   secure: true
 })
 
-const UploadImage = async (image) => {
-  return await cloudinary.uploader.upload(image, { folder: 'ECOMMERCE' })
+export const UploadImage = async (image) => {
+  return await cloudinary.v2.uploader.upload(image, { folder: 'ECOMMERCE' })
 }
 
-const DeleteImage = async (public_id) =>{
-  return await cloudinary.uploader.destroy(public_id)
-}
-
-module.exports = {
-  UploadImage,
-  DeleteImage
+export const DeleteImage = async (public_id) => {
+  return await cloudinary.v2.uploader.destroy(public_id)
 }
