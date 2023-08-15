@@ -1,7 +1,5 @@
 import fs from 'fs-extra'
 import uniquid from 'uniquid'
-import jsonwebtoken from 'jsonwebtoken'
-import SendEmail from '../Libraries/nodemailer.js'
 import { EncryptPass, ComparePass } from '../Libraries/bcrypt.js'
 import { UploadImage, DeleteImage } from '../Libraries/cloudinary.js'
 import { Categories, Detailsales, Products, Sales, Users } from '../Models/Model.js'
