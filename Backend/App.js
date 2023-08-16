@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename)
 GetMongoConnection()
 ServerApp.use(bodyparser.json())
 ServerApp.use(bodyparser.urlencoded({ extended: true }))
-ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Images' }))
+ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
 ServerApp.use('/ECOMMERCE/SERVER/NODE/ROUTE/API/ECOMMERCESERVER/APP', routes)
 
 if (NODE_ENV === "productions") {
