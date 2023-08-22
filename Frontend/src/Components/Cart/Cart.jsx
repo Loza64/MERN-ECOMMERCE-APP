@@ -1,4 +1,3 @@
-import React from "react";
 import Pago from "../Pago";
 import CartList from './CartList'
 import { ContextProvider } from "../../Context/ContextConsumer";

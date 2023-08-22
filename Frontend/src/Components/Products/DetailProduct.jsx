@@ -1,5 +1,5 @@
 import Top from "../Top";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillCartPlusFill } from 'react-icons/bs'
 import { FaShoppingBag } from 'react-icons/fa'
@@ -7,6 +7,11 @@ import { ContextProvider } from "../../Context/ContextConsumer";
 import { DetailProducts } from "../Styles/styled-components";
 import Loading from "../Loading";
 import ProductItem from "./ProductItem";
+import PropTypes from 'prop-types';
+
+DetailProduct.propTypes = {
+  product: PropTypes.object
+}
 
 export default function DetailProduct({ product }) {
   const { key, image, name, company, price, categorykey, stock, discount, details } = product;
@@ -61,7 +66,7 @@ export default function DetailProduct({ product }) {
                     stock > 0 ?
                       (
                         <div className="buttoms">
-                          <button className="buttom cart" onClick={() => { if (stock > 0) { AddToCart(key) } }} en>Add to cart <BsFillCartPlusFill className="react-icon" /></button>
+                          <button className="buttom cart" onClick={() => { if (stock > 0) { AddToCart(key) } }} >Add to cart <BsFillCartPlusFill className="react-icon" /></button>
                           <button className="buttom buy" onClick={() => { if (stock > 0) { AddToCart(key); navigator('/cart') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
                         </div>
                       ) : null

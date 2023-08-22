@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiCloseFill } from 'react-icons/ri';
 import { BsFillCartFill } from 'react-icons/bs';
@@ -46,7 +46,7 @@ export default function Navbar() {
               button: "Aceptar",
               footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
             })
-          });;
+          });
           navigator(search ? `/SearchProduct?product=${search}` : '/SearchProduct?product=all');
           setState(false);
           e.preventDefault();

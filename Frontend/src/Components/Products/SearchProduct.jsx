@@ -5,6 +5,11 @@ import Top from "../Top";
 import Loading from "../Loading";
 import { useEffect, useState } from "react";
 import Message from "../Message";
+import PropTypes from 'prop-types';
+
+SearchProduct.propTypes = {
+    TopState: PropTypes.bool
+}
 
 export default function SearchProduct({ TopState }) {
     const [loading, setLoading] = useState(0);
@@ -26,7 +31,7 @@ export default function SearchProduct({ TopState }) {
                         <Top state={TopState} />
                         <div className="result-search">
                             <label className="query">Result to: </label>
-                            <label className="result">"{JSON.parse(localStorage.getItem("search"))}"</label>
+                            <label className="result">{JSON.parse(localStorage.getItem("search"))}</label>
                         </div>
                         <div className="grid">
                             {

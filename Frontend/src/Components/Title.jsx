@@ -1,4 +1,9 @@
-import React from "react";
+import PropTypes from 'prop-types';
+
+Title.propTypes = {
+    Title: PropTypes.array,
+    SubTitle: PropTypes.array
+}
 
 export default function Title({ Title, SubTitle }) {
     return (

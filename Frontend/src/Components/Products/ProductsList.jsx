@@ -1,4 +1,3 @@
-import React from "react";
 import { ContextProvider } from '../../Context/ContextConsumer';
 import ProductItem from './ProductItem';
 

@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { useState } from 'react'
 import Top from '../Top'
 import CategorieList from './CategorieList'
 import Loading from '../Loading';
@@ -6,7 +6,7 @@ import { ContextProvider } from '../../Context/ContextConsumer';
 import Message from '../Message';
 import Title from '../Title';
 
-export default function Categories({ SubTopic, Topic }) {
+export default function Categories() {
   const [loading, setLoading] = useState(0);
   const { system, categories } = ContextProvider();
 

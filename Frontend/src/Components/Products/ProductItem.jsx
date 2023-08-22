@@ -1,8 +1,13 @@
-import React from "react";
 import { BsFillCartPlusFill, BsFillCartXFill } from 'react-icons/bs'
 import { BtnCart } from "../Styles/styled-components";
 import { ContextProvider } from '../../Context/ContextConsumer'
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
+
+ProductItem.propTypes = {
+  product: PropTypes.object,
+  animationState: PropTypes.bool
+}
 
 export default function ProductItem({ product, animationState }) {
   const { key, image, name, company, price, stock, discount } = product;

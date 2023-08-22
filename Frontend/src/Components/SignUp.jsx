@@ -1,8 +1,14 @@
 import Swal from 'sweetalert2';
 import { ContextProvider } from '../Context/ContextConsumer';
-import { React, useState } from "react";
+import { useState } from "react";
 import { Field, ErrorMessage, Formik, Form } from 'formik'
 import { SignupContainer } from "./Styles/styled-components";
+import PropTypes from 'prop-types';
+
+SignUp.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func
+}
 
 export default function SignUp({ open, setOpen }) {
 

@@ -1,4 +1,5 @@
 import path from 'path'
+import cors from 'cors'
 import express from 'express'
 import { fileURLToPath } from 'url'
 import bodyparser from 'body-parser'
@@ -12,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 GetMongoConnection()
+ServerApp.use(cors())
 ServerApp.use(bodyparser.json())
 ServerApp.use(bodyparser.urlencoded({ extended: true }))
 ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))

@@ -1,15 +1,15 @@
-import React from "react";
+import PropTypes from 'prop-types';
+
+Top.propTypes = {
+  state: PropTypes.bool
+}
 
 export default function Top({ state }) {
-  if (!state) {
-    return <div></div>
-  } else {
-    return (
-      <div>
-        <br />
-        <br />
-        <br />
-      </div>
-    )
-  }
+  return state ? (
+    <div>
+      <br />
+      <br />
+      <br />
+    </div>
+  ) : null;
 }

@@ -1,7 +1,7 @@
-export const login = process.env.REACT_APP_LOGIN;
-export const signup = process.env.REACT_APP_SIGNUP;
-export const getProducts = process.env.REACT_APP_GET_PRODUCTS;
-export const getCategories = process.env.REACT_APP_GET_CATEGORIES;
-export const searchProducts = process.env.REACT_APP_SEARCH_PRODUCTS;
-export const getProductByKey = process.env.REACT_APP_GET_PRODUCT_BY_KEY;
-export const getProductsByCategorie = process.env.REACT_APP_GET_PRODUCTS_BY_CATEGORIE;
+export const login = import.meta.env.VITE_LOGIN;
+export const signup = import.meta.VITE_SIGNUP;
+export const getProducts = import.meta.env.VITE_GET_PRODUCTS;
+export const getCategories = import.meta.env.VITE_GET_CATEGORIES;
+export const searchProducts = import.meta.env.VITE_SEARCH_PRODUCTS;
+export const getProductByKey = import.meta.env.VITE_GET_PRODUCT_BY_KEY;
+export const getProductsByCategorie = import.meta.env.VITE_GET_PRODUCTS_BY_CATEGORIE;

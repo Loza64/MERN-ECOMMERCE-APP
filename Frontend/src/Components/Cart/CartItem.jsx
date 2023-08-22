@@ -1,7 +1,11 @@
-import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { ContextProvider } from "../../Context/ContextConsumer";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
+
+CartItem.propTypes = {
+  item: PropTypes.object
+}
 
 export default function CartItem({ item }) {
   const { key, name, image, company, price, quantity, discount } = item;
@@ -29,7 +33,7 @@ export default function CartItem({ item }) {
               </button>
               <label>{quantity}</label>
               <button onClick={() => { Quantity(quantity + 1, key) }}>
-                <i class="fa fa-plus" />
+                <i className="fa fa-plus" />
               </button>
             </div>
             <div className="remove-buttom" onClick={() => { RemoveProductFromCart(key) }}>
@@ -61,7 +65,7 @@ export default function CartItem({ item }) {
               </button>
               <label>{quantity}</label>
               <button onClick={() => { Quantity(quantity + 1, key) }}>
-                <i class="fa fa-plus" />
+                <i className="fa fa-plus" />
               </button>
             </div>
             <div className="remove-buttom" onClick={() => { RemoveProductFromCart(key) }}>

@@ -1,4 +1,3 @@
-import { React } from 'react';
 import { ContextProvider } from '../Context/ContextConsumer';
 export default function Pago() {
 

@@ -1,9 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
-import { React, useContext, useState, createContext, useReducer, useEffect } from "react";
+import { useContext, useState, createContext, useReducer, useEffect } from "react";
 import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, SearchProducts, Login, SignUp } from "../Api/RestApi";
 import Swal from "sweetalert2";
+
+ContextConsumer.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+
 const Context = createContext();
 
 export const ContextProvider = () => {

@@ -1,9 +1,15 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { ContextProvider } from "../../Context/ContextConsumer";
 import ProductItem from "../Products/ProductItem";
 import Top from '../Top'
 import Loading from "../Loading";
 import Message from "../Message";
+import PropTypes from 'prop-types';
+
+ProductsByCategorie.propTypes = {
+  CategoryKey: PropTypes.string,
+  top: PropTypes.bool
+}
 
 export default function ProductsByCategorie({ CategoryKey, top }) {
 
