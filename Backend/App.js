@@ -20,8 +20,8 @@ ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
 ServerApp.use('/ECOMMERCE/SERVER/NODE/ROUTE/API/ECOMMERCESERVER/APP', routes)
 
 if (NODE_ENV === "productions") {
-    ServerApp.use(express.static(path.join(__dirname, '../Frontend/build')))
-    ServerApp.get('*', (req, res) => res.sendFile(path.join(__dirname, '../Frontend/build/index.html')))
+    ServerApp.use(express.static(path.join(__dirname, '../Frontend/dist')))
+    ServerApp.get('*', (req, res) => res.sendFile(path.join(__dirname, '../Frontend/dist/index.html')))
 } else {
     ServerApp.get('/', (req, res) => res.send("La pagina esta en mantenimiento, vuelve mas tarde"))
 }
