@@ -17,7 +17,7 @@ ServerApp.use(cors())
 ServerApp.use(bodyparser.json())
 ServerApp.use(bodyparser.urlencoded({ extended: true }))
 ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
-ServerApp.use('/API/REST/ECOMMERCE/SERVER/NODE/ROUTE', routes)
+ServerApp.use('/BACKEND/API/REST/UFOSTARTDEVELOPMENT/SERVER/NODE/ROUTE', routes)
 
 if (NODE_ENV === "productions") {
     ServerApp.use(express.static(path.join(__dirname, '../Frontend/dist')))
