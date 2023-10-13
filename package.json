@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon",
     "build": "npm run build --prefix Frontend",
-    "appinstall": "npm i && npm i --prefix Frontend",
+    "fullinstall": "npm i && npm i --prefix Frontend",
     "appupdate": "npm update && npm update --prefix Frontend",
     "renderapp": "npm i && npm i --prefix Frontend && npm run build --prefix Frontend"
   },
