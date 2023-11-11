@@ -1,11 +1,18 @@
 import axios from 'axios'
-import { getCategories, getProductByKey, getProducts, getProductsByCategorie, login, searchProducts, signup } from '../SettingsEnv'
+import { ServerRoute } from '../SettingsEnv'
 
-export const Login = async (usuario) => await axios.post(login, usuario)
-export const SignUp = async (usuario) => await axios.post(signup, usuario)
+const ServerFetch = axios.create({
+    baseURL: ServerRoute,
+    timeout: 1000 * 60 * 3,
+    headers: { "Content-Type": "application/json" },
+    timeoutErrorMessage: "Server timeout has expired"
+})
 
-export const GetProducts = async () => await axios.get(getProducts)
-export const GetCategories = async () => await axios.get(getCategories)
-export const SearchProducts = async (Product) => await axios.get(searchProducts + "/" + Product)
-export const GetProductByKey = async (ProductKey) => await axios.get(getProductByKey + "/" + ProductKey)
-export const GetProductsByCategorie = async (CategoryKey) => await axios.get(getProductsByCategorie + "/" + CategoryKey)
+export const Login = async (usuario) => await ServerFetch.post('/Login', usuario)
+export const SignUp = async (usuario) => await ServerFetch.post('/SignUp', usuario)
+
+export const GetProducts = async () => await ServerFetch.get('/GetProducts')
+export const GetCategories = async () => await ServerFetch.get('/GetCategories')
+export const SearchProducts = async (Product) => await ServerFetch.get(`/SearchProducts/${Product}`)
+export const GetProductByKey = async (ProductKey) => await ServerFetch.get(`/GetProductByKey/${ProductKey}`)
+export const GetProductsByCategorie = async (CategoryKey) => await ServerFetch.get(`/GetProductsByCategorie/${CategoryKey}`)
