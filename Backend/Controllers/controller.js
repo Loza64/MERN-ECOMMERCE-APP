@@ -109,7 +109,7 @@ export const GetProducts = async (req, res) => {
 }
 export const GetProductsByCategorie = async (req, res) => {
   try {
-    const { CategoryKey } = req.params;
+    const { categorykey } = req.params;
     let result = await Products.find({ categorykey: CategoryKey })
     res.send(result)
   } catch (error) {

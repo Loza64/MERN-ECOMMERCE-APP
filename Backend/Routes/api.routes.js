@@ -4,18 +4,18 @@ import { SignUp, Login, NewProduct, GetProducts, NewCategorie, GetCategories, Ge
 const routes = express.Router()
 
 //User Routes
-routes.post('/Login', Login)
-routes.post('/SignUp', SignUp)
+routes.post('/login', Login)
+routes.post('/signup', SignUp)
 
 //Products Routes
-routes.post('/NewProduct', NewProduct)
-routes.get('/GetProducts', GetProducts)
-routes.get('/GetProductsByCategorie/:CategoryKey', GetProductsByCategorie)
-routes.get('/GetProductByKey/:key', GetProductByKey)
-routes.get('/SearchProducts/:product', SearchProducts)
+routes.post('/newproduct', NewProduct)
+routes.get('/getproducts', GetProducts)
+routes.get('/getproductsbycategorie/:categorykey', GetProductsByCategorie)
+routes.get('/getproductbykey/:key', GetProductByKey)
+routes.get('/searchproducts/:product', SearchProducts)
 
 //Categorie Routes
-routes.post('/NewCategorie', NewCategorie)
-routes.get('/GetCategories', GetCategories)
+routes.post('/newcategorie', NewCategorie)
+routes.get('/getcategories', GetCategories)
 
 export default routes
