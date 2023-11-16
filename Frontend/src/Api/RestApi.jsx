@@ -4,7 +4,7 @@ import { ServerRoute } from '../SettingsEnv'
 const ServerFetch = axios.create({
     baseURL: ServerRoute,
     timeout: 1000 * 60 * 3,
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "multipart/form-data" },
     timeoutErrorMessage: "Server timeout has expired"
 })
 
