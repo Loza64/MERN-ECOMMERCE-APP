@@ -9,9 +9,9 @@
     "start": "node Index.js",
     "dev": "nodemon Index.js",
     "build": "npm run build --prefix Frontend",
-    "fullinstall": "npm i && npm i --prefix Frontend",
+    "appinstall": "npm i && npm i --prefix Frontend",
     "appupdate": "npm update && npm update --prefix Frontend",
-    "renderapp": "npm i && npm i --prefix Frontend && npm run build --prefix Frontend"
+    "deployapp": "npm i && npm i --prefix Frontend && npm run build --prefix Frontend"
   },
   "repository": {
     "type": "git",
