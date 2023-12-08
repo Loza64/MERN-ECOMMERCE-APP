@@ -20,12 +20,13 @@ export const SignUp = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
+
 export const Login = async (req, res) => {
     const { username, password } = req.body
     try {
         const user = await Users.findOne({ username: username })
         if (user != null && (await ComparePass(password, user.password))) {
-            const token = GenerateToken(user);
+            const token = await GenerateToken(user);
             res.status(200).json({ state: true, token })
         } else {
             res.status(200).json({ state: false, token: null })
@@ -35,12 +36,12 @@ export const Login = async (req, res) => {
     }
 }
 
-export const CheckToken = (req, res) => {
+export const CheckToken = async (req, res) => {
     const { TokenKey } = req.params;
     try {
-        const data = VerifyToken(TokenKey);
-        if (data) {
-            res.status(200).json({ state: true, result: { ...data.user } })
+        const token = await VerifyToken(TokenKey);
+        if (token) {
+            res.status(200).json({ state: true, result: { ...token.data } })
         } else {
             res.status(200).json({ state: false, result: null })
         }
