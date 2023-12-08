@@ -1,5 +1,5 @@
 import express from 'express'
-import { Login, SignUp } from '../Controllers/Users.js'
+import { Login, SignUp, CheckToken } from '../Controllers/Users.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
 import { GetProductByKey, GetProducts, GetProductsByCategorie, NewProduct, SearchProducts } from '../Controllers/Products.js'
 
@@ -8,6 +8,7 @@ const routes = express.Router()
 //User Routes
 routes.post('/login', Login)
 routes.post('/signup', SignUp)
+routes.get('/verifytoken/:TokenKey', CheckToken)
 
 //Products Routes
 routes.post('/newproduct', NewProduct)

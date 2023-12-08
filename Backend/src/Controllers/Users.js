@@ -36,9 +36,9 @@ export const Login = async (req, res) => {
 }
 
 export const CheckToken = (req, res) => {
-    const { Token } = req.params;
+    const { TokenKey } = req.params;
     try {
-        const data = VerifyToken(Token);
+        const data = VerifyToken(TokenKey);
         if (data) {
             res.status(200).json({ state: true, result: { ...data.user } })
         } else {

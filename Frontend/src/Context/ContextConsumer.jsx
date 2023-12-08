@@ -39,16 +39,16 @@ export default function ContextConsumer({ children }) {
 
   // Functions products
   const getCategories = async () => {
-    GetCategories().then(product => {
-      setCategories(product.data);
+    GetCategories().then(({ data }) => {
+      setCategories(data.result);
     }).catch((err) => {
       SystemError(err)
     });
 
   };
   const getProducts = async () => {
-    GetProducts().then(product => {
-      setProducts(product.data);
+    GetProducts().then(({ data }) => {
+      setProducts(data.result);
     }).catch((err) => {
       SystemError(err)
     });
@@ -58,9 +58,10 @@ export default function ContextConsumer({ children }) {
     const { data } = await GetProductByKey(ProductKey);
     return data;
   };
+
   const getProductsByCategorie = async (CategoryKey) => {
-    GetProductsByCategorie(CategoryKey).then(products => {
-      setProductsByCategorie(products.data);
+    GetProductsByCategorie(CategoryKey).then(({ data }) => {
+      setProductsByCategorie(data.result);
     }).catch((err) => {
       SystemError(err)
     });
@@ -68,14 +69,14 @@ export default function ContextConsumer({ children }) {
   };
   const searchProduct = async (product) => {
     if (product === "all") {
-      GetProducts().then(product => {
-        setResultSearch(product.data)
+      GetProducts().then(({ data }) => {
+        setResultSearch(data.result)
       }).catch((err) => {
         SystemError(err)
       })
     } else {
-      await SearchProducts(product).then(product => {
-        setResultSearch(product.data)
+      await SearchProducts(product).then(({ data }) => {
+        setResultSearch(data.result)
       }).catch((err) => {
         SystemError(err)
       })
