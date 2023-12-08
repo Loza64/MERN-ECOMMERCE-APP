@@ -1,5 +1,7 @@
 import express from 'express'
-import { SignUp, Login, NewProduct, GetProducts, NewCategorie, GetCategories, GetProductsByCategorie, GetProductByKey, SearchProducts } from '../Controllers/controller.js'
+import { Login, SignUp } from '../Controllers/Users.js'
+import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
+import { GetProductByKey, GetProducts, GetProductsByCategorie, NewProduct, SearchProducts } from '../Controllers/Products.js'
 
 const routes = express.Router()
 
