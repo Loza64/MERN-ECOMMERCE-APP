@@ -4,6 +4,7 @@ import { Login, SignUp, CheckToken } from '../Controllers/Users.js'
 import { ValidationResult } from '../Middlewares/VaidationsResult.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
 import { GetProductByKey, GetProducts, NewProduct } from '../Controllers/Products.js'
+import { ValidateProduct } from '../Validators/ProductValidation.js'
 
 const routes = express.Router()
 
@@ -13,7 +14,7 @@ routes.post('/signup', ValidateSignUp, ValidationResult, SignUp)
 routes.get('/verifytoken/:TokenKey', CheckToken)
 
 //Products Routes
-routes.post('/newproduct', NewProduct)
+routes.post('/newproduct', ValidateProduct, ValidationResult, NewProduct)
 routes.get('/getproducts', GetProducts)
 routes.get('/getproductbykey/:key', GetProductByKey)
 
