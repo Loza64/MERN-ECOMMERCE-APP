@@ -36,7 +36,7 @@ export const NewProduct = async (req, res, next) => {
 }
 
 export const GetProducts = async (req, res, next) => {
-  const { Product, Page, Categorie } = req.query
+  const { Product, Categorie, Page } = req.query
   try {
     const config = Categorie ? { name: { $regex: Product ?? "", $options: 'i' }, categorykey: Categorie } :
       { name: { $regex: Product ?? "", $options: 'i' } }

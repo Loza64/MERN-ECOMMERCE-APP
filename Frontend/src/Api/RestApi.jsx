@@ -8,11 +8,12 @@ const ServerFetch = axios.create({
     timeoutErrorMessage: "Server timeout has expired"
 })
 
+//post
 export const Login = async (usuario) => await ServerFetch.post('/login', usuario)
 export const SignUp = async (usuario) => await ServerFetch.post('/signup', usuario)
 
-export const GetProducts = async () => await ServerFetch.get('/getproducts')
+
+//get
 export const GetCategories = async () => await ServerFetch.get('/getcategories')
-export const SearchProducts = async (Product) => await ServerFetch.get(`/searchproducts/${Product}`)
 export const GetProductByKey = async (ProductKey) => await ServerFetch.get(`/getproductbykey/${ProductKey}`)
-export const GetProductsByCategorie = async (CategoryKey) => await ServerFetch.get(`/getproductsbycategorie/${CategoryKey}`)
+export const GetProducts = async (Product, Categorie, Page) => await ServerFetch.get(`/getproducts?Product=${Product}&Categorie=${Categorie}&Page=${Page}`)
