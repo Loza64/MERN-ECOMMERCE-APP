@@ -40,30 +40,30 @@ export const GetProducts = async (req, res) => {
     return res.status(500).json({ message: error.message })
   }
 }
-export const GetProductsByCategorie = async (req, res) => {
+export const GetProductsByCategorie = async (req, res, next) => {
   try {
     const { categorykey } = req.params;
     let result = await Products.find({ categorykey: categorykey })
     res.status(200).json({ state: true, result })
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    next(error)
   }
 }
-export const GetProductByKey = async (req, res) => {
+export const GetProductByKey = async (req, res, next) => {
   const { key } = req.params;
   try {
     let result = await Products.findOne({ key })
     res.status(200).json({ state: true, result })
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    next(error)
   }
 }
-export const SearchProducts = async (req, res) => {
+export const SearchProducts = async (req, res, next) => {
   try {
     const { product } = req.params;
     const result = await Products.find({ name: { $regex: product, $options: 'i' } })
     res.status(200).json({ state: true, result })
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    next(error)
   }
 }

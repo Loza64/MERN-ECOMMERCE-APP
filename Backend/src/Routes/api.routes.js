@@ -2,12 +2,14 @@ import express from 'express'
 import { Login, SignUp, CheckToken } from '../Controllers/Users.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
 import { GetProductByKey, GetProducts, GetProductsByCategorie, NewProduct, SearchProducts } from '../Controllers/Products.js'
+import { ValidateSignUp } from '../Validators/UserValidadots.js'
+import { ValidationResult } from '../Middlewares/VaidationsResult.js'
 
 const routes = express.Router()
 
 //User Routes
 routes.post('/login', Login)
-routes.post('/signup', SignUp)
+routes.post('/signup', ValidateSignUp, ValidationResult, SignUp)
 routes.get('/verifytoken/:TokenKey', CheckToken)
 
 //Products Routes

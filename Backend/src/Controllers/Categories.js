@@ -3,7 +3,7 @@ import uniquid from 'uniquid'
 import { UploadImage } from '../Libraries/cloudinary.js'
 import { Categories } from '../Models/Model.js'
 
-export const NewCategorie = async (req, res) => {
+export const NewCategorie = async (req, res, next) => {
   const { name } = req.body
   try {
     const check = await Categories.findOne({ name: name })
@@ -27,7 +27,7 @@ export const NewCategorie = async (req, res) => {
       })
     }
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    next(error)
   }
 }
 export const GetCategories = async (req, res) => {

@@ -1,16 +1,17 @@
 import cors from 'cors'
+import morgan from 'morgan'
 import express from 'express'
 import bodyparser from 'body-parser'
+import { Origin } from './SettingsEnv.js'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
+import { ErrorSystem } from './Middlewares/Errors.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
-import { Origin } from './SettingsEnv.js'
-import morgan from 'morgan'
 
 const ServerApp = express()
 
-//Configuration app
 GetMongoConnection()
+ServerApp.use(ErrorSystem)
 ServerApp.use(morgan('dev'))
 ServerApp.use(cors({ origin: Origin, credentials: true }))
 ServerApp.use(bodyparser.json({ limit: '100mb', extended: true }))

@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
+
 const Schema = mongoose.Schema
 
 const user = new Schema({
@@ -11,12 +13,12 @@ const user = new Schema({
   email: { type: String, require: true, unique: true },
   phone: { type: String, require: true, unique: true },
   password: { type: String, require: true },
-  type: { type: String, default: "Cliente", require: true },
-}, { versionKey: false })
+  type: { type: String, require: true, default: "Cliente" },
+}, { versionKey: false }).plugin(mongoosePaginate)
 
 const product = new Schema({
   key: { type: String, require: true, unique: true },
-  image: { public_id: String, url: String },
+  image: { type: Object, required: true, default: { public_id: "", url: "" } },
   categorykey: { type: String, require: true },
   name: { type: String, require: true },
   company: { type: String, require: true },
@@ -24,11 +26,11 @@ const product = new Schema({
   stock: { type: Number, require: true },
   price: { type: Number, require: true },
   discount: { type: Number, require: true },
-}, { versionKey: false })
+}, { versionKey: false }).plugin(mongoosePaginate)
 
 const category = new Schema({
   key: { type: String, require: true, unique: true },
-  image: { public_id: String, url: String },
+  image: { type: Object, required: true, default: { public_id: "", url: "" } },
   name: { type: String, require: true, unique: true }
 }, { versionKey: false })
 
@@ -39,7 +41,7 @@ const sale = new Schema({
   subtotal: { type: Number, require: true },
   total: { type: Number, require: true },
   state: { type: String, require: true, default: "Proceso" },
-}, { versionKey: false })
+}, { versionKey: false }).plugin(mongoosePaginate)
 
 const detailsale = new Schema({
   salekey: { type: String, require: true },

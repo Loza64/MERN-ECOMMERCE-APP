@@ -10,12 +10,9 @@ ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
+const Context = createContext()
 
-const Context = createContext();
-
-export const ContextProvider = () => {
-  return useContext(Context);
-};
+export const ContextProvider = () => useContext(Context)
 
 export default function ContextConsumer({ children }) {
   //hooks
@@ -97,16 +94,16 @@ export default function ContextConsumer({ children }) {
 
 
   // Functions user
-  const UserLogin = async (login) => {
+  const login = async (login) => {
     const { data } = await Login(login);
     dispatch({ type: Actions.USER_LOGIN, payload: { data } })
     return await data ? true : false;
   };
-  const UserSignOut = () => {
+  const signout = () => {
     dispatch({ type: Actions.USER_SIGN_OUT })
   }
-  const UserSignUp = async (signup) => {
-    return (await SignUp(signup)).data;
+  const signup = async (signup) => {
+    return await SignUp(signup);
   };
 
 
@@ -175,8 +172,8 @@ export default function ContextConsumer({ children }) {
 
   const ContextValues = {
     AddToCart, RemoveProductFromCart,
-    products, categories, UserSignOut,
-    UserLogin, UserSignUp, user, getProduct, system,
+    products, categories, signout,
+    login, signup, user, getProduct, system,
     getProducts, getCategories, getProductsByCategorie,
     resultSearch, ClearCart, cart, Quantity, searchProduct,
     productsByCategorie, SubTotal, Tax, Total, setProductsByCategorie

@@ -1,27 +1,32 @@
 import { GenerateToken, VerifyToken } from "../Libraries/jsonwebtoken.js"
 import { EncryptPass, ComparePass } from '../Libraries/bcrypt.js'
 import { Users } from "../Models/Model.js"
+import uniquid from 'uniquid'
 
-export const SignUp = async (req, res) => {
+export const SignUp = async (req, res, next) => {
     const { username, names, surnames, address, birthdate, email, phone, pass } = req.body
     try {
-        const check = await Users.findOne({ username: username }, { email: email }, { phone: phone })
-        if (check != null) {
-            res.send(false)
+        const checkuser = await Users.findOne({ username })
+        const checkemail = await Users.findOne({ email })
+        const checkphone = await Users.findOne({ phone })
+        if (checkemail || checkphone || checkuser) {
+            res.status(200).json({ state: false, message: "Username, email or phone already exist." })
         } else {
-            const password = await EncryptPass(pass)
             const key = uniquid()
             const date = new Date(birthdate)
+            const password = await EncryptPass(pass)
             new Users({ key, username, names, surnames, date, email, address, phone, password }).save().then(() => {
                 res.status(200).json({ state: true, message: "Register success" })
+            }).catch(error => {
+                next(error)
             });
         }
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        next(error)
     }
 }
 
-export const Login = async (req, res) => {
+export const Login = async (req, res, next) => {
     const { username, password } = req.body
     try {
         const user = await Users.findOne({ username: username })
@@ -32,20 +37,20 @@ export const Login = async (req, res) => {
             res.status(200).json({ state: false, token: null })
         }
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        next(error)
     }
 }
 
-export const CheckToken = async (req, res) => {
+export const CheckToken = async (req, res, next) => {
     const { TokenKey } = req.params;
     try {
-        const token = await VerifyToken(TokenKey);
+        const token = await VerifyToken(TokenKey)
         if (token) {
             res.status(200).json({ state: true, result: { ...token.data } })
         } else {
             res.status(200).json({ state: false, result: null })
         }
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        next(error)
     }
 }

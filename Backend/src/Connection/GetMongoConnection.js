@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { ConnectionCloud } from '../SettingsEnv.js'
 
 const database = debug('backend:mongodb')
-const error = debug('backend:error')
+const error = debug('backend:[Error]')
 
 export default function GetMongoConnection() {
   mongoose.set('strictQuery', true)
