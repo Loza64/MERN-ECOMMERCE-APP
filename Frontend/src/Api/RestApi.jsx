@@ -16,4 +16,4 @@ export const SignUp = async (usuario) => await ServerFetch.post('/signup', usuar
 //get
 export const GetCategories = async () => await ServerFetch.get('/getcategories')
 export const GetProductByKey = async (ProductKey) => await ServerFetch.get(`/getproductbykey/${ProductKey}`)
-export const GetProducts = async (Product, Categorie, Page) => await ServerFetch.get(`/getproducts?Product=${Product}&Categorie=${Categorie}&Page=${Page}`)
+export const GetProducts = async (Search, Categorie, Page) => await ServerFetch.get(`/getproducts?Search=${Search}&Categorie=${Categorie}&Page=${Page}`)

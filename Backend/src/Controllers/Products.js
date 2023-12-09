@@ -36,10 +36,10 @@ export const NewProduct = async (req, res, next) => {
 }
 
 export const GetProducts = async (req, res, next) => {
-  const { Product, Categorie, Page } = req.query
+  const { Search, Categorie, Page } = req.query
   try {
-    const config = Categorie ? { name: { $regex: Product ?? "", $options: 'i' }, categorykey: Categorie } :
-      { name: { $regex: Product ?? "", $options: 'i' } }
+    const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, categorykey: Categorie } :
+      { name: { $regex: Search ?? "", $options: 'i' } }
     const result = await Products.paginate(config, { page: Page, limit: 15 }
     )
     res.status(200).json({ state: true, result })

@@ -26,10 +26,10 @@ export default function App() {
         <Route path='/Login' element={<Login />} />
         <Route path='/Discounts' element={<Discounts />} />
         <Route path='/Categories' element={<Categories />} />
+        <Route path={`/Product/:Key`} element={<DetailProduct />} />        
         <Route path='/SearchProduct' element={<SearchProduct TopState={true} />} />
         <Route path='/Products' element={<Products Top={'40px'} TopState={true} />} />
-        {products.map(product => (<Route path={`/Product/${product.name}`} key={product._id} element={<DetailProduct product={product} />} />))}
-        {categories.map(category => (<Route path={`/Categorie/${category.name}`} key={category._id} element={<ProductsByCategorie CategoryKey={category.key} top={true} />} />))}
+        <Route path={`/Categorie/:Category`} element={<ProductsByCategorie top={true} />} />        
       </Routes>
     </div>
   );

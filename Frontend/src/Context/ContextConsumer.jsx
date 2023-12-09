@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductsByCategorie, GetProductByKey, SearchProducts, Login, SignUp } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByKey, Login, SignUp } from "../Api/RestApi";
 import Swal from "sweetalert2";
 
 ContextConsumer.propTypes = {
@@ -15,12 +15,14 @@ const Context = createContext()
 export const ContextProvider = () => useContext(Context)
 
 export default function ContextConsumer({ children }) {
+
   //hooks
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
   const [system, setSystem] = useState(true);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
+  const [categorie, setCategorie] = useState("");
   const [categories, setCategories] = useState([]);
-  const [resultSearch, setResultSearch] = useState([]);
-  const [productsByCategorie, setProductsByCategorie] = useState([]);
 
   function SystemError(err) {
     Swal.fire({
@@ -41,52 +43,20 @@ export default function ContextConsumer({ children }) {
     }).catch((err) => {
       SystemError(err)
     });
-
   };
-  const getProducts = async () => {
-    GetProducts().then(({ data }) => {
+
+  useEffect(() => {
+    GetProducts(search, categorie, page).then(({ data }) => {
       setProducts(data.result);
     }).catch((err) => {
       SystemError(err)
     });
+  }, [search, categorie, page])
 
-  };
   const getProduct = async (ProductKey) => {
     const { data } = await GetProductByKey(ProductKey);
     return data;
   };
-
-  const getProductsByCategorie = async (CategoryKey) => {
-    GetProductsByCategorie(CategoryKey).then(({ data }) => {
-      setProductsByCategorie(data.result);
-    }).catch((err) => {
-      SystemError(err)
-    });
-
-  };
-  const searchProduct = async (product) => {
-    if (product === "all") {
-      GetProducts().then(({ data }) => {
-        setResultSearch(data.result)
-      }).catch((err) => {
-        SystemError(err)
-      })
-    } else {
-      await SearchProducts(product).then(({ data }) => {
-        setResultSearch(data.result)
-      }).catch((err) => {
-        SystemError(err)
-      })
-    }
-  }
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-  useEffect(() => {
-    getProducts()
-  }, [])
 
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
@@ -171,12 +141,10 @@ export default function ContextConsumer({ children }) {
   ).toFixed(2);
 
   const ContextValues = {
-    AddToCart, RemoveProductFromCart,
-    products, categories, signout,
-    login, signup, user, getProduct, system,
-    getProducts, getCategories, getProductsByCategorie,
-    resultSearch, ClearCart, cart, Quantity, searchProduct,
-    productsByCategorie, SubTotal, Tax, Total, setProductsByCategorie
+    AddToCart, RemoveProductFromCart, setPage, setCategorie, setSearch,
+    products, categories, signout, login, signup, user, getProduct,
+    system, getCategories, ClearCart, cart, Quantity, SubTotal, Tax, Total
   };
+
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
 }

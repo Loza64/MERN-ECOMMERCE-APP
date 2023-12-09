@@ -6,7 +6,7 @@ export default function ProductsList() {
   return (
     <div className="grid">
       {
-        products.map(
+        products.docs.map(
           product => (
             <ProductItem key={product._id} product={product} animationState={true} />
           )

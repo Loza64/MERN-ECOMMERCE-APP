@@ -17,9 +17,9 @@ export default function Products({ TopState }) {
 
   if (system) {
     const timeId = setTimeout(() => { setLoading(loading + 1) }, 1000);
-    if (loading >= 1 && products.length > 0) {
+    if (loading >= 1 && products.docs.length > 0) {
       clearTimeout(timeId);
-      return products.length > 0 ?
+      return products.docs.length > 0 ?
         (
           <div>
             <Top state={TopState} />
