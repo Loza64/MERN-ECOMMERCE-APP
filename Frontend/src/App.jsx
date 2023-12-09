@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar'
-import { ContextProvider } from './Context/ContextConsumer';
 import Principal from './Components/Principal';
 import Login from './Components/Login';
 import Categories from './Components/Categories/Categories';
@@ -13,7 +12,6 @@ import Cart from './Components/Cart/Cart';
 import DetailProduct from './Components/Products/DetailProduct';
 
 export default function App() {
-  const { categories, products } = ContextProvider();
 
   return (
     <div>
