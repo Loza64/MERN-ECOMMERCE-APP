@@ -1,69 +1,55 @@
+import { remove } from "fs-extra"
 import { UploadImage } from "../Libraries/cloudinary.js"
 import { Products } from "../Models/Model.js"
-import fs from 'fs-extra'
+import uniquid from "uniquid"
 
-export const NewProduct = async (req, res) => {
-  const { name, category, stock, company, details, price, discount } = req.body
+export const NewProduct = async (req, res, next) => {
+  const { name, categorykey, company, details } = req.body
   try {
     const check = await Products.find({ name: name })
     if (check.length > 0) {
       res.status(200).json({ state: false, details: 'El producto ya existe en la base de datos.' })
     } else {
 
-      const getcategory = await Categories.findOne({ name: category })
-      let result = req.files.image ? await UploadImage(req.files.image.tempFilePath) : null
-      fs.remove(req.files.image.tempFilePath)
+      const result = req.files.image ? await UploadImage(req.files.image.tempFilePath) : null
+      const image = { public_id: result.public_id, url: result.url }
+      const discount = Number(req.body.discount)
+      remove(req.files.image.tempFilePath)
+      const stock = Number(req.body.stock)
+      const price = Number(req.body.price)
+      const key = uniquid()
 
-      new Products({
-        key: uniquid(),
-        image: { public_id: result.public_id, url: result.url },
-        categorykey: getcategory.key,
-        name: name,
-        company: company,
-        details: details,
-        stock: Number(stock),
-        price: Number(price),
-        discount: Number(discount)
-      }).save().then(() => {
+      new Products({ key, image, categorykey, name, company, details, stock, price, discount }).save().then(() => {
         res.status(200).json({ state: false, details: 'Producto guardado exitosamente.' })
       })
     }
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    next(error.message)
+    res.status(500).json({ state: false, message: error.message })
   }
 }
-export const GetProducts = async (req, res) => {
+
+export const GetProducts = async (req, res, next) => {
+  const { Product, Page, Categorie } = req.query
   try {
-    let result = await Products.find({})
+    const config = Categorie ? { name: { $regex: Product ?? "", $options: 'i' }, categorykey: Categorie } :
+      { name: { $regex: Product ?? "", $options: 'i' } }
+    const result = await Products.paginate(config, { page: Page, limit: 15 }
+    )
     res.status(200).json({ state: true, result })
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    next(error.message)
+    res.status(500).json({ state: false, message: error.message })
   }
 }
-export const GetProductsByCategorie = async (req, res, next) => {
-  try {
-    const { categorykey } = req.params;
-    let result = await Products.find({ categorykey: categorykey })
-    res.status(200).json({ state: true, result })
-  } catch (error) {
-    next(error)
-  }
-}
+
 export const GetProductByKey = async (req, res, next) => {
   const { key } = req.params;
   try {
     let result = await Products.findOne({ key })
     res.status(200).json({ state: true, result })
   } catch (error) {
-    next(error)
-  }
-}
-export const SearchProducts = async (req, res, next) => {
-  try {
-    const { product } = req.params;
-    const result = await Products.find({ name: { $regex: product, $options: 'i' } })
-    res.status(200).json({ state: true, result })
-  } catch (error) {
-    next(error)
+    next(error.message)
+    res.status(500).json({ state: false, message: error.message })
   }
 }

@@ -18,11 +18,13 @@ export const SignUp = async (req, res, next) => {
             new Users({ key, username, names, surnames, date, email, address, phone, password }).save().then(() => {
                 res.status(200).json({ state: true, message: "Register success" })
             }).catch(error => {
-                next(error)
+                next(error.message)
+                res.status(500).json({ state: false, message: error.message })
             });
         }
     } catch (error) {
-        next(error)
+        next(error.message)
+        res.status(500).json({ state: false, message: error.message })
     }
 }
 
@@ -37,7 +39,8 @@ export const Login = async (req, res, next) => {
             res.status(200).json({ state: false, token: null })
         }
     } catch (error) {
-        next(error)
+        next(error.message)
+        res.status(500).json({ state: false, message: error.message })
     }
 }
 
@@ -51,6 +54,7 @@ export const CheckToken = async (req, res, next) => {
             res.status(200).json({ state: false, result: null })
         }
     } catch (error) {
-        next(error)
+        next(error.message)
+        res.status(500).json({ state: false, message: error.message })
     }
 }
