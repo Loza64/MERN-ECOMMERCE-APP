@@ -5,13 +5,11 @@ import bodyparser from 'body-parser'
 import { Origin } from './SettingsEnv.js'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import { ErrorSystem } from './Middlewares/Errors.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const ServerApp = express()
 
 GetMongoConnection()
-ServerApp.use(ErrorSystem)
 ServerApp.use(morgan('dev'))
 ServerApp.use(cors({ origin: Origin, credentials: true }))
 ServerApp.use(bodyparser.json({ limit: '100mb', extended: true }))
