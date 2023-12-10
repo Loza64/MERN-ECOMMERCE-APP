@@ -1,0 +1,20 @@
+.flex-cart {
+    display: flex;
+    margin: 0px 20px;
+}
+
+@media only screen and (max-width:600px) {
+    .cart-empty .message {
+        font-size: 25px;
+    }
+
+    .flex-cart {
+        flex-direction: column-reverse;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    .cart-empty .message {
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,210 @@
+.target {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 11px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+    animation-duration: 1.3s;
+    animation-iteration-count: 1;
+}
+
+.target:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(105%);
+}
+
+@keyframes loadtarget {
+    0% {
+        transform: scale(0%);
+    }
+
+    100% {
+        transform: scale(100%);
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .target {
+        max-width: 800px;
+        margin: 5px 77px;
+    }
+
+    .result-search {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width:480px) {
+    .target {
+        max-width: 800px;
+        margin: 0 60px;
+    }
+
+    .target:hover {
+        transition: all 0.2s ease-in-out;
+        transform: scale(100%);
+    }
+}
+
+.target .head-target img {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+.target .body-target {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.target .body-target .product-name {
+    font-size: 13.5px;
+    font-weight: 800;
+}
+
+.target .body-target .content-product-price {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.target .body-target .content-product-price .product-price {
+    font-size: 12.5px;
+    font-weight: 900;
+    color: green;
+    margin: 0 6px;
+}
+
+.target .body-target .content-product-price .product-price-none {
+    font-size: 12.5px;
+    font-weight: 900;
+    color: gray;
+    text-decoration: line-through;
+    text-decoration-color: red;
+    text-decoration-thickness: 2.35px;
+    margin: 0 6px;
+}
+
+.target .body-target .content-product-price .price-discount {
+    font-size: 12.5px;
+    font-weight: 900;
+    color: green;
+    margin: 0 6px;
+}
+
+.target .product-discount {
+    font-size: 12.5px;
+    font-weight: 800;
+    background: red;
+    padding: 3px 8px;
+    color: white;
+    margin: 0 6px;
+    border-radius: 5px;
+}
+
+//Categories
+
+.targe-categorie {
+    width: 100%;
+    height: auto;
+    max-width: 310px;
+    background: rgba(237, 237, 237, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+    animation-name: showcategorie;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.targe-categorie:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(105%);
+}
+
+@media only screen and (max-width:600px) {
+    .targe-categorie {
+        max-width: 600px;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+    .targe-categorie {
+        max-width: 300px;
+        margin: 5px 5px;
+    }
+
+    .targe-categorie:hover {
+        transition: all 0.2s ease-in-out;
+        transform: scale(100%);
+    }
+}
+
+@keyframes showcategorie {
+    0% {
+        opacity: 0%;
+        transform: translateY(5%);
+    }
+
+    100% {
+        opacity: 100%;
+        transform: translateY(0%);
+    }
+}
+
+.targe-categorie .head img {
+    width: 120px;
+    height: 100px;
+    padding: 5px 15px;
+}
+
+.targe-categorie .body {
+    display: flex;
+    flex-direction: column;
+}
+
+.targe-categorie .body label {
+    font-weight: 900;
+}
+
+.targe-categorie .body a {
+    font-weight: 900;
+    color: blue;
+    text-decoration: none;
+}
+
+@media only screen and (max-width:280px) {
+    .targe-categorie .head img {
+        width: 105px;
+        height: 85px;
+    }
+
+    .targe-categorie .body label {
+        font-size: 15px;
+    }
+
+    .targe-categorie .body a {
+        font-size: 15px;
+    }
+}
