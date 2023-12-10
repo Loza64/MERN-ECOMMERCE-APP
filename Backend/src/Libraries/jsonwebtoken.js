@@ -1,5 +1,5 @@
 import Jwt from 'jsonwebtoken';
-import { TokenSecret } from '../SettingsEnv.js'
+import { TokenSecret } from '../Settings.js'
 
 export const GenerateToken = async (data) => {
     return Jwt.sign({ data }, TokenSecret, { expiresIn: '5h' })

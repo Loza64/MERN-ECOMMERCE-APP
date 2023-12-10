@@ -52,8 +52,8 @@ export const GetProducts = async (req, res, next) => {
 export const GetProductByKey = async (req, res, next) => {
   const { key } = req.params;
   try {
-    let result = await Products.findOne({ key })
-    res.status(200).json({ state: true, result })
+    const product = await Products.findOne({ key })
+    res.status(200).json({ state: true, product })
   } catch (error) {
     next(error.message)
     res.status(500).json({ state: false, message: error.message })

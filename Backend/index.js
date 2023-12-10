@@ -1,6 +1,6 @@
 import debug from 'debug'
 import express from 'express'
-import { PORT } from './src/SettingsEnv.js'
+import { PORT } from './src/Settings.js'
 import ServerApp from './src/Application.js'
 
 const App = express()

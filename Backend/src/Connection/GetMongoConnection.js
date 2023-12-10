@@ -1,6 +1,6 @@
 import debug from 'debug'
 import mongoose from 'mongoose'
-import { ConnectionCloud } from '../SettingsEnv.js'
+import { ConnectionCloud } from '../Settings.js'
 
 const database = debug('backend:mongodb')
 const error = debug('backend:[Error]')

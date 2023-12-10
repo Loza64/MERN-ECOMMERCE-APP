@@ -1,4 +1,6 @@
 import dotenv from 'dotenv'
+import MongoStore from 'connect-mongo'
+
 dotenv.config()
 
 export const ConnectionCloud = process.env.MONGODB
@@ -10,3 +12,5 @@ export const MAIL_BUSINESS = process.env.MAILBUSINESS
 export const MAIL_PASS = process.env.MAILPASS
 export const Origin = process.env.ORIGIN
 export const TokenSecret = process.env.TOKEN
+export const Session = process.env.SESSION
+export const NodeEnv = process.env.NODE_ENV

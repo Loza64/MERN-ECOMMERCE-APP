@@ -55,7 +55,7 @@ export default function ContextConsumer({ children }) {
 
   const getProduct = async (ProductKey) => {
     const { data } = await GetProductByKey(ProductKey);
-    return data;
+    return data.product;
   };
 
   //Functions Reducer
