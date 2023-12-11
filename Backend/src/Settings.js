@@ -22,7 +22,8 @@ export const CorsOptions = {
 }
 
 export const SessionSettings = {
-    name: 'UserSessions', resave: false,
+    name: 'UserSessions', 
+    resave: false,
     saveUninitialized: false,
     secret: Session,
     cookie: {
