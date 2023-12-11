@@ -62,10 +62,9 @@ export const CheckToken = async (req, res, next) => {
 
 export const GetUserSession = (req, res) => {
     if (req.session.user) {
-        const user = req.session.user;
-        // Hacer algo con el token y el carrito
-        res.send(`Token: ${user}`);
+        const session = req.session.user;
+        res.status(200).json({ state: true, session })
     } else {
-        res.status(401).send('Usuario no autenticado');
+        res.status(401).json({ state: true, session: null })
     }
 }

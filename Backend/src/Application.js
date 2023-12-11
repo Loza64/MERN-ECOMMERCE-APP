@@ -10,7 +10,7 @@ import GetMongoConnection from './Connection/GetMongoConnection.js'
 import { CorsOptions, MongoSettings, SessionSettings } from './Settings.js'
 
 const ServerApp = express()
-const MongoDBStore = MongoDBStoreFactory(expressSession);
+const MongoDBStore = MongoDBStoreFactory(expressSession)
 const StoreSessionsMongo = new MongoDBStore(MongoSettings)
 
 GetMongoConnection()
