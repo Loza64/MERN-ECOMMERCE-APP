@@ -1,4 +1,7 @@
 import dotenv from 'dotenv'
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
+
 dotenv.config()
 
 export const ConnectionCloud = process.env.MONGODB
@@ -12,3 +15,11 @@ export const Origin = process.env.ORIGIN
 export const TokenSecret = process.env.TOKEN
 export const Session = process.env.SESSION
 export const NodeEnv = process.env.NODE_ENV
+
+export const SessionServer = session({
+    secret: Session,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: ConnectionCloud }),
+    cookie: { secure: NodeEnv === 'production', maxAge: 60 * 60 * 1000, }
+})
