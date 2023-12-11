@@ -29,6 +29,7 @@ export const SessionServer = session({
     name: 'UserSessions',
     resave: false,
     saveUninitialized: false,
+    store: Store,
     secret: Session,
     cookie: {
         path: '/',
