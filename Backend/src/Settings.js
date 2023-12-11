@@ -19,7 +19,12 @@ export const NodeEnv = process.env.NODE_ENV
 export const SessionServer = session({
     secret: Session,
     resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: ConnectionCloud }),
-    cookie: { secure: NodeEnv === 'production', maxAge: 60 * 60 * 1000, }
+    rolling: true,
+    saveUninitialized: false,
+    cookie: { secure: true, maxAge: 60 * 60 * 1000, },
+    store: MongoStore.create({
+        mongoUrl: ConnectionCloud,
+        autoRemove: 'native',
+        autoRemoveInterval: 60 * 60 //Recoleccion de basura cada hora
+    })
 })
