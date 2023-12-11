@@ -2,7 +2,7 @@ import debug from 'debug'
 import mongoose from 'mongoose'
 import { ConnectionCloud } from '../Settings.js'
 
-const database = debug('backend:mongodb')
+const database = debug('backend:[MongoDB]')
 const error = debug('backend:[Error]')
 
 export default function GetMongoConnection() {

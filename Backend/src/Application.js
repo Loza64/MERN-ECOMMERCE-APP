@@ -20,7 +20,8 @@ ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
 ServerApp.use('/backend/api/rest/ufostartserver/node/route/fetch/axios', routes)
 ServerApp.use(session({
     secret: Session, resave: false, saveUninitialized: true,
-    cookie: { secure: NodeEnv === 'production' }, store: MongoStore.create({ mongoUrl: ConnectionCloud })
+    store: MongoStore.create({ mongoUrl: ConnectionCloud }),
+    cookie: { secure: NodeEnv === 'production', maxAge: 60 * 60 * 1000, }
 }))
 
 export default ServerApp;

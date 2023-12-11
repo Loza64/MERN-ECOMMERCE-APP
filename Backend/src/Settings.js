@@ -1,6 +1,4 @@
 import dotenv from 'dotenv'
-import MongoStore from 'connect-mongo'
-
 dotenv.config()
 
 export const ConnectionCloud = process.env.MONGODB
