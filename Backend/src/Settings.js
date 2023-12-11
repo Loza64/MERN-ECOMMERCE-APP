@@ -1,6 +1,4 @@
 import dotenv from 'dotenv'
-import session from 'express-session'
-import MongoDBStoreFactory from 'connect-mongodb-session'
 
 dotenv.config()
 
@@ -16,20 +14,16 @@ export const TokenSecret = process.env.TOKEN;
 export const Session = process.env.SESSION;
 export const NodeEnv = process.env.NODE_ENV;
 
-const MongoDBStore = MongoDBStoreFactory(session);
+export const CorsOptions = {
+    origin: Origin,
+    credentials: true,
+    methods: '*',
+    optionsSuccessStatus: true
+}
 
-const Store = new MongoDBStore({
-    uri: ConnectionCloud,
-    collection: 'sessions',
-    autoRemove: 'interval',
-    autoRemoveInterval: 60 //Remove sessions every 60 minutes
-})
-
-export const SessionServer = session({
-    name: 'UserSessions',
-    resave: false,
+export const SessionSettings = {
+    name: 'UserSessions', resave: false,
     saveUninitialized: false,
-    store: Store,
     secret: Session,
     cookie: {
         path: '/',
@@ -37,11 +31,11 @@ export const SessionServer = session({
         maxAge: 60 * 60 * 1000,
         sameSite: 'strict'
     }
-})
+}
 
-export const CorsOptions = {
-    origin: Origin,
-    credentials: true,
-    methods: '*',
-    optionsSuccessStatus: true
+export const MongoSettings = {
+    uri: ConnectionCloud,
+    collection: 'sessions',
+    autoRemove: 'interval',
+    autoRemoveInterval: 60 //Remove sessions every 60 minutes
 }
