@@ -34,8 +34,10 @@ export const Login = async (req, res, next) => {
         const user = await Users.findOne({ username: username })
         if (user != null && (await ComparePass(password, user.password))) {
             const token = await GenerateToken(user);
-            req.session.user = { token, cart: [] }
+            req.session.user = { token, Cart: [] }
             res.status(200).json({ state: true, token })
+        } else {
+            res.status(200).json({ state: false, token: null })
         }
     } catch (error) {
         next(error.message)
@@ -55,5 +57,15 @@ export const CheckToken = async (req, res, next) => {
     } catch (error) {
         next(error.message)
         res.status(500).json({ state: false, message: error.message })
+    }
+}
+
+export const GetUserSession = (req, res) => {
+    if (req.session.user) {
+        const user = req.session.user;
+        // Hacer algo con el token y el carrito
+        res.send(`Token: ${user}`);
+    } else {
+        res.status(401).send('Usuario no autenticado');
     }
 }
