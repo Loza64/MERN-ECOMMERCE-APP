@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByKey, Login, SignUp } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByKey, Login, SignUp, VerifyToken } from "../Api/RestApi";
 import Swal from "sweetalert2";
 
 ContextConsumer.propTypes = {
@@ -17,6 +17,7 @@ export const ContextProvider = () => useContext(Context)
 export default function ContextConsumer({ children }) {
 
   //hooks
+  const [user, setUser] = useState({});
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [system, setSystem] = useState(true);
@@ -60,22 +61,33 @@ export default function ContextConsumer({ children }) {
 
   //Functions Reducer
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
-  const { cart, user } = state;
+  const { cart, token } = state;
 
 
-  // Functions user
+  // Functions token
   const login = async (login) => {
     const { data } = await Login(login);
-    dispatch({ type: Actions.USER_LOGIN, payload: { data } })
-    return await data ? true : false;
+    const { token, state } = data;
+    dispatch({ type: Actions.SAVE_TOKEN, payload: { token } })
+    return await state;
   };
+
   const signout = () => {
-    dispatch({ type: Actions.USER_SIGN_OUT })
+    dispatch({ type: Actions.REMOVE_TOKEN, payload: null })
   }
+
   const signup = async (signup) => {
     return await SignUp(signup);
   };
 
+  useEffect(() => {
+    VerifyToken(token).then(({ data }) => {
+      const { result } = data;
+      setUser(result)
+    }).catch((err) => {
+      SystemError(err.message);
+    })
+  }, [token])
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {

@@ -9,7 +9,7 @@ export default function Login() {
   const navigator = useNavigate();
 
   //Function context
-  const { UserLogin, UserSignOut } = ContextProvider();
+  const { login, signout } = ContextProvider();
 
   //hooks
   const [user, setUser] = useState(String);
@@ -24,11 +24,11 @@ export default function Login() {
   }
 
   window.addEventListener('load', () => {
-    UserSignOut();
+    signout();
   })
 
   function LoginSubmit() {
-    UserLogin(body).then((responce) => {
+    login(body).then((responce) => {
       if (!responce) {
         setState(false);
       } else {

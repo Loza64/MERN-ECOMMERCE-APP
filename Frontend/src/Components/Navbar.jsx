@@ -15,8 +15,7 @@ export default function Navbar() {
   const navigator = useNavigate();
 
   //Functions Context
-  const { user, cart, UserSignOut, searchProduct } = ContextProvider();
-  let { username } = user;
+  const { user, cart, signout, searchProduct } = ContextProvider();
 
   //Hooks
   const [state, setState] = useState(false);
@@ -72,8 +71,8 @@ export default function Navbar() {
               )
               :
               (
-                <Link to="/Login" onClick={() => { setState(false); scrollTop(); UserSignOut() }}>
-                  <label>{username}<FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
+                <Link to="/Login" onClick={() => { setState(false); scrollTop(); signout() }}>
+                  <label>{user.username}<FaSignOutAlt className="react-icon" style={{ marginLeft: "5px" }} /></label>
                 </Link>
               )
           }
