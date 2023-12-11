@@ -29,7 +29,8 @@ export const SessionSettings = {
         path: '/',
         secure: true,
         maxAge: 60 * 60 * 1000,
-        sameSite: 'strict'
+        sameSite: 'strict',
+        domain: Origin
     }
 }
 
