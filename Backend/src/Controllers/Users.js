@@ -35,7 +35,7 @@ export const Login = async (req, res, next) => {
         if (user != null && (await ComparePass(password, user.password))) {
             const token = await GenerateToken(user);
             req.session.user = { token, cart: [] }
-            res.status(200).json({ state: true, token, sessions: req.session })
+            res.status(200).json({ state: true, token })
         }
     } catch (error) {
         next(error.message)
