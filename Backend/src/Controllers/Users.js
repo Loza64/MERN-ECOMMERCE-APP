@@ -34,7 +34,7 @@ export const Login = async (req, res, next) => {
         const user = await Users.findOne({ username: username })
         if (user != null && (await ComparePass(password, user.password))) {
             const token = await GenerateToken(user);
-            req.session.user = { token, Cart: [] }
+            req.session.usersession = { Id: user._id, Usuario: user.username, token, Cart: [] }
             res.status(200).json({ state: true, token })
         } else {
             res.status(200).json({ state: false, token: null })
