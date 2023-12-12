@@ -34,9 +34,9 @@ export const Login = async (req, res, next) => {
         const user = await Users.findOne({ username: username })
         if (user != null && (await ComparePass(password, user.password))) {
             const token = await GenerateToken(user);
-            req.session.UserSession = {
+            req.session.User = {
                 Id: user._id.toString(),
-                User: user.username,
+                Username: user.username,
                 Type: user.type,
                 Token: token,
                 Cart: []
@@ -67,8 +67,8 @@ export const CheckToken = async (req, res, next) => {
 }
 
 export const GetUserSession = (req, res) => {
-    if (req.session.UserSession) {
-        const session = req.session.UserSession;
+    if (req.session.User) {
+        const session = req.session.User;
         res.status(200).json({ state: true, session })
     } else {
         res.status(401).json({ state: true, session: null })
