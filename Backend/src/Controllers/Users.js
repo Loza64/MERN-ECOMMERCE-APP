@@ -4,7 +4,8 @@ import { Users } from "../Models/Model.js"
 import uniquid from 'uniquid'
 
 export const SignUp = async (req, res, next) => {
-    const { username, names, surnames, address, date, email, phone, pass } = req.body
+    const { username, names, surnames, address, date, email, pass } = req.body
+    const phone = Number(req.body.phone)
     try {
         const checkuser = await Users.findOne({ username })
         const checkemail = await Users.findOne({ email })

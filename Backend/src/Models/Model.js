@@ -11,7 +11,7 @@ const user = new Schema({
   address: { type: String, require: true },
   birthdate: { type: Date, require: true },
   email: { type: String, require: true, unique: true },
-  phone: { type: String, require: true, unique: true },
+  phone: { type: Number, require: true, unique: true },
   password: { type: String, require: true },
   type: { type: String, require: true, default: "Cliente" },
 }, { versionKey: false }).plugin(mongoosePaginate)
