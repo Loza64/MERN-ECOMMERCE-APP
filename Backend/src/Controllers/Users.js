@@ -66,10 +66,6 @@ export const CheckToken = async (req, res, next) => {
 }
 
 export const GetUserSession = (req, res) => {
-    if (req.session.user && req.session.token && req.session.cart) {
-        const { token, user, cart } = req.session;
-        res.status(200).json({ state: true, session: { token, user, cart } })
-    } else {
-        res.status(401).json({ state: false, session: null })
-    }
+    const { token, user, cart } = req.session;
+    res.status(200).json({ state: true, session: { token, user, cart } })
 }
