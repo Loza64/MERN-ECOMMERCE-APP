@@ -22,6 +22,23 @@ export default function SignUp({ open, setOpen }) {
     phone: /^[0-9]{8}$/
   }
 
+  function GetAge(date) {
+    const birthDate = new Date(date);
+    const currentlyDate = new Date();
+
+    let age = currentlyDate.getFullYear() - birthDate.getFullYear();
+
+    const currentlyMonth = currentlyDate.getMonth();
+    const birthMonth = birthDate.getMonth();
+
+    // Verifica si aún no ha llegado el cumpleaños de este año
+    if (currentlyMonth < birthMonth || ((currentlyMonth === birthMonth) && (birthDate.getDate() > currentlyDate.getDate()))) {
+      age--;
+    }
+
+    return age;
+  }
+
   return (
     <SignupContainer formopen={open}>
       <div className="container-form-signup">
@@ -70,6 +87,10 @@ export default function SignUp({ open, setOpen }) {
             //Validate date
             if (!values.birthdate) {
               errores.birthdate = 'Campo obligatorio.';
+            } else if ((new Date(values.birthdate)) > (new Date())) {
+              errores.birthdate = 'Seleccione una fecha de nacimiento valida.'
+            } else if (GetAge(values.birthdate) < 18) {
+              errores.birthdate = 'Debes ser mayor de edad para poder registrarte'
             }
 
             //Validate email
