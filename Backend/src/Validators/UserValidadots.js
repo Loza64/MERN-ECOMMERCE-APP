@@ -16,7 +16,7 @@ export const ValidateSignUp = [
     body('email').isEmail().withMessage('Please enter valid email').trim().notEmpty().withMessage('email must be required').
         isLength({ min: 14 }).withMessage('email should have at least 14 characters'),
 
-    body('birthdate').isString().withMessage('Please enter valid date').trim().notEmpty().withMessage('birthdate must be required'),
+    body('date').isString().withMessage('Please enter valid date').trim().notEmpty().withMessage('birthdate must be required'),
 
     body('phone').isNumeric().withMessage('Please enter valid phone number').trim().notEmpty().withMessage('phone must be required').
         isLength({ min: 8 }).withMessage('phone should have least 8 characters'),

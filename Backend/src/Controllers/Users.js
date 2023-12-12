@@ -5,6 +5,8 @@ import uniquid from 'uniquid'
 
 export const SignUp = async (req, res, next) => {
     const { username, names, surnames, address, date, email, pass } = req.body
+    const key = uniquid()
+    const birthdate = new Date(date)
     const phone = Number(req.body.phone)
     try {
         const checkuser = await Users.findOne({ username })
@@ -13,8 +15,6 @@ export const SignUp = async (req, res, next) => {
         if (checkemail || checkphone || checkuser) {
             res.status(200).json({ state: false, message: "Username, email or phone already exist." })
         } else {
-            const key = uniquid()
-            const birthdate = new Date(date)
             const password = await EncryptPass(pass)
             new Users({ key, username, names, surnames, birthdate, email, address, phone, password }).save().then(() => {
                 res.status(200).json({ state: true, message: "Register success" })
@@ -34,8 +34,8 @@ export const Login = async (req, res, next) => {
     try {
         const getUser = await Users.findOne({ username: username })
         if (getUser != null && (await ComparePass(password, getUser.password))) {
-            const { _id, key, username, names, surnames, address, date, email, phone, type } = getUser
-            const user = { _id, key, username, names, surnames, address, date, email, phone, type };
+            const { _id, key, username, names, surnames, address, birthdate, email, phone, type } = getUser
+            const user = { _id, key, username, names, surnames, address, birthdate, email, phone, type };
             const token = await GenerateToken(user);
             req.session.Token = token
             req.session.User = user
