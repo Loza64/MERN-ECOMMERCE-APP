@@ -31,16 +31,14 @@ export const SignUp = async (req, res, next) => {
 export const Login = async (req, res, next) => {
     const { username, password } = req.body
     try {
-        const user = await Users.findOne({ username: username })
-        if (user != null && (await ComparePass(password, user.password))) {
+        const getUser = await Users.findOne({ username: username })
+        if (getUser != null && (await ComparePass(password, getUser.password))) {
+            const { _id, key, username, names, surnames, address, date, email, phone, type } = getUser
+            const user = { _id, key, username, names, surnames, address, date, email, phone, type };
             const token = await GenerateToken(user);
-            req.session.User = {
-                Id: user._id.toString(),
-                Username: user.username,
-                Type: user.type,
-                Token: token,
-                Cart: []
-            }
+            req.session.Token = token
+            req.session.User = user
+            req.session.Cart = []
             res.status(200).json({ state: true, token })
         } else {
             res.status(200).json({ state: false, token: null })
@@ -67,9 +65,9 @@ export const CheckToken = async (req, res, next) => {
 }
 
 export const GetUserSession = (req, res) => {
-    if (req.session.User) {
-        const session = req.session.User;
-        res.status(200).json({ state: true, session })
+    if (req.session.User && req.session.Token) {
+        const { Token, User, Cart } = req.session;
+        res.status(200).json({ state: true, Session: { Token, User, Cart } })
     } else {
         res.status(401).json({ state: true, session: null })
     }
