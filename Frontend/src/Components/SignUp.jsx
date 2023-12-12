@@ -14,11 +14,11 @@ export default function SignUp({ open, setOpen }) {
   const { signup } = ContextProvider();
   //Objects
   let expresiones = {
-    username: /(^[A-Za-z]{1,10}([0-9]{3})){1}/,
-    names: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
-    surnames: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
-    address: /^[a-zA-ZÁ-ÿ\s]{1,240}$/,
-    email: /^(([^<>()[\].,;:\s@”]+(\.[^<>()[\].,;:\s@”]+)*)|(”.+”))@(([^<>()[\].,;:\s@”]+\.)+[^<>()[\].,;:s@”]{2,})$/,
+    username: /^[a-zA-ZÁ-ÿ0-9]{10,40}$/,
+    names: /^[a-zA-ZÁ-ÿ\s]{3,40}$/,
+    surnames: /^[a-zA-ZÁ-ÿ\s]{5,40}$/,
+    address: /^[a-zA-ZÁ-ÿ\s]{5,240}$/,
+    email: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
     phone: /^[0-9]{8}$/
   }
 
