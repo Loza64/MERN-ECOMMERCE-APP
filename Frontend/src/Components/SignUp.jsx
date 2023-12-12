@@ -17,7 +17,7 @@ export default function SignUp({ open, setOpen }) {
     username: /^[a-zA-ZÁ-ÿ0-9]{10,40}$/,
     names: /^[a-zA-ZÁ-ÿ\s]{3,40}$/,
     surnames: /^[a-zA-ZÁ-ÿ\s]{5,40}$/,
-    address: /^[a-zA-ZÁ-ÿ\s]{5,240}$/,
+    address: /^[a-zA-ZÁ-ÿ\s-,().,]{5,240}$/,
     email: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
     phone: /^[0-9]{8}$/
   }
@@ -48,7 +48,7 @@ export default function SignUp({ open, setOpen }) {
             names: '',
             surnames: '',
             address: '',
-            birthdate: '',
+            date: '',
             email: '',
             phone: '',
             pass: '',
@@ -61,19 +61,19 @@ export default function SignUp({ open, setOpen }) {
             if (!values.username) {
               errores.username = 'Campo obligatorio.'
             } else if (!expresiones.username.test(values.username) || values.username.length > 12) {
-              errores.username = 'Nombre de username no valido.'
+              errores.username = 'Nombre de usuario no valido.'
             }
 
             //Validate names
             if (!values.names) {
-              errores.names = 'Campo names obligatorio.'
+              errores.names = 'Campo obligatorio.'
             } else if (!expresiones.names.test(values.names)) {
               errores.names = 'Nombres no validos.'
             }
 
             //Validate surnames
             if (!values.surnames) {
-              errores.surnames = 'Campo surnames obligatorio.'
+              errores.surnames = 'Campo obligatorio.'
             } else if (!expresiones.surnames.test(values.surnames)) {
               errores.surnames = 'Apellidos no validos.'
             }
@@ -81,16 +81,16 @@ export default function SignUp({ open, setOpen }) {
             if (!values.address) {
               errores.address = 'Campo obligatorio.';
             } else if (!expresiones.address.test()) {
-              errores.address = 'La address no debe incluir numero o caracteres especiales.';
+              errores.address = 'La direccion no debe incluir caracteres especiales.';
             }
 
             //Validate date
-            if (!values.birthdate) {
-              errores.birthdate = 'Campo obligatorio.';
-            } else if ((new Date(values.birthdate)) > (new Date())) {
-              errores.birthdate = 'Seleccione una fecha de nacimiento valida.'
-            } else if (GetAge(values.birthdate) < 18) {
-              errores.birthdate = 'Debes ser mayor de edad para poder registrarte'
+            if (!values.date) {
+              errores.date = 'Campo obligatorio.';
+            } else if ((new Date(values.date)) > (new Date())) {
+              errores.date = 'Seleccione una fecha de nacimiento valida.'
+            } else if (GetAge(values.date) < 18) {
+              errores.date = 'Debes ser mayor de edad para poder registrarte'
             }
 
             //Validate email
@@ -191,8 +191,8 @@ export default function SignUp({ open, setOpen }) {
                 </div>
                 <Field type="text" placeholder="Ingrese su dirección" name="address" />
                 <ErrorMessage name="address" component={() => (<label className="errormessage">{errors.address}</label>)} />
-                <Field type="date" placeholder="Usuario" name="birthdate" />
-                <ErrorMessage name="birthdate" component={() => (<label className="errormessage">{errors.birthdate}</label>)} />
+                <Field type="date" placeholder="Usuario" name="date" />
+                <ErrorMessage name="date" component={() => (<label className="errormessage">{errors.date}</label>)} />
                 <Field type="text" placeholder="Correo electronico" name="email" />
                 <ErrorMessage name="email" component={() => (<label className="errormessage">{errors.email}</label>)} />
                 <Field type="tel" placeholder="Teléfono" name="phone" />

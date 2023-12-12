@@ -4,7 +4,7 @@ import { Users } from "../Models/Model.js"
 import uniquid from 'uniquid'
 
 export const SignUp = async (req, res, next) => {
-    const { username, names, surnames, address, birthdate, email, phone, pass } = req.body
+    const { username, names, surnames, address, date, email, phone, pass } = req.body
     try {
         const checkuser = await Users.findOne({ username })
         const checkemail = await Users.findOne({ email })
@@ -13,9 +13,9 @@ export const SignUp = async (req, res, next) => {
             res.status(200).json({ state: false, message: "Username, email or phone already exist." })
         } else {
             const key = uniquid()
-            const date = new Date(birthdate)
+            const birthdate = new Date(date)
             const password = await EncryptPass(pass)
-            new Users({ key, username, names, surnames, date, email, address, phone, password }).save().then(() => {
+            new Users({ key, username, names, surnames, birthdate, email, address, phone, password }).save().then(() => {
                 res.status(200).json({ state: true, message: "Register success" })
             }).catch(error => {
                 next(error.message)
