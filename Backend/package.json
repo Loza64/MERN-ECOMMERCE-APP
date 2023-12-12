@@ -39,6 +39,7 @@
     "mongoose-paginate-v2": "^1.7.4",
     "nodemailer": "^6.9.7",
     "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "^0.7.0",
     "path": "^0.12.7",
     "uniquid": "^1.1.4",
     "url": "^0.11.3"

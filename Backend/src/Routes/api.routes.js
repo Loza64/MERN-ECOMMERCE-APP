@@ -5,6 +5,7 @@ import { ValidationResult } from '../Middlewares/VaidationsResult.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
 import { GetProductByKey, GetProducts, NewProduct } from '../Controllers/Products.js'
 import { ValidateProduct } from '../Validators/ProductValidation.js'
+import { isAutenticate } from '../Middlewares/CheckSession.js'
 
 const routes = express.Router()
 
@@ -12,7 +13,7 @@ const routes = express.Router()
 routes.post('/login', Login)
 routes.post('/signup', ValidateSignUp, ValidationResult, SignUp)
 routes.get('/verifytoken/:TokenKey', CheckToken)
-routes.get('/getusersession', GetUserSession)
+routes.get('/getusersession', isAutenticate, GetUserSession)
 
 //Products Routes
 routes.post('/newproduct', ValidateProduct, ValidationResult, NewProduct)

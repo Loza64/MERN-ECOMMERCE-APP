@@ -1,4 +1,6 @@
 import dotenv from 'dotenv'
+import session from 'express-session'
+import MongoDBStoreFactory from 'connect-mongodb-session'
 
 dotenv.config()
 
@@ -21,23 +23,22 @@ export const CorsOptions = {
     optionsSuccessStatus: true
 }
 
-export const SessionSettings = {
-    name: 'UserSessions', 
-    resave: true,
-    saveUninitialized: false,
-    secret: Session,
-    cookie: {
-        path: '/',
-        secure: true,
-        maxAge: 60 * 60 * 1000,
-        sameSite: 'strict',
-        domain: Origin
-    }
-}
-
-export const MongoSettings = {
+const MongoStore = new MongoDBStoreFactory(session)({
     uri: ConnectionCloud,
     collection: 'sessions',
     autoRemove: 'interval',
-    autoRemoveInterval: 60 //Remove sessions every 60 minutes
-}
+    autoRemoveInterval: 60
+})
+
+export const SessionsApp = session({
+    secret: Session,
+    resave: true,
+    saveUninitialized: false,
+    store: MongoStore,
+    cookie: {
+        secure: false,
+        maxAge: 1000 * 60 * 60,
+        httpOnly: true,
+        sameSite: 'strict'
+    }
+})
