@@ -4,14 +4,14 @@ import express from 'express'
 import bodyparser from 'body-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import { CorsOptions,  SessionsApp } from './Settings.js'
+import { CorsOptions,  SessionApp } from './Settings.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const ServerApp = express()
 
 //Config app
 GetMongoConnection()
-ServerApp.use(SessionsApp)
+ServerApp.use(SessionApp)
 ServerApp.use(morgan('dev'))
 ServerApp.use(cors(CorsOptions))
 ServerApp.use(bodyparser.json({ limit: '100mb', extended: true }))

@@ -30,7 +30,7 @@ const MongoStore = new MongoDBStoreFactory(session)({
     autoRemoveInterval: 60 //Removes interval 1h
 })
 
-export const SessionsApp = session({
+export const SessionApp = session({
     secret: Session,
     resave: true,
     saveUninitialized: false,
