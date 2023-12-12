@@ -27,7 +27,7 @@ const MongoStore = new MongoDBStoreFactory(session)({
     uri: ConnectionCloud,
     collection: 'sessions',
     autoRemove: 'interval',
-    autoRemoveInterval: 60
+    autoRemoveInterval: 60 //Removes interval 1h
 })
 
 export const SessionsApp = session({
