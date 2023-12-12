@@ -8,6 +8,7 @@ const cookie = new Cookie();
 
 const setCookie = (cookiename, values) => {
   cookie.set(cookiename, values, {
+    path: '/',
     secure: true,
     sameSite: 'strict',
     maxAge: 1000 * 60 * 60 * 5//Expires in six hours

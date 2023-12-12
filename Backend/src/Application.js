@@ -4,8 +4,8 @@ import express from 'express'
 import bodyparser from 'body-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import GetMongoConnection from './Connection/GetMongoConnection.js'
 import { CorsOptions,  SessionsApp } from './Settings.js'
+import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const ServerApp = express()
 

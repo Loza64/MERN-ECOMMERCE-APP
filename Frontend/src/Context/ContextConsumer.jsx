@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByKey, Login, SignUp, VerifyToken } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByKey, Login, SignUp, VerifyToken, GetUserSessions } from "../Api/RestApi";
 import Swal from "sweetalert2";
 
 ContextConsumer.propTypes = {
@@ -151,6 +151,14 @@ export default function ContextConsumer({ children }) {
       0
     ))
   ).toFixed(2);
+
+  useEffect(async () => {
+    GetUserSessions().then(({ data }) => {
+      console.log(data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
   const ContextValues = {
     AddToCart, RemoveProductFromCart, setPage, setCategorie, setSearch,
