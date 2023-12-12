@@ -37,9 +37,9 @@ export const Login = async (req, res, next) => {
             const { _id, key, username, names, surnames, address, birthdate, email, phone, type } = getUser
             const user = { _id, key, username, names, surnames, address, birthdate, email, phone, type };
             const token = await GenerateToken(user);
-            req.session.Token = token
-            req.session.User = user
-            req.session.Cart = []
+            req.session.token = token
+            req.session.user = user
+            req.session.cart = []
             res.status(200).json({ state: true, token })
         } else {
             res.status(200).json({ state: false, token: null })
@@ -66,10 +66,10 @@ export const CheckToken = async (req, res, next) => {
 }
 
 export const GetUserSession = (req, res) => {
-    if (req.session.User && req.session.Token) {
-        const { Token, User, Cart } = req.session;
-        res.status(200).json({ state: true, Session: { Token, User, Cart } })
+    if (req.session.user && req.session.token && req.session.cart) {
+        const { token, user, cart } = req.session;
+        res.status(200).json({ state: true, session: { token, user, cart } })
     } else {
-        res.status(401).json({ state: true, session: null })
+        res.status(401).json({ state: false, session: null })
     }
 }
