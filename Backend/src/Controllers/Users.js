@@ -35,7 +35,7 @@ export const Login = async (req, res, next) => {
         if (user != null && (await ComparePass(password, user.password))) {
             const token = await GenerateToken(user);
             req.session.UserSession = {
-                IdUser: user._id,
+                Id: user._id.toString(),
                 User: user.username,
                 Type: user.type,
                 Token: token,

@@ -7,7 +7,7 @@ const error = debug('backend:[Error]')
 
 export default function GetMongoConnection() {
   mongoose.set('strictQuery', true)
-  mongoose.connect(ConnectionCloud)
+  mongoose.connect(ConnectionCloud, { connectTimeoutMS: 1000 * 60 * 5 })
   mongoose.connection.on('open', () => { database("connection succes.") })
   mongoose.connection.on('error', err => { error(err.message) })
 }
