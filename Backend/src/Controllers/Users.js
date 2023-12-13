@@ -52,7 +52,7 @@ export const Login = async (req, res, next) => {
 export const Profile = async (req, res) => {
     const { token } = req.session;
     const profile = await VerifyToken(token);
-    res.status(200).json({ state: true, profile })
+    res.status(200).json({ ...profile })
 }
 
 export const Logout = (req, res) => {
