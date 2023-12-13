@@ -38,11 +38,10 @@ export const Login = async (req, res, next) => {
             const user = { _id, key, username, names, surnames, address, birthdate, email, phone, type };
             const token = await GenerateToken(user);
             req.session.token = token
-            req.session.user = user
             req.session.cart = []
-            res.status(200).json({ state: true, token })
+            res.status(200).json({ state: true, details: "Successful login" })
         } else {
-            res.status(200).json({ state: false, token: null })
+            res.status(200).json({ state: false, details: "User or password incorrect" })
         }
     } catch (error) {
         next(error.message)
@@ -50,22 +49,13 @@ export const Login = async (req, res, next) => {
     }
 }
 
-export const CheckToken = async (req, res, next) => {
-    const { TokenKey } = req.params;
-    try {
-        const result = await VerifyToken(TokenKey)
-        if (result) {
-            res.status(200).json({ state: true, result })
-        } else {
-            res.status(200).json({ state: false, result: null })
-        }
-    } catch (error) {
-        next(error.message)
-        res.status(500).json({ state: false, message: error.message })
-    }
+export const GetSession = async (req, res) => {
+    const { token, cart } = req.session;
+    res.status(200).json({ state: true, session: { token, cart } })
 }
 
-export const GetUserSession = (req, res) => {
-    const { token, user, cart } = req.session;
-    res.status(200).json({ state: true, session: { token, user, cart } })
+export const GetInfoUser = async (req, res) => {
+    const { token } = req.session;
+    const result = await VerifyToken(token);
+    res.status(200).json({ state: true, result })
 }
