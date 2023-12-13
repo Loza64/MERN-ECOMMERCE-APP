@@ -1,5 +1,4 @@
 import dotenv from 'dotenv'
-import uniquid from 'uniquid'
 import session from 'express-session'
 import MongoDBStoreFactory from 'connect-mongodb-session'
 
