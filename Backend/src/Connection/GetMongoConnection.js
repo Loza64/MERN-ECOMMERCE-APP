@@ -6,7 +6,6 @@ const success = debug('backend:[Successful]')
 const error = debug('backend:[Failure]')
 
 export default function GetMongoConnection() {
-  mongoose.set('strictQuery', true)
   mongoose.connect(ConnectionCloud, { connectTimeoutMS: 1000 * 60 * 5 })
   mongoose.connection.on('error', err => { error(err.message); console.log(err.message) })
   mongoose.connection.on('disconnected', () => { error('Database connection disconnected') })
