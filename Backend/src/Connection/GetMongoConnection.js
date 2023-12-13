@@ -14,7 +14,8 @@ export default function GetMongoConnection() {
 
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
-      success('Mongoose default connection disconnected through app termination');
+      success('Mongoose default connection disconnected through app termination')
+      console.log('Mongoose default connection disconnected through app termination')
       process.exit(0);
     });
   });
