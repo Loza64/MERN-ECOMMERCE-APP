@@ -3,9 +3,10 @@ import { isAutenticate } from '../Middlewares/CheckSession.js'
 import { ValidateSignUp } from '../Validators/UserValidadots.js'
 import { ValidateProduct } from '../Validators/ProductValidation.js'
 import { ValidationResult } from '../Middlewares/VaidationsResult.js'
+import { Login, SignUp, Profile, Logout } from '../Controllers/Users.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
 import { GetProductByKey, GetProducts, NewProduct } from '../Controllers/Products.js'
-import { Login, SignUp, GetSession, GetInfoUser, SessionDestroy } from '../Controllers/Users.js'
+import { Cart } from '../Controllers/Cart.js'
 
 const routes = express.Router()
 
@@ -17,10 +18,10 @@ routes.post('/newproduct', ValidateProduct, ValidationResult, NewProduct)
 
 //Get
 routes.get('/getproducts', GetProducts)
+routes.get('/cart', isAutenticate, Cart)
 routes.get('/getcategories', GetCategories)
+routes.get('/logout', isAutenticate, Logout)
+routes.get('/profile', isAutenticate, Profile)
 routes.get('/getproductbykey/:key', GetProductByKey)
-routes.get('/getsession', isAutenticate, GetSession)
-routes.get('/getinfouser', isAutenticate, GetInfoUser)
-routes.get('/sessiondestroy', isAutenticate, SessionDestroy)
 
 export default routes

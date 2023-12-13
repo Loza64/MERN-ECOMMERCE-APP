@@ -49,18 +49,13 @@ export const Login = async (req, res, next) => {
     }
 }
 
-export const GetSession = async (req, res) => {
-    const { token, cart } = req.session;
-    res.status(200).json({ state: true, session: { token, cart } })
-}
-
-export const GetInfoUser = async (req, res) => {
+export const Profile = async (req, res) => {
     const { token } = req.session;
-    const result = await VerifyToken(token);
-    res.status(200).json({ state: true, result })
+    const profile = await VerifyToken(token);
+    res.status(200).json({ state: true, profile })
 }
 
-export const SessionDestroy = (req, res) => {
+export const Logout = (req, res) => {
     req.session.destroy(err => {
         if (!err) {
             res.status(200).json({ state: true, details: "Your session has been destroyed" })
