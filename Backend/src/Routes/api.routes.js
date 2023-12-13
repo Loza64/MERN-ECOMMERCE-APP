@@ -20,6 +20,6 @@ routes.get('/getproducts', GetProducts)
 routes.get('/getcategories', GetCategories)
 routes.get('/getproductbykey/:key', GetProductByKey)
 routes.get('/getsession', isAutenticate, GetSession)
-routes.get('getinfouser', isAutenticate, GetInfoUser)
+routes.get('/getinfouser', isAutenticate, GetInfoUser)
 
 export default routes
