@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import uniquid from 'uniquid'
 import session from 'express-session'
 import MongoDBStoreFactory from 'connect-mongodb-session'
 
@@ -31,10 +32,11 @@ const MongoStore = new MongoDBStoreFactory(session)({
 })
 
 export const SessionApp = session({
-    secret: Session,
     resave: true,
-    saveUninitialized: false,
+    name: 'Session',
+    secret: Session,
     store: MongoStore,
+    saveUninitialized: false,
     cookie: {
         secure: false,
         maxAge: 1000 * 60 * 60,

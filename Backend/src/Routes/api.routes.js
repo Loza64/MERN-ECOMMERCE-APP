@@ -4,8 +4,8 @@ import { ValidateSignUp } from '../Validators/UserValidadots.js'
 import { ValidateProduct } from '../Validators/ProductValidation.js'
 import { ValidationResult } from '../Middlewares/VaidationsResult.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
-import { Login, SignUp, GetSession, GetInfoUser } from '../Controllers/Users.js'
 import { GetProductByKey, GetProducts, NewProduct } from '../Controllers/Products.js'
+import { Login, SignUp, GetSession, GetInfoUser, SessionDestroy } from '../Controllers/Users.js'
 
 const routes = express.Router()
 
@@ -21,5 +21,6 @@ routes.get('/getcategories', GetCategories)
 routes.get('/getproductbykey/:key', GetProductByKey)
 routes.get('/getsession', isAutenticate, GetSession)
 routes.get('/getinfouser', isAutenticate, GetInfoUser)
+routes.get('/sessiondestroy', isAutenticate, SessionDestroy)
 
 export default routes

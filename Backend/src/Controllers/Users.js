@@ -59,3 +59,11 @@ export const GetInfoUser = async (req, res) => {
     const result = await VerifyToken(token);
     res.status(200).json({ state: true, result })
 }
+
+export const SessionDestroy = (req, res) => {
+    req.session.destroy(err => {
+        if (!err) {
+            res.status(200).json({ state: true, details: "Your session has been destroyed" })
+        }
+    })
+}
