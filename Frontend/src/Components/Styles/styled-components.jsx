@@ -366,9 +366,9 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-z-index:${({ formopen }) => (formopen ? "100" : "0")};
-background:${({ formopen }) => (formopen ? "rgba(0, 0, 0, 0.5)" : "transparent")};
-opacity:${({ formopen }) => (formopen ? "1" : "0")};
+z-index:${({ open }) => (open ? "100" : "0")};
+background:${({ open }) => (open ? "rgba(0, 0, 0, 0.5)" : "transparent")};
+opacity:${({ open }) => (open ? "1" : "0")};
 transition:all 0.7s ease-in-out;
 }
 
@@ -380,7 +380,7 @@ transition:all 0.7s ease-in-out;
   border-radius:10px;
   margin:0 10px;
   transition:all 0.7s ease-in-out;
-  transform: ${({ formopen }) => (formopen ? "scale(100%)" : "scale(0%)")};
+  transform: scale(${({ open }) => (open ? "1" : "0")});
 }
 .container-form-signup form .closebuttom{
   display:flex;

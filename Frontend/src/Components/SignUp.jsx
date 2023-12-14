@@ -40,7 +40,7 @@ export default function SignUp({ open, setOpen }) {
   }
 
   return (
-    <SignupContainer formopen={open}>
+    <SignupContainer open={open}>
       <div className="container-form-signup">
         <Formik
           initialValues={{
