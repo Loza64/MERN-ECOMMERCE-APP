@@ -38,10 +38,8 @@ export const NewProduct = async (req, res, next) => {
 export const GetProducts = async (req, res, next) => {
   const { Search, Categorie, Page } = req.query
   try {
-    const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, categorykey: Categorie } :
-      { name: { $regex: Search ?? "", $options: 'i' } }
-    const result = await Products.paginate(config, { page: Page, limit: 15 }
-    )
+    const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, categorykey: Categorie } : { name: { $regex: Search ?? "", $options: 'i' } }
+    const result = await Products.paginate(config, { page: Page, limit: 15 })
     res.status(200).json({ state: true, result })
   } catch (error) {
     next(error.message)
@@ -49,11 +47,15 @@ export const GetProducts = async (req, res, next) => {
   }
 }
 
-export const GetProductByKey = async (req, res, next) => {
-  const { key } = req.params;
+export const GetProductByName = async (req, res, next) => {
+  const { Name } = req.params;
   try {
-    const product = await Products.findOne({ key })
-    res.status(200).json({ state: true, product })
+    const product = await Products.findOne({ name: Name })
+    if (product) {
+      res.status(200).json({ state: true, product })
+    } else {
+      res.status(200).json({ state: true, product: null })
+    }
   } catch (error) {
     next(error.message)
     res.status(500).json({ state: false, message: error.message })

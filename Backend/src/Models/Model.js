@@ -19,7 +19,7 @@ const user = new Schema({
 const product = new Schema({
   key: { type: String, require: true, unique: true },
   image: { type: Object, required: true, default: { public_id: "", url: "" } },
-  categorykey: { type: String, require: true },
+  categorykey: { type: String, require: true, ref: 'categories' },
   name: { type: String, require: true },
   company: { type: String, require: true },
   details: { type: String, require: true },

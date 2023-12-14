@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByKey, Login, SignUp, GetCart, Profile, Logout } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -20,6 +20,7 @@ export default function ContextConsumer({ children }) {
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
   const [system, setSystem] = useState(true);
+  const [product, setProduct] = useState({});
   const [products, setProducts] = useState({});
   const [session, setSession] = useState(false);
   const [categorie, setCategorie] = useState("");
@@ -65,9 +66,13 @@ export default function ContextConsumer({ children }) {
     })
   }, [session])
 
-  const getProduct = async (ProductKey) => {
-    const { data } = await GetProductByKey(ProductKey);
-    return data.product;
+  const getProductByName = async (Product) => {
+    try {
+      const { data } = await GetProductByName(Product);
+      setProduct(data.product)
+    } catch (error) {
+      SystemError(error)
+    }
   };
 
   useEffect(() => {
@@ -102,14 +107,14 @@ export default function ContextConsumer({ children }) {
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {
-    await getProduct(ProductKey).then(product => {
+    await getProductByName(ProductKey).then(product => {
       dispatch({ type: Actions.ADD_TO_CART, payload: { product } });
     }).catch((err) => {
       SystemError(err)
     })
   };
   const Quantity = async (cant, productkey) => {
-    await getProduct(productkey).then(product => {
+    await getProductByName(productkey).then(product => {
       const { stock } = product
       if (cant <= 1) {
         dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey, stock } });
@@ -165,8 +170,8 @@ export default function ContextConsumer({ children }) {
 
   const ContextValues = {
     AddToCart, RemoveProductFromCart, setPage, setCategorie, setSearch,
-    products, categories, signout, login, signup, user, getProduct,
-    system, getCategories, ClearCart, cart, Quantity, SubTotal, Tax, Total
+    products, categories, signout, login, signup, user, getProductByName,
+    system, getCategories, ClearCart, cart, Quantity, SubTotal, Tax, Total, product
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;
