@@ -36,6 +36,12 @@ export function ContextReducer(state, { type, payload }) {
     }
 
     //Actions Cart
+
+    case Actions.CART_LIST: {
+      const { cart } = payload;
+      return { ...state, cart }
+    }
+
     case Actions.ADD_TO_CART: {
       const { product } = payload;
       const { key, image, name, company, price, stock, discount } = product

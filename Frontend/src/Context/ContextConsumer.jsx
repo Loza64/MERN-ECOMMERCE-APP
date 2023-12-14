@@ -1,9 +1,9 @@
+import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByKey, Login, SignUp, VerifyToken } from "../Api/RestApi";
-import Swal from "sweetalert2";
+import { GetCategories, GetProducts, GetProductByKey, Login, SignUp, GetCart, Profile, Logout } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -16,13 +16,17 @@ export const ContextProvider = () => useContext(Context)
 export default function ContextConsumer({ children }) {
 
   //hooks
-  const [user, setUser] = useState({});
   const [page, setPage] = useState(1);
+  const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
   const [system, setSystem] = useState(true);
   const [products, setProducts] = useState({});
+  const [session, setSession] = useState(false);
   const [categorie, setCategorie] = useState("");
   const [categories, setCategories] = useState([]);
+
+  const [state, dispatch] = useReducer(ContextReducer, InitialState);
+  const { cart } = state;
 
   function SystemError(err) {
     Swal.fire({
@@ -53,40 +57,48 @@ export default function ContextConsumer({ children }) {
     });
   }, [search, categorie, page])
 
+  useEffect(() => {
+    Profile().then(({ data }) => {
+      setUser(data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }, [session])
+
   const getProduct = async (ProductKey) => {
     const { data } = await GetProductByKey(ProductKey);
     return data.product;
   };
 
-  //Functions Reducer
-  const [state, dispatch] = useReducer(ContextReducer, InitialState);
-  const { cart, token } = state;
-
+  useEffect(() => {
+    GetCart().then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+    }).catch(() => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    })
+  }, [session])
 
   // Functions token
   const login = async (login) => {
-    const { data } = await Login(login);
-    const { token, state } = data;
-    dispatch({ type: Actions.SAVE_TOKEN, payload: { token } })
-    return await state;
+    try {
+      const { state } = (await Login(login)).data;
+      setSession(state)
+      return await state;
+    } catch (error) {
+      SystemError(error)
+    }
   };
 
   const signout = () => {
-    dispatch({ type: Actions.REMOVE_TOKEN, payload: null })
+    Logout().then(() => {
+      setUser(null)
+      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    })
   }
 
   const signup = async (signup) => {
     return await SignUp(signup);
   };
-
-  useEffect(() => {
-    VerifyToken(token).then(({ data }) => {
-      const { result } = data;
-      setUser(result)
-    }).catch((err) => {
-      SystemError(err.message);
-    })
-  }, [token])
 
   //Functions Cart
   const AddToCart = async (ProductKey) => {
