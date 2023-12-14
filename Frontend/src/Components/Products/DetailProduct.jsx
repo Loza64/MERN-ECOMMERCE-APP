@@ -27,8 +27,8 @@ export default function DetailProduct() {
   if (system) {
     if (product) {
       const { key, image, name, company, price, categorykey, stock, discount, details } = product;
-      setCategorie(categorykey)
       const timeId = setTimeout(() => { setLoading(loading + 1) }, 1000);
+      setCategorie(categorykey)
       if (loading >= 1) {
         clearTimeout(timeId);
         return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductsList from "./ProductsList";
 import Top from "../Top";
 import Loading from "../Loading";
@@ -12,7 +12,15 @@ Products.propTypes = {
 }
 
 export default function Products({ TopState }) {
-  const { products, system } = ContextProvider();
+  const { products, system,setCategorie, setSearch, setPage } = ContextProvider()
+
+  useEffect(() => {
+    setCategorie("")
+    setSearch("")
+    setPage(1)
+  }, [])
+
+
   const [loading, setLoading] = useState(0);
 
   if (system) {
