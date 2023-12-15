@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -16,10 +17,14 @@ export const ContextProvider = () => useContext(Context)
 export default function ContextConsumer({ children }) {
 
   //hooks
+  const [system, setSystem] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+
+
   const [page, setPage] = useState(1);
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
-  const [system, setSystem] = useState(true);
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState({});
   const [session, setSession] = useState(false);
@@ -43,52 +48,54 @@ export default function ContextConsumer({ children }) {
 
   // Functions products
   const getCategories = async () => {
+    setLoading(true);
     GetCategories().then(({ data }) => {
       setCategories(data.result);
     }).catch((err) => {
       SystemError(err)
+    }).finally(() => {
+      setLoading(false);
     });
   };
 
-  useEffect(() => {
-    GetProducts(search, categorie, page).then(({ data }) => {
+  useEffect(async () => {
+    try {
+      setLoading(true);
+      const { data } = await GetProducts(search, categorie, page)
       setProducts(data.result);
-    }).catch((err) => {
-      SystemError(err)
-    });
+    } catch (error) {
+      SystemError(error)
+    } finally {
+      setLoading(false)
+    }
   }, [search, categorie, page])
 
   useEffect(() => {
     Profile().then(({ data }) => {
       setUser(data)
-    }).catch((err) => {
-      console.log(err)
+    }).catch(() => {
+      setUser(null)
     })
   }, [session])
 
   const getProductByName = async (Product) => {
     try {
+      setLoading(true)
       const { data } = await GetProductByName(Product);
       setProduct(data.product)
     } catch (error) {
       SystemError(error)
+    } finally {
+      setLoading(false)
     }
   };
-
-  useEffect(() => {
-    GetCart().then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch(() => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-    })
-  }, [session])
 
   // Functions token
   const login = async (login) => {
     try {
-      const { state } = (await Login(login)).data;
-      setSession(state)
-      return await state;
+      const { data } = await Login(login);
+      setSession(true)
+      return await data.state;
     } catch (error) {
       SystemError(error)
     }
@@ -106,31 +113,47 @@ export default function ContextConsumer({ children }) {
   };
 
   //Functions Cart
-  const AddToCart = async (ProductKey) => {
-    await getProductByName(ProductKey).then(product => {
-      dispatch({ type: Actions.ADD_TO_CART, payload: { product } });
+  useEffect(() => {
+    GetCart().then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+    }).catch(() => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    })
+  }, [session])
+
+  const addToCart = async (ProductKey) => {
+    if (user) {
+      try {
+        const { data } = await AddToCart(ProductKey)
+        dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+      } catch (error) {
+        setUser(null)
+        dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+      }
+    } else {
+      window.location.href = "/login"
+    }
+  };
+  const quantityProduct = async (key, type) => {
+    Quantity(key, type).then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch((err) => {
-      SystemError(err)
+
+      if (err.responce.status === 400) {
+        SystemError(err.responce.data.message)
+      } else if (err.responce.status === 404) {
+        setUser(null)
+        dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+      }else{
+        SystemError(err.responce.data.message)
+      }
     })
   };
-  const Quantity = async (cant, productkey) => {
-    await getProductByName(productkey).then(product => {
-      const { stock } = product
-      if (cant <= 1) {
-        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant: 1, productkey, stock } });
-      } else {
-        dispatch({ type: Actions.QUANTITY_PRODUCT, payload: { cant, productkey, stock } });
-      }
-    }).catch((err) => {
-      SystemError(err)
-    });
+  const RemoveProductFromCart = (ProductKey) => {
 
   };
-  const RemoveProductFromCart = (productkey) => {
-    dispatch({ type: Actions.REMOVE_PRODUCT_FROM_CART, payload: productkey });
-  };
   const ClearCart = () => {
-    dispatch({ type: Actions.CLEAR_CART });
+
   };
 
   //Totals Cart
@@ -169,9 +192,9 @@ export default function ContextConsumer({ children }) {
   ).toFixed(2);
 
   const ContextValues = {
-    AddToCart, RemoveProductFromCart, setPage, setCategorie, setSearch,
-    products, categories, signout, login, signup, user, getProductByName,
-    system, getCategories, ClearCart, cart, Quantity, SubTotal, Tax, Total, product
+    addToCart, RemoveProductFromCart, setPage, setCategorie, setSearch,
+    products, categories, signout, login, signup, user, getProductByName, loading,
+    system, getCategories, ClearCart, cart, quantityProduct, SubTotal, Tax, Total, product
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

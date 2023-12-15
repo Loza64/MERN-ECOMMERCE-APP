@@ -11,7 +11,7 @@ ProductItem.propTypes = {
 
 export default function ProductItem({ product, animationState }) {
   const { key, image, name, company, price, stock, discount } = product;
-  const { AddToCart } = ContextProvider();
+  const { addToCart } = ContextProvider();
   const navigator = useNavigate();
 
   function TopWindow() {
@@ -25,7 +25,7 @@ export default function ProductItem({ product, animationState }) {
     (
       <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
-          <BsFillCartPlusFill className="react-icon" onClick={() => { AddToCart(key) }} />
+          <BsFillCartPlusFill className="react-icon" onClick={() => { addToCart(key) }} />
           {discount > 0 ? (<label className="product-discount">{Math.round(discount * 100)}%</label>) : null}
         </BtnCart>
         <div className="head-target" onClick={() => { navigator(`/Product/${name}`); TopWindow() }}>

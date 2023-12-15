@@ -9,14 +9,14 @@ CartItem.propTypes = {
 
 export default function CartItem({ item }) {
   const { key, name, image, company, price, quantity, discount } = item;
-  const { RemoveProductFromCart, Quantity } = ContextProvider();
+  const { RemoveProductFromCart, quantityProduct } = ContextProvider();
   const navigator = useNavigate();
 
   if (discount > 0) {
     return (
       <div className="item">
         <div className="image" onClick={() => { navigator(`/Product/${name}`) }}>
-          <img src={image.url} alt={name} />
+          <img src={image} alt={name} />
         </div>
         <div className="detailproduct">
           <div className="flex-product">
@@ -28,11 +28,11 @@ export default function CartItem({ item }) {
           <label className="subtotal-none">SubTotal: ${(price * quantity).toFixed(2)}</label>
           <div className="flex-buttoms">
             <div className="quantity-buttoms">
-              <button onClick={() => { Quantity(quantity - 1, key) }}>
+              <button onClick={() => { quantityProduct(key, "Subtraction") }}>
                 <i className="fa fa-minus" />
               </button>
               <label>{quantity}</label>
-              <button onClick={() => { Quantity(quantity + 1, key) }}>
+              <button onClick={() => { quantityProduct(key, "Addition") }}>
                 <i className="fa fa-plus" />
               </button>
             </div>
@@ -47,7 +47,7 @@ export default function CartItem({ item }) {
     return (
       <div className="item">
         <div className="image">
-          <img src={image.url} alt={name} onClick={() => { navigator(`/Product/${name}`) }} />
+          <img src={image} alt={name} onClick={() => { navigator(`/Product/${name}`) }} />
         </div>
         <div className="detailproduct">
           <div className="flex-product">
@@ -60,11 +60,11 @@ export default function CartItem({ item }) {
           <label className="price">Price: ${price}</label>
           <div className="flex-buttoms">
             <div className="quantity-buttoms">
-              <button onClick={() => { Quantity(quantity - 1, key) }}>
+              <button onClick={() => { quantityProduct(key, "Subtraction") }}>
                 <i className="fa fa-minus" />
               </button>
               <label>{quantity}</label>
-              <button onClick={() => { Quantity(quantity + 1, key) }}>
+              <button onClick={() => { quantityProduct(key, "Addition") }}>
                 <i className="fa fa-plus" />
               </button>
             </div>
