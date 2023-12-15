@@ -36,8 +36,8 @@ export default function ContextConsumer({ children }) {
 
   function SystemError(err) {
     Swal.fire({
-      title: 'Connection server error',
-      text: err + ', we will solve this problem as soon as possible.',
+      title: err,
+      text: 'we will solve this problem as soon as possible.',
       icon: 'error',
       button: "Aceptar",
       footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
@@ -45,6 +45,28 @@ export default function ContextConsumer({ children }) {
       setSystem(false);
     })
   }
+
+  // Functions user
+  const login = async (login) => {
+    try {
+      const { data } = await Login(login);
+      setSession(true)
+      return await data.state;
+    } catch (error) {
+      SystemError(error)
+    }
+  };
+
+  const signout = () => {
+    Logout().then(() => {
+      setUser(null)
+      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    })
+  }
+
+  const signup = async (signup) => {
+    return await SignUp(signup);
+  };
 
   // Functions products
   const getCategories = async () => {
@@ -73,8 +95,12 @@ export default function ContextConsumer({ children }) {
   useEffect(() => {
     Profile().then(({ data }) => {
       setUser(data)
-    }).catch(() => {
-      setUser(null)
+    }).catch(({ response, message }) => {
+      if (response.status === 401) {
+        setUser(null)
+      } else {
+        SystemError(message)
+      }
     })
   }, [session])
 
@@ -90,61 +116,54 @@ export default function ContextConsumer({ children }) {
     }
   };
 
-  // Functions token
-  const login = async (login) => {
-    try {
-      const { data } = await Login(login);
-      setSession(true)
-      return await data.state;
-    } catch (error) {
-      SystemError(error)
-    }
-  };
-
-  const signout = () => {
-    Logout().then(() => {
-      setUser(null)
-      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-    })
-  }
-
-  const signup = async (signup) => {
-    return await SignUp(signup);
-  };
-
   //Functions Cart
   useEffect(() => {
     GetCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch(() => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    }).catch(({ response, message }) => {
+      if (response.status === 401) {
+        dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+      } else {
+        SystemError(message)
+      }
     })
   }, [session])
 
   const addToCart = async (ProductKey) => {
-    if (user) {
-      try {
-        const { data } = await AddToCart(ProductKey)
-        dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-      } catch (error) {
-        setUser(null)
-        dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    AddToCart(ProductKey).then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+    }).catch(({ response, message }) => {
+      if (response.status === 400) {
+        SystemError(response.data.message)
+      } else if (response.status === 401) {
+        if (user) {
+          Swal.fire("Su sesión ya expiro").then(() => {
+            setUser(null)
+            window.location.href = "/login"
+          });
+        } else {
+          window.location.href = "/login"
+        }
+      } else {
+        SystemError(message)
       }
-    } else {
-      window.location.href = "/login"
-    }
+    })
   };
   const quantityProduct = async (key, type) => {
     Quantity(key, type).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch((err) => {
-      if (err.responce.status === 400) {
-        SystemError(err.responce.data.message)
-      } else if (err.responce.status === 404) {
-        setUser(null)
-        dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-      }else{
-        SystemError(err.responce.data.message)
+    }).catch(({ response, message }) => {
+      if (response.status === 400) {
+        SystemError(response.data.message)
+      } else if (response.status === 401) {
+        if (user) {
+          Swal.fire("Su sesión ya expiro").then(() => {
+            setUser(null)
+            window.location.href = "/login"
+          });
+        }
+      } else {
+        SystemError(message)
       }
     })
   };

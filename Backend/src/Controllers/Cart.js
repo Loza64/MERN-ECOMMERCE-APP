@@ -36,14 +36,15 @@ export const Quantity = async (req, res) => {
                 req.session.cart.map(
                     item => item.key === Key ? { ...item, quantity: item.quantity < product.stock ? ++item.quantity : stock } : item
                 )
+                res.status(200).json({ state: true, cart: req.session.cart })
             } else if (Type === "Subtraction") {
                 req.session.cart.map(
-                    item => item.key === Key ? { ...item, quantity: item.quantity >= 1 ? --item.quantity : 1 } : item
+                    item => item.key === Key ? { ...item, quantity: item.quantity > 1 ? --item.quantity : 1 } : item
                 )
+                res.status(200).json({ state: true, cart: req.session.cart })
             } else {
                 res.status(400).json({ state: false, message: 'Invalid option' });
             }
-            res.status(200).json({ state: true, cart: req.session.cart })
         } else {
             res.status(404).json({ state: false, message: 'Product not found' });
         }
