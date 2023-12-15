@@ -17,8 +17,10 @@ export const SignUp = async (usuario) => await ServerFetch.post('/signup', usuar
 
 //Cart
 export const GetCart = async () => await ServerFetch.get('/cart')
+export const ClearCart = async () => await ServerFetch.get('/clearcart')
 export const AddToCart = async (Key) => await ServerFetch.get(`/addtocart/${Key}`)
 export const Quantity = async (Key, Type) => await ServerFetch.get(`/quantity/${Key}/${Type}`)
+export const RemoveProductFromCart = async (Key) => await ServerFetch.get(`/removetocart/${Key}`)
 
 //User
 export const Logout = async () => await ServerFetch.get('/logout')

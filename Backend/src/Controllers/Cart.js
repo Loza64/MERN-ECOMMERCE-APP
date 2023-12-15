@@ -20,7 +20,6 @@ export const AddToCart = async (req, res, next) => {
         } else {
             res.status(404).json({ state: false, message: 'Product not found' });
         }
-
     } catch (error) {
         next(error.message)
         res.status(500).json({ state: false, message: error.message })
@@ -50,6 +49,19 @@ export const Quantity = async (req, res) => {
         }
 
     } catch (error) {
-
+        next(error.message)
+        res.status(500).json({ state: false, message: error.message })
     }
+}
+
+export const RemoveProductFromCart = (req, res) => {
+    const { Key } = req.params;
+    const remove = req.session.cart.filter(item => item.key !== Key)
+    req.session.cart = remove
+    res.status(200).json({ state: true, cart: req.session.cart })
+}
+
+export const ClearCart = (req, res) => {
+    req.session.cart = []
+    res.status(200).json({ state: true, cart: req.session.cart })
 }

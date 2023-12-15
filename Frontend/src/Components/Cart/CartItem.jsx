@@ -9,7 +9,7 @@ CartItem.propTypes = {
 
 export default function CartItem({ item }) {
   const { key, name, image, company, price, quantity, discount } = item;
-  const { RemoveProductFromCart, quantityProduct } = ContextProvider();
+  const { removeProductFromCart, quantityProduct } = ContextProvider();
   const navigator = useNavigate();
 
   if (discount > 0) {
@@ -36,7 +36,7 @@ export default function CartItem({ item }) {
                 <i className="fa fa-plus" />
               </button>
             </div>
-            <div className="remove-buttom" onClick={() => { RemoveProductFromCart(key) }}>
+            <div className="remove-buttom" onClick={() => { removeProductFromCart(key) }}>
               <FaTrashAlt className="react-icon" />
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function CartItem({ item }) {
                 <i className="fa fa-plus" />
               </button>
             </div>
-            <div className="remove-buttom" onClick={() => { RemoveProductFromCart(key) }}>
+            <div className="remove-buttom" onClick={() => { removeProductFromCart(key) }}>
               <FaTrashAlt className="react-icon" />
             </div>
           </div>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -166,12 +166,44 @@ export default function ContextConsumer({ children }) {
       }
     })
   };
-  
-  const RemoveProductFromCart = (ProductKey) => {
 
+  const removeProductFromCart = (ProductKey) => {
+    RemoveProductFromCart(ProductKey).then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+    }).catch(({ response, message }) => {
+      if (response.status === 400) {
+        SystemError(response.data.message)
+      } else if (response.status === 401) {
+        if (user) {
+          Swal.fire("Su sesión ya expiro").then(() => {
+            setUser(null)
+            window.location.href = "/login"
+          });
+        }
+      } else {
+        console.log(response)
+        SystemError(message)
+      }
+    })
   };
-  const ClearCart = () => {
-
+  const clearCart = () => {
+    ClearCart().then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+    }).catch(({ response, message }) => {
+      if (response.status === 400) {
+        SystemError(response.data.message)
+      } else if (response.status === 401) {
+        if (user) {
+          Swal.fire("Su sesión ya expiro").then(() => {
+            setUser(null)
+            window.location.href = "/login"
+          });
+        }
+      } else {
+        console.log(response)
+        SystemError(message)
+      }
+    })
   };
 
   //Totals Cart
@@ -210,9 +242,9 @@ export default function ContextConsumer({ children }) {
   ).toFixed(2);
 
   const ContextValues = {
-    addToCart, RemoveProductFromCart, setPage, setCategorie, setSearch,
+    addToCart, removeProductFromCart, setPage, setCategorie, setSearch,
     products, categories, signout, login, signup, user, getProductByName, loading,
-    system, getCategories, ClearCart, cart, quantityProduct, SubTotal, Tax, Total, product
+    system, getCategories, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

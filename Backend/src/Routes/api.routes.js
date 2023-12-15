@@ -6,7 +6,7 @@ import { ValidationResult } from '../Middlewares/VaidationsResult.js'
 import { Login, SignUp, Profile, Logout } from '../Controllers/Users.js'
 import { GetCategories, NewCategorie } from '../Controllers/Categories.js'
 import { GetProductByName, GetProducts, NewProduct } from '../Controllers/Products.js'
-import { AddToCart, Cart, Quantity } from '../Controllers/Cart.js'
+import { AddToCart, Cart, ClearCart, Quantity, RemoveProductFromCart } from '../Controllers/Cart.js'
 
 const routes = express.Router()
 
@@ -25,7 +25,9 @@ routes.post('/newproduct', ValidateProduct, ValidationResult, NewProduct)
 
 // Cart
 routes.get('/cart', isAutenticate, Cart)
+routes.get('/clearcart', isAutenticate, ClearCart)
 routes.get('/addtocart/:Key', isAutenticate, AddToCart)
 routes.get('/quantity/:Key/:Type', isAutenticate, Quantity)
+routes.get('/removetocart/:Key', isAutenticate, RemoveProductFromCart)
 
 export default routes
