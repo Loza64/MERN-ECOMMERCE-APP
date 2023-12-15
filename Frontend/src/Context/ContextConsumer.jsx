@@ -138,7 +138,6 @@ export default function ContextConsumer({ children }) {
     Quantity(key, type).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch((err) => {
-
       if (err.responce.status === 400) {
         SystemError(err.responce.data.message)
       } else if (err.responce.status === 404) {
