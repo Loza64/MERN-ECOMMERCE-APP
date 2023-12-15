@@ -133,9 +133,7 @@ export default function ContextConsumer({ children }) {
     AddToCart(ProductKey).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      if (response.status === 400) {
-        SystemError(response.data.message)
-      } else if (response.status === 401) {
+      if (response.status === 401) {
         if (user) {
           Swal.fire("Su sesión ya expiro").then(() => {
             setUser(null)
@@ -149,6 +147,7 @@ export default function ContextConsumer({ children }) {
       }
     })
   };
+
   const quantityProduct = async (key, type) => {
     Quantity(key, type).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
@@ -167,6 +166,7 @@ export default function ContextConsumer({ children }) {
       }
     })
   };
+  
   const RemoveProductFromCart = (ProductKey) => {
 
   };
