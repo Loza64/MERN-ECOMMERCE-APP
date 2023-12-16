@@ -7,36 +7,51 @@
     .pagination-flex {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         gap: 10px;
         font-weight: 800;
 
-        .prev-buttom {
+        .disable {
+            background-color: rgb(177, 177, 177);
             border: none;
-            background: linear-gradient(135deg, blue 100%, greenyellow);
-            color: white;
+            font-weight: 800;
             padding: 4px 20px;
             border-radius: 10px;
+            color: white;
+        }
+
+        .prev-buttom {
+            border: none;
+            color: white;
             font-weight: 800;
-            transition: all .06s ease-in-out;
-            &:hover{
-                background: linear-gradient(90deg, blue 20%, greenyellow 100%);
+            padding: 4px 20px;
+            border-radius: 10px;
+            transition: all .1s ease-in-out;
+            background: linear-gradient(135deg, blue 100%, greenyellow);
+
+            &:hover {
+                background: linear-gradient(90deg, blue 1%, greenyellow);
             }
-            &:active{
+
+            &:active {
                 transform: scale(105%);
             }
         }
+
         .next-buttom {
             border: none;
-            background: linear-gradient(135deg, greenyellow 100%, blue);
             color: black;
+            font-weight: 800;
             padding: 4px 20px;
             border-radius: 10px;
-            font-weight: 800;
-            transition: all .03s ease-in-out;
-            &:hover{
-                background: linear-gradient(90deg, greenyellow 30%, blue 100%);
+            transition: all .1s ease-in-out;
+            background: linear-gradient(135deg, greenyellow 100%, blue);
+
+            &:hover {
+                background: linear-gradient(90deg, greenyellow 25%, blue);
             }
-            &:active{
+
+            &:active {
                 transform: scale(105%);
             }
         }

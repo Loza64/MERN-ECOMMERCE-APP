@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ProductsList from "./ProductsList";
 import Top from "../Top";
 import Loading from "../Loading";
@@ -17,9 +18,12 @@ export default function Products({ TopState }) {
   const [item, setItem] = useState(1)
   const [show, setShow] = useState(false)
 
-  useEffect(() => { setCategorie(""); setSearch(""); setPage(item) })
-  setTimeout(() => { setShow(true); }, 1000)
+  useEffect(() => {
+    setCategorie(""); setSearch(""); setPage(item)
+  }, [item])
   
+  setTimeout(() => { setShow(true); }, 1000)
+
   if (system) {
     if (loading || !show) {
       return <Loading title={"Loading products...."} />

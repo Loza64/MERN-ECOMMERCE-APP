@@ -16,9 +16,9 @@ export default function Pagination({ Page, Pages, Prev, Next, PrevItem, NextItem
             {
                 Pages > 1 ? (
                     <div className='pagination-flex'>
-                        {Prev ? (<button className='prev-buttom' onClick={() => { setPage(PrevItem) }}>Prev</button>) : null}
+                        <button className={` ${Prev ? "prev-buttom" : "disable"}`} onClick={() => { if (Prev) setPage(PrevItem) }}>Prev</button>
                         <label>{Page} - {Pages}</label>
-                        {Next ? (<button className='next-buttom' onClick={() => { setPage(NextItem) }}>Next</button>) : null}
+                        <button className={` ${Next ? "next-buttom" : "disable"}`} onClick={() => { if (Next) setPage(NextItem) }}>Next</button>
                     </div>
                 ) : null
             }

@@ -8,25 +8,24 @@ import { AiFillHome, AiFillSetting, AiFillTags } from 'react-icons/ai'
 import { NavBar } from "./Styles/styled-components";
 import { Link } from "react-router-dom";
 import { ContextProvider } from '../Context/ContextConsumer';
-import Swal from "sweetalert2";
 
 export default function Navbar() {
 
   const navigator = useNavigate();
 
   //Functions Context
-  const { user, cart, signout, searchProduct } = ContextProvider();
+  const { user, cart, signout, setSearch } = ContextProvider();
 
   //Hooks
   const [state, setState] = useState(false);
-  const [search, setSearch] = useState(String);
 
   //Functions
-  const scrollTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  const scrollTop = () => { window.scrollTo({ top: 0, behavior: "smooth", }) }
+  const Search = (e) => {
+    e.preventDefault();
+    localStorage.setItem('search', JSON.stringify(e.target.query.value))
+    setSearch(e.target.query.value)
+    navigator(`/Search?Product=${e.target.query.value}`)
   }
 
   return (
@@ -35,22 +34,8 @@ export default function Navbar() {
         <label>COMMERCE</label>
       </div>
       <div className="sidebar">
-        <form className="content-search" onSubmit={(e) => {
-          localStorage.setItem("search", JSON.stringify(search ? search : "all"));
-          searchProduct(search ? search : "all").catch((err) => {
-            Swal.fire({
-              title: 'Connection server error',
-              text: 'Bug name: ' + err + ', we will solve this problem as soon as possible.',
-              icon: 'error',
-              button: "Aceptar",
-              footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
-            })
-          });
-          navigator(search ? `/SearchProduct?product=${search}` : '/SearchProduct?product=all');
-          setState(false);
-          e.preventDefault();
-        }}>
-          <input name="query" id="query" type="search" placeholder="Search products..." className="txt-search" onChange={(e) => { setSearch(e.target.value) }} />
+        <form className="content-search" onSubmit={Search}>
+          <input name="query" id="query" type="search" placeholder="Search products..." className="txt-search" />
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>

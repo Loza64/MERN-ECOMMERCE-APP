@@ -24,10 +24,10 @@ export default function App() {
         <Route path='/Login' element={<Login />} />
         <Route path='/Discounts' element={<Discounts />} />
         <Route path='/Categories' element={<Categories />} />
-        <Route path='/Product/:Name' element={<DetailProduct />} />        
-        <Route path='/SearchProduct' element={<SearchProduct TopState={true} />} />
+        <Route path='/Product/:Name' element={<DetailProduct />} />
+        <Route path='/Search' element={<SearchProduct TopState={true} />} />
         <Route path='/Products' element={<Products Top={'40px'} TopState={true} />} />
-        <Route path='/Categorie/:Category' element={<ProductsByCategorie top={true} />} />        
+        <Route path='/Categorie/:Category' element={<ProductsByCategorie top={true} />} />
       </Routes>
     </div>
   );
