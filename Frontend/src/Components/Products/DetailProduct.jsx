@@ -10,6 +10,7 @@ import { BsFillCartPlusFill } from 'react-icons/bs';
 import { useNavigate, useParams } from "react-router-dom";
 import { DetailProducts } from "../Styles/styled-components";
 import { ContextProvider } from "../../Context/ContextConsumer";
+import Pagination from "../Pagination";
 
 DetailProduct.propTypes = {
   product: PropTypes.object
@@ -17,19 +18,21 @@ DetailProduct.propTypes = {
 
 export default function DetailProduct() {
   const { addToCart, getProductByName, system, product, loading } = ContextProvider();
+  const [showProduct, setShowProduct] = useState(false);
   const [page, setPage] = useState(1)
   const navigator = useNavigate();
   const { Name } = useParams();
 
   //Change item doc
   useEffect(() => { getProductByName(Name, page) }, [Name, page])
+  setTimeout(() => { setShowProduct(true) }, 1000)
 
   const [view, setView] = useState(false);
   if (system) {
-    if (loading) {
-      return <Loading title={"Loaging......"} />
+    if (loading || !showProduct) {
+      return <Loading title={"Loading...."} />
     } else {
-      if (product !== null) {
+      if (product) {
         const { key, image, name, company, details, price, stock, discount, releated } = product;
         return (
           <div>
@@ -52,9 +55,9 @@ export default function DetailProduct() {
                         (
                           <div className="description view-less">
                             <p>{details}</p>
-                            <label className="view-more" onClick={() => { setView(view ? false : true) }}>
+                            <label className="view-more" onClick={() => { setView(!view) }}>
                               {
-                                view ? ("View less") : ("View more")
+                                view ? "View less" : "View more"
                               }
                             </label>
                           </div>
@@ -79,14 +82,15 @@ export default function DetailProduct() {
             </DetailProducts>
             {
               releated.docs.length > 1 ? (
-                <div>
+                <section>
                   <h1 className="text-center" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Releated</label> Products</h1>
                   <div className="grid">
                     {
-                      releated.docs.map(item => item.name !== name ? (<ProductItem key={item._id} product={item} animationState={true} />) : null)
+                      releated.docs.map(item => item.name !== Name ? (<ProductItem key={item._id} product={item} animationState={true} />) : null)
                     }
                   </div>
-                </div>
+                  <Pagination Page={releated.page} Pages={releated.totalPages} Prev={releated.hasPrevPage} Next={releated.hasNextPage} PrevItem={releated.prevPage} NextItem={releated.nextPage} setPage={setPage} />
+                </section>
               ) : null
             }
           </div>

@@ -5,6 +5,8 @@ import { ContextProvider } from "../../Context/ContextConsumer";
 import Message from "../Message";
 import Title from "../Title";
 import PropTypes from 'prop-types';
+import Pagination from "../Pagination";
+import { useEffect, useState } from "react";
 
 Products.propTypes = {
   TopState: PropTypes.bool
@@ -12,13 +14,15 @@ Products.propTypes = {
 
 export default function Products({ TopState }) {
   const { products, system, setCategorie, setSearch, setPage, loading } = ContextProvider()
-  setCategorie("")
-  setSearch("")
-  setPage(1)
+  const [item, setItem] = useState(1)
+  const [show, setShow] = useState(false)
 
+  useEffect(() => { setCategorie(""); setSearch(""); setPage(item) })
+  setTimeout(() => { setShow(true); }, 1000)
+  
   if (system) {
-    if (loading) {
-      <Loading title={"Loading product "} />
+    if (loading || !show) {
+      return <Loading title={"Loading products...."} />
     } else {
       return products.docs.length > 0 ?
         (
@@ -26,6 +30,7 @@ export default function Products({ TopState }) {
             <Top state={TopState} />
             <Title Title={"Our"} SubTitle={"Products"} />
             <ProductsList />
+            <Pagination Page={products.page} Pages={products.totalPages} Prev={products.hasPrevPage} Next={products.hasNextPage} PrevItem={products.prevPage} NextItem={products.nextPage} setPage={setItem} />
           </div>
         ) : <Message title={"Products not found"} />
     }
