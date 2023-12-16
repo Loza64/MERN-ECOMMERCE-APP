@@ -20,8 +20,6 @@ export default function ContextConsumer({ children }) {
   const [system, setSystem] = useState(true);
   const [loading, setLoading] = useState(true);
 
-
-
   const [page, setPage] = useState(1);
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
@@ -80,16 +78,16 @@ export default function ContextConsumer({ children }) {
     });
   };
 
-  useEffect(async () => {
-    try {
-      setLoading(true);
-      const { data } = await GetProducts(search, categorie, page)
-      setProducts(data.result);
-    } catch (error) {
+  useEffect(() => {
+    setLoading(true)
+    GetProducts(search, categorie, page).then(({ data }) => {
+      const { result } = data
+      setProducts(result)
+    }).catch(error => {
       SystemError(error)
-    } finally {
-      setLoading(false)
-    }
+    }).finally(() => {
+      setLoading(false);
+    })
   }, [search, categorie, page])
 
   useEffect(() => {
@@ -104,16 +102,17 @@ export default function ContextConsumer({ children }) {
     })
   }, [session])
 
-  const getProductByName = async (Product) => {
-    try {
-      setLoading(true)
-      const { data } = await GetProductByName(Product);
+  const getProductByName = (Product, Page) => {
+    setLoading(true)
+    GetProductByName(Product, Page).then(async ({ data }) => {
       setProduct(data.product)
-    } catch (error) {
-      SystemError(error)
-    } finally {
+    }).catch(error => {
       setLoading(false)
-    }
+      SystemError(error)
+      console.log(error)
+    }).finally(() => {
+      setLoading(false)
+    })
   };
 
   //Functions Cart
@@ -186,6 +185,7 @@ export default function ContextConsumer({ children }) {
       }
     })
   };
+
   const clearCart = () => {
     ClearCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })

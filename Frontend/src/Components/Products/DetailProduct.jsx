@@ -1,36 +1,36 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Top from "../Top";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { BsFillCartPlusFill } from 'react-icons/bs'
-import { FaShoppingBag } from 'react-icons/fa'
-import { ContextProvider } from "../../Context/ContextConsumer";
-import { DetailProducts } from "../Styles/styled-components";
-import Loading from "../Loading";
-import ProductItem from "./ProductItem";
-import PropTypes from 'prop-types';
 import Message from "../Message";
+import Loading from "../Loading";
+import PropTypes from 'prop-types';
+import ProductItem from "./ProductItem";
+import { useEffect, useState } from "react";
+import { FaShoppingBag } from 'react-icons/fa';
+import { BsFillCartPlusFill } from 'react-icons/bs';
+import { useNavigate, useParams } from "react-router-dom";
+import { DetailProducts } from "../Styles/styled-components";
+import { ContextProvider } from "../../Context/ContextConsumer";
 
 DetailProduct.propTypes = {
   product: PropTypes.object
 }
 
 export default function DetailProduct() {
+  const { addToCart, getProductByName, system, product, loading } = ContextProvider();
+  const [page, setPage] = useState(1)
   const navigator = useNavigate();
   const { Name } = useParams();
 
-  const { AddToCart, products, setCategorie, getProductByName, system, product } = ContextProvider();
-  useEffect(() => { getProductByName(Name) }, [Name])
+  //Change item doc
+  useEffect(() => { getProductByName(Name, page) }, [page])
 
   const [view, setView] = useState(false);
-  const [loading, setLoading] = useState(0);
-
   if (system) {
-    if (product) {
-      const { key, image, name, company, price, categorykey, stock, discount, details } = product;
-      const timeId = setTimeout(() => { setLoading(loading + 1) }, 1000);
-      setCategorie(categorykey)
-      if (loading >= 1) {
-        clearTimeout(timeId);
+    if (loading) {
+      return <Loading title={"Loaging......"} />
+    } else {
+      if (product !== null) {
+        const { key, image, name, company, details, price, stock, discount, releated } = product;
         return (
           <div>
             <DetailProducts status={stock > 0 ? true : false} data={view}>
@@ -68,8 +68,8 @@ export default function DetailProduct() {
                       stock > 0 ?
                         (
                           <div className="buttoms">
-                            <button className="buttom cart" onClick={() => { if (stock > 0) { AddToCart(key) } }} >Add to cart <BsFillCartPlusFill className="react-icon" /></button>
-                            <button className="buttom buy" onClick={() => { if (stock > 0) { AddToCart(key); navigator('/cart') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
+                            <button className="buttom cart" onClick={() => { if (stock > 0) { addToCart(key) } }} >Add to cart <BsFillCartPlusFill className="react-icon" /></button>
+                            <button className="buttom buy" onClick={() => { if (stock > 0) { addToCart(key); navigator('/cart') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
                           </div>
                         ) : null
                     }
@@ -78,25 +78,22 @@ export default function DetailProduct() {
               </div>
             </DetailProducts>
             {
-              products.docs.length > 0 ?
-                (
-                  <div>
-                    <h1 className="text-center" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Releated</label> Products</h1>
-                    <div className="grid">
-                      {
-                        products.docs.map(item => item.name !== Name ? (<ProductItem key={item._id} product={item} animationState={true} />) : null)
-                      }
-                    </div>
+              releated.docs.length > 1 ? (
+                <div>
+                  <h1 className="text-center" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Releated</label> Products</h1>
+                  <div className="grid">
+                    {
+                      releated.docs.map(item => item.name !== name ? (<ProductItem key={item._id} product={item} animationState={true} />) : null)
+                    }
                   </div>
-                ) : null
+                </div>
+              ) : null
             }
           </div>
         )
       } else {
-        return <Loading title={"Loading...."} />
+        return <Message title={"Product not found"} />
       }
-    } else {
-      return <Message title={"Product not found"} />
     }
   } else {
     return null

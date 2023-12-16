@@ -49,10 +49,12 @@ export const GetProducts = async (req, res, next) => {
 
 export const GetProductByName = async (req, res, next) => {
   const { Name } = req.params;
+  const { Page } = req.query;
   try {
     const product = await Products.findOne({ name: Name })
     if (product) {
-      res.status(200).json({ state: true, product })
+      const releated = await Products.paginate({ categorykey: product.categorykey }, { page: Page, limit: 10 })
+      res.status(200).json({ state: true, product: { ...product._doc, releated } })
     } else {
       res.status(200).json({ state: true, product: null })
     }
