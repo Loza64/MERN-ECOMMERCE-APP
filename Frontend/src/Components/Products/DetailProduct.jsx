@@ -22,7 +22,7 @@ export default function DetailProduct() {
   const { Name } = useParams();
 
   //Change item doc
-  useEffect(() => { getProductByName(Name, page) }, [page])
+  useEffect(() => { getProductByName(Name, page) }, [Name, page])
 
   const [view, setView] = useState(false);
   if (system) {
