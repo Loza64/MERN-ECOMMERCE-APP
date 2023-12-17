@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { RiCloseFill } from 'react-icons/ri';
 import { BsFillCartFill } from 'react-icons/bs';
 import { VscThreeBars } from 'react-icons/vsc';
@@ -11,10 +10,8 @@ import { ContextProvider } from '../Context/ContextConsumer';
 
 export default function Navbar() {
 
-  const navigator = useNavigate();
-
   //Functions Context
-  const { user, cart, signout, setSearch } = ContextProvider();
+  const { user, cart, signout, setSearch, categories, setCategorie } = ContextProvider();
 
   //Hooks
   const [state, setState] = useState(false);
@@ -23,9 +20,9 @@ export default function Navbar() {
   const scrollTop = () => { window.scrollTo({ top: 0, behavior: "smooth", }) }
   const Search = (e) => {
     e.preventDefault();
-    localStorage.setItem('search', JSON.stringify(e.target.query.value))
-    setSearch(e.target.query.value)
-    navigator(`/Search?Product=${e.target.query.value}`)
+    localStorage.setItem('search', JSON.stringify(e.target.product.value))
+    setSearch(e.target.product.value)
+    setCategorie(e.target.categorie.value) 
   }
 
   return (
@@ -35,7 +32,12 @@ export default function Navbar() {
       </div>
       <div className="sidebar">
         <form className="content-search" onSubmit={Search}>
-          <input name="query" id="query" type="search" placeholder="Search products..." className="txt-search" />
+          <input name="product" id="product" type="search" placeholder="Search products..." className="txt-search" />
+          <select name="categorie" id="categorie">
+            <option value="" disabled selected>Categoria</option>
+            <option value="" >Todo</option>
+            {categories.map((item, index) => (<option key={index} value={item.key}>{item.name}</option>))}
+          </select>
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>

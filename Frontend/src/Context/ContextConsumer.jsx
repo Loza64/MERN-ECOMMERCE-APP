@@ -67,7 +67,7 @@ export default function ContextConsumer({ children }) {
   };
 
   // Functions products
-  const getCategories = async () => {
+  useEffect(() => {
     setLoading(true);
     GetCategories().then(({ data }) => {
       setCategories(data.result);
@@ -76,7 +76,7 @@ export default function ContextConsumer({ children }) {
     }).finally(() => {
       setLoading(false);
     });
-  };
+  }, [])
 
   useEffect(() => {
     setLoading(true)
@@ -244,7 +244,7 @@ export default function ContextConsumer({ children }) {
   const ContextValues = {
     addToCart, removeProductFromCart, setPage, setCategorie, setSearch,
     products, categories, signout, login, signup, user, getProductByName, loading,
-    system, getCategories, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product
+    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

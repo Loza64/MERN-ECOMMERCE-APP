@@ -53,6 +53,13 @@ color:white;
   max-width:465px;
   color:black;
 }
+.sidebar .content-search select{
+  border: none;
+  outline: none;
+  text-align: center;
+  background: greenyellow;
+  font-weight: bold;
+}
 .sidebar .content-search .txt-search::placeholder{
   color:gray;
 }
