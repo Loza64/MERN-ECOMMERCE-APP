@@ -22,8 +22,9 @@ export const GenerateSale = async (req, res, next) => {
         }
     } catch (error) {
         next(error.message)
-        res.status(500).json({ state: false, message: error.message })
+        return res.status(500).json({ state: false, message: error.message })
     } finally {
+        req.session.cart = []
         res.status(200).json({ state: true, cart: req.session.cart, message: 'The purchase was completed successfully.' })
     }
 }
