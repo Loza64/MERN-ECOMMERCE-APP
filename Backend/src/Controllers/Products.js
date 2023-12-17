@@ -4,7 +4,7 @@ import { Products } from "../Models/Model.js"
 import uniquid from "uniquid"
 
 export const NewProduct = async (req, res, next) => {
-  const { name, categorykey, company, details } = req.body
+  const { name, category, company, details } = req.body
   try {
     const { photo } = req.files;
     const check = await Products.findOne({ name: name })
@@ -17,7 +17,7 @@ export const NewProduct = async (req, res, next) => {
       const price = Number(req.body.price)
       const key = uniquid()
 
-      new Products({ key, image, categorykey, name, company, details, stock, price, discount }).save().then(() => {
+      new Products({ key, image, category, name, company, details, stock, price, discount }).save().then(() => {
         remove(photo.tempFilePath)
         res.status(200).json({ state: false, details: 'Producto guardado exitosamente.' })
       }).catch((error) => {
@@ -38,7 +38,7 @@ export const NewProduct = async (req, res, next) => {
 export const GetProducts = async (req, res, next) => {
   const { Search, Categorie, Page, Type } = req.query
   try {
-    const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, categorykey: Categorie } : { name: { $regex: Search ?? "", $options: 'i' } }
+    const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, category: Categorie } : { name: { $regex: Search ?? "", $options: 'i' } }
     switch (Type) {
       case 'All':
         res.status(200).json({ state: true, result: await Products.paginate(config, { page: Page, limit: 15 }) })
@@ -68,7 +68,7 @@ export const GetProductByName = async (req, res, next) => {
   try {
     const product = await Products.findOne({ name: Name })
     if (product) {
-      const releated = await Products.paginate({ categorykey: product.categorykey }, { page: Page, limit: 10 })
+      const releated = await Products.paginate({ category: product.category }, { page: Page, limit: 10 })
       res.status(200).json({ state: true, product: { ...product._doc, releated } })
     } else {
       res.status(200).json({ state: true, product: null })

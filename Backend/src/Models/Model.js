@@ -19,7 +19,7 @@ const user = new Schema({
 const product = new Schema({
   key: { type: String, require: true, unique: true },
   image: { type: Object, required: true, default: { public_id: "", url: "" } },
-  categorykey: { type: String, require: true, ref: 'categories' },
+  category: { type: String, require: true, ref: 'categories' },
   name: { type: String, require: true },
   company: { type: String, require: true },
   details: { type: String, require: true },
@@ -36,23 +36,17 @@ const category = new Schema({
 
 const sale = new Schema({
   key: { type: String, require: true, unique: true },
-  clientkey: { type: String, require: true, },
-  cantproducts: { type: Number, require: true },
+  user: { type: String, require: true, },
+  date: { type: Date, require: true },
+  products: { type: Number, require: true },
   subtotal: { type: Number, require: true },
   total: { type: Number, require: true },
+  details: { type: Array, require: true },
   state: { type: String, require: true, default: "Proceso" },
 }, { versionKey: false }).plugin(mongoosePaginate)
 
-const detailsale = new Schema({
-  salekey: { type: String, require: true },
-  productkey: { type: String, require: true },
-  cant: { type: Number, require: true },
-  subtotal: { type: Number, require: true },
-  total: { type: Number, require: true },
-}, { versionKey: false })
 
 export const Users = mongoose.model("users", user)
 export const Products = mongoose.model("products", product)
 export const Categories = mongoose.model("categories", category)
 export const Sales = mongoose.model("sales", sale)
-export const Detailsales = mongoose.model("detailsales", detailsale)

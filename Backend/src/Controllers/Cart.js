@@ -14,7 +14,8 @@ export const AddToCart = async (req, res, next) => {
             const { _id, key, name, image, price, discount } = product
             const checkProduct = cart.find(item => item.key === Key)
             const modifyCart = cart.map(item => item.key === Key ? { ...item, quantity: item.quantity < product.stock ? ++item.quantity : product.stock } : item)
-            const CartList = checkProduct ? modifyCart : [...cart, { id: _id, key, name, image: image.url, price, quantity: 1, discount }]
+            const saveProduct = [...cart, { id: _id.toString(), key, name, image: image.url, price, quantity: 1, discount }]
+            const CartList = checkProduct ? modifyCart : saveProduct
             req.session.cart = CartList
             res.status(200).json({ state: true, cart: req.session.cart })
         } else {

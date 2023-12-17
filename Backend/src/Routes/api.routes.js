@@ -1,4 +1,5 @@
 import express from 'express'
+import { GenerateSales } from '../Controllers/Sales.js'
 import { isAutenticate } from '../Middlewares/CheckSession.js'
 import { ValidateSignUp } from '../Validators/UserValidadots.js'
 import { ValidateProduct } from '../Validators/ProductValidation.js'
@@ -29,5 +30,6 @@ routes.get('/clearcart', isAutenticate, ClearCart)
 routes.get('/addtocart/:Key', isAutenticate, AddToCart)
 routes.get('/quantity/:Key/:Type', isAutenticate, Quantity)
 routes.get('/removetocart/:Key', isAutenticate, RemoveProductFromCart)
+routes.post('/generatesale', isAutenticate, GenerateSales)
 
 export default routes
