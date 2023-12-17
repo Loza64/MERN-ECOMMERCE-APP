@@ -4,7 +4,6 @@ import Top from "../Top";
 import Loading from "../Loading";
 import { ContextProvider } from "../../Context/ContextConsumer";
 import Message from "../Message";
-import Title from "../Title";
 import PropTypes from 'prop-types';
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
@@ -32,7 +31,6 @@ export default function Products({ TopState }) {
         (
           <div>
             <Top state={TopState} />
-            <Title Title={"Our"} SubTitle={"Products"} />
             <ProductsList />
             <Pagination Page={products.page} Pages={products.totalPages} Prev={products.hasPrevPage} Next={products.hasNextPage} PrevItem={products.prevPage} NextItem={products.nextPage} setPage={setItem} />
           </div>

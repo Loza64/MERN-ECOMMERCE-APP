@@ -29,4 +29,4 @@ export const Profile = async () => await ServerFetch.get('/profile')
 //Product
 export const GetCategories = async () => await ServerFetch.get('/getcategories')
 export const GetProductByName = async (Product, Page) => await ServerFetch.get(`/getproductbyname/${Product}?Page=${Page}`)
-export const GetProducts = async (Search, Categorie, Page) => await ServerFetch.get(`/getproducts?Search=${Search}&Categorie=${Categorie}&Page=${Page}`)
+export const GetProducts = async (Search, Categorie, Type, Page) => await ServerFetch.get(`/getproducts?Search=${Search}&Categorie=${Categorie}&Type=${Type}&Page=${Page}`)

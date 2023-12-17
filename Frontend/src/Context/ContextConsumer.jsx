@@ -20,14 +20,20 @@ export default function ContextConsumer({ children }) {
   const [system, setSystem] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  const [page, setPage] = useState(1);
+  //Users
   const [user, setUser] = useState(null);
+  const [session, setSession] = useState(false);
+
+  //Products
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [type, setType] = useState('Normal');
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState({});
-  const [session, setSession] = useState(false);
-  const [categorie, setCategorie] = useState("");
-  const [categories, setCategories] = useState([]);
+
+  //Categories
+  const [categorie, setCategorie] = useState(""); //Categorie
+  const [categories, setCategories] = useState([]); //List of categories
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
@@ -80,7 +86,7 @@ export default function ContextConsumer({ children }) {
 
   useEffect(() => {
     setLoading(true)
-    GetProducts(search, categorie, page).then(({ data }) => {
+    GetProducts(search, categorie, type, page).then(({ data }) => {
       const { result } = data
       setProducts(result)
     }).catch(error => {
@@ -88,7 +94,7 @@ export default function ContextConsumer({ children }) {
     }).finally(() => {
       setLoading(false);
     })
-  }, [search, categorie, page])
+  }, [search, categorie, page, type])
 
   useEffect(() => {
     Profile().then(({ data }) => {
@@ -244,7 +250,7 @@ export default function ContextConsumer({ children }) {
   const ContextValues = {
     addToCart, removeProductFromCart, setPage, setCategorie, setSearch,
     products, categories, signout, login, signup, user, getProductByName, loading,
-    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product
+    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType,
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

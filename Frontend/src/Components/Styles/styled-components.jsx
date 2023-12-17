@@ -14,6 +14,7 @@ transition:all 2s ease-in-out;
 animation-name: load;
 animation-duration: 2s;
 animation-iteration-count: 1;
+
 @keyframes load {
   0% {
     opacity:0%;
@@ -33,16 +34,20 @@ color:white;
   width:100%;
   display:flex;
   align-items:center;
+
 }
+
 .sidebar .content-search{
   display:flex;
-  margin:0 10px;
+  margin:0 30px;
   width:100%;
+  max-width:35rem;
   text-align:center;
   justify-content:center;
 }
 .sidebar .content-search .txt-search{
-  font-weight:800;
+  -webkit-appearance: none;
+  font-weight:700;
   outline:none;
   border:0;
   padding:7px 15px;
@@ -55,10 +60,23 @@ color:white;
 .sidebar .content-search select{
   border: none;
   outline: none;
+  width:85px;
+  font-size:13px;
+  font-weight:700;
   text-align: center;
-  background: #EFEFEF;
-  font-weight: bold;
+  background: white;
   border-radius: 6px 0 0 6px;
+  border-right: 2px solid greenyellow;
+}
+.opcion{
+  color: black;
+  font-weight: 800;
+  font-size:15px;
+  background-color:white;
+  width:600px;
+}
+.option-none{
+  display: none;
 }
 .sidebar .content-search .txt-search::placeholder{
   color:gray;
@@ -69,7 +87,7 @@ color:white;
   outline:none;
   border:0;
   padding:7px 10px;
-  font-size:20px;
+  font-size:18px;
   display:flex;
   align-items:center;
   border-radius: 0 6px 6px 0;
@@ -81,11 +99,12 @@ color:white;
 .sidebar nav{
   display:flex;
   align-items:center;
-  font-weight:800;
+  font-weight:700;
+  justify-content:space-between;
 }
 .sidebar nav a{
   color:white;
-  padding:0 5px;
+  padding:0 10px;
   text-decoration:none;
   display:flex;
   align-items:center;
@@ -95,15 +114,17 @@ color:white;
   color:#2AFF00
 }
 .sidebar nav a .react-icon{
-  font-size:18px
+  font-size:18px;
+  margin: 0 4px;
 }
+
 .sidebar .login-buttom a{
   color:white;
-  margin:0 5px;
+  margin:0 10px;
   text-decoration:none;
   display:flex;
   align-items:center;
-  font-weight:800;
+  font-weight:700;
   transition:all 0.3s ease-in-out;
 }
 .sidebar .login-buttom a label{
@@ -111,7 +132,8 @@ color:white;
   align-items:center
 }
 .sidebar .login-buttom a label .react-icon{
-  font-size:18px
+  font-size:18px;
+  margin: 0 4px;
 }
 .sidebar .login-buttom a:hover{
   color:#2AFF00
@@ -135,6 +157,7 @@ color:white;
     position:fixed;
     top:4.57rem;
     background:rgba(0, 0, 0, 0.69);
+    font-size:12px;
     flex-direction:column;
     width:20rem;
     transition: all 0.5s ease-in-out;
@@ -168,11 +191,21 @@ color:white;
     }
   }
   .sidebar .content-search .txt-search{
-    background:rgba(49, 48, 48, 1);
+    background:black;
     color:white;
   }
   .sidebar .content-search .txt-search::placeholder{
     color:lightgray;
+  }
+  .sidebar .content-search select{
+    background:black;
+    color:white;
+    font-size:12px;
+  }
+  .opcion{
+    background:black;
+    color:white;
+    font-size:12px;
   }
   nav{
     flex-direction:column;
