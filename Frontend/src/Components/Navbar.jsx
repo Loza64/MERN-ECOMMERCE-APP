@@ -10,7 +10,7 @@ import { FaSearch, FaUserAlt, FaBoxes, FaSignOutAlt, FaDollarSign } from 'react-
 
 export default function Navbar() {
 
-  const { user, cart, signout, setSearch, categories, setCategorie, setType } = ContextProvider();
+  const { user, signout, setSearch, categories, setCategorie, setType, productsInCart } = ContextProvider();
 
   const navigator = useNavigate();
   const [state, setState] = useState(false);
@@ -45,7 +45,7 @@ export default function Navbar() {
           <Link to="/Products" onClick={() => { setState(false); scrollTop(); setType("All") }}><FaBoxes className="react-icon" />Products</Link>
           <Link to="/NormalPrice" onClick={() => { setState(false); scrollTop(); setType("Normal") }}><FaDollarSign className="react-icon" />Normal</Link>
           <Link to="/Discounts" onClick={() => { setState(false); scrollTop(); setType("Discount") }}>< AiFillTags className="react-icon" />Discounts</Link>
-          <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
+          <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({productsInCart})</Link>
           {
             !user ?
               (

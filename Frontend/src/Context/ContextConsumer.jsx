@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart, GenerateSale } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -213,6 +213,8 @@ export default function ContextConsumer({ children }) {
   };
 
   //Totals Cart
+  const productsInCart = cart.reduce((a, c) => a + c.quantity, 0)
+
   const SubTotal = cart.reduce(
     (Total, NextItem) =>
       NextItem.discount > 0
@@ -247,10 +249,38 @@ export default function ContextConsumer({ children }) {
     ))
   ).toFixed(2);
 
+  //Sales functions 
+  const generateSale = () => {
+    GenerateSale({
+      user: user.key,
+      date: new Date().toDateString(),
+      product: productsInCart,
+      subtotal: SubTotal,
+      total: Total
+    }).then(({ data }) => {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } });
+      Swal.fire({ title: data.message, icon: "success" }).then(() => {
+      }).catch(error => {
+        if (error.response.status === 400) {
+          SystemError(error.response.data.message)
+        } else if (error.response.status === 401) {
+          if (user) {
+            Swal.fire("Su sesión ya expiro").then(() => {
+              setUser(null)
+              window.location.href = "/login"
+            });
+          }
+        } else {
+          SystemError(error.message)
+        }
+      })
+    })
+  }
+
   const ContextValues = {
-    addToCart, removeProductFromCart, setPage, setCategorie, setSearch,
+    addToCart, removeProductFromCart, setPage, setCategorie, setSearch, productsInCart,
     products, categories, signout, login, signup, user, getProductByName, loading,
-    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType,
+    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, generateSale
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

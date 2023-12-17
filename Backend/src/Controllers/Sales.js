@@ -1,22 +1,23 @@
 import uniquid from 'uniquid'
 import { Products, Sales } from '../Models/Model.js'
 
-export const GenerateSales = (req, res, next) => {
+export const GenerateSale = async (req, res, next) => {
     const { user, products, subtotal, total } = req.body
     const date = new Date(req.body.date)
     const details = req.session.cart
     const key = uniquid()
     try {
-        const sales = new Sales({ key, user, date, products, subtotal, total, details }).save()
+        const sales = await new Sales({ key, user, date, products, subtotal, total, details }).save()
         if (sales) {
-            sales.details.map(async (element) => {
-                const product = await Products.findById(element.id)
+            sales.details.map(async (item) => {
+                const product = await Products.findById(item.id)
                 if (product) {
-                    const stock = product.stock - element.quantity > 0 ? product.stock - element.quantity : 0
-                    Products.updateOne({ _id: product._id }, { stock })
+                    const stock = product.stock - item.quantity > 0 ? product.stock - item.quantity : 0
+                    Products.findByIdAndUpdate(item.id, { stock })
                 }
             });
-            res.status(200).json({ state: true, message: 'The purchase was completed successfully.' })
+            req.session.cart = []
+            res.status(200).json({ state: true, cart: req.session.cart, message: 'The purchase was completed successfully.' })
         }
     } catch (error) {
         next(error.message)

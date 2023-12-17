@@ -1,7 +1,7 @@
 import { ContextProvider } from '../Context/ContextConsumer';
 export default function Pago() {
 
-  const { clearCart, SubTotal, Tax, Total } = ContextProvider();
+  const { clearCart, SubTotal, Tax, Total, generateSale } = ContextProvider();
   return (
     <div className='pay-container'>
       <label className='subtotal'>SubTotal</label>
@@ -11,7 +11,7 @@ export default function Pago() {
       <label className='pay'>Total</label>
       <label className='paymoney'>${Total}</label>
       <button className='buttom-clear' onClick={() => { clearCart() }}>Clear my cart</button>
-      <button className='buttom-pay'>Proceed to Checkout</button>
+      <button className='buttom-pay' onClick={() => { generateSale() }}>Proceed to Checkout</button>
     </div>
   );
 }
