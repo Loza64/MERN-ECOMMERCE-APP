@@ -39,14 +39,22 @@ export const GetProducts = async (req, res, next) => {
   const { Search, Categorie, Page, Type } = req.query
   try {
     const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, categorykey: Categorie } : { name: { $regex: Search ?? "", $options: 'i' } }
-    if (Type === 'Normal') {
-      const result = await Products.paginate(config, { page: Page, limit: 15 })
-      res.status(200).json({ state: true, result })
-    } else if (Type === 'Discount') {
-      const result = await Products.paginate({ ...config, discount: { $gt: 0 } }, { page: Page, limit: 15 })
-      res.status(200).json({ state: true, result })
-    } else {
-      res.status(400).json({ state: true, result: null })
+    switch (Type) {
+      case 'All':
+        res.status(200).json({ state: true, result: await Products.paginate(config, { page: Page, limit: 15 }) })
+        break;
+
+      case 'Discount':
+        res.status(200).json({ state: true, result: await Products.paginate({ ...config, discount: { $gt: 0 } }, { page: Page, limit: 15 }) })
+        break;
+
+      case 'Normal':
+        res.status(200).json({ state: true, result: await Products.paginate({ ...config, discount: 0 }, { page: Page, limit: 15 }) })
+        break;
+
+      default:
+        res.status(200).json({ state: true, result: null })
+        break;
     }
   } catch (error) {
     next(error.message)

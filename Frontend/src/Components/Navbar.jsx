@@ -40,9 +40,9 @@ export default function Navbar() {
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>
-          <Link to="/" onClick={() => { setState(false); scrollTop(); setType("Normal") }}><AiFillHome className="react-icon" />Home</Link>
+          <Link to="/" onClick={() => { setState(false); scrollTop(); setType("All") }}><AiFillHome className="react-icon" />Home</Link>
           <Link to="/Terms" onClick={() => { setState(false); scrollTop(); }}><AiFillSetting className="react-icon" />Terms</Link>
-          <Link to="/Products" onClick={() => { setState(false); scrollTop(); setType("Normal") }}><FaBoxes className="react-icon" />Products</Link>
+          <Link to="/Products" onClick={() => { setState(false); scrollTop(); setType("All") }}><FaBoxes className="react-icon" />Products</Link>
           <Link to="/Discounts" onClick={() => { setState(false); scrollTop(); setType("Discount") }}>< AiFillTags className="react-icon" />Discounts</Link>
           <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({cart.reduce((a, c) => a + c.quantity, 0)})</Link>
         </nav>

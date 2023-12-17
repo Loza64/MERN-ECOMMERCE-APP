@@ -27,7 +27,7 @@ export default function ContextConsumer({ children }) {
   //Products
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [type, setType] = useState('Normal');
+  const [type, setType] = useState('All');
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState({});
 
