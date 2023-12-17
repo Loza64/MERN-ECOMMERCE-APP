@@ -18,7 +18,6 @@ export const GenerateSale = async (req, res, next) => {
                     })
                 }
             });
-            req.session.cart = []
         }
     } catch (error) {
         next(error.message)
