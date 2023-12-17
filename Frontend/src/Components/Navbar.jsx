@@ -22,7 +22,7 @@ export default function Navbar() {
     e.preventDefault();
     localStorage.setItem('search', JSON.stringify(e.target.product.value))
     setSearch(e.target.product.value)
-    setCategorie(e.target.categorie.value) 
+    setCategorie(e.target.categorie.value)
   }
 
   return (
@@ -32,12 +32,12 @@ export default function Navbar() {
       </div>
       <div className="sidebar">
         <form className="content-search" onSubmit={Search}>
-          <input name="product" id="product" type="search" placeholder="Search products..." className="txt-search" />
           <select name="categorie" id="categorie">
             <option value="" disabled selected>Categoria</option>
             <option value="" >Todo</option>
             {categories.map((item, index) => (<option key={index} value={item.key}>{item.name}</option>))}
           </select>
+          <input name="product" id="product" type="search" placeholder="Search products..." className="txt-search" />
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>

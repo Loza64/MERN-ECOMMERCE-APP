@@ -46,7 +46,6 @@ color:white;
   outline:none;
   border:0;
   padding:7px 15px;
-  border-radius: 6px 0 0 6px;
   transition:all 0.3s ease-in-out;
   background: white;
   width:100%;
@@ -57,8 +56,9 @@ color:white;
   border: none;
   outline: none;
   text-align: center;
-  background: greenyellow;
+  background: #EFEFEF;
   font-weight: bold;
+  border-radius: 6px 0 0 6px;
 }
 .sidebar .content-search .txt-search::placeholder{
   color:gray;
