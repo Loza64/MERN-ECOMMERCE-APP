@@ -12,15 +12,18 @@ export const GenerateSale = async (req, res, next) => {
             sales.details.map(async (item) => {
                 const product = await Products.findById(item.id)
                 if (product) {
-                    const stock = product.stock - item.quantity > 0 ? product.stock - item.quantity : 0
-                    Products.findByIdAndUpdate(item.id, { stock })
+                    const newStock = product.stock - item.quantity > 0 ? product.stock - item.quantity : 0
+                    Products.findByIdAndUpdate(item.id, { stock: newStock }).then((data) => {
+                        console.log(data.name + " stock updated")
+                    })
                 }
             });
             req.session.cart = []
-            res.status(200).json({ state: true, cart: req.session.cart, message: 'The purchase was completed successfully.' })
         }
     } catch (error) {
         next(error.message)
         res.status(500).json({ state: false, message: error.message })
+    } finally {
+        res.status(200).json({ state: true, cart: req.session.cart, message: 'The purchase was completed successfully.' })
     }
 }
