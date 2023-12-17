@@ -13,14 +13,14 @@ Products.propTypes = {
 }
 
 export default function Products({ TopState }) {
-  const { products, system, setCategorie, setSearch, setPage, loading } = ContextProvider()
+  const { products, system, setPage, loading } = ContextProvider()
   const [item, setItem] = useState(1)
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    setCategorie(""); setSearch(""); setPage(item)
+    setPage(item)
   }, [item])
-  
+
   setTimeout(() => { setShow(true); }, 1000)
 
   if (system) {

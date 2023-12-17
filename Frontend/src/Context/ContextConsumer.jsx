@@ -54,7 +54,7 @@ export default function ContextConsumer({ children }) {
   const login = async (login) => {
     try {
       const { data } = await Login(login);
-      setSession(true)
+      setSession(!session)
       return await data.state;
     } catch (error) {
       SystemError(error)
@@ -186,7 +186,6 @@ export default function ContextConsumer({ children }) {
           });
         }
       } else {
-        console.log(response)
         SystemError(message)
       }
     })
@@ -206,7 +205,6 @@ export default function ContextConsumer({ children }) {
           });
         }
       } else {
-        console.log(response)
         SystemError(message)
       }
     })
