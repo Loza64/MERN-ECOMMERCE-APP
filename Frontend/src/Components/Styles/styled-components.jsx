@@ -5,7 +5,7 @@ position: fixed;
 z-index: 50;
 width:100%;
 background:rgba(2, 1, 71, 1);
-padding:15px 10px;
+padding:15px 8px;
 display:flex;
 align-items:center;
 justify-content:space-between;
@@ -34,19 +34,17 @@ color:white;
   width:100%;
   display:flex;
   align-items:center;
-
+  justify-content:space-between;
 }
 
 .sidebar .content-search{
   display:flex;
-  margin:0 30px;
+  margin:0 40px;
   width:100%;
-  max-width:35rem;
   text-align:center;
   justify-content:center;
 }
 .sidebar .content-search .txt-search{
-  -webkit-appearance: none;
   font-weight:700;
   outline:none;
   border:0;
@@ -100,7 +98,7 @@ color:white;
   display:flex;
   align-items:center;
   font-weight:700;
-  justify-content:space-between;
+  font-size:14px;
 }
 .sidebar nav a{
   color:white;
@@ -115,28 +113,6 @@ color:white;
 }
 .sidebar nav a .react-icon{
   font-size:18px;
-  margin: 0 4px;
-}
-
-.sidebar .login-buttom a{
-  color:white;
-  margin:0 10px;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  font-weight:700;
-  transition:all 0.3s ease-in-out;
-}
-.sidebar .login-buttom a label{
-  display:flex;
-  align-items:center
-}
-.sidebar .login-buttom a label .react-icon{
-  font-size:18px;
-  margin: 0 4px;
-}
-.sidebar .login-buttom a:hover{
-  color:#2AFF00
 }
 .btn-menu{
   transition:all 0.001s ease-in-out;
@@ -151,7 +127,6 @@ color:white;
   background: rgb(0, 194, 26);
 }
 
-
 @media only screen and (max-width:1130px){
   .sidebar{
     position:fixed;
@@ -159,6 +134,7 @@ color:white;
     background:rgba(0, 0, 0, 0.69);
     font-size:12px;
     flex-direction:column;
+    justify-content:start;
     width:20rem;
     transition: all 0.5s ease-in-out;
     animation-name: ${({ menu }) => (menu ? "openmenu" : "closemenu")};
@@ -190,6 +166,9 @@ color:white;
       left:-21rem;
     }
   }
+  .sidebar .content-search{
+    padding: 0 10px
+  }
   .sidebar .content-search .txt-search{
     background:black;
     color:white;
@@ -215,11 +194,6 @@ color:white;
     width:100%;
     margin:15px 0;
   }
-  .login-buttom{
-    width:100%;
-    margin-top:15px;
-    margin-bottom:3rem;
-  }
   .btn-menu{
     display:block;
   }
@@ -233,7 +207,7 @@ color:white;
 
 export const BtnCart = styles.div`
   display: flex;
-  flex-direction: crow;
+  flex-direction: row;
   align-items: center;
   justify-content:space-between;
   width:100%;
