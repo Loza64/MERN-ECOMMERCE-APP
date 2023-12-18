@@ -13,7 +13,7 @@ export const GenerateSale = async (req, res, next) => {
                 if (product) {
                     const newStock = product.stock - item.quantity > 0 ? product.stock - item.quantity : 0
                     Products.findByIdAndUpdate(item.id, { stock: newStock }).then((data) => {
-                        console.log(`The stock product went from ${data.stock} to ${newStock}`)
+                        console.log(`The stock product: ${product.name}, went from ${data.stock} to ${newStock}`)
                     })
                 }
             });
