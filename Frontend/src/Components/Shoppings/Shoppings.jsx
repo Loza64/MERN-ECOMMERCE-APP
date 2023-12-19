@@ -42,7 +42,7 @@ export default function Shoppings() {
                       <td className="price none">${item.subtotal}</td>
                       <td className="price">${item.total}</td>
                       <td className="state">{item.state}</td>
-                      <td>Download PDF</td>
+                      <td>Download</td>
                     </tr>
                   )
                 )
