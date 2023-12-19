@@ -19,7 +19,7 @@ export const AddToCart = async (req, res, next) => {
             req.session.cart = CartList
             res.status(200).json({ state: true, cart: req.session.cart })
         } else {
-            res.status(404).json({ state: false, message: 'Product not found' });
+            res.status(404).json({ state: false, message: 'Product not available' });
         }
     } catch (error) {
         next(error.message)
