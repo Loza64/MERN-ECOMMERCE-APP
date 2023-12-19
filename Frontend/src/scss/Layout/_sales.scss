@@ -40,14 +40,14 @@
     }
 }
 
-@media only screen and (max-width:490px) {
+@media only screen and (max-width:620px) {
     .content-sales {
         table {
             thead {
                 font-size: 12px;
 
                 th {
-                    padding: 7px 0;
+                    padding: 5px 0;
                     font-weight: 800;
                 }
 
@@ -58,6 +58,33 @@
 
             tbody {
                 font-size: 11px;
+
+                .none {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:390px) {
+    .content-sales {
+        table {
+            thead {
+                font-size: 9px;
+
+                th {
+                    padding: 3px 0;
+                    font-weight: 800;
+                }
+
+                .none {
+                    display: none;
+                }
+            }
+
+            tbody {
+                font-size: 7px;
 
                 .none {
                     display: none;
