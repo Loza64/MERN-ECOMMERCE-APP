@@ -4,9 +4,9 @@ import { RiCloseFill } from 'react-icons/ri';
 import { VscThreeBars } from 'react-icons/vsc';
 import { BsFillCartFill } from 'react-icons/bs';
 import { NavBar } from "./Styles/styled-components";
+import { AiFillHome, AiFillTags } from 'react-icons/ai'
 import { ContextProvider } from '../Context/ContextConsumer';
-import { AiFillHome, AiFillSetting, AiFillTags } from 'react-icons/ai'
-import { FaSearch, FaUserAlt, FaBoxes, FaSignOutAlt, FaDollarSign } from 'react-icons/fa';
+import { FaSearch, FaUserAlt, FaBoxes, FaSignOutAlt, FaDollarSign, FaShoppingBag } from 'react-icons/fa';
 
 export default function Navbar() {
 
@@ -38,8 +38,8 @@ export default function Navbar() {
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>
-          <Link to="/Terms" onClick={() => { setState(false); scrollTop(); }}><AiFillSetting className="react-icon" />Terms</Link>
           <Link to="/" onClick={() => { setState(false); scrollTop(); setType("All"); setPage(1) }}><AiFillHome className="react-icon" />Home</Link>
+          {user ? (<Link to="/Shoppings" onClick={() => { setState(false); scrollTop(); }}><FaShoppingBag className="react-icon" />Shoppings</Link>) : null}
           <Link to="/Products" onClick={() => { setState(false); scrollTop(); setType("All"); setPage(1) }}><FaBoxes className="react-icon" />Products</Link>
           <Link to="/NormalPrice" onClick={() => { setState(false); scrollTop(); setType("Normal"); setPage(1) }}><FaDollarSign className="react-icon" />Normal</Link>
           <Link to="/Discounts" onClick={() => { setState(false); scrollTop(); setType("Discount"); setPage(1) }}>< AiFillTags className="react-icon" />Discounts</Link>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart, GenerateSale } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart, GenerateSale, GetSalesByUser } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -34,6 +34,10 @@ export default function ContextConsumer({ children }) {
   //Categories
   const [categorie, setCategorie] = useState(""); //Categorie
   const [categories, setCategories] = useState([]); //List of categories
+
+  //Sales
+  const [sales, setSales] = useState(null)
+  const [salePage, setSalePage] = useState(1)
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
@@ -275,10 +279,26 @@ export default function ContextConsumer({ children }) {
     })
   }
 
+  useEffect(() => {
+    setLoading(true)
+    GetSalesByUser(user ? user.key : "", salePage).then(({ data }) => {
+      setSales(data.sales)
+    }).catch(({ response, message }) => {
+      setLoading(false)
+      if (response.status === 401) {
+        setSales(null)
+      } else {
+        SystemError(message)
+      }
+    }).finally(() => {
+      setLoading(false)
+    })
+  }, [salePage, user])
+
   const ContextValues = {
     addToCart, removeProductFromCart, setPage, setCategorie, setSearch, productsInCart,
-    products, categories, signout, login, signup, user, getProductByName, loading,
-    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, generateSale
+    products, categories, signout, login, signup, user, getProductByName, loading, setSalePage,
+    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, generateSale, sales
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

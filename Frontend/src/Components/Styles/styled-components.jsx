@@ -29,6 +29,7 @@ color:white;
 .title-business{
   font-weight:900;
   font-size:25px;
+  margin-right:10px
 }
 .sidebar{
   width:100%;
@@ -39,7 +40,6 @@ color:white;
 
 .sidebar .content-search{
   display:flex;
-  margin:0 40px;
   width:100%;
   text-align:center;
   justify-content:center;
@@ -102,7 +102,7 @@ color:white;
 }
 .sidebar nav a{
   color:white;
-  padding:0 10px;
+  padding:0 4px;
   text-decoration:none;
   display:flex;
   align-items:center;
@@ -113,6 +113,7 @@ color:white;
 }
 .sidebar nav a .react-icon{
   font-size:18px;
+  margin:0 4px;
 }
 .btn-menu{
   transition:all 0.001s ease-in-out;

@@ -1,0 +1,68 @@
+.content-sales {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    table {
+        width: 100%;
+        max-width: 70rem;
+        text-align: center;
+        margin: 0 20px;
+
+        thead {
+            background: linear-gradient(90deg, blue, greenyellow);
+            color: white;
+
+            th {
+                padding: 7px 0;
+                font-weight: 800;
+            }
+        }
+
+        tbody {
+            font-weight: 800;
+            font-size: 13px;
+
+            tr {
+                td {
+                    padding: 13px 0
+                }
+
+                .price {
+                    color: green
+                }
+
+                .state {
+                    color: blue;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:490px) {
+    .content-sales {
+        table {
+            thead {
+                font-size: 12px;
+
+                th {
+                    padding: 7px 0;
+                    font-weight: 800;
+                }
+
+                .none {
+                    display: none;
+                }
+            }
+
+            tbody {
+                font-size: 11px;
+
+                .none {
+                    display: none;
+                }
+            }
+        }
+    }
+}

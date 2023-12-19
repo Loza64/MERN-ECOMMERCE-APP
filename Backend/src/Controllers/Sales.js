@@ -26,3 +26,14 @@ export const GenerateSale = async (req, res, next) => {
         res.status(200).json({ state: true, cart: req.session.cart, message: 'The purchase was completed successfully.' })
     }
 }
+
+export const GetSalesByUser = async (req, res) => {
+    const { User, Page } = req.query
+    try {
+        const sales = await Sales.paginate({ user: User }, { page: Page, limit: 9, sort: { date: -1 } })
+        res.status(200).json({ state: true, sales })
+    } catch (error) {
+        next(error.message)
+        return res.status(500).json({ state: false, message: error.message })
+    }
+}
