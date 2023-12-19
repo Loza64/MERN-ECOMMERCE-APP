@@ -5,8 +5,8 @@ import { SignupContainer } from "./Styles/styled-components";
 import PropTypes from 'prop-types';
 
 SignUp.propTypes = {
-  open: PropTypes.bool,
-  setOpen: PropTypes.func
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.bool.isRequired
 }
 
 export default function SignUp({ open, setOpen }) {

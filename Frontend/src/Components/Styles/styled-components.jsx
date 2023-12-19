@@ -384,7 +384,6 @@ z-index:${({ open }) => (open ? "100" : "0")};
 background:${({ open }) => (open ? "rgba(0, 0, 0, 0.5)" : "transparent")};
 opacity:${({ open }) => (open ? "1" : "0")};
 transition:all 0.7s ease-in-out;
-}
 
 .container-form-signup{
   width:100%;
@@ -393,8 +392,8 @@ transition:all 0.7s ease-in-out;
   padding:10px 17px;
   border-radius:10px;
   margin:0 10px;
-  transition:all 0.7s ease-in-out;
   transform: scale(${({ open }) => (open ? "1" : "0")});
+  transition:all 0.7s ease-in-out;
 }
 .container-form-signup form .closebuttom{
   display:flex;

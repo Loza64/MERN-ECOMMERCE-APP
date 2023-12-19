@@ -15,7 +15,7 @@ export default function Login() {
   const [user, setUser] = useState(String);
   const [pass, setPass] = useState(String);
   const [state, setState] = useState(true);
-  const [openSignup, setOpenSignup] = useState(false);
+  const [open, setOpen] = useState(false);
 
   //object
   let body = {
@@ -52,7 +52,7 @@ export default function Login() {
         <div className="container-form-login">
           <div className="content">
             <label>Registrate ahora en ECOMMERCE y realiza tus compras de forma rapida y segura.</label>
-            <ButtomTransparent onClick={() => { setOpenSignup(true) }}>Registrarme ahora!</ButtomTransparent>
+            <ButtomTransparent onClick={() => { setOpen(true) }}>Registrarme ahora!</ButtomTransparent>
           </div>
           <form onSubmit={(e) => { LoginSubmit(); e.preventDefault() }} >
             <label className="topic">Iniciar Sesión</label>
@@ -64,7 +64,7 @@ export default function Login() {
           </form>
         </div>
       </LoginContainer>
-      <SignUp open={openSignup} setOpen={setOpenSignup} />
+      <SignUp open={open} setOpen={setOpen} />
     </div>
   )
 }
