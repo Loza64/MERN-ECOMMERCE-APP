@@ -211,18 +211,29 @@ export const BtnCart = styles.div`
   align-items: center;
   justify-content:space-between;
   width:100%;
+
 .react-icon{
   color:green;
   font-size:27px;
   transition:all 0.05s ease-in-out;
   cursor: pointer;
   text-align:end;
+  &:active{
+    transform:scale(115%);
+  }
 }
-.react-icon:active{
-  transform:scale(115%);
-}
+
 .disable{
   color:grey;
+  &:active{
+    transform:scale(1);
+  }
+}
+.incart{
+  color:greenyellow;
+  &:active{
+    transform:scale(1);
+  }
 }
 .no-product{
   font-weight:900;
@@ -503,13 +514,13 @@ border:solid 3px white;
 margin:20px 10px;
 padding: 6px 30px;
 border-radius: 20px;
-transition:all .07s ease-in-out;
+transition:all .2s ease-in-out;
 outline:none;
-:hover{
+&:hover{
   color:greenyellow;
   border-color:greenyellow;
 }
-:active{
+&:active{
   transform:scale(98%);
 }
 @media only screen and (max-width: 610px){
@@ -524,7 +535,6 @@ outline:none;
 export const ShoppingCartList = styles.div`
 overflow:hidden;
 width:100%;
-
 .item{
   display:flex;
   align-items:center;

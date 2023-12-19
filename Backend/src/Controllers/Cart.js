@@ -9,7 +9,7 @@ export const AddToCart = async (req, res, next) => {
     const { Key } = req.params;
     try {
         const product = await Products.findOne({ key: Key })
-        if (product) {
+        if (product && product.stock > 0) {
             const cart = req.session.cart;
             const { _id, key, name, image, price, discount } = product
             const checkProduct = cart.find(item => item.key === Key)

@@ -47,7 +47,7 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <>
       <LoginContainer>
         <div className="container-form-login">
           <div className="content">
@@ -65,6 +65,6 @@ export default function Login() {
         </div>
       </LoginContainer>
       <SignUp open={open} setOpen={setOpen} />
-    </div>
+    </>
   )
 }
