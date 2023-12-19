@@ -4,16 +4,17 @@ import Loading from "../Loading";
 import Title from '../Title'
 import Top from "../Top";
 import Pagination from "../Pagination";
+import Login from "../Login";
 
 export default function Shoppings() {
-  const { sales, loading, setSalePage } = ContextProvider();
+  const { sales, loading, setSalePage, user } = ContextProvider();
   const [show, setShow] = useState(false)
   setTimeout(() => { setShow(true) }, 1000)
 
-  if (loading || !show) {
-    return <Loading title={"Loading Sales"} />
-  } else {
-    return sales ? (
+  return loading || !show ? (
+    <Loading title={"Loading sales"} />
+  ) : user ? (
+    (
       <div className="sales">
         <Top state={true} />
         <Title Title={"My"} SubTitle={"Shoppings"} />
@@ -43,13 +44,12 @@ export default function Shoppings() {
                     </tr>
                   )
                 )
-
               }
             </tbody>
           </table>
         </div>
         <Pagination Page={sales.page} Pages={sales.totalPages} Prev={sales.hasPrevPage} Next={sales.hasNextPage} PrevItem={sales.prevPage} NextItem={sales.nextPage} setPage={setSalePage} />
       </div>
-    ) : null
-  }
+    )
+  ) : <Login />
 }
