@@ -25,7 +25,20 @@
 
             tr {
                 td {
-                    padding: 13px 0
+                    padding: 13px 0;
+                    button{
+                        border: none;
+                        font-size: 12.5px;
+                        background-color: blue;
+                        font-weight: 900;
+                        color: white;
+                        padding: 3px 5px;
+                        border-radius: 4px;
+                        transition: all 0.05s ease-in-out;
+                        &:active{
+                            transform: scale(0.95);
+                        }
+                    }
                 }
 
                 .price {
@@ -58,7 +71,6 @@
 
             tbody {
                 font-size: 11px;
-
                 .none {
                     display: none;
                 }

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { ContextProvider } from "../../Context/ContextConsumer";
 import Loading from "../Loading";
 import Title from '../Title'
 import Top from "../Top";
 import Pagination from "../Pagination";
 import Login from "../Login";
+import PDF from "./PDF";
 
 export default function Shoppings() {
   const { sales, loading, setSalePage, user } = ContextProvider();
@@ -42,7 +44,27 @@ export default function Shoppings() {
                       <td className="price none">${item.subtotal}</td>
                       <td className="price">${item.total}</td>
                       <td className="state">{item.state}</td>
-                      <td>Download</td>
+                      <td>
+                        <PDFDownloadLink document={
+                          <PDF
+                            total={item.total}
+                            factura={item.key}
+                            products={item.details}
+                            subtotal={item.subtotal}
+                            usuario={user.username}
+                            date={(new Date(item.date).toDateString())}
+                          />
+                        }
+                        >
+                          {
+                            ({ loading }) => loading ? (
+                              <button>loading...</button>
+                            ) : (
+                              <button>Download</button>
+                            )
+                          }
+                        </PDFDownloadLink>
+                      </td>
                     </tr>
                   )
                 )

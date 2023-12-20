@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.14",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "font-awesome": "^4.7.0",
