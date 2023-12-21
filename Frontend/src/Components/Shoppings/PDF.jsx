@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     ContentTotals: {
         color: 'green',
         borderBottom: '1.5px solid green',
-        margin: '15px 0px'
+        margin: '10px 0px'
     },
     Grey: {
         color: '#A6ACAF',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: '13px',
-        marginBottom: '15px'
+        marginBottom: '10px'
     },
     footer: {
         backgroundColor: 'black',
@@ -127,7 +127,7 @@ export default function PDF({ products, subtotal, total, usuario, factura, date 
                     </View>
                     <View style={styles.TotalWidth}>{/*Body*/}
                         <View style={styles.TotalWidth}> {/*Info Factura*/}
-                            <View style={{ ...styles.flexSpace, margin: '15px 0' }}>
+                            <View style={{ ...styles.flexSpace, margin: '10px 0' }}>
                                 <View>
                                     <Text>Ecommerce</Text>
                                 </View>
@@ -150,7 +150,7 @@ export default function PDF({ products, subtotal, total, usuario, factura, date 
                                 </View>
                             </View>
                         </View>
-                        <View style={{ ...styles.TotalWidth, margin: '15px 0' }}> {/*Details Factura*/}
+                        <View style={{ ...styles.TotalWidth, margin: '10px 0' }}> {/*Details Factura*/}
                             <View style={styles.table}>
                                 <View style={styles.thead}>
                                     <View style={styles.td_md_200_left}>
@@ -191,7 +191,7 @@ export default function PDF({ products, subtotal, total, usuario, factura, date 
                             </View>
                         </View>
                         <View style={{ ...styles.TotalWidth, ...styles.ContentTotals }}> {/*Totals Factura*/}
-                            <View style={{ ...styles.flexSpace, marginBottom: '15px' }}>
+                            <View style={{ ...styles.flexSpace, marginBottom: '10px' }}>
                                 <View>
                                     <Text>Subtotal:</Text>
                                 </View>
