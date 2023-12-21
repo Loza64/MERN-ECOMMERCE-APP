@@ -191,7 +191,7 @@ export default function PDF({ products, subtotal, total, usuario, factura, date 
                             </View>
                         </View>
                         <View style={{ ...styles.TotalWidth, ...styles.ContentTotals }}> {/*Totals Factura*/}
-                            <View style={{...styles.flexSpace, marginBottom: '15px'}}>
+                            <View style={{ ...styles.flexSpace, marginBottom: '15px' }}>
                                 <View>
                                     <Text>Subtotal:</Text>
                                 </View>
