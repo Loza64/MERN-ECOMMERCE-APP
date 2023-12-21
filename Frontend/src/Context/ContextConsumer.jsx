@@ -262,20 +262,21 @@ export default function ContextConsumer({ children }) {
     }).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } });
       Swal.fire({ title: data.message, icon: "success" }).then(() => {
-      }).catch(error => {
-        if (error.response.status === 400) {
-          SystemError(error.response.data.message)
-        } else if (error.response.status === 401) {
-          if (user) {
-            Swal.fire("Su sesión ya expiro").then(() => {
-              setUser(null)
-              window.location.href = "/login"
-            });
-          }
-        } else {
-          SystemError(error.message)
-        }
+        window.location.href = "/Shoppings";
       })
+    }).catch(error => {
+      if (error.response.status === 400) {
+        SystemError(error.response.data.message)
+      } else if (error.response.status === 401) {
+        if (user) {
+          Swal.fire("Su sesión ya expiro").then(() => {
+            setUser(null)
+            window.location.href = "/login"
+          });
+        }
+      } else {
+        SystemError(error.message)
+      }
     })
   }
 

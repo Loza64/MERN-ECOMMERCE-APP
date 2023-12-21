@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ProductItem from "./ProductItem";
 import { useEffect, useState } from "react";
 import { FaShoppingBag } from 'react-icons/fa';
-import { BsFillCartPlusFill } from 'react-icons/bs';
+import { BsFillCartPlusFill, BsFillCartCheckFill } from 'react-icons/bs';
 import { useNavigate, useParams } from "react-router-dom";
 import { DetailProducts } from "../Styles/styled-components";
 import { ContextProvider } from "../../Context/ContextConsumer";
@@ -17,7 +17,7 @@ DetailProduct.propTypes = {
 }
 
 export default function DetailProduct() {
-  const { addToCart, getProductByName, system, product, loading } = ContextProvider();
+  const { addToCart, getProductByName, system, product, loading, cart } = ContextProvider();
   const [showProduct, setShowProduct] = useState(false);
   const [page, setPage] = useState(1)
   const navigator = useNavigate();
@@ -71,8 +71,21 @@ export default function DetailProduct() {
                       stock > 0 ?
                         (
                           <div className="buttoms">
-                            <button className="buttom cart" onClick={() => { if (stock > 0) { addToCart(key) } }} >Add to cart <BsFillCartPlusFill className="react-icon" /></button>
-                            <button className="buttom buy" onClick={() => { if (stock > 0) { addToCart(key); navigator('/cart') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
+                            {
+                              !cart.find(item => item.key === key) ?
+                                (
+                                  <>
+                                    <button className="buttom cart" onClick={() => { if (stock > 0) { addToCart(key) } }} >Add to cart <BsFillCartPlusFill className="react-icon" /></button>
+                                    <button className="buttom buy" onClick={() => { if (stock > 0) { addToCart(key); navigator('/cart') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
+                                  </>
+                                ) :
+                                (
+                                  <>
+                                    <button className="buttom incart" >In cart <BsFillCartCheckFill className="react-icon" /></button>
+                                    <button className="buttom buy" onClick={() => { navigator('/cart') }}>Make a purchase<FaShoppingBag className="react-icon" /></button>
+                                  </>
+                                )
+                            }
                           </div>
                         ) : null
                     }

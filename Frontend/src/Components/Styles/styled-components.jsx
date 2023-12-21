@@ -845,7 +845,10 @@ export const DetailProducts = styles.div`
   background : linear-gradient(to right, blue, greenyellow);
   color:white;
 }
-
+.content-detail-product .flex-detail-product .buttoms  .incart{
+  background : green;
+  color:white;
+}
 .content-detail-product .flex-detail-product .buttoms  .cart .react-icon{
   font-size:25px;
   margin: 0 10px
