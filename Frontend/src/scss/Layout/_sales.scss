@@ -8,9 +8,12 @@
         max-width: 70rem;
         text-align: center;
         margin: 0 20px;
+        overflow: hidden;
+        border-radius: 10px;
 
         thead {
-            background: linear-gradient(90deg, blue, greenyellow);
+            background: midnightblue;
+            border-bottom: 4.5px solid greenyellow;
             color: white;
 
             th {
@@ -30,7 +33,7 @@
                     button {
                         border: none;
                         font-size: 11.5px;
-                        background-color: blue;
+                        background-color: midnightblue;
                         font-weight: 900;
                         color: white;
                         padding: 2px 5px;
