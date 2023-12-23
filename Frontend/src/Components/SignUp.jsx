@@ -14,12 +14,12 @@ export default function SignUp({ open, setOpen }) {
   const { signup } = ContextProvider();
   //Objects
   let expresiones = {
-    username: /^[a-zA-ZÁ-ÿ0-9]{10,40}$/,
+    username: /^[a-zA-ZÁ-ÿ0-9]{6,40}$/,
     names: /^[a-zA-ZÁ-ÿ\s]{3,40}$/,
     surnames: /^[a-zA-ZÁ-ÿ\s]{5,40}$/,
     address: /^[a-zA-ZÁ-ÿ\s-,().,]{5,240}$/,
     email: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
-    phone: /^[0-9]{8}$/
+    phone: /^[0-9]{8,30}$/
   }
 
   function GetAge(date) {
@@ -60,8 +60,10 @@ export default function SignUp({ open, setOpen }) {
             //Validate username
             if (!values.username) {
               errores.username = 'Campo obligatorio.'
-            } else if (!expresiones.username.test(values.username) || values.username.length > 12) {
-              errores.username = 'Nombre de usuario no valido.'
+            } else if (values.username.length < 8) {
+              errores.username = 'Minimo 6 caracteres'
+            } else if (!expresiones.username.test(values.username)) {
+              errores.username = 'No se admiten espacios en blanco ni caracteres especiales'
             }
 
             //Validate names
@@ -80,7 +82,7 @@ export default function SignUp({ open, setOpen }) {
 
             if (!values.address) {
               errores.address = 'Campo obligatorio.';
-            } else if (!expresiones.address.test()) {
+            } else if (!expresiones.address.test(values.address)) {
               errores.address = 'La direccion no debe incluir caracteres especiales.';
             }
 
@@ -96,14 +98,19 @@ export default function SignUp({ open, setOpen }) {
             //Validate email
             if (!values.email) {
               errores.email = 'Campo obligatorio.'
-            } else if (!expresiones.email.test(values.email)) {
+            }
+            if (values.email.length < 19) {
+              errores.email = 'Correo no valido.'
+            }
+            else if (!expresiones.email.test(values.email)) {
               errores.email = 'Correo no valido.'
             }
 
             //Validate phone
             if (!values.phone) {
               errores.phone = 'Campo obligatorio.'
-            } else if (!expresiones.phone.test(values.phone)) {
+            }
+            else if (!expresiones.phone.test(values.phone)) {
               errores.phone = 'Teléfono no valido.'
             }
 
