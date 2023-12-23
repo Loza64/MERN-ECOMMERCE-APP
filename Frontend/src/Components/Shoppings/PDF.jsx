@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 'auto',
         display: 'flex',
-        margin: '4px 0',
+        margin: '5px 0',
         alignItems: 'center',
         flexDirection: 'column',
     },
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '100%',
         maxWidth: '530rem',
-        margin: '25px 0'
+        margin: '27px 0'
     },
     table: {
         width: '100%',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     Footer: {
         textAlign: 'center',
         color: 'blue',
-        margin: '20px 0'
+        margin: '22px 0'
     }
 });
 

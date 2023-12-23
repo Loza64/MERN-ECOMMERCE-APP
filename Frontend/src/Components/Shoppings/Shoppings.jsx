@@ -55,6 +55,7 @@ export default function Shoppings() {
                             date={(new Date(item.date).toDateString())}
                           />
                         }
+                          fileName={`Factura-${item.key}`}
                         >
                           {
                             ({ loading }) => loading ? (
