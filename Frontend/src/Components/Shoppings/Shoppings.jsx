@@ -51,7 +51,7 @@ export default function Shoppings() {
                             factura={item.key}
                             products={item.details}
                             subtotal={item.subtotal}
-                            usuario={user.username}
+                            usuario={`${user.names} ${user.surnames}`}
                             date={(new Date(item.date).toDateString())}
                           />
                         }
