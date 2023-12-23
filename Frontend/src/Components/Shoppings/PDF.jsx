@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         borderBottom: '3px solid greenyellow',
         width: '100%',
         height: 'auto',
-        padding: '8px 10px'
+        padding: '10px 10px'
     },
     FlexGap: {
         display: 'flex',
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
         gap: '3px',
     },
     Logo: {
-        width: '43rem',
-        height: '43rem',
+        width: '36rem',
+        height: '36rem',
         borderRadius: '100%'
     },
     Container: {
@@ -167,7 +167,7 @@ export default function PDF({ products, subtotal, total, usuario, factura, date 
                             {
                                 products.map(
                                     ({ name, price, discount, quantity }, index) => (
-                                        <View style={{ ...styles.tr, backgroundColor: (index + 1) % 2 ? '#D5DBDB' : 'white' }} key={index}>
+                                        <View style={{ ...styles.tr, backgroundColor: (index + 1) % 2 ? '#E6E6E6' : 'white' }} key={index}>
                                             <View style={styles.td_md_300_left}>
                                                 <Text>{name}</Text>
                                             </View>
