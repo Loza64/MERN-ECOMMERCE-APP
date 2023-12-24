@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "https://servercommerce.vercel.app/backend/api/rest/ufostartserver/node/route/fetch/axios/$1"
         }
     ]
 }
