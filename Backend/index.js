@@ -1,10 +1,10 @@
 import debug from 'debug'
 import express from 'express'
+import { createServer } from 'http'
 import { PORT } from './src/Settings.js'
 import ServerApp from './src/Application.js'
 
-const App = express()
-const server = debug('backend:[Server]');
+const message = debug('backend:[Server]')
+const ServerHttp = createServer(express().use(ServerApp))
 
-App.use(ServerApp)
-App.listen(PORT, () => { server(`is running on port: ${PORT}`) })
+ServerHttp.listen(PORT, () => { message(`is running on port: ${PORT}`) })

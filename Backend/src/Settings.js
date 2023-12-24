@@ -36,9 +36,9 @@ export const SessionApp = session({
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
-        secure: false,
+        secure: 'auto',
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'none'
+        sameSite: 'strict'
     }
 })
