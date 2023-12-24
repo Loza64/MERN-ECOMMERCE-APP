@@ -8,17 +8,17 @@ import fileupload from 'express-fileupload'
 import { CorsOptions,  SessionApp } from './Settings.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
-const ServerApp = express()
+const Application = express()
 
 //Config app
 GetMongoConnection()
-ServerApp.use(SessionApp)
-ServerApp.use(morgan('dev'))
-ServerApp.use(CookieParser())
-ServerApp.use(cors(CorsOptions))
-ServerApp.use(bodyparser.json({ limit: '100mb', extended: true }))
-ServerApp.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
-ServerApp.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
-ServerApp.use('/backend/api/rest/ufostartserver/node/route/fetch/axios', routes)
+Application.use(SessionApp)
+Application.use(morgan('dev'))
+Application.use(CookieParser())
+Application.use(cors(CorsOptions))
+Application.use(bodyparser.json({ limit: '100mb', extended: true }))
+Application.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
+Application.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
+Application.use('/backend/api/rest/ufostartserver/node/route/fetch/axios', routes)
 
-export default ServerApp;
+export default Application;
