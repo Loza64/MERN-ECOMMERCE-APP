@@ -17,10 +17,9 @@ export const Session = process.env.SESSION;
 export const NodeEnv = process.env.NODE_ENV;
 
 export const CorsOptions = {
-    origin: Origin,
+    origin: [Origin],
+    methods: ["POST", "GET", "PUT", "DELETE", "PATCH"],
     credentials: true,
-    methods: '*',
-    optionsSuccessStatus: true
 }
 
 const MongoStore = new MongoDBStoreFactory(session)({

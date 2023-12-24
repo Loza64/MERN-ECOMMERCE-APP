@@ -696,8 +696,7 @@ width:100%;
 
 export const DetailProducts = styles.div`
 .content-detail-product {
-  width: 100%;
-  padding: 0.5rem 5rem;
+  margin: 3rem 5rem;
 }
 
 .content-detail-product h2 {
@@ -711,7 +710,12 @@ export const DetailProducts = styles.div`
   .content-detail-product h2{font-size: 25px;}
 }
 @media only screen and (max-width: 450px){
-  .content-detail-product h2{font-size: 18px;}
+  .content-detail-product {
+    margin: 0.5rem 0;
+  }
+  .content-detail-product h2{
+    font-size: 18px;
+  }
 }
 .content-detail-product .flex-detail-product {
   display: flex;
@@ -739,7 +743,7 @@ export const DetailProducts = styles.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding :10px;
+  padding :7px;
 }
 
 .content-detail-product .flex-detail-product .image img {
@@ -748,7 +752,7 @@ export const DetailProducts = styles.div`
 }
 @media only screen and (max-width: 600px){
   .content-detail-product .flex-detail-product .image img {
-    padding: 0px;
+    padding: 20px;
   }
 }
 
@@ -799,6 +803,18 @@ export const DetailProducts = styles.div`
   overflow: hidden;
   margin-bottom: 0px
 }
+@media only screen and (max-width: 450px){
+  .content-detail-product .flex-detail-product .info .description p{
+    font-size:10px;
+  }
+  .content-detail-product .flex-detail-product .info .company,
+.price,
+.price-none,
+.status,
+.discount {
+  font-size: 12px;
+}
+}
 .content-detail-product .flex-detail-product .info  .view-less p{
   ${({ data }) => (data ? null : "height:100px;")}
 } 
@@ -820,6 +836,7 @@ export const DetailProducts = styles.div`
 @media only screen and (max-width: 780px){
   .content-detail-product .flex-detail-product .buttoms{
     flex-direction:column;
+    align-items:center;
   }
 }
 .content-detail-product .flex-detail-product .buttoms .buttom{

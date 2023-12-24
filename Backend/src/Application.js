@@ -2,6 +2,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import express from 'express'
 import bodyparser from 'body-parser'
+import CookieParser from 'cookie-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
 import { CorsOptions,  SessionApp } from './Settings.js'
@@ -13,6 +14,7 @@ const ServerApp = express()
 GetMongoConnection()
 ServerApp.use(SessionApp)
 ServerApp.use(morgan('dev'))
+ServerApp.use(CookieParser())
 ServerApp.use(cors(CorsOptions))
 ServerApp.use(bodyparser.json({ limit: '100mb', extended: true }))
 ServerApp.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
