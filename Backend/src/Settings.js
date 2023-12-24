@@ -39,6 +39,6 @@ export const SessionApp = session({
         secure: false,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'strict'
+        sameSite: 'none'
     }
 })
