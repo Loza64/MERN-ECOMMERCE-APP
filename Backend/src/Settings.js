@@ -45,7 +45,7 @@ export const SessionApp = session({
     }
 })
 
-export const OptionsHttp = {
+export const OptionsHttps = {
     key: readFileSync('src/Certificates/server.key'),
     cert: readFileSync('src/Certificates/server.cert'),
 }
