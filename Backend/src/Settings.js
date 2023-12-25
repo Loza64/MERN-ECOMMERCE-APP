@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import { readFileSync } from 'fs'
 import session from 'express-session'
 import MongoDBStoreFactory from 'connect-mongodb-session'
 
@@ -36,9 +37,14 @@ export const SessionApp = session({
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
-        secure: 'auto',
+        secure: true,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
         sameSite: 'strict'
     }
 })
+
+export const OptionsHttp = {
+    key: readFileSync('certificates/server.key'),
+    cert: readFileSync('certificates/server.cert'),
+}
