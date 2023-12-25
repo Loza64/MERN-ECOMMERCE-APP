@@ -18,9 +18,10 @@ export const Session = process.env.SESSION;
 export const NodeEnv = process.env.NODE_ENV;
 
 export const CorsOptions = {
-    origin: [Origin],
-    methods: ["POST", "GET", "PUT", "DELETE", "PATCH"],
+    origin: Origin,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
+    optionsSuccessStatus: 204,
 }
 
 const MongoStore = new MongoDBStoreFactory(session)({
@@ -40,7 +41,7 @@ export const SessionApp = session({
         secure: true,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'strict'
+        sameSite: 'none'
     }
 })
 
