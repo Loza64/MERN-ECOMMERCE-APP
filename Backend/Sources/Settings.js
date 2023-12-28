@@ -20,8 +20,7 @@ export const NodeEnv = process.env.NODE_ENV;
 export const CorsOptions = {
     origin: Origin,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionsSuccessStatus: 204,
+    credentials: true
 }
 
 const MongoStore = new MongoDBStoreFactory(session)({
@@ -47,5 +46,5 @@ export const SessionApp = session({
 
 export const OptionsHttps = {
     key: readFileSync('Sources/Certificates/server.key'),
-    cert: readFileSync('Sources/Certificates/server.cert'),
+    cert: readFileSync('Sources/Certificates/server.crt'),
 }
