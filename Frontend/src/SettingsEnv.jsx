@@ -1,1 +1,0 @@
-export const ServerRoute = import.meta.env.VITE_ROUTE_SERVER;

@@ -1,10 +1,6 @@
 /node_modules
 /Resources
 
-*.key
-*.crt
-*.csr
-
 .env
 .env.local
 .env.development.local

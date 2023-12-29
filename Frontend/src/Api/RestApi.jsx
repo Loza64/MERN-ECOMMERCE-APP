@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { ServerRoute } from '../SettingsEnv'
+
+const ServerRoute = import.meta.env.VITE_ROUTE_SERVER
 
 const ServerFetch = axios.create({
     baseURL: ServerRoute,
