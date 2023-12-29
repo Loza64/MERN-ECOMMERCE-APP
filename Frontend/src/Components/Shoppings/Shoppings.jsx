@@ -17,7 +17,7 @@ export default function Shoppings() {
   return loading || !show ? (
     <Loading title={"Loading sales"} />
   ) : user ? (
-    sales.docs.length > 1 ? (
+    sales.docs.length > 0 ? (
       <div className="sales pt-2">
         <Top state={true} />
         <Title Title={"My"} SubTitle={"Shoppings"} />
