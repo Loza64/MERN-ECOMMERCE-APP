@@ -4,7 +4,7 @@
 *.key
 *.crt
 *.csr
-*.pem
+
 .env
 .env.local
 .env.development.local
