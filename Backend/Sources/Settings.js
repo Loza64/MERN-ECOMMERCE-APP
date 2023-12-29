@@ -19,6 +19,7 @@ export const Origin = process.env.ORIGIN;
 export const TokenSecret = process.env.TOKEN;
 export const Session = process.env.SESSION;
 export const NodeEnv = process.env.NODE_ENV;
+export const Stripes = process.env.STRIPE;
 
 
 //Setting Application
