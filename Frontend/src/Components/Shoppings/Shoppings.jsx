@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { ContextProvider } from "../../Context/ContextConsumer";
 import Loading from "../Loading";
+import Message from "../Message";
 import Title from '../Title'
 import Top from "../Top";
 import Pagination from "../Pagination";
@@ -16,8 +17,8 @@ export default function Shoppings() {
   return loading || !show ? (
     <Loading title={"Loading sales"} />
   ) : user ? (
-    (
-      <div className="sales">
+    sales.docs.length > 1 ? (
+      <div className="sales pt-2">
         <Top state={true} />
         <Title Title={"My"} SubTitle={"Shoppings"} />
         <div className="content-sales">
@@ -75,6 +76,6 @@ export default function Shoppings() {
         </div>
         <Pagination Page={sales.page} Pages={sales.totalPages} Prev={sales.hasPrevPage} Next={sales.hasNextPage} PrevItem={sales.prevPage} NextItem={sales.nextPage} setPage={setSalePage} />
       </div>
-    )
+    ) : <Message title={"Your purchase history is currently empty."} />
   ) : <Login />
 }
