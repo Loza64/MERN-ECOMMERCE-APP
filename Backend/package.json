@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "servercommerce",
   "version": "1.0.0",
   "description": "Server web ecommerce",
   "main": "index.js",
