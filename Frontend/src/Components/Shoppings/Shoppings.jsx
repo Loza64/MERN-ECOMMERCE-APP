@@ -31,7 +31,7 @@ export default function Shoppings() {
               <th className="none">Subtotal</th>
               <th>Total</th>
               <th>Estado</th>
-              <th>Factura</th>
+              <th>Comprobante</th>
             </thead>
             <tbody>
               {
