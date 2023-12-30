@@ -54,7 +54,6 @@ export const SessionApp = session({
 
 
 //Settings https
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
