@@ -1,7 +1,5 @@
-import mongoose from 'mongoose'
+import { Schema, model } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
-
-const Schema = mongoose.Schema
 
 const user = new Schema({
   key: { type: String, require: true, unique: true },
@@ -42,11 +40,11 @@ const sale = new Schema({
   subtotal: { type: Number, require: true },
   total: { type: Number, require: true },
   details: { type: Array, require: true },
-  state: { type: String, require: true, default: "Proceso" },
+  state: { type: String, require: true, default: "Pendiente" },
 }, { versionKey: false }).plugin(mongoosePaginate)
 
 
-export const Users = mongoose.model("users", user)
-export const Products = mongoose.model("products", product)
-export const Categories = mongoose.model("categories", category)
-export const Sales = mongoose.model("sales", sale)
+export const Users = model("users", user)
+export const Products = model("products", product)
+export const Categories = model("categories", category)
+export const Sales = model("sales", sale)

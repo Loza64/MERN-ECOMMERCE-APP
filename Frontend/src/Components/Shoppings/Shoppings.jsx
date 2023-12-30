@@ -50,6 +50,7 @@ export default function Shoppings() {
                           <PDF
                             total={item.total}
                             factura={item.key}
+                            state={item.state}
                             products={item.details}
                             subtotal={item.subtotal}
                             usuario={`${user.names} ${user.surnames}`}

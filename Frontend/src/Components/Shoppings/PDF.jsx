@@ -5,6 +5,7 @@ PDF.propTypes = {
     products: PropTypes.array.isRequired,
     subtotal: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    state: PropTypes.string.isRequired,
     usuario: PropTypes.string.isRequired,
     factura: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function PDF({ products, subtotal, total, usuario, factura, date }) {
+export default function PDF({ products, subtotal, total, usuario, factura, date, state }) {
     return (
         <Document>
             <Page>
@@ -123,7 +124,11 @@ export default function PDF({ products, subtotal, total, usuario, factura, date 
                     <View style={styles.ContentFactura}>
                         <View>
                             <View style={{ ...styles.FlexGap, ...styles.Font }}>
-                                <Text>Vendido a:</Text>
+                                <Text>Estado:</Text>
+                                <Text style={{ color: '#9D9D9D' }}>{state}</Text>
+                            </View>
+                            <View style={{ ...styles.FlexGap, ...styles.Font }}>
+                                <Text>Cliente:</Text>
                                 <Text style={{ color: '#9D9D9D' }}>{usuario}</Text>
                             </View>
                             <View style={{ ...styles.FlexGap, ...styles.Font }}>
