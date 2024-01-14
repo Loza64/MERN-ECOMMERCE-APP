@@ -5,7 +5,7 @@ import bodyparser from 'body-parser'
 import CookieParser from 'cookie-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import { CorsOptions, SessionApp } from './Settings.js'
+import { CorsOptions, SessionApp } from '../config.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const Application = express()
