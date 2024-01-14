@@ -57,7 +57,7 @@ export const SessionApp = session({
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const OptionsHttps = {
+export const ConfigHttps = {
     key: readFileSync(path.join(__dirname, 'key.pem')),
     cert: readFileSync(path.join(__dirname, 'cert.pem'))
 }
