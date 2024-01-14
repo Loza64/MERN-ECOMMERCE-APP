@@ -1,7 +1,7 @@
 import debug from 'debug'
 import { createServer } from 'https'
-import Application from './Sources/Application.js'
 import { ConfigHttps, PORT } from './config.js'
+import Application from './Sources/Application.js'
 
 const Server = debug('backend:[Server]')
 const Https = createServer(ConfigHttps, Application)
