@@ -18,7 +18,6 @@ export const MAIL_PASS = process.env.MAILPASS;
 export const Origin = process.env.ORIGIN;
 export const TokenSecret = process.env.TOKEN;
 export const Session = process.env.SESSION;
-export const NodeEnv = process.env.NODE_ENV;
 
 
 //Setting Application
@@ -47,7 +46,8 @@ export const SessionApp = session({
         secure: true,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'none'
+        sameSite: 'none',
+        domain: process.env.DOMAIN
     }
 })
 

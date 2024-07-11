@@ -54,6 +54,34 @@ export default function ContextConsumer({ children }) {
     })
   }
 
+  function BackendError(response, message) {
+    switch (response.status) {
+      case 401: {
+        if (user) {
+          Swal.fire("Su sesión ya expiro").then(() => {
+            setUser(null)
+            dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+          });
+        }
+        break
+      }
+      case 410: {
+        if (user) {
+          Swal.fire("Por incumplimiento a nuestras politicas su cuenta a sido eliminada").then(() => {
+            setUser(null)
+            dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+          });
+        }
+        break
+      }
+
+      default: {
+        SystemError(`Error ${response.status}: ${message}`)
+      }
+
+    }
+  }
+
   // Functions user
   const login = async (login) => {
     try {
@@ -104,11 +132,7 @@ export default function ContextConsumer({ children }) {
     Profile().then(({ data }) => {
       setUser(data)
     }).catch(({ response, message }) => {
-      if (response.status === 401) {
-        setUser(null)
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     })
   }, [session])
 
@@ -130,11 +154,7 @@ export default function ContextConsumer({ children }) {
     GetCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      if (response.status === 401) {
-        dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     })
   }, [session])
 
@@ -142,18 +162,7 @@ export default function ContextConsumer({ children }) {
     AddToCart(ProductKey).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      if (response.status === 401) {
-        if (user) {
-          Swal.fire("Su sesión ya expiro").then(() => {
-            setUser(null)
-            window.location.href = "/login"
-          });
-        } else {
-          window.location.href = "/login"
-        }
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     })
   };
 
@@ -161,18 +170,7 @@ export default function ContextConsumer({ children }) {
     Quantity(key, type).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      if (response.status === 400) {
-        SystemError(response.data.message)
-      } else if (response.status === 401) {
-        if (user) {
-          Swal.fire("Su sesión ya expiro").then(() => {
-            setUser(null)
-            window.location.href = "/login"
-          });
-        }
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     })
   };
 
@@ -180,18 +178,7 @@ export default function ContextConsumer({ children }) {
     RemoveProductFromCart(ProductKey).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      if (response.status === 400) {
-        SystemError(response.data.message)
-      } else if (response.status === 401) {
-        if (user) {
-          Swal.fire("Su sesión ya expiro").then(() => {
-            setUser(null)
-            window.location.href = "/login"
-          });
-        }
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     })
   };
 
@@ -199,18 +186,7 @@ export default function ContextConsumer({ children }) {
     ClearCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      if (response.status === 400) {
-        SystemError(response.data.message)
-      } else if (response.status === 401) {
-        if (user) {
-          Swal.fire("Su sesión ya expiro").then(() => {
-            setUser(null)
-            window.location.href = "/login"
-          });
-        }
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     })
   };
 
@@ -264,19 +240,8 @@ export default function ContextConsumer({ children }) {
       Swal.fire({ title: data.message, icon: "success" }).then(() => {
         window.location.href = "/Shoppings";
       })
-    }).catch(error => {
-      if (error.response.status === 400) {
-        SystemError(error.response.data.message)
-      } else if (error.response.status === 401) {
-        if (user) {
-          Swal.fire("Su sesión ya expiro").then(() => {
-            setUser(null)
-            window.location.href = "/login"
-          });
-        }
-      } else {
-        SystemError(error.message)
-      }
+    }).catch(({ response, message }) => {
+      BackendError(response, message)
     })
   }
 
@@ -285,12 +250,7 @@ export default function ContextConsumer({ children }) {
     GetSalesByUser(user ? user.key : "", salePage).then(({ data }) => {
       setSales(data.sales)
     }).catch(({ response, message }) => {
-      setLoading(false)
-      if (response.status === 401) {
-        setSales(null)
-      } else {
-        SystemError(message)
-      }
+      BackendError(response, message)
     }).finally(() => {
       setLoading(false)
     })
