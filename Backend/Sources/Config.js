@@ -1,3 +1,4 @@
+import debug from 'debug'
 import dotenv from 'dotenv'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
@@ -5,19 +6,26 @@ import session from 'express-session'
 import MongoDBStoreFactory from 'connect-mongodb-session'
 import path from 'path'
 
+export const Success = debug('backend:[Success]')
+export const Error = debug('backend:[Failure]')
+export const Database = debug('backend:[Database]')
+export const Session = debug('backend:[Session]')
+export const Server = debug('backend:[Server]')
+
 dotenv.config()
+const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN } = process.env
 
 //Setting env
-export const ConnectionCloud = process.env.MONGODB;
-export const PORT = process.env.PORT;
-export const ApiKey = process.env.APIKEY;
-export const CloudName = process.env.CLOUDNAME;
-export const ApiSecret = process.env.APISECRET;
-export const MAIL_BUSINESS = process.env.MAILBUSINESS;
-export const MAIL_PASS = process.env.MAILPASS;
-export const Origin = process.env.ORIGIN;
-export const TokenSecret = process.env.TOKEN;
-export const Session = process.env.SESSION;
+export const ConnectionCloud = MONGODB;
+export const Port = PORT;
+export const ApiKey = APIKEY;
+export const CloudName = CLOUDNAME;
+export const ApiSecret = APISECRET;
+export const MAIL_BUSINESS = MAILBUSINESS;
+export const MAIL_PASS = MAILPASS;
+export const Origin = ORIGIN;
+export const TokenSecret = TOKEN;
+export const SessionSecret = SESSION;
 
 
 //Setting Application
@@ -39,7 +47,7 @@ const MongoStore = new MongoDBStoreFactory(session)({
 export const SessionApp = session({
     resave: true,
     name: 'Session',
-    secret: Session,
+    secret: SessionSecret,
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
@@ -47,7 +55,7 @@ export const SessionApp = session({
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
         sameSite: 'none',
-        domain: process.env.DOMAIN
+        domain: DOMAIN
     }
 })
 
@@ -57,6 +65,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const ConfigHttps = {
-    key: readFileSync(path.join(__dirname, 'key.pem')),
-    cert: readFileSync(path.join(__dirname, 'cert.pem'))
+    key: readFileSync(path.join(__dirname, '../key.pem')),
+    cert: readFileSync(path.join(__dirname, '../cert.pem'))
 }

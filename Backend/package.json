@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "windows": "set DEBUG=backend:* && nodemon index.js",
-    "linux": "DEBUG=backend:* nodemon index.js",
+    "windows": "set DEBUG=Application:* && nodemon index.js",
+    "linux": "DEBUG=Application:* nodemon index.js",
     "dev": "npm run linux || npm run windows"
   },
   "repository": {

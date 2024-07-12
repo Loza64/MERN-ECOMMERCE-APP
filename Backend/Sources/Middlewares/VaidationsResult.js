@@ -1,19 +1,17 @@
-import debug from 'debug'
 import { remove } from 'fs-extra'
 import { validationResult } from 'express-validator'
+import { Error, Success } from '../Config.js';
 
-const error = debug('backend:[Error input]')
-const success = debug('backend:[Success input]')
 
 export const ValidationResult = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         next("Error with input parameters")
         if (req.files) remove(req.files.photo.tempFilePath)
-        errors.array().map(item => { error(item.msg) })
+        errors.array().map(item => { Error(item.msg) })
         return res.status(400).json({ state: false, message: errors.array().map(item => item.msg) });
     } else {
         next()
-        success("The body of the input requests is valid.")
+        Success("input's body requests is valid.")
     };
 }
