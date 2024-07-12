@@ -6,11 +6,11 @@ import session from 'express-session'
 import MongoDBStoreFactory from 'connect-mongodb-session'
 import path from 'path'
 
-export const Success = debug('backend:[Success]')
-export const Error = debug('backend:[Failure]')
-export const Database = debug('backend:[Database]')
-export const Session = debug('backend:[Session]')
-export const Server = debug('backend:[Server]')
+export const Success = debug('Application:[Success]')
+export const Error = debug('Application:[Failure]')
+export const Database = debug('Application:[Database]')
+export const Session = debug('Application:[Session]')
+export const Server = debug('Application:[Server]')
 
 dotenv.config()
 const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN } = process.env
