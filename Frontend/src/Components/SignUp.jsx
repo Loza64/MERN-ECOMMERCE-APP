@@ -1,8 +1,8 @@
-import Swal from 'sweetalert2';
 import { ContextProvider } from '../Context/ContextConsumer';
 import { Field, ErrorMessage, Formik, Form } from 'formik';
 import { SignupContainer } from "./Styles/styled-components";
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 SignUp.propTypes = {
   open: PropTypes.bool.isRequired,
@@ -122,51 +122,13 @@ export default function SignUp({ open, setOpen }) {
           }}
 
           onSubmit={(values) => {
-            let timerInterval;
-            Swal.fire({
-              title: "Enviando informacion por favor espere",
-              html: "Esto podria demorar unos segundos.",
-              timer: 1000 * 60 * 60,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                const timer = Swal.getPopup().querySelector("b");
-                timerInterval = setInterval(() => {
-                  timer.textContent = `${Swal.getTimerLeft()}`;
-                }, 100);
-              },
-              willClose: () => {
-                clearInterval(timerInterval);
-              }
-            }).then((result) => {
-              /* Read more about handling dismissals below */
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log("I was closed by the timer");
-              }
-            });
-            signup(values).then(({ data }) => {
-              const { state, message } = data;
+            signup(values).then(({ state, message }) => {
               if (state) {
-                Swal.fire({
-                  title: message,
-                  icon: "success"
-                }).then(() => {
-                  setOpen(false)
-                })
+                toast.success(message)
+                setOpen(false)
               } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Ocurrio un error en el registro!',
-                  text: message
-                })
+                toast.warning(message)
               }
-            }).catch((err) => {
-              Swal.fire({
-                title: err.message,
-                icon: 'error',
-                button: "Aceptar",
-                footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
-              })
             });
           }}
         >

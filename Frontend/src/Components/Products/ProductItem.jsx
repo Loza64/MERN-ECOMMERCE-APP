@@ -25,7 +25,7 @@ export default function ProductItem({ product, animationState }) {
     (
       <div className="target" style={{ animationName: animationState ? "loadtarget" : "none" }}>
         <BtnCart>
-          {cart.find(item => item.key === key) ? (<BsFillCartCheckFill className="react-icon incart" />) : (<BsFillCartPlusFill className="react-icon" onClick={() => { addToCart(key) }} />)}
+          {cart.find(item => item.key === key) ? (<BsFillCartCheckFill className="react-icon incart" />) : (<BsFillCartPlusFill className="react-icon" onClick={() => { addToCart(key, name) }} />)}
           {discount > 0 ? (<label className="product-discount">{Math.round(discount * 100)}%</label>) : null}
         </BtnCart>
         <div className="head-target" onClick={() => { navigator(`/Product/${name}`); TopWindow() }}>

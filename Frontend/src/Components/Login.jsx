@@ -1,9 +1,9 @@
-import Swal from 'sweetalert2';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../Context/ContextConsumer';
 import { ButtomTransparent, LoginContainer } from "./Styles/styled-components";
 import SignUp from './SignUp';
+import { toast } from "react-toastify";
 
 export default function Login() {
   const navigator = useNavigate();
@@ -16,6 +16,7 @@ export default function Login() {
   const [pass, setPass] = useState(String);
   const [state, setState] = useState(true);
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState(String)
 
   //object
   let body = {
@@ -28,21 +29,15 @@ export default function Login() {
   })
 
   function LoginSubmit() {
-    login(body).then((responce) => {
-      if (!responce) {
+    login(body).then(({ state, message }) => {
+      if (!state) {
         setState(false);
+        setMessage(message)
       } else {
+        toast.success(message)
         setState(true);
         navigator("/");
       }
-    }).catch((err) => {
-      Swal.fire({
-        title: 'Connection server error',
-        text: err + ', we will solve this problem as soon as possible.',
-        icon: 'error',
-        button: "Aceptar",
-        footer: '<a href="mailto:ufostartservices@gmail.com">Report problem</a>'
-      })
     });
   }
 
@@ -58,7 +53,7 @@ export default function Login() {
             <label className="topic">Iniciar Sesión</label>
             <input type="text" name="usuario" placeholder="usuario" onChange={(e) => { setUser(e.target.value) }} />
             <input type="password" name="password" placeholder="contraseña" onChange={(e) => { setPass(e.target.value) }} />
-            {!state ? (<label className='errormessage'>Usuario o contraseña incorrectos.</label>) : null}
+            {!state && (<label className='errormessage'>{message}</label>)}
             <input type="submit" value="Iniciar sesión" />
             <a href='/#'>¿Olvidates tu contraseña</a>
           </form>

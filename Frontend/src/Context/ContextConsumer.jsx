@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify";
 import { Actions } from "./ContextActions";
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
@@ -19,6 +20,7 @@ export default function ContextConsumer({ children }) {
   //hooks
   const [system, setSystem] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [loadSession, setLoadSession] = useState(true)
 
   //Users
   const [user, setUser] = useState(null);
@@ -42,7 +44,7 @@ export default function ContextConsumer({ children }) {
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
-  function SystemError(err) {
+  function MessageError(err) {
     Swal.fire({
       title: err,
       text: 'we will solve this problem as soon as possible.',
@@ -55,65 +57,98 @@ export default function ContextConsumer({ children }) {
   }
 
   function BackendError(response, message) {
-    switch (response.status) {
-      case 401: {
-        if (user) {
-          Swal.fire("Su sesión ya expiro").then(() => {
+    if (response && response.status) {
+      switch (response.status) {
+        case 401:
+          if (user) {
             setUser(null)
             dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-          });
-        }
-        break
-      }
-      case 410: {
-        if (user) {
-          Swal.fire("Por incumplimiento a nuestras politicas su cuenta a sido eliminada").then(() => {
+            toast.error(response.data.message)
+          }
+          break;
+        case 410:
+          if (user) {
             setUser(null)
             dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-          });
-        }
-        break
-      }
+            Swal.fire(response.data.message);
+          }
+          break;
 
-      default: {
-        SystemError(`Error ${response.status}: ${message}`)
-      }
+        case 500:
+          if (user) {
+            setUser(null)
+            dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+            MessageError(response.data.message)
+          }
+          break;
 
+        default:
+          MessageError(`Error ${response.status}, ${message}`)
+          break;
+      }
+    } else {
+      MessageError(message)
     }
+    setLoading(false)
   }
 
-  // Functions user
+  //---------------------------------------------------Functions user
+  const signup = async (signup) => {
+    try {
+      const { data } = await SignUp(signup);
+      return await data
+    } catch ({ response, message }) {
+      if (response.status === 409) {
+        return response.data
+      } else {
+        BackendError(response, message)
+      }
+    }
+  };
+
   const login = async (login) => {
     try {
       const { data } = await Login(login);
       setSession(!session)
-      return await data.state;
-    } catch (error) {
-      SystemError(error)
+      return await data;
+    } catch ({ response, message }) {
+      if (response.status === 401) {
+        return response.data
+      } else {
+        BackendError(response, message)
+        return null
+      }
     }
   };
 
+  useEffect(() => {
+    setLoadSession(true)
+    Profile().then(({ data }) => {
+      setUser(data)
+      setLoadSession(false)
+    }).catch(({ response, message }) => {
+      BackendError(response, message)
+    })
+  }, [session])
+
   const signout = () => {
     Logout().then(() => {
-      setUser(null)
       dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+      setUser(null)
+    }).catch(({ response, message }) => {
+      BackendError(response, message)
     })
   }
 
-  const signup = async (signup) => {
-    return await SignUp(signup);
-  };
-
-  // Functions products
+  //---------------------------------------------------Functions products
   useEffect(() => {
     setLoading(true);
     GetCategories().then(({ data }) => {
       setCategories(data.result);
-    }).catch((err) => {
-      SystemError(err)
-    }).finally(() => {
-      setLoading(false);
-    });
+      setLoading(false)
+    }).catch(({ response, message }) => {
+      BackendError(response, message)
+    })
   }, [])
 
   useEffect(() => {
@@ -121,35 +156,23 @@ export default function ContextConsumer({ children }) {
     GetProducts(search, categorie, type, page).then(({ data }) => {
       const { result } = data
       setProducts(result)
-    }).catch(error => {
-      SystemError(error)
-    }).finally(() => {
-      setLoading(false);
-    })
-  }, [search, categorie, page, type])
-
-  useEffect(() => {
-    Profile().then(({ data }) => {
-      setUser(data)
+      setLoading(false)
     }).catch(({ response, message }) => {
       BackendError(response, message)
     })
-  }, [session])
+  }, [search, categorie, page, type])
 
   const getProductByName = (Product, Page) => {
     setLoading(true)
     GetProductByName(Product, Page).then(async ({ data }) => {
       setProduct(data.product)
-    }).catch(error => {
       setLoading(false)
-      SystemError(error)
-      console.log(error)
-    }).finally(() => {
-      setLoading(false)
+    }).catch(({ response, message }) => {
+      BackendError(response, message)
     })
   };
 
-  //Functions Cart
+  //---------------------------------------------------Functions Cart
   useEffect(() => {
     GetCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
@@ -158,9 +181,10 @@ export default function ContextConsumer({ children }) {
     })
   }, [session])
 
-  const addToCart = async (ProductKey) => {
+  const addToCart = async (ProductKey, ProductName) => {
     AddToCart(ProductKey).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+      toast.success(`${ProductName} agregado al carrito!`)
     }).catch(({ response, message }) => {
       BackendError(response, message)
     })
@@ -190,7 +214,7 @@ export default function ContextConsumer({ children }) {
     })
   };
 
-  //Totals Cart
+  //---------------------------------------------------Totals Cart
   const productsInCart = cart.reduce((a, c) => a + c.quantity, 0)
 
   const SubTotal = cart.reduce(
@@ -227,7 +251,7 @@ export default function ContextConsumer({ children }) {
     ))
   ).toFixed(2);
 
-  //Sales functions 
+  //---------------------------------------------------Sales functions 
   const generateSale = () => {
     GenerateSale({
       user: user.key,
@@ -241,7 +265,7 @@ export default function ContextConsumer({ children }) {
         window.location.href = "/Shoppings";
       })
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      BackendError(response, response, message)
     })
   }
 
@@ -249,16 +273,16 @@ export default function ContextConsumer({ children }) {
     setLoading(true)
     GetSalesByUser(user ? user.key : "", salePage).then(({ data }) => {
       setSales(data.sales)
+      setLoading(false)
     }).catch(({ response, message }) => {
       BackendError(response, message)
-    }).finally(() => {
-      setLoading(false)
     })
   }, [salePage, user])
 
+  //---------------------------------------------------Context Values to import
   const ContextValues = {
     addToCart, removeProductFromCart, setPage, setCategorie, setSearch, productsInCart,
-    products, categories, signout, login, signup, user, getProductByName, loading, setSalePage,
+    products, categories, signout, login, signup, user, getProductByName, loading, setSalePage, loadSession,
     system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, generateSale, sales
   };
 

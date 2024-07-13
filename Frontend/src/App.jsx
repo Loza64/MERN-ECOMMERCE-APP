@@ -6,11 +6,14 @@ import Shoppings from './Components/Shoppings/Shoppings';
 import { Route, Routes } from 'react-router-dom';
 import Products from './Components/Products/Products'
 import DetailProduct from './Components/Products/DetailProduct';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   return (
     <div>
       <Navbar />
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Principal />} />
         <Route path='/*' element={<Principal />} />

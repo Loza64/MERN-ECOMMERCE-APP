@@ -13,15 +13,15 @@ export const SignUp = async (req, res, next) => {
         const checkemail = await Users.findOne({ email })
         const checkphone = await Users.findOne({ phone })
         if (checkemail || checkphone || checkuser) {
-            res.status(200).json({ state: false, message: "Username, email or phone already exist." })
+            res.status(409).json({ state: false, message: "Username, email or phone already exist." })
         } else {
             const password = await EncryptPass(pass)
-            new Users({ key, username, names, surnames, birthdate, email, address, phone, password }).save().then(() => {
-                res.status(200).json({ state: true, message: "Register success" })
-            }).catch(error => {
-                next(error.message)
-                res.status(500).json({ state: false, message: error.message })
-            });
+            const saveUser = new Users({ key, username, names, surnames, birthdate, email, address, phone, password }).save()
+            if(saveUser){
+                res.status(200).json({ state: true, message: "Your account has been registered" })
+            }else{
+                res.status(500).json({ state: true, message: "Error to register your account" })
+            }
         }
     } catch (error) {
         next(error.message)
@@ -38,9 +38,9 @@ export const Login = async (req, res, next) => {
             const token = await GenerateToken(_id);
             req.session.token = token
             req.session.cart = []
-            res.status(200).json({ state: true, details: "Successful login" })
+            res.status(200).json({ state: true, message: "Successful login" })
         } else {
-            res.status(200).json({ state: false, details: "User or password incorrect" })
+            res.status(401).json({ state: false, message: "User or password incorrect" })
         }
     } catch (error) {
         next(error.message)
@@ -63,7 +63,7 @@ export const Profile = async (req, res) => {
 export const Logout = (req, res) => {
     req.session.destroy(err => {
         if (!err) {
-            res.status(200).json({ state: true, details: "Your session has been destroyed" })
+            res.status(200).json({ state: true, message: "Your session has been destroyed" })
         }
     })
 }
