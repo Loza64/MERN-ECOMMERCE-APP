@@ -58,7 +58,7 @@ color:white;
 .sidebar .content-search select{
   border: none;
   outline: none;
-  width:85px;
+  width:93px;
   font-size:13px;
   font-weight:700;
   text-align: center;
@@ -128,7 +128,7 @@ color:white;
   background: rgb(0, 194, 26);
 }
 
-@media only screen and (max-width:1130px){
+@media only screen and (max-width:1240px){
   .sidebar{
     position:fixed;
     top:4.57rem;
