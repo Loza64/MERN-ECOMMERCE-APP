@@ -13,7 +13,7 @@ export const SignUp = async (req, res, next) => {
         const checkemail = await Users.findOne({ email })
         const checkphone = await Users.findOne({ phone })
         if (checkemail || checkphone || checkuser) {
-            res.status(409).json({ state: false, message: "Username, email or phone already exist." })
+            res.status(409).json({ state: false, message: "Username, email or phone number are already used by another user" })
         } else {
             const password = await EncryptPass(pass)
             const saveUser = new Users({ key, username, names, surnames, birthdate, email, address, phone, password }).save()
