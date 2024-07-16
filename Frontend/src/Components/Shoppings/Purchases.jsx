@@ -16,7 +16,7 @@ export default function Purchases() {
 
   useEffect(() => {
     getPurchasesByUser(user ? user : "", salePage)
-  }, [salePage])
+  }, [salePage, user])
 
   if (user) {
     if (loadingSales) {
