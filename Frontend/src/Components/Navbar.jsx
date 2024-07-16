@@ -39,7 +39,7 @@ export default function Navbar() {
         </form>
         <nav>
           <Link to="/" onClick={() => { setState(false); scrollTop(); setType("All"); setPage(1) }}><AiFillHome className="react-icon" />Home</Link>
-          <Link to="/Shoppings" onClick={() => { setState(false); scrollTop(); }}><FaShoppingBag className="react-icon" />Shoppings</Link>
+          <Link to="/Purchases" onClick={() => { setState(false); scrollTop(); }}><FaShoppingBag className="react-icon" />Shoppings</Link>
           <Link to="/Products" onClick={() => { setState(false); scrollTop(); setType("All"); setPage(1) }}><FaBoxes className="react-icon" />Products</Link>
           <Link to="/NormalPrice" onClick={() => { setState(false); scrollTop(); setType("Normal"); setPage(1) }}><FaDollarSign className="react-icon" />Normal</Link>
           <Link to="/Discounts" onClick={() => { setState(false); scrollTop(); setType("Discount"); setPage(1) }}>< AiFillTags className="react-icon" />Discounts</Link>

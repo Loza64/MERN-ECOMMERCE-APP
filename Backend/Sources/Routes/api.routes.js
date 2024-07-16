@@ -1,5 +1,5 @@
 import express from 'express'
-import { GenerateSale, GetSalesByUser } from '../Controllers/Sales.js'
+import { MakePurchase, GetPurchaseByUser } from '../Controllers/Purchase.js'
 import { isAutenticate } from '../Middlewares/CheckSession.js'
 import { ValidateSignUp } from '../Validators/UserValidadots.js'
 import { ValidateProduct } from '../Validators/ProductValidation.js'
@@ -31,8 +31,8 @@ routes.get('/addtocart/:Key', isAutenticate, AddToCart)
 routes.get('/quantity/:Key/:Type', isAutenticate, Quantity)
 routes.get('/removetocart/:Key', isAutenticate, RemoveProductFromCart)
 
-//Sales
-routes.post('/generatesale', isAutenticate, GenerateSale)
-routes.get('/getsalesbyuser', isAutenticate, GetSalesByUser)
+//Purchages
+routes.post('/makepurchase', isAutenticate, MakePurchase)
+routes.get('/getpurchasesbyuser', isAutenticate, GetPurchaseByUser)
 
 export default routes

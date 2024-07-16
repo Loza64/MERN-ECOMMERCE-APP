@@ -13,18 +13,15 @@ Products.propTypes = {
 }
 
 export default function Products({ TopState }) {
-  const { products, system, setPage, loading } = ContextProvider()
+  const { products, system, setPage, loadingProducts } = ContextProvider()
   const [item, setItem] = useState(1)
-  const [show, setShow] = useState(false)
 
   useEffect(() => {
     setPage(item)
   }, [item])
 
-  setTimeout(() => { setShow(true); }, 1000)
-
   if (system) {
-    if (loading || !show) {
+    if (loadingProducts) {
       return <Loading title={"Loading products...."} />
     } else {
       return products.docs.length > 0 ?

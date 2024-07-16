@@ -1,14 +1,16 @@
 import uniquid from 'uniquid'
-import { Products, Sales } from '../Models/Model.js'
+import { Products, Purchase } from '../Models/Model.js'
 
-export const GenerateSale = async (req, res, next) => {
-    const { user, products, subtotal, total } = req.body
-    const date = new Date(req.body.date)
+export const MakePurchase = async (req, res, next) => {
+    const { user, cant, subtotal, total } = req.body
+
     const details = req.session.cart
+    const date = Date.now()
     const key = uniquid()
+
     try {
-        new Sales({ key, user, date, products, subtotal, total, details }).save().then(sales => {
-            sales.details.map(async (item) => {
+        new Purchase({ key, user, date, cant, subtotal, total, details }).save().then(data => {
+            data.details.map(async (item) => {
                 const product = await Products.findById(item.id)
                 if (product) {
                     const newStock = product.stock - item.quantity > 0 ? product.stock - item.quantity : 0
@@ -27,11 +29,11 @@ export const GenerateSale = async (req, res, next) => {
     }
 }
 
-export const GetSalesByUser = async (req, res) => {
+export const GetPurchaseByUser = async (req, res) => {
     const { User, Page } = req.query
     try {
-        const sales = await Sales.paginate({ user: User }, { page: Page, limit: 9, sort: { date: -1 } })
-        res.status(200).json({ state: true, sales })
+        const purchases = await Purchase.paginate({ user: User }, { page: Page, limit: 9, sort: { date: -1 } })
+        res.status(200).json({ state: true, purchases })
     } catch (error) {
         next(error.message)
         return res.status(500).json({ state: false, message: error.message })

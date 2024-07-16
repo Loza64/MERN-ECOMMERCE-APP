@@ -116,7 +116,7 @@ export default function PDF({ products, subtotal, total, usuario, factura, date,
             <Page>
                 <View style={styles.Header}>
                     <View style={styles.FlexGap}>
-                        <Image style={styles.Logo} src={"https://res.cloudinary.com/ufostart-development/image/upload/v1703298450/ECOMMERCE/u2xrv5s6jojcpda1wkub.png"} />
+                        <Image style={styles.Logo} src={"https://res.cloudinary.com/ufostart-development/image/upload/v1720843711/ECOMMERCE/xnodycdxvyx2plgdswyw.png"} />
                         <Text style={{ color: 'white' }}>Ecommerce</Text>
                     </View>
                 </View>

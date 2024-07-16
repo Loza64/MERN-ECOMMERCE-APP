@@ -11,17 +11,13 @@ Pagination.propTypes = {
 }
 
 export default function Pagination({ Page, Pages, Prev, Next, PrevItem, NextItem, setPage }) {
-    return (
+    return (Pages > 1) ? (
         <div className='pagination-container'>
-            {
-                Pages > 1 ? (
-                    <div className='pagination-flex'>
-                        <button className={` ${Prev ? "prev-buttom" : "disable"}`} onClick={() => { if (Prev) setPage(PrevItem) }}>Prev</button>
-                        <label>{Page} - {Pages}</label>
-                        <button className={` ${Next ? "next-buttom" : "disable"}`} onClick={() => { if (Next) setPage(NextItem) }}>Next</button>
-                    </div>
-                ) : null
-            }
+            <div className='pagination-flex'>
+                <button className={` ${Prev ? "prev-buttom" : "disable"}`} onClick={() => { if (Prev) setPage(PrevItem) }}>Prev</button>
+                <label>{Page} - {Pages}</label>
+                <button className={` ${Next ? "next-buttom" : "disable"}`} onClick={() => { if (Next) setPage(NextItem) }}>Next</button>
+            </div>
         </div>
-    )
+    ) : null
 }

@@ -3,9 +3,10 @@ import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 import { toast } from "react-toastify";
 import { Actions } from "./ContextActions";
+import { useNavigate } from 'react-router-dom';
 import { ContextReducer, InitialState } from "./ContextReducer";
 import { useContext, useState, createContext, useReducer, useEffect } from "react";
-import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart, GenerateSale, GetSalesByUser } from "../Api/RestApi";
+import { GetCategories, GetProducts, GetProductByName, Login, SignUp, GetCart, Profile, Logout, AddToCart, Quantity, RemoveProductFromCart, ClearCart, MakePurchase, GetPurchasesByUser } from "../Api/RestApi";
 
 ContextConsumer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -19,8 +20,13 @@ export default function ContextConsumer({ children }) {
 
   //hooks
   const [system, setSystem] = useState(true);
-  const [loading, setLoading] = useState(true);
-  const [loadSession, setLoadSession] = useState(true)
+  const navigate = useNavigate()
+
+  //Loading hooks
+  const [loadingProducts, setLoadingProducts] = useState(true); //List
+  const [loadingProduct, setLoadingProduct] = useState(true); //GetProduct
+  const [loadingSales, setLoadingPurchases] = useState(true);
+  const [loadApp, setLoadApp] = useState(true);
 
   //Users
   const [user, setUser] = useState(null);
@@ -38,13 +44,12 @@ export default function ContextConsumer({ children }) {
   const [categories, setCategories] = useState([]); //List of categories
 
   //Sales
-  const [sales, setSales] = useState(null)
-  const [salePage, setSalePage] = useState(1)
+  const [purchases, setPurchases] = useState(null)
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
-  function MessageError(err) {
+  function AlertError(err) {
     Swal.fire({
       title: err,
       text: 'we will solve this problem as soon as possible.',
@@ -56,7 +61,7 @@ export default function ContextConsumer({ children }) {
     })
   }
 
-  function BackendError(response, message) {
+  function ManageErrors(response, message) {
     if (response && response.status) {
       switch (response.status) {
         case 401:
@@ -78,18 +83,17 @@ export default function ContextConsumer({ children }) {
           if (user) {
             setUser(null)
             dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-            MessageError(response.data.message)
+            AlertError(response.data.message)
           }
           break;
 
         default:
-          MessageError(`Error ${response.status}, ${message}`)
+          AlertError(`Error ${response.status}, ${message}`)
           break;
       }
     } else {
-      MessageError(message)
+      AlertError(message)
     }
-    setLoading(false)
   }
 
   //---------------------------------------------------Functions user
@@ -101,7 +105,7 @@ export default function ContextConsumer({ children }) {
       if (response.status === 409) {
         return response.data
       } else {
-        BackendError(response, message)
+        ManageErrors(response, message)
       }
     }
   };
@@ -112,63 +116,75 @@ export default function ContextConsumer({ children }) {
       setSession(!session)
       return await data;
     } catch ({ response, message }) {
-      if (response.status === 401) {
-        return response.data
-      } else {
-        BackendError(response, message)
-        return null
+      if (response && response.status) {
+        if (response.status === 401) {
+          return response.data
+        } else {
+          ManageErrors(response, message)
+          return null
+        }
       }
     }
   };
 
   useEffect(() => {
-    setLoadSession(true)
     Profile().then(({ data }) => {
       setUser(data)
-      setLoadSession(false)
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   }, [session])
+
+  //----------------Loading app
+  useEffect(() => {
+    setLoadApp(true)
+    Profile().then(({ data }) => {
+      setUser(data)
+    }).catch(({ response, message }) => {
+      ManageErrors(response, message)
+    }).finally(() => {
+      setTimeout(() => { setLoadApp(false) }, 6000)
+    })
+  }, [])
 
   const signout = () => {
     Logout().then(() => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
       setUser(null)
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   }
 
   //---------------------------------------------------Functions products
   useEffect(() => {
-    setLoading(true);
     GetCategories().then(({ data }) => {
       setCategories(data.result);
-      setLoading(false)
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   }, [])
 
   useEffect(() => {
-    setLoading(true)
+    setLoadingProducts(true)
     GetProducts(search, categorie, type, page).then(({ data }) => {
       const { result } = data
       setProducts(result)
-      setLoading(false)
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
+    }).finally(() => {
+      setTimeout(() => { setLoadingProducts(false) }, 1000)
     })
   }, [search, categorie, page, type])
 
   const getProductByName = (Product, Page) => {
-    setLoading(true)
+    setLoadingProduct(true)
     GetProductByName(Product, Page).then(async ({ data }) => {
       setProduct(data.product)
-      setLoading(false)
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
+    }).finally(() => {
+      setTimeout(() => { setLoadingProduct(false) }, 1000)
     })
   };
 
@@ -177,7 +193,7 @@ export default function ContextConsumer({ children }) {
     GetCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   }, [session])
 
@@ -186,7 +202,7 @@ export default function ContextConsumer({ children }) {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
       toast.success(`${ProductName} agregado al carrito!`)
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   };
 
@@ -194,7 +210,7 @@ export default function ContextConsumer({ children }) {
     Quantity(key, type).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   };
 
@@ -202,7 +218,7 @@ export default function ContextConsumer({ children }) {
     RemoveProductFromCart(ProductKey).then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   };
 
@@ -210,7 +226,7 @@ export default function ContextConsumer({ children }) {
     ClearCart().then(({ data }) => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
     }).catch(({ response, message }) => {
-      BackendError(response, message)
+      ManageErrors(response, message)
     })
   };
 
@@ -252,38 +268,34 @@ export default function ContextConsumer({ children }) {
   ).toFixed(2);
 
   //---------------------------------------------------Sales functions 
-  const generateSale = () => {
-    GenerateSale({
-      user: user.key,
-      date: new Date().toDateString(),
-      product: productsInCart,
-      subtotal: SubTotal,
-      total: Total
-    }).then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } });
-      Swal.fire({ title: data.message, icon: "success" }).then(() => {
-        window.location.href = "/Shoppings";
-      })
+  const makePurchase = async () => {
+    try {
+      const { data } = await MakePurchase({ user: user.key, cant: productsInCart, subtotal: SubTotal, total: Total })
+      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+      toast.success(data.message)
+      navigate("/purchases")
+    } catch ({ response, message }) {
+      ManageErrors(response, message)
+    }
+
+  }
+
+  const getPurchasesByUser = (user, page) => {
+    setLoadingPurchases(true)
+    GetPurchasesByUser(user.key, page).then(({ data }) => {
+      setPurchases(data.purchases)
     }).catch(({ response, message }) => {
-      BackendError(response, response, message)
+      ManageErrors(response, message)
+    }).finally(() => {
+      setTimeout(() => { setLoadingPurchases(false) }, 1000)
     })
   }
 
-  useEffect(() => {
-    setLoading(true)
-    GetSalesByUser(user ? user.key : "", salePage).then(({ data }) => {
-      setSales(data.sales)
-      setLoading(false)
-    }).catch(({ response, message }) => {
-      BackendError(response, message)
-    })
-  }, [salePage, user])
-
   //---------------------------------------------------Context Values to import
   const ContextValues = {
-    addToCart, removeProductFromCart, setPage, setCategorie, setSearch, productsInCart,
-    products, categories, signout, login, signup, user, getProductByName, loading, setSalePage, loadSession,
-    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, generateSale, sales
+    addToCart, removeProductFromCart, setPage, setCategorie, setSearch, productsInCart, loadApp,
+    products, categories, signout, login, signup, user, getProductByName, loadingProduct, loadingSales, getPurchasesByUser,
+    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, makePurchase, purchases, loadingProducts
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

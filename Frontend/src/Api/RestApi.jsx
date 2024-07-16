@@ -17,8 +17,8 @@ export const Login = async (usuario) => await ServerFetch.post('/login', usuario
 export const SignUp = async (usuario) => await ServerFetch.post('/signup', usuario)
 
 //Sales
-export const GenerateSale = async (body) => await ServerFetch.post('/generatesale', body)
-export const GetSalesByUser = async (User, Page) => await ServerFetch(`/getsalesbyuser?User=${User}&Page=${Page}`)
+export const MakePurchase = async (body) => await ServerFetch.post('/makepurchase', body)
+export const GetPurchasesByUser = async (User, Page) => await ServerFetch(`/getpurchasesbyuser?User=${User}&Page=${Page}`)
 
 //------------------------------------get-----------------------------------------------
 

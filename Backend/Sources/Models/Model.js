@@ -32,11 +32,11 @@ const category = new Schema({
   name: { type: String, require: true, unique: true }
 }, { versionKey: false })
 
-const sale = new Schema({
+const purchase = new Schema({
   key: { type: String, require: true, unique: true },
   user: { type: String, require: true, },
   date: { type: Date, require: true },
-  products: { type: Number, require: true },
+  cant: { type: Number, require: true },
   subtotal: { type: Number, require: true },
   total: { type: Number, require: true },
   details: { type: Array, require: true },
@@ -47,4 +47,4 @@ const sale = new Schema({
 export const Users = model("users", user)
 export const Products = model("products", product)
 export const Categories = model("categories", category)
-export const Sales = model("sales", sale)
+export const Purchase = model("purchases", purchase)

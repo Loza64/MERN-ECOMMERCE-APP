@@ -17,19 +17,17 @@ DetailProduct.propTypes = {
 }
 
 export default function DetailProduct() {
-  const { addToCart, getProductByName, system, product, loading, cart } = ContextProvider();
-  const [showProduct, setShowProduct] = useState(false);
+  const { addToCart, getProductByName, system, product, loadingProduct, cart } = ContextProvider();
   const [page, setPage] = useState(1)
   const navigator = useNavigate();
   const { Name } = useParams();
 
   //Change item doc
   useEffect(() => { getProductByName(Name, page) }, [Name, page])
-  setTimeout(() => { setShowProduct(true) }, 1000)
 
   const [view, setView] = useState(false);
   if (system) {
-    if (loading || !showProduct) {
+    if (loadingProduct) {
       return <Loading title={"Loading...."} />
     } else {
       if (product) {
