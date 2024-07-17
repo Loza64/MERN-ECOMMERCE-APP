@@ -32,12 +32,12 @@ export default function Purchases() {
                 <thead>
                   <th className="none">Item</th>
                   <th>Codigo</th>
-                  <th>Fecha</th>
+                  <th className="none">Fecha</th>
                   <th className="none">Cant</th>
                   <th className="none">Subtotal</th>
                   <th>Total</th>
                   <th>Estado</th>
-                  <th>Comprobante</th>
+                  <th>Factura</th>
                 </thead>
                 <tbody>
                   {
@@ -46,7 +46,7 @@ export default function Purchases() {
                         <tr key={index}>
                           <td className="none">{index + 1}</td>
                           <td>{item.key}</td>
-                          <td key={index}>{(new Date(item.date).toDateString())}</td>
+                          <td key={index} className="none">{(new Date(item.date).toDateString())}</td>
                           <td className="none">{item.cant}</td>
                           <td className="price none">${item.subtotal}</td>
                           <td className="price">${item.total}</td>
