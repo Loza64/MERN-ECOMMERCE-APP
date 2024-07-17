@@ -12,22 +12,40 @@ import LoadApp from './Components/LoadApp';
 import Purchases from './Components/Shoppings/Purchases';
 
 export default function App() {
-  const { loadApp } = ContextProvider()
+  const { loadApp, initApp } = ContextProvider()
 
-  return loadApp ? <LoadApp/> : (
-    <>
-      <Navbar />
-      <ToastContainer />
-      <Routes>
-        <Route path='/' element={<Principal />} />
-        <Route path='/*' element={<Principal />} />
-        <Route path='/Login' element={<Login />} />
-        <Route path='/Product/:Name' element={<DetailProduct />} />
-        <Route path='/Cart' element={<Cart />} />
-        <Route path='/Purchases' element={<Purchases />} />
-        <Route path='/Products' element={<Products Top={'40px'} TopState={true} />} />
-      </Routes>
-    </>
-  )
+  if (!initApp) {
+    return loadApp ? <LoadApp /> : (
+      <>
+        <Navbar />
+        <ToastContainer />
+        <Routes>
+          <Route path='/' element={<Principal />} />
+          <Route path='/*' element={<Principal />} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Product/:Name' element={<DetailProduct />} />
+          <Route path='/Cart' element={<Cart />} />
+          <Route path='/Purchases' element={<Purchases />} />
+          <Route path='/Products' element={<Products Top={'40px'} TopState={true} />} />
+        </Routes>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Navbar />
+        <ToastContainer />
+        <Routes>
+          <Route path='/' element={<Principal />} />
+          <Route path='/*' element={<Principal />} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Product/:Name' element={<DetailProduct />} />
+          <Route path='/Cart' element={<Cart />} />
+          <Route path='/Purchases' element={<Purchases />} />
+          <Route path='/Products' element={<Products Top={'40px'} TopState={true} />} />
+        </Routes>
+      </>
+    )
+  }
 
 }

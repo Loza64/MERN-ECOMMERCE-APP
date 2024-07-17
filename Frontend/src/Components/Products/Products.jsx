@@ -22,7 +22,7 @@ export default function Products({ TopState }) {
 
   if (system) {
     if (loadingProducts) {
-      return <Loading title={"Loading products...."} />
+      return <Loading/>
     } else {
       return products.docs.length > 0 ?
         (

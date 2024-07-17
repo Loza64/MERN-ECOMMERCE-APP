@@ -20,7 +20,7 @@ export default function Purchases() {
 
   if (user) {
     if (loadingSales) {
-      return <Loading title={"Loading purchases"} />
+      return <Loading />
     } else {
       return (
         purchases.docs.length > 0 ? (

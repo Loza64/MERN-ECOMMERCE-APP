@@ -6,10 +6,10 @@ Top.propTypes = {
 
 export default function Top({ state }) {
   return state ? (
-    <div>
+    <>
       <br />
       <br />
       <br />
-    </div>
+    </>
   ) : null;
 }

@@ -26,7 +26,12 @@ export default function ContextConsumer({ children }) {
   const [loadingProducts, setLoadingProducts] = useState(true); //List
   const [loadingProduct, setLoadingProduct] = useState(true); //GetProduct
   const [loadingSales, setLoadingPurchases] = useState(true);
+  const [loadingLogin, setLoadingLogin] = useState(false);
+  const [loadingSignUp, setLoadingSignUp] = useState(false);
+
+  //Init App
   const [loadApp, setLoadApp] = useState(true);
+  const [initApp, setInitApp] = useState(false);
 
   //Users
   const [user, setUser] = useState(null);
@@ -49,6 +54,7 @@ export default function ContextConsumer({ children }) {
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
+  //--------------------------------------------------Manage Erros
   function AlertError(err) {
     Swal.fire({
       title: err,
@@ -98,6 +104,7 @@ export default function ContextConsumer({ children }) {
 
   //---------------------------------------------------Functions user
   const signup = async (signup) => {
+    setLoadingSignUp(true)
     try {
       const { data } = await SignUp(signup);
       return await data
@@ -108,9 +115,13 @@ export default function ContextConsumer({ children }) {
         ManageErrors(response, message)
       }
     }
+    finally {
+      setLoadingSignUp(false)
+    }
   };
 
   const login = async (login) => {
+    setLoadingLogin(true)
     try {
       const { data } = await Login(login);
       setSession(!session)
@@ -124,28 +135,30 @@ export default function ContextConsumer({ children }) {
           return null
         }
       }
+    } finally {
+      setLoadingLogin(false)
     }
   };
 
   useEffect(() => {
-    Profile().then(({ data }) => {
-      setUser(data)
-    }).catch(({ response, message }) => {
-      ManageErrors(response, message)
-    })
-  }, [session])
+    if (!initApp) {
+      setLoadApp(true)
+      Profile().then(({ data }) => {
+        setUser(data)
+      }).catch(({ response, message }) => {
+        ManageErrors(response, message)
+      }).finally(() => {
+        setTimeout(() => { setLoadApp(false); setInitApp(true) }, 6000)
+      })
+    } else {
+      Profile().then(({ data }) => {
+        setUser(data)
+      }).catch(({ response, message }) => {
+        ManageErrors(response, message)
+      })
+    }
 
-  //----------------Loading app
-  useEffect(() => {
-    setLoadApp(true)
-    Profile().then(({ data }) => {
-      setUser(data)
-    }).catch(({ response, message }) => {
-      ManageErrors(response, message)
-    }).finally(() => {
-      setTimeout(() => { setLoadApp(false) }, 6000)
-    })
-  }, [])
+  }, [session])
 
   const signout = () => {
     Logout().then(() => {
@@ -293,9 +306,11 @@ export default function ContextConsumer({ children }) {
 
   //---------------------------------------------------Context Values to import
   const ContextValues = {
-    addToCart, removeProductFromCart, setPage, setCategorie, setSearch, productsInCart, loadApp,
-    products, categories, signout, login, signup, user, getProductByName, loadingProduct, loadingSales, getPurchasesByUser,
-    system, clearCart, cart, quantityProduct, SubTotal, Tax, Total, product, setType, makePurchase, purchases, loadingProducts
+    addToCart, removeProductFromCart, setPage, setCategorie, setSearch,
+    productsInCart, loadApp, initApp, loadingLogin, loadingSignUp, products, categories,
+    signout, login, signup, user, getProductByName, loadingProduct, loadingSales,
+    getPurchasesByUser, system, clearCart, cart, quantityProduct, SubTotal, Tax, Total,
+    product, setType, makePurchase, purchases, loadingProducts
   };
 
   return <Context.Provider value={ContextValues}>{children}</Context.Provider>;

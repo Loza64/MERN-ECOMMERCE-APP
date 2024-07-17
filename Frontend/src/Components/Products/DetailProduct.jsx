@@ -28,7 +28,7 @@ export default function DetailProduct() {
   const [view, setView] = useState(false);
   if (system) {
     if (loadingProduct) {
-      return <Loading title={"Loading...."} />
+      return <Loading />
     } else {
       if (product) {
         const { key, image, name, company, details, price, stock, discount, releated } = product;

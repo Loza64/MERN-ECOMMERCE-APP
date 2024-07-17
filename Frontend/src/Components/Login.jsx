@@ -9,7 +9,7 @@ export default function Login() {
   const navigator = useNavigate();
 
   //Function context
-  const { login, signout } = ContextProvider();
+  const { login, signout, loadingLogin } = ContextProvider();
 
   //hooks
   const [user, setUser] = useState(String);
@@ -54,7 +54,7 @@ export default function Login() {
             <input type="text" name="usuario" placeholder="usuario" onChange={(e) => { setUser(e.target.value) }} />
             <input type="password" name="password" placeholder="contraseña" onChange={(e) => { setPass(e.target.value) }} />
             {!state && (<label className='errormessage'>{message}</label>)}
-            <input type="submit" value="Iniciar sesión" />
+            <input type="submit" value={loadingLogin ? "loading..." : "Iniciar sesión"} disabled={loadingLogin} />
             <a href='/#'>¿Olvidates tu contraseña</a>
           </form>
         </div>

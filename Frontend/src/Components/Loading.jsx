@@ -1,16 +1,15 @@
-import PropTypes from 'prop-types';
+import LoadingAnimation from 'react-spinners/BarLoader'
+import Top from './Top'
 
-Loading.propTypes = {
-    title: PropTypes.array
-}
-
-export default function Loading({ title }) {
+export default function Loading() {
     return (
         <div className="loading-container">
-            <div className="loading">
-                <img src="https://res.cloudinary.com/ufostart-development/image/upload/v1689982703/ECOMMERCE/mckaustcnmrms3nxvhzx.gif" alt="Loading" />
-                <label>{title}</label>
-            </div>
+            <Top />
+            <LoadingAnimation
+                color='blue'
+                width={'20%'}
+                height={'6px'}
+            />
         </div>
     )
 }

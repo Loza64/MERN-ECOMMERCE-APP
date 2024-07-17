@@ -11,7 +11,7 @@ SignUp.propTypes = {
 
 export default function SignUp({ open, setOpen }) {
 
-  const { signup } = ContextProvider();
+  const { signup, loadingSignUp } = ContextProvider();
   //Objects
   let expresiones = {
     username: /^[a-zA-ZÁ-ÿ0-9]{6,40}$/,
@@ -168,7 +168,7 @@ export default function SignUp({ open, setOpen }) {
                 <ErrorMessage name="phone" component={() => (<label className="errormessage">{errors.phone}</label>)} />
                 <Field type="password" placeholder="Contraseña" name="pass" />
                 <ErrorMessage name="pass" component={() => (<label className="errormessage">{errors.pass}</label>)} />
-                <input type="submit" className="buttom buttom-dark" value="Registrame" style={{ width: '100%' }} />
+                <input type="submit" className="buttom buttom-dark" value={loadingSignUp ? "loading..." : "Registrame"} disabled={loadingSignUp} style={{ width: '100%' }} />
               </Form>
             )
           }
