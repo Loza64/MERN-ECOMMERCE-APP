@@ -2,14 +2,14 @@ import styles from 'styled-components'
 
 export const NavBar = styles.div`
 position: fixed;
-z-index: 50;
+z-index: 30;
 width:100%;
 background:rgba(2, 1, 71, 1);
-padding:15px 8px;
+padding: 17px 8px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-border-bottom:5.5px solid #2AFF00;
+
 transition:all 2s ease-in-out;
 animation-name: load;
 animation-duration: 2s;
@@ -21,7 +21,7 @@ animation-iteration-count: 1;
   }
 
   100% {
-    opacity:110%;
+    opacity:100%;
   }
 }
 
@@ -131,23 +131,23 @@ color:white;
 @media only screen and (max-width:1240px){
   .sidebar{
     position:fixed;
-    top:4.57rem;
+    top:4.49rem;
     background:rgba(0, 0, 0, 0.69);
     font-size:12px;
     flex-direction:column;
     justify-content:start;
-    width:20rem;
+    width:24rem;
     transition: all 0.5s ease-in-out;
     animation-name: ${({ menu }) => (menu ? "openmenu" : "closemenu")};
     animation-duration:0.6s;
-    left: ${({ menu }) => (menu ? "0px" : "-21rem")};
+    left: ${({ menu }) => (menu ? "0px" : "-31rem")};
     padding:20px;
     height:100vh;
     overflow:scroll;
   }
   @keyframes openmenu {
     0% {
-      left:-21rem;
+      left:-31rem;
     }
     50% {
       left:70px;
@@ -164,7 +164,7 @@ color:white;
       left:-200px;
     }
     100% {
-      left:-21rem;
+      left:-31rem;
     }
   }
   .sidebar .content-search{
@@ -198,6 +198,12 @@ color:white;
   .btn-menu{
     display:block;
   }
+}
+  
+@media only screen and (max-width:382px){
+   .sidebar{
+    width : 100%
+   }
 }
 @media only screen and (max-width:280px){
   .sidebar{

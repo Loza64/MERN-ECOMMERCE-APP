@@ -15,6 +15,7 @@ export default function Navbar() {
 
   //Functions
   const scrollTop = () => { window.scrollTo({ top: 0, behavior: "smooth", }) }
+
   const Search = (e) => {
     e.preventDefault();
     setSearch(e.target.product.value)
@@ -34,15 +35,15 @@ export default function Navbar() {
             <option value="" className={"opcion"}>Todo</option>
             {categories.map((item, index) => (<option key={index} value={item.key} className={"opcion"}>{item.name}</option>))}
           </select>
-          <input name="product" id="product" type="search" placeholder="Search...." className="txt-search" />
+          <input name="product" id="product" type="search" placeholder="Search..." className="txt-search" />
           <button type="submit" className="btn-search"><FaSearch /></button>
         </form>
         <nav>
           <Link to="/" onClick={() => { setState(false); scrollTop(); setType("All"); setPage(1) }}><AiFillHome className="react-icon" />Home</Link>
           <Link to="/Purchases" onClick={() => { setState(false); scrollTop(); }}><FaShoppingBag className="react-icon" />Shoppings</Link>
           <Link to="/Products" onClick={() => { setState(false); scrollTop(); setType("All"); setPage(1) }}><FaBoxes className="react-icon" />Products</Link>
-          <Link to="/NormalPrice" onClick={() => { setState(false); scrollTop(); setType("Normal"); setPage(1) }}><FaDollarSign className="react-icon" />Normal</Link>
-          <Link to="/Discounts" onClick={() => { setState(false); scrollTop(); setType("Discount"); setPage(1) }}>< AiFillTags className="react-icon" />Discounts</Link>
+          <Link to="/" onClick={() => { setState(false); scrollTop(); setType("Normal"); setPage(1) }}><FaDollarSign className="react-icon" />Normal</Link>
+          <Link to="/" onClick={() => { setState(false); scrollTop(); setType("Discount"); setPage(1) }}>< AiFillTags className="react-icon" />Discounts</Link>
           <Link to="/Cart" onClick={() => { setState(false); scrollTop(); }}><BsFillCartFill className="react-icon" />Cart({productsInCart})</Link>
           {
             !user ?

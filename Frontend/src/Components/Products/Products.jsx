@@ -9,10 +9,11 @@ import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 
 Products.propTypes = {
-  TopState: PropTypes.bool
+  TopState: PropTypes.bool,
+  color: PropTypes.string
 }
 
-export default function Products({ TopState }) {
+export default function Products({ TopState, color }) {
   const { products, system, setPage, loadingProducts } = ContextProvider()
   const [item, setItem] = useState(1)
 
@@ -22,15 +23,15 @@ export default function Products({ TopState }) {
 
   if (system) {
     if (loadingProducts) {
-      return <Loading/>
+      return <Loading color={color}/>
     } else {
       return products.docs.length > 0 ?
         (
-          <div>
+          <>
             <Top state={TopState} />
             <ProductsList />
             <Pagination Page={products.page} Pages={products.totalPages} Prev={products.hasPrevPage} Next={products.hasNextPage} PrevItem={products.prevPage} NextItem={products.nextPage} setPage={setItem} />
-          </div>
+          </>
         ) : <Message title={"Products not found"} />
     }
   } else {

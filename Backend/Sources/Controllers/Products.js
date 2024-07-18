@@ -68,7 +68,7 @@ export const GetProductByName = async (req, res, next) => {
   try {
     const product = await Products.findOne({ name: Name })
     if (product) {
-      const releated = await Products.paginate({ category: product.category }, { page: Page, limit: 10 })
+      const releated = await Products.paginate({ category: product.category, name: { $ne: Name } }, { page: Page, limit: 10 })
       res.status(200).json({ state: true, product: { ...product._doc, releated } })
     } else {
       res.status(200).json({ state: true, product: null })

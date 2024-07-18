@@ -1,15 +1,21 @@
 import LoadingAnimation from 'react-spinners/BarLoader'
-import Top from './Top'
+import PropType from 'prop-types'
 
-export default function Loading() {
+Loading.propTypes = {
+    color: PropType.string
+}
+
+export default function Loading({ color }) {
     return (
-        <div className="loading-container">
-            <Top />
-            <LoadingAnimation
-                color='blue'
-                width={'20%'}
-                height={'6px'}
-            />
-        </div>
+        <>
+            <div className="loading-container">
+                <LoadingAnimation
+                    color={color ? color : 'greenyellow'}
+                    width={'100%'}
+                    height={'3px'}
+                />
+            </div>
+        </>
+
     )
 }

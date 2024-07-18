@@ -33,9 +33,8 @@ export default function ContextConsumer({ children }) {
   const [loadApp, setLoadApp] = useState(true);
   const [initApp, setInitApp] = useState(false);
 
-  //Users
+  //User
   const [user, setUser] = useState(null);
-  const [session, setSession] = useState(false);
 
   //Products
   const [page, setPage] = useState(1);
@@ -123,9 +122,10 @@ export default function ContextConsumer({ children }) {
   const login = async (login) => {
     setLoadingLogin(true)
     try {
-      const { data } = await Login(login);
-      setSession(!session)
-      return await data;
+      const response = (await Login(login)).data;
+      const profile = (await Profile()).data
+      setUser(profile)
+      return await response;
     } catch ({ response, message }) {
       if (response && response.status) {
         if (response.status === 401) {
@@ -157,8 +157,7 @@ export default function ContextConsumer({ children }) {
         ManageErrors(response, message)
       })
     }
-
-  }, [session])
+  }, [])
 
   const signout = () => {
     Logout().then(() => {
@@ -208,7 +207,7 @@ export default function ContextConsumer({ children }) {
     }).catch(({ response, message }) => {
       ManageErrors(response, message)
     })
-  }, [session])
+  }, [user])
 
   const addToCart = async (ProductKey, ProductName) => {
     AddToCart(ProductKey).then(({ data }) => {

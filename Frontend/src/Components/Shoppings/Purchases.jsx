@@ -24,7 +24,7 @@ export default function Purchases() {
     } else {
       return (
         purchases.docs.length > 0 ? (
-          <div className="sales pt-2">
+          <div>
             <Top state={true} />
             <Title Title={"My"} SubTitle={"Purchases"} />
             <div className="content-sales">

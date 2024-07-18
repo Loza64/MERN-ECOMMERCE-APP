@@ -33,7 +33,7 @@ export default function DetailProduct() {
       if (product) {
         const { key, image, name, company, details, price, stock, discount, releated } = product;
         return (
-          <div>
+          <>
             <DetailProducts status={stock > 0 ? true : false} data={view}>
               <Top state={true} />
               <div className="content-detail-product">
@@ -91,20 +91,20 @@ export default function DetailProduct() {
                 </div>
               </div>
             </DetailProducts>
-            {
-              releated.docs.length > 1 ? (
-                <section>
+            <section>
                   <h1 className="text-center" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Releated</label> Products</h1>
                   <div className="grid">
                     {
-                      releated.docs.map(item => item.name !== Name ? (<ProductItem key={item._id} product={item} animationState={true} />) : null)
+                      releated.docs.map(
+                        item => (
+                          <ProductItem key={item._id} product={item} animationState={true} />
+                        )
+                      )
                     }
                   </div>
                   <Pagination Page={releated.page} Pages={releated.totalPages} Prev={releated.hasPrevPage} Next={releated.hasNextPage} PrevItem={releated.prevPage} NextItem={releated.nextPage} setPage={setPage} />
                 </section>
-              ) : null
-            }
-          </div>
+          </>
         )
       } else {
         return <Message title={"Product not found"} />
