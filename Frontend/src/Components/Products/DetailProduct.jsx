@@ -91,7 +91,9 @@ export default function DetailProduct() {
                 </div>
               </div>
             </DetailProducts>
-            <section>
+            {
+              releated.docs.length > 0 ? (
+                <section>
                   <h1 className="text-center" style={{ fontWeight: "bold" }}><label style={{ color: "blue", fontWeight: "bold" }}>Releated</label> Products</h1>
                   <div className="grid">
                     {
@@ -104,6 +106,8 @@ export default function DetailProduct() {
                   </div>
                   <Pagination Page={releated.page} Pages={releated.totalPages} Prev={releated.hasPrevPage} Next={releated.hasNextPage} PrevItem={releated.prevPage} NextItem={releated.nextPage} setPage={setPage} />
                 </section>
+              ) : null
+            }
           </>
         )
       } else {

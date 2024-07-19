@@ -48,9 +48,9 @@ export default function Purchases() {
                           <td>{item.key}</td>
                           <td key={index} className="none">{(new Date(item.date).toDateString())}</td>
                           <td className="none">{item.cant}</td>
-                          <td className="price none">${item.subtotal}</td>
-                          <td className="price">${item.total}</td>
-                          <td className="state">{item.state}</td>
+                          <td className="none">${item.subtotal}</td>
+                          <td >${item.total}</td>
+                          <td >{item.state}</td>
                           <td>
                             <PDFDownloadLink document={
                               <PDF
@@ -63,7 +63,7 @@ export default function Purchases() {
                                 date={(new Date(item.date).toDateString())}
                               />
                             }
-                              fileName={`Factura-${item.key}`}
+                              fileName={item.key}
                             >
                               {
                                 ({ loading }) => loading ? (

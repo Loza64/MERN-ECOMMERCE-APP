@@ -19,11 +19,12 @@ export default function SignUp({ open, setOpen }) {
     surnames: /^[a-zA-ZÁ-ÿ\s]{5,40}$/,
     address: /^[a-zA-ZÁ-ÿ\s-,().,]{5,240}$/,
     email: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
-    phone: /^[0-9]{8,30}$/
+    phone: /^[0-9]{8,30}$/,
+    pass: /^[a-zA-ZÁ-ÿ0-9\s-,().,]{5,40}$/
   }
 
-  function GetAge(date) {
-    const birthDate = new Date(date);
+  function GetAge(value) {
+    const birthDate = new Date(value);
     const currentlyDate = new Date();
 
     let age = currentlyDate.getFullYear() - birthDate.getFullYear();
@@ -117,6 +118,8 @@ export default function SignUp({ open, setOpen }) {
             //Validate pass
             if (!values.pass) {
               errores.pass = 'Campo obligatorio.'
+            } else if (!expresiones.pass.test(values.pass)) {
+              errores.pass = 'Contraseña no valida'
             }
             return errores;
           }}
