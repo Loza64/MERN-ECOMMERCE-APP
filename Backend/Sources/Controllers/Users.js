@@ -36,7 +36,7 @@ export const Login = async (req, res, next) => {
             const token = await GenerateToken(_id);
             req.session.token = token
             req.session.cart = []
-            res.status(200).json({ state: true, message: "Successful login" })
+            res.status(200).json({ state: true, message: "Successful login", profile: getUser })
         } else {
             res.status(401).json({ state: false, message: "User or password incorrect" })
         }

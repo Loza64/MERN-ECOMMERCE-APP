@@ -149,10 +149,9 @@ export default function ContextConsumer({ children }) {
   const login = async (login) => {
     setLoadingLogin(true)
     try {
-      const response = (await Login(login)).data;
-      const profile = (await Profile()).data
+      const { state, message, profile } = (await Login(login)).data;
       setUser(profile)
-      return await response;
+      return { state, message };
     } catch ({ response, message }) {
       if (response && response.status) {
         if (response.status === 401) {
