@@ -327,18 +327,36 @@ export default function ContextConsumer({ children }) {
   }
 
   //------------------------------------------------------------------------------------------------------------
+
+  //Load Application
   useEffect(() => { loadApplication() }, [])
 
-  useEffect(() => {
-    getCart()
-  }, [user])
 
+  //Load Categories
   useEffect(() => { getCategories() }, [])
+
+  //Search Products Methods
+  useEffect(() => {
+    getProducts(search, categorie, type, page)
+  }, [search])
 
   useEffect(() => {
     getProducts(search, categorie, type, page)
-  }, [search, categorie, page, type])
+  }, [categorie])
 
+  useEffect(() => {
+    getProducts(search, categorie, type, page)
+  }, [type])
+
+  useEffect(() => {
+    getProducts(search, categorie, type, page)
+  }, [page])
+
+
+  //Get dinamic Cart after login
+  useEffect(() => { getCart() }, [user])
+
+  //Get My Purchase
   useEffect(() => {
     getPurchasesByUser(user, purchasePage)
   }, [user, purchasePage])
