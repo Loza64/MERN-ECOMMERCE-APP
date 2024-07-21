@@ -19,11 +19,11 @@ export const isAutenticate = async (req, res, next) => {
         } else {
             Session("not authorized or not exist")
             next('Session not authorized or not exist')
-            return res.status(401).json({ state: false, message: "Your session has been expired." })
+            return res.status(401).json({ state: false, message: "Your session has been finished." })
         }
     } else {
         Session("not authorized or not exist")
         next('Session not authorized or not exist')
-        return res.status(401).json({ state: false, message: "Your session has been expired." })
+        return res.status(401).json({ state: false, message: "Your session has been finished." })
     }
 }

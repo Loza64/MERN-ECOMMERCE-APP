@@ -7,16 +7,15 @@ import Top from "../Top";
 import Pagination from "../Pagination";
 import Login from "../Login";
 import PDF from "./PDF";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Purchases() {
 
-  const { user, loadingSales, getPurchasesByUser, purchases } = ContextProvider();
-  const [salePage, setSalePage] = useState(1)
+  const { user, loadingSales, setPurchasePage, purchases } = ContextProvider();
 
   useEffect(() => {
-    getPurchasesByUser(user ? user : "", salePage)
-  }, [salePage, user])
+    setPurchasePage(1)
+  }, [])
 
   if (user) {
     if (loadingSales) {
@@ -81,7 +80,7 @@ export default function Purchases() {
                 </tbody>
               </table>
             </div>
-            <Pagination Page={purchases.page} Pages={purchases.totalPages} Prev={purchases.hasPrevPage} Next={purchases.hasNextPage} PrevItem={purchases.prevPage} NextItem={purchases.nextPage} setPage={setSalePage} />
+            <Pagination Page={purchases.page} Pages={purchases.totalPages} Prev={purchases.hasPrevPage} Next={purchases.hasNextPage} PrevItem={purchases.prevPage} NextItem={purchases.nextPage} setPage={setPurchasePage} />
           </div>
         ) : <Message title={"Your purchase history is currently empty."} />
       )

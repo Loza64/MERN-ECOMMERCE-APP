@@ -49,9 +49,36 @@ export default function ContextConsumer({ children }) {
 
   //Sales
   const [purchases, setPurchases] = useState(null)
+  const [purchasePage, setPurchasePage] = useState(1)
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
+
+
+  //Application
+  const loadApplication = async () => {
+    if (!initApp) {
+      setLoadApp(true)
+      try {
+        const { data } = await Profile()
+        setUser(data)
+      } catch ({ response, message }) {
+        ManageErrors(response, message)
+      } finally {
+        setTimeout(() => { setLoadApp(false); setInitApp(true) }, 6000)
+      }
+
+    } else {
+      try {
+        const { data } = await Profile()
+        setUser(data)
+      } catch ({ response, message }) {
+        ManageErrors(response, message)
+      } finally {
+        setTimeout(() => { setLoadApp(false); setInitApp(true) }, 6000)
+      }
+    }
+  }
 
   //--------------------------------------------------Manage Erros
   function AlertError(err) {
@@ -140,25 +167,6 @@ export default function ContextConsumer({ children }) {
     }
   };
 
-  useEffect(() => {
-    if (!initApp) {
-      setLoadApp(true)
-      Profile().then(({ data }) => {
-        setUser(data)
-      }).catch(({ response, message }) => {
-        ManageErrors(response, message)
-      }).finally(() => {
-        setTimeout(() => { setLoadApp(false); setInitApp(true) }, 6000)
-      })
-    } else {
-      Profile().then(({ data }) => {
-        setUser(data)
-      }).catch(({ response, message }) => {
-        ManageErrors(response, message)
-      })
-    }
-  }, [])
-
   const signout = () => {
     Logout().then(() => {
       dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
@@ -169,77 +177,90 @@ export default function ContextConsumer({ children }) {
   }
 
   //---------------------------------------------------Functions products
-  useEffect(() => {
-    GetCategories().then(({ data }) => {
-      setCategories(data.result);
-    }).catch(({ response, message }) => {
-      ManageErrors(response, message)
-    })
-  }, [])
 
-  useEffect(() => {
+  const getCategories = async () => {
+    try {
+      const { result } = (await GetCategories()).data
+      setCategories(result);
+    } catch ({ response, message }) {
+      ManageErrors(response, message)
+    }
+  }
+
+  const getProducts = async (search, categorie, type, page) => {
     setLoadingProducts(true)
-    GetProducts(search, categorie, type, page).then(({ data }) => {
-      const { result } = data
+    try {
+      const { result } = (await GetProducts(search, categorie, type, page)).data
       setProducts(result)
-    }).catch(({ response, message }) => {
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    }).finally(() => {
+    } finally {
       setTimeout(() => { setLoadingProducts(false) }, 1000)
-    })
-  }, [search, categorie, page, type])
+    }
+  }
 
-  const getProductByName = (Product, Page) => {
+  const getProductByName = async (Product, Page) => {
     setLoadingProduct(true)
-    GetProductByName(Product, Page).then(async ({ data }) => {
-      setProduct(data.product)
-    }).catch(({ response, message }) => {
+    try {
+      const { product } = (await GetProductByName(Product, Page)).data
+      setProduct(product)
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    }).finally(() => {
+    } finally {
       setTimeout(() => { setLoadingProduct(false) }, 1000)
-    })
+    }
   };
 
   //---------------------------------------------------Functions Cart
-  useEffect(() => {
-    GetCart().then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch(({ response, message }) => {
-      ManageErrors(response, message)
-    })
-  }, [user])
+
+  const getCart = async () => {
+    if (user) {
+      const { cart } = (await GetCart()).data
+      try {
+        dispatch({ type: Actions.CART_LIST, payload: { cart } })
+      } catch ({ response, message }) {
+        ManageErrors(response, message)
+      }
+    } else {
+      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+    }
+  }
 
   const addToCart = async (ProductKey, ProductName) => {
-    AddToCart(ProductKey).then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
+    try {
+      const { cart } = (await AddToCart(ProductKey)).data
+      dispatch({ type: Actions.CART_LIST, payload: { cart } })
       toast.success(`${ProductName} agregado al carrito!`)
-    }).catch(({ response, message }) => {
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    })
+    }
   };
 
   const quantityProduct = async (key, type) => {
-    Quantity(key, type).then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch(({ response, message }) => {
+    try {
+      const { cart } = (await Quantity(key, type)).data
+      dispatch({ type: Actions.CART_LIST, payload: { cart } })
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    })
+    }
   };
 
-  const removeProductFromCart = (ProductKey) => {
-    RemoveProductFromCart(ProductKey).then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch(({ response, message }) => {
+  const removeProductFromCart = async (ProductKey) => {
+    try {
+      const { cart } = (await RemoveProductFromCart(ProductKey)).data
+      dispatch({ type: Actions.CART_LIST, payload: { cart } })
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    })
+    }
   };
 
-  const clearCart = () => {
-    ClearCart().then(({ data }) => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-    }).catch(({ response, message }) => {
+  const clearCart = async () => {
+    try {
+      const { cart } = (await ClearCart()).data
+      dispatch({ type: Actions.CART_LIST, payload: { cart } })
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    })
+    }
   };
 
   //---------------------------------------------------Totals Cart
@@ -285,30 +306,48 @@ export default function ContextConsumer({ children }) {
       const { data } = await MakePurchase({ user: user.key, cant: productsInCart, subtotal: SubTotal, total: Total })
       dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
       toast.success(data.message)
-      navigate("/purchases")
     } catch ({ response, message }) {
       ManageErrors(response, message)
+    } finally {
+      navigate("/purchases")
     }
-
   }
 
-  const getPurchasesByUser = (user, page) => {
+  const getPurchasesByUser = async (user, page) => {
     setLoadingPurchases(true)
-    GetPurchasesByUser(user.key, page).then(({ data }) => {
-      setPurchases(data.purchases)
-    }).catch(({ response, message }) => {
+    try {
+      const { purchases } = (await GetPurchasesByUser(user.key, page)).data
+      setPurchases(purchases)
+    } catch ({ response, message }) {
       ManageErrors(response, message)
-    }).finally(() => {
+    } finally {
       setTimeout(() => { setLoadingPurchases(false) }, 1000)
-    })
+    }
   }
+
+  //------------------------------------------------------------------------------------------------------------
+  useEffect(() => { loadApplication() }, [])
+
+  useEffect(() => {
+    getCart()
+  }, [user])
+
+  useEffect(() => { getCategories() }, [])
+
+  useEffect(() => {
+    getProducts(search, categorie, type, page)
+  }, [search, categorie, page, type])
+
+  useEffect(() => {
+    if (user) { getPurchasesByUser(user, purchasePage) }
+  }, [user, purchasePage])
 
   //---------------------------------------------------Context Values to import
   const ContextValues = {
     addToCart, removeProductFromCart, setPage, setCategorie, setSearch,
     productsInCart, loadApp, initApp, loadingLogin, loadingSignUp, products, categories,
     signout, login, signup, user, getProductByName, loadingProduct, loadingSales,
-    getPurchasesByUser, system, clearCart, cart, quantityProduct, SubTotal, Tax, Total,
+    setPurchasePage, system, clearCart, cart, quantityProduct, SubTotal, Tax, Total,
     product, setType, makePurchase, purchases, loadingProducts
   };
 

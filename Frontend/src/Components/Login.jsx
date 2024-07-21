@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../Context/ContextConsumer';
 import { ButtomTransparent, LoginContainer } from "./Styles/styled-components";
@@ -9,27 +9,26 @@ export default function Login() {
   const navigator = useNavigate();
 
   //Function context
-  const { login, signout, loadingLogin } = ContextProvider();
+  const { login, signout, loadingLogin, user } = ContextProvider();
 
   //hooks
-  const [user, setUser] = useState(String);
-  const [pass, setPass] = useState(String);
   const [state, setState] = useState(true);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(String)
-
-  //object
-  let body = {
-    username: user,
-    password: pass
-  }
-
-  window.addEventListener('load', () => {
-    signout();
+  const [form, setForm] = useState({
+    username: "",
+    password: ""
   })
 
+
+  useEffect(() => {
+    if (user) {
+      signout();
+    }
+  }, [])
+
   function LoginSubmit() {
-    login(body).then(({ state, message }) => {
+    login(form).then(({ state, message }) => {
       if (!state) {
         setState(false);
         setMessage(message)
@@ -51,8 +50,8 @@ export default function Login() {
           </div>
           <form onSubmit={(e) => { LoginSubmit(); e.preventDefault() }} >
             <label className="topic">Iniciar Sesión</label>
-            <input type="text" name="usuario" placeholder="usuario" onChange={(e) => { setUser(e.target.value) }} />
-            <input type="password" name="password" placeholder="contraseña" onChange={(e) => { setPass(e.target.value) }} />
+            <input type="text" name="usuario" placeholder="usuario" onChange={(e) => { setForm({ ...form, username: e.target.value }) }} />
+            <input type="password" name="password" placeholder="contraseña" onChange={(e) => { setForm({ ...form, password: e.target.value }) }} />
             {!state && (<label className='errormessage'>{message}</label>)}
             <input type="submit" value={loadingLogin ? "loading..." : "Iniciar sesión"} disabled={loadingLogin} />
             <a href='/#'>¿Olvidates tu contraseña</a>

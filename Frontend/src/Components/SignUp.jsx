@@ -20,7 +20,7 @@ export default function SignUp({ open, setOpen }) {
     address: /^[a-zA-ZÁ-ÿ\s-,().,]{5,240}$/,
     email: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
     phone: /^[0-9]{8,30}$/,
-    pass: /^[a-zA-ZÁ-ÿ0-9\s-,().,]{5,40}$/
+    password: /^[a-zA-ZÁ-ÿ0-9\s-,().,]{5,40}$/
   }
 
   function GetAge(value) {
@@ -52,7 +52,7 @@ export default function SignUp({ open, setOpen }) {
             date: '',
             email: '',
             phone: '',
-            pass: '',
+            password: '',
           }}
 
           validate={(values) => {
@@ -115,11 +115,11 @@ export default function SignUp({ open, setOpen }) {
               errores.phone = 'Teléfono no valido.'
             }
 
-            //Validate pass
-            if (!values.pass) {
-              errores.pass = 'Campo obligatorio.'
-            } else if (!expresiones.pass.test(values.pass)) {
-              errores.pass = 'Contraseña no valida'
+            //Validate password
+            if (!values.password) {
+              errores.password = 'Campo obligatorio.'
+            } else if (!expresiones.password.test(values.password)) {
+              errores.password = 'Contraseña no valida'
             }
             return errores;
           }}
@@ -169,8 +169,8 @@ export default function SignUp({ open, setOpen }) {
                 <ErrorMessage name="email" component={() => (<label className="errormessage">{errors.email}</label>)} />
                 <Field type="tel" placeholder="Teléfono" name="phone" />
                 <ErrorMessage name="phone" component={() => (<label className="errormessage">{errors.phone}</label>)} />
-                <Field type="password" placeholder="Contraseña" name="pass" />
-                <ErrorMessage name="pass" component={() => (<label className="errormessage">{errors.pass}</label>)} />
+                <Field type="password" placeholder="Contraseña" name="password" />
+                <ErrorMessage name="password" component={() => (<label className="errormessage">{errors.password}</label>)} />
                 <input type="submit" className="buttom buttom-dark" value={loadingSignUp ? "loading..." : "Registrame"} disabled={loadingSignUp} style={{ width: '100%' }} />
               </Form>
             )

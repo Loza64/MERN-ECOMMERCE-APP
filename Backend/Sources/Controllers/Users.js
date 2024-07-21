@@ -4,22 +4,20 @@ import { Users } from "../Models/Model.js"
 import uniquid from 'uniquid'
 
 export const SignUp = async (req, res, next) => {
-    const { username, names, surnames, address, date, email, pass } = req.body
+    const { username, names, surnames, address, date, email } = req.body
     const key = uniquid()
     const birthdate = new Date(date)
     const phone = Number(req.body.phone)
     try {
-        const checkuser = await Users.findOne({ username })
-        const checkemail = await Users.findOne({ email })
-        const checkphone = await Users.findOne({ phone })
-        if (checkemail || checkphone || checkuser) {
+        const existingUser = await Users.findOne({ $or: [{ username }, { email }, { phone }] })
+        if (existingUser) {
             res.status(409).json({ state: false, message: "Username, email or phone number are already used by another user" })
         } else {
-            const password = await EncryptPass(pass)
+            const password = await EncryptPass(req.body.password)
             const saveUser = new Users({ key, username, names, surnames, birthdate, email, address, phone, password }).save()
-            if(saveUser){
+            if (saveUser) {
                 res.status(200).json({ state: true, message: "Your account has been registered" })
-            }else{
+            } else {
                 res.status(500).json({ state: true, message: "Error to register your account" })
             }
         }
