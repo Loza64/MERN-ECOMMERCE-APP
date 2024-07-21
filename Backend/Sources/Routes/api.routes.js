@@ -13,7 +13,7 @@ const routes = express.Router()
 
 //User
 routes.post('/login', Login)
-routes.get('/logout', isAutenticate, Logout)
+routes.get('/logout', Logout)
 routes.get('/profile', isAutenticate, Profile)
 routes.post('/signup', ValidateSignUp, ValidationResult, SignUp)
 

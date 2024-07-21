@@ -169,7 +169,6 @@ export default function ContextConsumer({ children }) {
 
   const signout = () => {
     Logout().then(() => {
-      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
       setUser(null)
     }).catch(({ response, message }) => {
       ManageErrors(response, message)
@@ -316,8 +315,10 @@ export default function ContextConsumer({ children }) {
   const getPurchasesByUser = async (user, page) => {
     setLoadingPurchases(true)
     try {
-      const { purchases } = (await GetPurchasesByUser(user.key, page)).data
-      setPurchases(purchases)
+      if (user) {
+        const { purchases } = (await GetPurchasesByUser(user.key, page)).data
+        setPurchases(purchases)
+      }
     } catch ({ response, message }) {
       ManageErrors(response, message)
     } finally {
@@ -339,7 +340,7 @@ export default function ContextConsumer({ children }) {
   }, [search, categorie, page, type])
 
   useEffect(() => {
-    if (user) { getPurchasesByUser(user, purchasePage) }
+    getPurchasesByUser(user, purchasePage)
   }, [user, purchasePage])
 
   //---------------------------------------------------Context Values to import

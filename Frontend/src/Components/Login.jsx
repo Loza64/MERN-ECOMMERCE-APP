@@ -15,29 +15,23 @@ export default function Login() {
   const [state, setState] = useState(true);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(String)
-  const [form, setForm] = useState({
-    username: "",
-    password: ""
-  })
+  const [form, setForm] = useState({})
 
 
   useEffect(() => {
-    if (user) {
-      signout();
-    }
+    if (user) { signout() }
   }, [])
 
-  function LoginSubmit() {
-    login(form).then(({ state, message }) => {
-      if (!state) {
-        setState(false);
-        setMessage(message)
-      } else {
-        toast.success(message)
-        setState(true);
-        navigator("/");
-      }
-    });
+  const LoginSubmit = async () => {
+    const { state, message } = await login(form)
+    if (!state) {
+      setState(state)
+      setMessage(message)
+    } else {
+      navigator("/")
+      setState(state)
+      toast.success(message)
+    }
   }
 
   return (
