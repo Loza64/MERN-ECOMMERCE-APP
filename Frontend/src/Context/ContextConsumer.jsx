@@ -301,9 +301,9 @@ export default function ContextConsumer({ children }) {
   //---------------------------------------------------Sales functions 
   const makePurchase = async () => {
     try {
-      const { data } = await MakePurchase({ user: user.key, cant: productsInCart, subtotal: SubTotal, total: Total })
-      dispatch({ type: Actions.CART_LIST, payload: { cart: data.cart } })
-      toast.success(data.message)
+      const { message } = (await MakePurchase({ user: user.key, cant: productsInCart, subtotal: SubTotal, total: Total })).data
+      dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
+      toast.success(message)
     } catch ({ response, message }) {
       ManageErrors(response, message)
     } finally {
@@ -315,8 +315,8 @@ export default function ContextConsumer({ children }) {
     setLoadingPurchases(true)
     try {
       if (user) {
-        const { purchases } = (await GetPurchasesByUser(user.key, page)).data
-        setPurchases(purchases)
+        const { result } = (await GetPurchasesByUser(user.key, page)).data
+        setPurchases(result)
       }
     } catch ({ response, message }) {
       ManageErrors(response, message)

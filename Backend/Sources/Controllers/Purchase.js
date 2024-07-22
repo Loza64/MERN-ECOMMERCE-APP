@@ -25,15 +25,15 @@ export const MakePurchase = async (req, res, next) => {
         return res.status(500).json({ state: false, message: error.message })
     } finally {
         req.session.cart = []
-        res.status(200).json({ state: true, cart: req.session.cart, message: 'The purchase was completed successfully.' })
+        res.status(200).json({ state: true, message: 'The purchase was completed successfully.' })
     }
 }
 
 export const GetPurchaseByUser = async (req, res) => {
     const { User, Page } = req.query
     try {
-        const purchases = await Purchase.paginate({ user: User }, { page: Page, limit: 9, sort: { date: -1 } })
-        res.status(200).json({ state: true, purchases })
+        const result = await Purchase.paginate({ user: User }, { page: Page, limit: 9, sort: { date: -1 } })
+        res.status(200).json({ state: true, result })
     } catch (error) {
         next(error.message)
         return res.status(500).json({ state: false, message: error.message })
