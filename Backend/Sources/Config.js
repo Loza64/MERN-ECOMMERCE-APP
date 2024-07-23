@@ -56,7 +56,7 @@ export const SessionApp = session({
         domain: DOMAIN,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: 'none'
     }
 })
 
