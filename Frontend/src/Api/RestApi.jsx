@@ -4,8 +4,6 @@ const ServerRoute = import.meta.env.VITE_ROUTE_SERVER
 
 const ServerFetch = axios.create({
     baseURL: ServerRoute,
-    withCredentials: true,
-    timeout: 1000 * 60 * 5,
     headers: { "Content-Type": "application/json" },
     timeoutErrorMessage: "Server timeout has expired"
 })
