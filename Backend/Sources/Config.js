@@ -52,11 +52,11 @@ export const SessionApp = session({
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
-        secure: NodeEnv === "production",//Con https true
+        secure: false, //Con https true
         domian: DOMAIN,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: 'none'
     }
 })
 
