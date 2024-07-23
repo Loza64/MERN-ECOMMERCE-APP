@@ -17,21 +17,23 @@ export const NewProduct = async (req, res, next) => {
       const price = Number(req.body.price)
       const key = uniquid()
 
-      new Products({ key, image, category, name, company, details, stock, price, discount }).save().then(() => {
+      const upload = await new Products({ key, image, category, name, company, details, stock, price, discount }).save()
+      if (upload) {
         remove(photo.tempFilePath)
-        res.status(200).json({ state: false, details: 'Producto guardado exitosamente.' })
-      }).catch((error) => {
-        next(error.message)
+        return res.status(201).json({ state: true, message: 'Producto guardado exitosamente.' })
+      } else {
         remove(photo.tempFilePath)
-        res.status(500).json({ state: false, message: error.message })
-      })
+        return res.status(500).json({ state: false, message: 'No se pudo registrar el producto, intentalo de nuevo.' })
+      }
+
+
     } else {
       remove(photo.tempFilePath)
-      res.status(200).json({ state: false, details: 'El producto ya existe en la base de datos.' })
+      return res.status(200).json({ state: false, message: 'El producto ya existe en la base de datos.' })
     }
   } catch (error) {
     next(error.message)
-    res.status(500).json({ state: false, message: error.message })
+    return res.status(500).json({ state: false, message: error.message })
   }
 }
 
@@ -40,25 +42,21 @@ export const GetProducts = async (req, res, next) => {
   try {
     const config = Categorie ? { name: { $regex: Search ?? "", $options: 'i' }, category: Categorie } : { name: { $regex: Search ?? "", $options: 'i' } }
     switch (Type) {
-      case 'All':
-        res.status(200).json({ state: true, result: await Products.paginate(config, { page: Page, limit: 15 }) })
-        break;
+      case 'All': return res.status(200).json({ state: true, result: await Products.paginate(config, { page: Page, limit: 15 }) })
 
-      case 'Discount':
-        res.status(200).json({ state: true, result: await Products.paginate({ ...config, discount: { $gt: 0 } }, { page: Page, limit: 15 }) })
-        break;
 
-      case 'Normal':
-        res.status(200).json({ state: true, result: await Products.paginate({ ...config, discount: 0 }, { page: Page, limit: 15 }) })
-        break;
+      case 'Discount': return res.status(200).json({ state: true, result: await Products.paginate({ ...config, discount: { $gt: 0 } }, { page: Page, limit: 15 }) })
 
-      default:
-        res.status(200).json({ state: true, result: null })
-        break;
+
+      case 'Normal': return res.status(200).json({ state: true, result: await Products.paginate({ ...config, discount: 0 }, { page: Page, limit: 15 }) })
+
+
+      default: return res.status(200).json({ state: true, result: await Products.paginate(config, { page: Page, limit: 15 }) })
+
     }
   } catch (error) {
     next(error.message)
-    res.status(500).json({ state: false, message: error.message })
+    return res.status(500).json({ state: false, message: error.message })
   }
 }
 
@@ -69,12 +67,12 @@ export const GetProductByName = async (req, res, next) => {
     const product = await Products.findOne({ name: Name })
     if (product) {
       const releated = await Products.paginate({ category: product.category, name: { $ne: Name } }, { page: Page, limit: 10 })
-      res.status(200).json({ state: true, product: { ...product._doc, releated } })
+      return res.status(200).json({ state: true, product: { ...product._doc, releated } })
     } else {
-      res.status(200).json({ state: true, product: null })
+      return res.status(200).json({ state: true, product: null })
     }
   } catch (error) {
     next(error.message)
-    res.status(500).json({ state: false, message: error.message })
+    return res.status(500).json({ state: false, message: error.message })
   }
 }

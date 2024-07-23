@@ -1,7 +1,9 @@
-import { createServer } from 'https'
+import { createServer } from 'http'
+// import { createServer } from 'https'
 import Application from './Sources/Application.js'
 import { ConfigHttps, Port, Server } from './Sources/Config.js'
 
-const Https = createServer(ConfigHttps, Application)
+const https = createServer(Application)
+//const https = createServer(ConfigHttps, Application)
 
-Https.listen(Port, () => { Server(`is running on port: ${Port}`) })
+https.listen(Port, () => { Server(`is running on port: ${Port}`) })

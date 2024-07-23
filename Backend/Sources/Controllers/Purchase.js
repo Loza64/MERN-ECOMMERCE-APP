@@ -1,5 +1,6 @@
 import uniquid from 'uniquid'
 import { Products, Purchase } from '../Models/Model.js'
+import { Error, Success } from '../Config.js'
 
 export const MakePurchase = async (req, res, next) => {
     const { user, cant, subtotal, total } = req.body
@@ -9,31 +10,34 @@ export const MakePurchase = async (req, res, next) => {
     const key = uniquid()
 
     try {
-        new Purchase({ key, user, date, cant, subtotal, total, details }).save().then(data => {
-            data.details.map(async (item) => {
-                const product = await Products.findById(item.id)
-                if (product) {
-                    const newStock = product.stock - item.quantity > 0 ? product.stock - item.quantity : 0
-                    Products.findByIdAndUpdate(item.id, { stock: newStock }).then((data) => {
-                        console.log(`The stock product: ${product.name}, went from ${data.stock} to ${newStock}`)
-                    })
-                }
-            });
-        })
+        const upload = await new Purchase({ key, user, date, cant, subtotal, total, details }).save()
+        if (!upload) {
+            return res.status(500).json({ state: false, message: "No se pudo guardar la compra" })
+        }
+        for (const item of details) {
+            const product = await Products.findById(item.id)
+            if (!product) {
+                Error(`Product: ${item.id} not found`)
+                console.warn(`Product: ${item.id} not found to make purchase`)
+            } else {
+                const newStock = product.stock - item.quantity
+                await Products.findByIdAndUpdate(item.id, { stock: newStock > 0 ? newStock : 0 })
+                Success(`The stock product: ${product.name}, went from ${product.stock} to ${newStock}`)
+            }
+        }
     } catch (error) {
         next(error.message)
         return res.status(500).json({ state: false, message: error.message })
     } finally {
         req.session.cart = []
-        res.status(200).json({ state: true, message: 'The purchase was completed successfully.' })
+        return res.status(201).json({ state: true, message: 'The purchase was completed successfully.' })
     }
 }
-
 export const GetPurchaseByUser = async (req, res) => {
     const { User, Page } = req.query
     try {
         const result = await Purchase.paginate({ user: User }, { page: Page, limit: 9, sort: { date: -1 } })
-        res.status(200).json({ state: true, result })
+        return res.status(200).json({ state: true, result })
     } catch (error) {
         next(error.message)
         return res.status(500).json({ state: false, message: error.message })
