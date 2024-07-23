@@ -30,7 +30,9 @@ export default function Login() {
     } else {
       navigator("/")
       setState(state)
-      toast.success(message)
+      toast.success(message, {
+        position: "bottom-right"
+      })
     }
   }
 

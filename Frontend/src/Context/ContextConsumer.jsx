@@ -100,7 +100,9 @@ export default function ContextConsumer({ children }) {
           if (user) {
             setUser(null)
             dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-            toast.error(response.data.message)
+            toast.error(response.data.message, {
+              position: "bottom-right"
+            })
           }
           break;
         case 410:
@@ -226,9 +228,15 @@ export default function ContextConsumer({ children }) {
 
   const addToCart = async (ProductKey, ProductName) => {
     try {
-      const { cart } = (await AddToCart(ProductKey)).data
-      dispatch({ type: Actions.CART_LIST, payload: { cart } })
-      toast.success(`${ProductName} agregado al carrito!`)
+      if (user) {
+        const { cart } = (await AddToCart(ProductKey)).data
+        dispatch({ type: Actions.CART_LIST, payload: { cart } })
+        toast.success(`${ProductName} agregado al carrito!`, {
+          position: "bottom-right"
+        })
+      } else {
+        navigate("login")
+      }
     } catch ({ response, message }) {
       ManageErrors(response, message)
     }
@@ -303,7 +311,9 @@ export default function ContextConsumer({ children }) {
     try {
       const { message } = (await MakePurchase({ user: user.key, cant: productsInCart, subtotal: SubTotal, total: Total })).data
       dispatch({ type: Actions.CART_LIST, payload: { cart: [] } })
-      toast.success(message)
+      toast.success(message, {
+        position: "bottom-right"
+      })
     } catch ({ response, message }) {
       ManageErrors(response, message)
     } finally {

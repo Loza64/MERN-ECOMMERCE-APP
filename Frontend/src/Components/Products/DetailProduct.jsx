@@ -17,7 +17,7 @@ DetailProduct.propTypes = {
 }
 
 export default function DetailProduct() {
-  const { addToCart, getProductByName, system, product, loadingProduct, cart } = ContextProvider();
+  const { addToCart, getProductByName, system, product, loadingProduct, cart, user } = ContextProvider();
   const [page, setPage] = useState(1)
   const navigator = useNavigate();
   const { Name } = useParams();
@@ -74,7 +74,7 @@ export default function DetailProduct() {
                                 (
                                   <>
                                     <button className="buttom cart" onClick={() => { if (stock > 0) { addToCart(key) } }} >Add to cart <BsFillCartPlusFill className="react-icon" /></button>
-                                    <button className="buttom buy" onClick={() => { if (stock > 0) { addToCart(key); navigator('/cart') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
+                                    <button className="buttom buy" onClick={() => { if (stock > 0) { addToCart(key); navigator(user ? '/cart' : '/login') } }}>Buy now<FaShoppingBag className="react-icon" /></button>
                                   </>
                                 ) :
                                 (

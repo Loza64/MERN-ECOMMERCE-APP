@@ -127,10 +127,14 @@ export default function SignUp({ open, setOpen }) {
           onSubmit={(values) => {
             signup(values).then(({ state, message }) => {
               if (state) {
-                toast.success(message)
+                toast.success(message, {
+                  position: "bottom-right"
+                })
                 setOpen(false)
               } else {
-                toast.warning(message)
+                toast.warning(message, {
+                  position: "bottom-right"
+                })
               }
             });
           }}
