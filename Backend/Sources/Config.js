@@ -13,7 +13,7 @@ export const Session = debug('Application:[Session]')
 export const Server = debug('Application:[Server]')
 
 dotenv.config()
-const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN } = process.env
+const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN, NODE_ENV } = process.env
 
 //Setting env
 export const ConnectionCloud = MONGODB;
@@ -26,6 +26,7 @@ export const MAIL_PASS = MAILPASS;
 export const Origin = ORIGIN;
 export const TokenSecret = TOKEN;
 export const SessionSecret = SESSION;
+export const NodeEnv = NODE_ENV
 
 
 //Setting Application
@@ -51,7 +52,8 @@ export const SessionApp = session({
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
-        secure: false, //Con https true
+        secure: NodeEnv === "production",//Con https true
+        domian: DOMAIN,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
         sameSite: 'lax'
