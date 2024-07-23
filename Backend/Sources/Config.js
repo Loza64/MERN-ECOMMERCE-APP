@@ -52,7 +52,7 @@ export const SessionApp = session({
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
-        secure: false, //Con https true
+        secure: true, //Con https true
         domain: DOMAIN,
         maxAge: 1000 * 60 * 60,
         httpOnly: true,
