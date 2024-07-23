@@ -1,4 +1,5 @@
 import cors from 'cors'
+import helmet from 'helmet'
 import morgan from 'morgan'
 import express from 'express'
 import bodyparser from 'body-parser'
@@ -12,6 +13,7 @@ const Application = express()
 
 //Config app
 GetMongoConnection()
+Application.use(helmet())
 Application.use(SessionApp)
 Application.use(morgan('dev'))
 Application.use(CookieParser())
