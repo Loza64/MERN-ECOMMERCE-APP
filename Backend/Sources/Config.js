@@ -53,7 +53,9 @@ export const SessionApp = session({
     saveUninitialized: false,
     cookie: {
         secure: NodeEnv === "production",
-        
+        domain: DOMAIN,
+        maxAge: 1000 * 60 * 60,
+        httpOnly: true,
         sameSite: 'lax'
     }
 })
