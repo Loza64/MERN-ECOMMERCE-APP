@@ -46,17 +46,17 @@ const MongoStore = new MongoDBStoreFactory(session)({
 })
 
 export const SessionApp = session({
-    resave: true,
+    resave: false,
     name: 'Session',
     secret: SessionSecret,
     store: MongoStore,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-        secure: true, //Con https true
-        //domain: DOMAIN,
-        //maxAge: 1000 * 60 * 60,
-        //httpOnly: true,
-        //sameSite: 'lax'
+        secure: NodeEnv === "production",
+        domain: DOMAIN,
+        maxAge: 1000 * 60 * 60,
+        httpOnly: true,
+        sameSite: 'lax'
     }
 })
 
