@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "node index.js",
     "start": "node index.js",
     "windows": "set DEBUG=Application:* && nodemon index.js",
     "linux": "DEBUG=Application:* nodemon index.js",
