@@ -52,7 +52,7 @@ export const SessionApp = session({
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
-        secure: false, //if https : true
+        secure: true, //if https : true
         sameSite: 'none'
         // setings https
         //domain: DOMAIN,
