@@ -53,10 +53,10 @@ export const SessionApp = session({
     saveUninitialized: false,
     cookie: {
         secure: true, //Con https true
-        domain: DOMAIN,
-        maxAge: 1000 * 60 * 60,
-        httpOnly: true,
-        sameSite: 'lax'
+        //domain: DOMAIN,
+        //maxAge: 1000 * 60 * 60,
+        //httpOnly: true,
+        //sameSite: 'lax'
     }
 })
 
