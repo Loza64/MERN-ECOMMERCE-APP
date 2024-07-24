@@ -24,4 +24,4 @@ Application.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
 Application.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
 Application.use('/backend/api/rest/ufostartserver/node/route/fetch/axios', routes)
 
-export default Application;
+export default function (req, res) { Application(req, res) };
