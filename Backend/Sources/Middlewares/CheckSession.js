@@ -9,6 +9,7 @@ export const isAutenticate = async (req, res, next) => {
             if (token) {
                 const profile = await Users.findById(token)
                 if (profile) {
+                    next()
                     Session("authorized")
                 } else {
                     Session("has removed")
