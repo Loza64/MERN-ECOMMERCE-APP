@@ -20,7 +20,7 @@ Application.use(CookieParser())
 Application.use(cors(CorsOptions))
 
 // Config helmet
-Application.use(helmet.xssFilter()) //Protection with xss ataks
+Application.use(helmet.xssFilter()) //Protection with xss atacks
 Application.use(helmet.hsts(ConfigHsts)) //Config Hsts 
 Application.use(helmet.frameguard({ action: 'deny' })) // Not iframe html
 Application.use(helmet.dnsPrefetchControl({ allow: false })) //Dont pre resolve domains
