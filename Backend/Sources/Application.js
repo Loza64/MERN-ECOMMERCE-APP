@@ -18,10 +18,11 @@ Application.use(SessionApp)
 Application.use(morgan('dev'))
 Application.use(CookieParser())
 Application.use(cors(CorsOptions))
+Application.disable('x-powered-by');
 
 // Config helmet
-Application.use(helmet.hidePoweredBy({ setTo: '' })) //Dont backend powered by
-Application.use(helmet.xssFilter()) //Protection with xss atacks
+Application.use(helmet.hidePoweredBy({ setTo: 'RF2QRFQWRQ3RQ3RQW' })) //Dont show backend powered by
+Application.use(helmet({ xssFilter: true })) //Protection with xss atacks
 Application.use(helmet.hsts(ConfigHsts)) //Config Hsts 
 Application.use(helmet.frameguard({ action: 'deny' })) // Not iframe html
 Application.use(helmet.dnsPrefetchControl({ allow: false })) //Dont pre resolve domains
