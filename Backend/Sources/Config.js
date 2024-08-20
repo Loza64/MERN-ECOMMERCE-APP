@@ -36,6 +36,8 @@ export const CorsOptions = {
     credentials: true
 }
 
+export const ConfigHsts = { maxAge: 31536000, includeSubDomains: true, preload: true }
+
 
 //Setting Session
 const MongoStore = new MongoDBStoreFactory(session)({

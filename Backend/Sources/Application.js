@@ -6,19 +6,27 @@ import bodyparser from 'body-parser'
 import CookieParser from 'cookie-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import { CorsOptions, SessionApp } from './Config.js'
+import { ConfigHsts, CorsOptions, SessionApp } from './Config.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const Application = express()
 
 GetMongoConnection()
 
-Application.use(helmet())
+//Config App
 Application.use(SessionApp)
 Application.use(morgan('dev'))
 Application.use(CookieParser())
 Application.use(cors(CorsOptions))
-Application.use(helmet.xssFilter())
+
+// Config helmet
+Application.use(helmet.xssFilter()) //Protection with xss ataks
+Application.use(helmet.hsts(ConfigHsts)) //Config Hsts 
+Application.use(helmet.frameguard({ action: 'deny' })) // Not iframe html
+Application.use(helmet.dnsPrefetchControl({ allow: false })) //Dont pre resolve domains
+Application.use(helmet.referrerPolicy({ policy: 'no-referrer' })) //Dont send references
+
+//Config route
 Application.use(bodyparser.json({ limit: '100mb', extended: true }))
 Application.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
 Application.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
