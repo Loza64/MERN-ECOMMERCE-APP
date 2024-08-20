@@ -20,6 +20,7 @@ Application.use(CookieParser())
 Application.use(cors(CorsOptions))
 
 // Config helmet
+Application.use(helmet.hidePoweredBy({ setTo: '' })) //Dont backend powered by
 Application.use(helmet.xssFilter()) //Protection with xss atacks
 Application.use(helmet.hsts(ConfigHsts)) //Config Hsts 
 Application.use(helmet.frameguard({ action: 'deny' })) // Not iframe html
