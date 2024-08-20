@@ -36,7 +36,18 @@ export const CorsOptions = {
     credentials: true
 }
 
-export const ConfigHsts = { maxAge: 31536000, includeSubDomains: true, preload: true }
+export const HelmetConfig = {
+    hidePoweredBy: { setTo: 'RF2QRFQWRQ3RQ3RQW' },
+    xssFilter: true, // Habilitar protección contra XSS  
+    hsts: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+        preload: true
+    }, // Configurar HSTS  
+    frameguard: { action: 'deny' }, // No permitir iframes  
+    dnsPrefetchControl: { allow: false }, // No pre-resolver dominios  
+    referrerPolicy: { policy: 'origin-when-cross-origin' }
+}
 
 
 //Setting Session

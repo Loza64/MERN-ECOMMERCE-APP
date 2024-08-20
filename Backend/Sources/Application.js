@@ -6,7 +6,7 @@ import bodyparser from 'body-parser'
 import CookieParser from 'cookie-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import { ConfigHsts, CorsOptions, SessionApp } from './Config.js'
+import { CorsOptions, HelmetConfig, SessionApp } from './Config.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const Application = express()
@@ -18,17 +18,8 @@ Application.use(SessionApp)
 Application.use(morgan('dev'))
 Application.use(CookieParser())
 Application.use(cors(CorsOptions))
-Application.disable('x-powered-by');
-
-// Config helmet
-Application.use(helmet.hidePoweredBy({ setTo: 'RF2QRFQWRQ3RQ3RQW' })) //Dont show backend powered by
-Application.use(helmet({ xssFilter: true })) //Protection with xss atacks
-Application.use(helmet.hsts(ConfigHsts)) //Config Hsts 
-Application.use(helmet.frameguard({ action: 'deny' })) // Not iframe html
-Application.use(helmet.dnsPrefetchControl({ allow: false })) //Dont pre resolve domains
-Application.use(helmet.referrerPolicy({ policy: 'no-referrer' })) //Dont send references
-
-//Config route
+Application.disable('x-powered-by')
+Application.use(helmet(HelmetConfig))
 Application.use(bodyparser.json({ limit: '100mb', extended: true }))
 Application.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
 Application.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))
