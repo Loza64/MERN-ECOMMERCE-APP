@@ -37,7 +37,6 @@ export const CorsOptions = {
 }
 
 export const HelmetConfig = {
-    hidePoweredBy: { setTo: 'RF2QRFQWRQ3RQ3RQW' },
     xssFilter: true, // Habilitar protección contra XSS  
     hsts: {
         maxAge: 31536000,
