@@ -45,7 +45,7 @@ export const HelmetConfig = {
     }, // Configurar HSTS  
     frameguard: { action: 'deny' }, // No permitir iframes  
     dnsPrefetchControl: { allow: false }, // No pre-resolver dominios  
-    referrerPolicy: { policy: 'origin-when-cross-origin' }
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 }
 
 
