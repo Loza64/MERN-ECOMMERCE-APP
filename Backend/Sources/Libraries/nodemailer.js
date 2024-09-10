@@ -3,6 +3,8 @@ import { MAIL_BUSINESS, MAIL_PASS } from '../Config.js'
 
 const transport = nodemailer.createTransport({
   service: 'gmail',
+  port: 465,
+  secure: true,
   auth: {
     user: MAIL_BUSINESS,
     pass: MAIL_PASS
