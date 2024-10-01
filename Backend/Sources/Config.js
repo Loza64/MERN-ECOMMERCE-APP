@@ -72,6 +72,11 @@ export const SessionApp = session({
     }
 })
 
+export const LimiterConfig = {
+    limit: 500,
+    windowMs: 1000 * 60 * 10,
+    message: "the request's limit have been exceded for this ip, please try again later."
+}
 
 //Settings https
 const __filename = fileURLToPath(import.meta.url);
