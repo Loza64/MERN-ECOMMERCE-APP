@@ -6,7 +6,8 @@ import bodyparser from 'body-parser'
 import CookieParser from 'cookie-parser'
 import routes from './Routes/api.routes.js'
 import fileupload from 'express-fileupload'
-import { CorsOptions, HelmetConfig, SessionApp } from './Config.js'
+import rateLimit from 'express-rate-limit'
+import { CorsOptions, HelmetConfig, LimiterConfig, SessionApp } from './Config.js'
 import GetMongoConnection from './Connection/GetMongoConnection.js'
 
 const Application = express()
@@ -20,6 +21,7 @@ Application.use(CookieParser())
 Application.use(cors(CorsOptions))
 Application.disable('x-powered-by')
 Application.use(helmet(HelmetConfig))
+Application.use(rateLimit(LimiterConfig))
 Application.use(bodyparser.json({ limit: '100mb', extended: true }))
 Application.use(bodyparser.urlencoded({ limit: '100mb', extended: true }))
 Application.use(fileupload({ useTempFiles: true, tempFileDir: './Resources' }))

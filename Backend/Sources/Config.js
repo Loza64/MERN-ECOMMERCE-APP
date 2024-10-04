@@ -72,6 +72,16 @@ export const SessionApp = session({
     }
 })
 
+export const LimiterConfig = {
+    limit: 1000,
+    windowMs: 1000 * 60 * 10,
+    handler: (req, res) => {
+        res.status(429).json({
+            error: "Too many requests",
+            message: "The request's limit has been exceeded for this IP, please try again later."
+        });
+    }
+}
 
 //Settings https
 const __filename = fileURLToPath(import.meta.url);
