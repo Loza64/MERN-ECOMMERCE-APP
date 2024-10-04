@@ -54,7 +54,6 @@ export default function ContextConsumer({ children }) {
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
   const { cart } = state;
 
-
   //Application
   const loadApplication = async () => {
     if (!initApp) {
@@ -347,19 +346,7 @@ export default function ContextConsumer({ children }) {
   //Search Products Methods
   useEffect(() => {
     getProducts(search, categorie, type, page)
-  }, [search])
-
-  useEffect(() => {
-    getProducts(search, categorie, type, page)
-  }, [categorie])
-
-  useEffect(() => {
-    getProducts(search, categorie, type, page)
-  }, [type])
-
-  useEffect(() => {
-    getProducts(search, categorie, type, page)
-  }, [page])
+  }, [{ search, categorie, type, page }])
 
 
   //Get dinamic Cart after login
@@ -368,7 +355,7 @@ export default function ContextConsumer({ children }) {
   //Get My Purchase
   useEffect(() => {
     getPurchasesByUser(user, purchasePage)
-  }, [user, purchasePage])
+  }, [{ user, purchasePage }])
 
   //---------------------------------------------------Context Values to import
   const ContextValues = {
