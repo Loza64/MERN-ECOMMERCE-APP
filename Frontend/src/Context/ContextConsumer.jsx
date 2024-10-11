@@ -34,7 +34,7 @@ export default function ContextConsumer({ children }) {
   const [initApp, setInitApp] = useState(false);
 
   //User
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
 
   //Products
   const [page, setPage] = useState(1);
@@ -48,7 +48,7 @@ export default function ContextConsumer({ children }) {
   const [categories, setCategories] = useState([]); //List of categories
 
   //Sales
-  const [purchases, setPurchases] = useState(null)
+  const [purchases, setPurchases] = useState({})
   const [purchasePage, setPurchasePage] = useState(1)
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
@@ -320,13 +320,11 @@ export default function ContextConsumer({ children }) {
     }
   }
 
-  const getPurchasesByUser = async (user, page) => {
+  const getPurchasesByUser = async (userKey, page) => {
     setLoadingPurchases(true)
     try {
-      if (user) {
-        const { result } = (await GetPurchasesByUser(user.key, page)).data
-        setPurchases(result)
-      }
+      const { result } = (await GetPurchasesByUser(userKey.key, page)).data
+      setPurchases(result)
     } catch ({ response, message }) {
       ManageErrors(response, message)
     } finally {
@@ -355,8 +353,10 @@ export default function ContextConsumer({ children }) {
 
   //Get My Purchase
   useEffect(() => {
-    getPurchasesByUser(user, purchasePage)
-  }, [{ user, purchasePage }])
+    if (user) {
+      getPurchasesByUser(user, purchasePage)
+    }
+  }, [user, purchasePage])
 
   //---------------------------------------------------Context Values to import
   const ContextValues = {
