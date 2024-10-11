@@ -343,10 +343,11 @@ export default function ContextConsumer({ children }) {
   //Load Categories
   useEffect(() => { getCategories() }, [])
 
+
   //Search Products Methods
   useEffect(() => {
     getProducts(search, categorie, type, page)
-  }, [{ search, categorie, type, page }])
+  }, [search, categorie, type, page])
 
 
   //Get dinamic Cart after login
