@@ -34,7 +34,7 @@ export default function ContextConsumer({ children }) {
   const [initApp, setInitApp] = useState(false);
 
   //User
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   //Products
   const [page, setPage] = useState(1);
@@ -48,7 +48,7 @@ export default function ContextConsumer({ children }) {
   const [categories, setCategories] = useState([]); //List of categories
 
   //Sales
-  const [purchases, setPurchases] = useState({})
+  const [purchases, setPurchases] = useState(null)
   const [purchasePage, setPurchasePage] = useState(1)
 
   const [state, dispatch] = useReducer(ContextReducer, InitialState);
