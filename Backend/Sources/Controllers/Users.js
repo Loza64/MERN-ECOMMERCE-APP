@@ -35,7 +35,7 @@ export const Login = async (req, res, next) => {
             const token = await GenerateToken(getUser._id);
             req.session.token = token
             req.session.cart = []
-            req.session.ip = req.socket.remoteAddress
+            req.session.ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
             return res.status(200).json({ state: true, message: "Successful login", profile: getUser })
         } else {
             return res.status(401).json({ state: false, message: "User or password incorrect" })
