@@ -2,7 +2,6 @@ import debug from 'debug'
 import dotenv from 'dotenv'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
-import session from 'express-session'
 import MongoDBStoreFactory from 'connect-mongodb-session'
 import path from 'path'
 
@@ -13,7 +12,7 @@ export const Session = debug('Application:[Session]')
 export const Server = debug('Application:[Server]')
 
 dotenv.config()
-const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN} = process.env
+const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN } = process.env
 
 //Setting env
 export const ConnectionCloud = MONGODB;
@@ -55,7 +54,7 @@ const MongoStore = new MongoDBStoreFactory(session)({
     autoRemoveInterval: 60 //Removes interval 1h
 })
 
-export const SessionApp = session({
+export const SessionConfig = {
     resave: true,
     name: 'Session',
     secret: SessionSecret,
@@ -68,7 +67,7 @@ export const SessionApp = session({
         httpOnly: true,
         sameSite: 'none'
     }
-})
+}
 
 export const LimiterConfig = {
     limit: 1000,
