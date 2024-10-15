@@ -29,6 +29,6 @@ Application.use(BodyParser.urlencoded({ limit: '100mb', extended: true }))
 Application.use(FileUpload({ useTempFiles: true, tempFileDir: './Resources' }))
 Application.use('/backend/api/rest/server/ecommerce/route/fetch/axios', routes)
 
-Application.get('/', (req, res) => { res.send("hello server ecommerce-node-app") })
+Application.get('/', (req, res) => { res.send("hello server ecommerce") })
 
 export default function (req, res) { Application(req, res) };
