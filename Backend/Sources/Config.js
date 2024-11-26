@@ -2,7 +2,8 @@ import debug from 'debug'
 import dotenv from 'dotenv'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
-import MongoDBStoreFactory from 'connect-mongodb-session'
+//import MongoDBStoreFactory from 'connect-mongodb-session'
+//import session from 'express-session'
 import path from 'path'
 
 export const Success = debug('Application:[Success]')
@@ -46,19 +47,19 @@ export const HelmetConfig = {
 }
 
 
-//Setting Session
+/*Setting Session
 const MongoStore = new MongoDBStoreFactory(session)({
     uri: ConnectionCloud,
     collection: 'sessions',
     autoRemove: 'interval',
     autoRemoveInterval: 60 //Removes interval 1h
 })
-
+*/
 export const SessionConfig = {
     resave: true,
     name: 'Session',
     secret: SessionSecret,
-    store: MongoStore,
+    //store: MongoStore,
     saveUninitialized: false,
     cookie: {
         secure: true,
