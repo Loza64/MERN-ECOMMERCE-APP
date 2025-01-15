@@ -5,11 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "node index.js",
     "start": "node index.js",
-    "windows": "set DEBUG=Application:* && nodemon index.js",
-    "linux": "DEBUG=Application:* nodemon index.js",
-    "dev": "npm run linux || npm run windows"
+    "dev": "cross-env DEBUG=Application:* nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +26,6 @@
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "debug": "^4.3.4",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
@@ -50,6 +46,8 @@
     "url": "^0.11.3"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "debug": "^4.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.0"
   }
