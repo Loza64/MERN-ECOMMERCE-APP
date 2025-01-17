@@ -1,9 +1,9 @@
 import debug from 'debug'
-import dotenv from 'dotenv'
+import environtment from 'dotenv/config'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
-//import MongoDBStoreFactory from 'connect-mongodb-session'
-//import session from 'express-session'
+import MongoDBStoreFactory from 'connect-mongodb-session'
+import session from 'express-session'
 import path from 'path'
 
 export const Success = debug('Application:[Success]')
@@ -12,8 +12,8 @@ export const Database = debug('Application:[Database]')
 export const Session = debug('Application:[Session]')
 export const Server = debug('Application:[Server]')
 
-dotenv.config()
-const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN } = process.env
+environtment;
+const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN, CRYPTOKEY } = process.env
 
 //Setting env
 export const ConnectionCloud = MONGODB;
@@ -26,6 +26,7 @@ export const MAIL_PASS = MAILPASS;
 export const Origin = ORIGIN;
 export const TokenSecret = TOKEN;
 export const SessionSecret = SESSION;
+export const CryptoKey = CRYPTOKEY;
 
 //Setting Application
 export const CorsOptions = {
@@ -47,19 +48,18 @@ export const HelmetConfig = {
 }
 
 
-/*Setting Session
 const MongoStore = new MongoDBStoreFactory(session)({
     uri: ConnectionCloud,
     collection: 'sessions',
     autoRemove: 'interval',
     autoRemoveInterval: 60 //Removes interval 1h
 })
-*/
+
 export const SessionConfig = {
     resave: true,
     name: 'Session',
     secret: SessionSecret,
-    //store: MongoStore,
+    store: MongoStore,
     saveUninitialized: false,
     cookie: {
         secure: true,

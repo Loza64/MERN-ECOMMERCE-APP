@@ -2,6 +2,7 @@ import { GenerateToken, VerifyToken } from "../Libraries/jsonwebtoken.js"
 import { EncryptPass, ComparePass } from '../Libraries/bcrypt.js'
 import { Users } from "../Models/Model.js"
 import uniquid from 'uniquid'
+import { encrypt, decrypt } from "../Libraries/crypto.js"
 
 export const SignUp = async (req, res, next) => {
     const { username, names, surnames, address, date, email } = req.body
@@ -22,38 +23,45 @@ export const SignUp = async (req, res, next) => {
             }
         }
     } catch (error) {
-        next(error.message)
         return res.status(500).json({ state: false, message: error.message })
     }
 }
 
 export const Login = async (req, res, next) => {
-    const { username, password } = req.body
+    const { username, password } = req.body;
+
     try {
-        const getUser = await Users.findOne({ username: username })
-        if (getUser && (await ComparePass(password, getUser.password))) {
-            const token = await GenerateToken(getUser._id);
-            req.session.token = token
-            req.session.cart = []
-            req.session.ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-            return res.status(200).json({ state: true, message: "Successful login", profile: getUser })
-        } else {
-            return res.status(401).json({ state: false, message: "User or password incorrect" })
+        const getUser = await Users.findOne({ username });
+
+        if (!getUser) {
+            return res.status(401).json({ state: false, message: "Incorrect username or password" });
         }
+
+        const passwordMatch = await ComparePass(password, getUser.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ state: false, message: "Incorrect username or password" });
+        }
+
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        const token = await GenerateToken(getUser._id);
+        const agent = req.headers['user-agent'];
+
+        req.session.data = encrypt(JSON.stringify({ ip, agent, token }));
+        req.session.data.cart = [];
+
+        return res.status(200).json({ state: true, message: "Successful login", profile: getUser });
     } catch (error) {
-        next(error.message)
-        return res.status(500).json({ state: false, message: error.message })
+        return res.status(500).json({ state: false, message: error.message });
     }
-}
+};
 
 export const Profile = async (req, res) => {
     try {
-        const { token } = req.session;
+        const { token } = decrypt(req.session.data)
         const idUser = await VerifyToken(token);
         const profile = await Users.findById(idUser)
         return res.status(200).json({ ...profile._doc })
     } catch (error) {
-        next(error.message)
         return res.status(500).json({ state: false, message: error.message })
     }
 }

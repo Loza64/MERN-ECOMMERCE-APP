@@ -1,6 +1,6 @@
 import express from 'express'
 import { MakePurchase, GetPurchaseByUser } from '../Controllers/Purchase.js'
-import { isAutenticate } from '../Middlewares/CheckSession.js'
+import { isAuthenticate } from '../Middlewares/CheckSession.js'
 import { ValidateSignUp } from '../Validators/UserValidadots.js'
 import { ValidateProduct } from '../Validators/ProductValidation.js'
 import { ValidationResult } from '../Middlewares/VaidationsResult.js'
@@ -14,7 +14,7 @@ const routes = express.Router()
 //User
 routes.post('/login', Login)
 routes.get('/logout', Logout)
-routes.get('/profile', isAutenticate, Profile)
+routes.get('/profile', isAuthenticate, Profile)
 routes.post('/signup', ValidateSignUp, ValidationResult, SignUp)
 
 //Products
@@ -25,14 +25,14 @@ routes.get('/getproductbyname/:Name', GetProductByName)
 routes.post('/newproduct', ValidateProduct, ValidationResult, NewProduct)
 
 // Cart
-routes.get('/cart', isAutenticate, Cart)
-routes.get('/clearcart', isAutenticate, ClearCart)
-routes.get('/addtocart/:Key', isAutenticate, AddToCart)
-routes.get('/quantity/:Key/:Type', isAutenticate, Quantity)
-routes.get('/removetocart/:Key', isAutenticate, RemoveProductFromCart)
+routes.get('/cart', isAuthenticate, Cart)
+routes.get('/clearcart', isAuthenticate, ClearCart)
+routes.get('/addtocart/:Key', isAuthenticate, AddToCart)
+routes.get('/quantity/:Key/:Type', isAuthenticate, Quantity)
+routes.get('/removetocart/:Key', isAuthenticate, RemoveProductFromCart)
 
 //Purchages
-routes.post('/makepurchase', isAutenticate, MakePurchase)
-routes.get('/getpurchasesbyuser', isAutenticate, GetPurchaseByUser)
+routes.post('/makepurchase', isAuthenticate, MakePurchase)
+routes.get('/getpurchasesbyuser', isAuthenticate, GetPurchaseByUser)
 
 export default routes

@@ -7,7 +7,7 @@ export const GenerateToken = async (result) => {
 
 export const VerifyToken = async (token) => {
     try {
-        return Jwt.verify(token, TokenSecret).result //El .result es como se guardo el token con el metodo sign
+        return Jwt.verify(token, TokenSecret).result
     } catch (error) {
         return null
     }
