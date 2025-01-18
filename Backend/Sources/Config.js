@@ -36,7 +36,7 @@ export const CorsOptions = {
 }
 
 export const HelmetConfig = {
-    xssFilter: true, // Habilitar protección contra XSS  
+    xssFilter: true, // Habilitar pr/ o true/false dependiendo de tus necesidades  otección contra XSS  
     hsts: {
         maxAge: 31536000,
         includeSubDomains: true,
