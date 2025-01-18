@@ -46,8 +46,8 @@ export const Login = async (req, res, next) => {
         const token = await GenerateToken(getUser._id);
         const agent = req.headers['user-agent'];
 
-        req.session.data = encrypt(JSON.stringify({ ip, agent, token }));
-        req.session.data.cart = [];
+        req.session.user = encrypt(JSON.stringify({ ip, agent, token }));
+        req.session.user.cart = [];
 
         return res.status(200).json({ state: true, message: "Successful login", profile: getUser });
     } catch (error) {
@@ -57,7 +57,7 @@ export const Login = async (req, res, next) => {
 
 export const Profile = async (req, res) => {
     try {
-        const { token } = decrypt(req.session.data)
+        const { token } = decrypt(req.session.user)
         const idUser = await VerifyToken(token);
         const profile = await Users.findById(idUser)
         return res.status(200).json({ ...profile._doc })

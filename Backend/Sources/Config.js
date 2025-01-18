@@ -13,7 +13,7 @@ export const Session = debug('Application:[Session]')
 export const Server = debug('Application:[Server]')
 
 environtment;
-const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, DOMAIN, CRYPTOKEY } = process.env
+const { MONGODB, PORT, APIKEY, CLOUDNAME, APISECRET, MAILBUSINESS, MAILPASS, ORIGIN, TOKEN, SESSION, CRYPTOKEY } = process.env
 
 //Setting env
 export const ConnectionCloud = MONGODB;
@@ -62,11 +62,15 @@ export const SessionConfig = {
     store: MongoStore,
     saveUninitialized: false,
     cookie: {
+        originalMaxAge: 3600000, // 1 hour
+        partitioned: true,
+        priority: "High",
+        expires: new Date(Date.now() + 3600000), // 1 hour
         secure: true,
-        domain: DOMAIN,
-        maxAge: 1000 * 60 * 60,
         httpOnly: true,
-        sameSite: 'none'
+        domain: null,
+        path: "/",
+        sameSite: "none",
     }
 }
 

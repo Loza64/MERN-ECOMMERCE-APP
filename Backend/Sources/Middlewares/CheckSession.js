@@ -10,19 +10,18 @@ const handleError = (req, res, status, message) => {
 
 export const isAuthenticate = async (req, res, next) => {  
     try {  
-        if (!req.session) return handleError(req, res, 401, "Session expired.");  
+        if (!req.session || !req.session.user) return handleError(req, res, 401, "Session expired.");  
 
-        const { token, agent, ip } = await decrypt(req.session.data);  
+        const { token, agent, ip } = await decrypt(req.session.user);  
 
         if (ip !== (req.headers['x-forwarded-for'] || req.socket.remoteAddress)) {  
+            console.log(ip)
             return handleError(req, res, 401, "Ip invalid to your session.");  
         }  
 
         if (agent !== req.headers['user-agent']) {  
             return handleError(req, res, 401, "Agent invalid for your session.");  
         }  
-
-        if (!token) return handleError(req, res, 400, "Token not found in session data.");  
 
         const profile = await authenticateUser(token);  
         if (!profile) {  
@@ -32,7 +31,7 @@ export const isAuthenticate = async (req, res, next) => {
         next();  
         Session("authorized");  
     } catch (error) {  
-        return res.status(500).json({ state: false, message: "An error occurred." });  
+        return res.status(500).json({ state: false, message: error.message});  
     }  
 };  
 

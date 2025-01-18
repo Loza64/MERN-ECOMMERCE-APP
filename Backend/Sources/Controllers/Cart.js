@@ -1,7 +1,7 @@
 import { Products } from "../Models/Model.js";
 
 export const Cart = (req, res) => {
-    const { cart } = req.session.data
+    const { cart } = req.session.user
     return res.status(200).json({ state: true, cart })
 }
 
@@ -15,7 +15,7 @@ export const AddToCart = async (req, res, next) => {
             return res.status(404).json({ state: false, message: 'Product not available' });
         }
 
-        const cart = req.session.data.cart || [];
+        const cart = req.session.user.cart || [];
         const checkProduct = cart.find(item => item.key === Key);
 
         if (checkProduct) {
@@ -32,8 +32,8 @@ export const AddToCart = async (req, res, next) => {
             });
         }
 
-        req.session.data.cart = cart;
-        return res.status(200).json({ state: true, cart: req.session.data.cart });
+        req.session.user.cart = cart;
+        return res.status(200).json({ state: true, cart: req.session.user.cart });
 
     } catch (error) {
         return res.status(500).json({ state: false, message: 'An error occurred while adding the product to the cart.' });
@@ -47,7 +47,7 @@ export const Quantity = async (req, res, next) => {
         const product = await Products.findOne({ key: Key });
         if (!product) return res.status(404).json({ state: false, message: 'Product not found' });
 
-        const updatedCart = req.session.data.cart.map(item => {
+        const updatedCart = req.session.user.cart.map(item => {
             if (item.key !== Key) return item;
             if (Type === "Addition") {
                 return { ...item, quantity: Math.min(item.quantity + 1, product.stock) };
@@ -56,7 +56,7 @@ export const Quantity = async (req, res, next) => {
             }
         });
 
-        req.session.data.cart = updatedCart;
+        req.session.user.cart = updatedCart;
         return res.status(200).json({ state: true, cart: updatedCart });
 
     } catch (error) {
@@ -66,12 +66,12 @@ export const Quantity = async (req, res, next) => {
 
 export const RemoveProductFromCart = (req, res) => {
     const { Key } = req.params;
-    const remove = req.session.data.cart.filter(item => item.key !== Key)
-    req.session.data.cart = remove
-    return res.status(200).json({ state: true, cart: req.session.data.cart })
+    const remove = req.session.user.cart.filter(item => item.key !== Key)
+    req.session.user.cart = remove
+    return res.status(200).json({ state: true, cart: req.session.user.cart })
 }
 
 export const ClearCart = (req, res) => {
-    req.session.data.cart = []
-    return res.status(200).json({ state: true, cart: req.session.data.cart })
+    req.session.user.cart = []
+    return res.status(200).json({ state: true, cart: req.session.user.cart })
 }
