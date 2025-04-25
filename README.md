@@ -16,7 +16,11 @@ Esta es una aplicación CRUD construida con el stack **MERN** (MongoDB, Express.
 
 Para ejecutar la aplicación en tu entorno local, asegúrate de tener instalado [Node.js](https://nodejs.org/) y [MongoDB](https://www.mongodb.com/).  
 
-### Variables de Entorno  
+
+## Backup de mongodb
+en la carpeta Backend/backup se encuentran los productos y categorias
+
+### Variables de Entorno para el backend  
 
 Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:  
 
@@ -34,4 +38,11 @@ TOKEN=J72AFS2RFVVDWR3FEGWQ3RWFGW3QRETW4YHRGFSRGWT3RQEGSRHY4W5EJTNHRGEWRHET5YW4T3
 SESSION=MJW64YQ35T4WHATESJUHFQWF9HQW9PE8FHQPW9E8HF9WH9PQ8WEHF9P8QWEHFEW9Q8FHEFHEFJSDABFASKJL  
 
 CRYPTOKEY=60c7f1d2d0f12d1373f4208c4fc5c6ad7762304c1e35fce85f8c53ddb4facf3b  
-VITE_ROUTE_SERVER=https://localhost:4000/backend/api/rest/server/ecommerce/route/fetch/axios  
+
+```
+
+### Variables de Entorno para el frontend 
+
+```.env
+VITE_ROUTE_SERVER=https://localhost:4000/backend/api/rest/server/ecommerce/route/fetch/axios 
+``` 
