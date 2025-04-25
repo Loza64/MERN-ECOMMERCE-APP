@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "63e47566a9c759a4bd832e84"
+  },
+  "key": "cqdqvaj5yi80",
+  "image": {
+    "public_id": "ECOMMERCE/x67j0kn9el42ztkgenve",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675916698/ECOMMERCE/x67j0kn9el42ztkgenve.jpg"
+  },
+  "name": "Cocina"
+},
+{
+  "_id": {
+    "$oid": "63e3d487bdc03c419b326dc5"
+  },
+  "key": "cqdc9rde43c0",
+  "image": {
+    "public_id": "ECOMMERCE/ja1i7zg3hucvv5plksii",
+    "url": "https://res.cloudinary.com/ufostart-development/image/upload/v1676173837/ECOMMERCE/ja1i7zg3hucvv5plksii.avif"
+  },
+  "name": "Juguetes"
+},
+{
+  "_id": {
+    "$oid": "63e47754a9c759a4bd832e89"
+  },
+  "key": "cqdr1lr6jhc0",
+  "image": {
+    "public_id": "ECOMMERCE/ojzyn2wqljotzgbwsrvi",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675917192/ECOMMERCE/ojzyn2wqljotzgbwsrvi.avif"
+  },
+  "name": "Equipaje"
+},
+{
+  "_id": {
+    "$oid": "63e83168fe6ed3c350f9552a"
+  },
+  "key": "cqg5mds8d6g0",
+  "image": {
+    "public_id": "ECOMMERCE/de0nf5eddyatqjmxpimn",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1676161384/ECOMMERCE/de0nf5eddyatqjmxpimn.jpg"
+  },
+  "name": "Hogar"
+},
+{
+  "_id": {
+    "$oid": "63e3d55dbdc03c419b326dc7"
+  },
+  "key": "cqdcchztg3s0",
+  "image": {
+    "public_id": "ECOMMERCE/lwets2xildi79guugk7m",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675875729/ECOMMERCE/lwets2xildi79guugk7m.jpg"
+  },
+  "name": "Ropa"
+},
+{
+  "_id": {
+    "$oid": "63f1678b8de94169122cd32e"
+  },
+  "key": "cqm3ly14qo00",
+  "image": {
+    "public_id": "ECOMMERCE/h8ff0nl5behlux2xrc6k",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1676765071/ECOMMERCE/h8ff0nl5behlux2xrc6k.webp"
+  },
+  "name": "Celulares"
+},
+{
+  "_id": {
+    "$oid": "64d2d577178bf3a872533b98"
+  },
+  "key": "cunkgogfqqw0",
+  "image": {
+    "public_id": "ECOMMERCE/ypyws5dnmpffq4sw36x1",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1691538815/ECOMMERCE/ypyws5dnmpffq4sw36x1.jpg"
+  },
+  "name": "Mascotas"
+},
+{
+  "_id": {
+    "$oid": "63e3d5c1bdc03c419b326dc9"
+  },
+  "key": "cqdcdrln76o0",
+  "image": {
+    "public_id": "ECOMMERCE/bptuy8e6vqhtki1f0hdx",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675875829/ECOMMERCE/bptuy8e6vqhtki1f0hdx.jpg"
+  },
+  "name": "Videojuegos"
+},
+{
+  "_id": {
+    "$oid": "63e478e6a9c759a4bd832e8e"
+  },
+  "key": "cqdr6q5sb480",
+  "image": {
+    "public_id": "ECOMMERCE/p92qrzhcnnvl0d5oqmsd",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675917593/ECOMMERCE/p92qrzhcnnvl0d5oqmsd.avif"
+  },
+  "name": "Sillas"
+},
+{
+  "_id": {
+    "$oid": "64d2da5d604626dd296766be"
+  },
+  "key": "cunkwokhrco0",
+  "image": {
+    "public_id": "ECOMMERCE/bh2xwepmqmakwzvutuep",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1691540069/ECOMMERCE/bh2xwepmqmakwzvutuep.png"
+  },
+  "name": "Higiene Personal"
+},
+{
+  "_id": {
+    "$oid": "63e4461a0987c653a04344a3"
+  },
+  "key": "cqdmksdzu4g0",
+  "image": {
+    "public_id": "ECOMMERCE/x5zhsapkhfjb397ljkin",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675904590/ECOMMERCE/x5zhsapkhfjb397ljkin.jpg"
+  },
+  "name": "Automotriz"
+},
+{
+  "_id": {
+    "$oid": "63e446720987c653a04344a5"
+  },
+  "key": "cqdmlwy0ic80",
+  "image": {
+    "public_id": "ECOMMERCE/eg7wacxermw75a3vizak",
+    "url": "http://res.cloudinary.com/ufostart-development/image/upload/v1675904679/ECOMMERCE/eg7wacxermw75a3vizak.avif"
+  },
+  "name": "Electronicos"
+}]
