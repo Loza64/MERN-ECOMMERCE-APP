@@ -1,4 +1,4 @@
-# Nombre del Proyecto: Aplicación CRUD MERN  
+# Nombre del Proyecto: Aplicación MERN ECOMMERCE  
 
 ## Descripción  
 
