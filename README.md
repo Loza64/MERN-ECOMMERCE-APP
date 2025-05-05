@@ -42,6 +42,7 @@ CRYPTOKEY=60c7f1d2d0f12d1373f4208c4fc5c6ad7762304c1e35fce85f8c53ddb4facf3b
 ```
 
 ### Variables de Entorno para el frontend 
+El backend utiliza HTTPS con SSL y llaves cifradas, asegurando la comunicación. Sin embargo, las variables de entorno del frontend también impactan en la seguridad y, si no están correctamente configuradas, podrían hacer que la página parezca insegura. Por ello, es recomendable ingresar la URL "VITE_ROUTE_SERVER" en tu navegador y presionar el botón 'Continúa de todos modos' para que el frontend pueda comunicarse con el backend correctamente
 
 ```.env
 VITE_ROUTE_SERVER=https://localhost:4000/backend/api/rest/server/ecommerce/route/fetch/axios 
